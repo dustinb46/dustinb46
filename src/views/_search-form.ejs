@@ -1,0 +1,7 @@
+<form class="search" action="/search" method="get">
+  <input type="search" name="q" value="<%= typeof q !== 'undefined' ? q : '' %>"
+         placeholder="Plant code (e.g. 55-23), plant name, or brand" autofocus />
+  <input type="text" name="state" maxlength="2" value="<%= typeof state !== 'undefined' ? state : '' %>" placeholder="State" />
+  <input type="text" name="parent" value="<%= typeof parent !== 'undefined' ? parent : '' %>" placeholder="Parent company" />
+  <button type="submit">Search</button>
+</form>

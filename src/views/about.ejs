@@ -1,0 +1,43 @@
+<% const title = 'About'; %>
+<%- include('_header', { title, disclaimer }) %>
+
+<h1>About Plant Track</h1>
+<p>
+  A dairy plant transparency lookup. Maps plant codes printed on dairy
+  packaging to the plant that made the product, the brands that come out of
+  that plant, and the recall history attached to it.
+</p>
+
+<h2>Data sources</h2>
+<ul>
+  <li><a href="https://www.fda.gov/food/milk-guidance-documents-regulatory-information/interstate-milk-shippers-list">FDA Interstate Milk Shippers List</a> — authoritative roster of Grade A plants.</li>
+  <li><a href="https://open.fda.gov/apis/food/enforcement/">openFDA Food Enforcement API</a> — recall records.</li>
+  <li><a href="https://www.ams.usda.gov/rules-regulations/moa/dairy">USDA AMS Pool Plant Reports</a> — FMMO affiliation.</li>
+  <li>Hand-curated brand-to-plant mappings, each with a source and confidence level.</li>
+</ul>
+
+<h2>What v1 covers (and what it doesn't)</h2>
+<p>
+  v1 lists IMS-coded Grade A fluid and cultured plants only. Packaging codes
+  from other systems — FDA food facility registration numbers, USDA
+  establishment numbers, state-specific codes — are not yet supported. If
+  your code starts with <code>EST.</code> or is a long all-digit string, it
+  probably is not an IMS code.
+</p>
+
+<h2>How confidence works</h2>
+<p>
+  Every brand-to-plant mapping carries a confidence level (high / medium /
+  low) and a source. Recall matches carry a numeric confidence and a method
+  (name, name + geography, manual). Below "high" / above 70% should be
+  treated as a lead, not a fact.
+</p>
+
+<h2>Corrections</h2>
+<p>
+  Found a mistake? Email <code>brunndairy88@gmail.com</code> with the plant
+  code or recall number and what should change. Manual overrides are
+  preserved across data refreshes.
+</p>
+
+<%- include('_footer') %>

@@ -1,0 +1,58 @@
+<% const title = q ? `Search: ${q}` : 'Search'; %>
+<%- include('_header', { title, disclaimer }) %>
+
+<h1>Search</h1>
+<%- include('_search-form', { q, state, parent }) %>
+
+<% if (aliasHit) { %>
+  <div class="callout">
+    Direct code match: <a href="/plant/<%= aliasHit.plant.plant_code %>"><%= aliasHit.plant.name %></a>
+    <% if (aliasHit.via !== 'ims') { %>
+      <span class="muted">(via <%= aliasHit.via %> alias)</span>
+    <% } %>
+  </div>
+<% } %>
+
+<% if (!q) { %>
+  <p class="empty">Type a plant code, plant name, or brand to search.</p>
+<% } else { %>
+  <h2>Plants (<%= plants.length %>)</h2>
+  <% if (!plants.length) { %>
+    <p class="empty">No plants matched.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Code</th><th>Name</th><th>City</th><th>State</th><th>Parent</th></tr></thead>
+      <tbody>
+        <% for (const p of plants) { %>
+          <tr>
+            <td><a href="/plant/<%= p.plant_code %>"><%= p.plant_code %></a></td>
+            <td><%= p.name %></td>
+            <td><%= p.city || '' %></td>
+            <td><%= p.state || '' %></td>
+            <td><%= p.parent_company || '' %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  <% } %>
+
+  <h2>Brands (<%= brands.length %>)</h2>
+  <% if (!brands.length) { %>
+    <p class="empty">No brands matched.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Brand</th><th>Type</th><th>Parent</th></tr></thead>
+      <tbody>
+        <% for (const b of brands) { %>
+          <tr>
+            <td><a href="/brand/<%= b.id %>"><%= b.brand_name %></a></td>
+            <td><%= b.brand_type || '' %></td>
+            <td><%= b.parent_company || '' %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  <% } %>
+<% } %>
+
+<%- include('_footer') %>

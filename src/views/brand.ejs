@@ -1,0 +1,32 @@
+<% const title = brand.brand_name; %>
+<%- include('_header', { title, disclaimer }) %>
+
+<h1><%= brand.brand_name %></h1>
+<dl class="meta">
+  <% if (brand.brand_type) { %><dt>Type</dt><dd><%= brand.brand_type %></dd><% } %>
+  <% if (brand.parent_company) { %><dt>Parent</dt><dd><%= brand.parent_company %></dd><% } %>
+</dl>
+
+<h2>Made at</h2>
+<% if (!plants.length) { %>
+  <p class="empty">No plant mappings recorded for this brand.</p>
+<% } else { %>
+  <table>
+    <thead><tr><th>Plant</th><th>Code</th><th>Location</th><th>Region</th><th>Category</th><th>Confidence</th><th>Source</th></tr></thead>
+    <tbody>
+      <% for (const p of plants) { %>
+        <tr>
+          <td><a href="/plant/<%= p.plant_code %>"><%= p.plant_name %></a></td>
+          <td><%= p.plant_code %></td>
+          <td><%= [p.city, p.state].filter(Boolean).join(', ') %></td>
+          <td><%= p.region || '' %></td>
+          <td><%= p.product_category || '' %></td>
+          <td><span class="conf conf-<%= p.confidence %>"><%= p.confidence %></span></td>
+          <td><%= p.source %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('_footer') %>

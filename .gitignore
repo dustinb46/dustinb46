@@ -1,0 +1,11 @@
+node_modules/
+db/*.db
+db/*.db-journal
+db/*.db-wal
+db/*.db-shm
+data/ims/*.pdf
+data/ims/*.txt
+.env
+.env.local
+*.log
+.DS_Store

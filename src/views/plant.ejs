@@ -1,0 +1,81 @@
+<% const title = `${plant.plant_code} — ${plant.name}`; %>
+<%- include('_header', { title, disclaimer }) %>
+
+<h1><%= plant.name %></h1>
+<p class="code-line">
+  <span class="badge"><%= plant.plant_code %></span>
+  <% if (plant.category) { %><span class="muted"><%= plant.category %></span><% } %>
+  <% if (via && via !== 'ims') { %>
+    <span class="muted">(matched via <%= via %> alias)</span>
+  <% } %>
+</p>
+
+<dl class="meta">
+  <% if (plant.parent_company) { %><dt>Parent</dt><dd><%= plant.parent_company %></dd><% } %>
+  <% if (plant.address || plant.city || plant.state) { %>
+    <dt>Address</dt><dd>
+      <%= [plant.address, plant.city, plant.state].filter(Boolean).join(', ') %>
+    </dd>
+  <% } %>
+  <% if (plant.fmmo_pool) { %><dt>FMMO pool</dt><dd><%= plant.fmmo_pool %></dd><% } %>
+  <% if (plant.ims_rating) { %><dt>IMS rating</dt><dd><%= plant.ims_rating %></dd><% } %>
+  <% if (plant.source) { %><dt>Source</dt><dd><%= plant.source %></dd><% } %>
+  <% if (plant.last_verified) { %><dt>Last verified</dt><dd><%= plant.last_verified %></dd><% } %>
+</dl>
+
+<% if (aliases && aliases.length > 1) { %>
+  <h2>Code aliases</h2>
+  <ul class="aliases">
+    <% for (const a of aliases) { %>
+      <li><code><%= a.code %></code> <span class="muted"><%= a.code_system %></span></li>
+    <% } %>
+  </ul>
+<% } %>
+
+<h2>Brands made here</h2>
+<% if (!brands.length) { %>
+  <p class="empty">No brand mappings recorded for this plant.</p>
+<% } else { %>
+  <table>
+    <thead><tr><th>Brand</th><th>Category</th><th>Region</th><th>Confidence</th><th>Source</th><th>Verified</th></tr></thead>
+    <tbody>
+      <% for (const b of brands) { %>
+        <tr>
+          <td><a href="/brand/<%= b.brand_id %>"><%= b.brand_name %></a></td>
+          <td><%= b.product_category || '' %></td>
+          <td><%= b.region || '' %></td>
+          <td><span class="conf conf-<%= b.confidence %>"><%= b.confidence %></span></td>
+          <td><%= b.source %></td>
+          <td><%= b.last_verified || '' %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <p class="note">Every mapping shows its source and confidence. Anything below <em>high</em> should be independently verified.</p>
+<% } %>
+
+<h2>Recalls</h2>
+<% if (!recalls.length) { %>
+  <p class="empty">No recalls matched to this plant.</p>
+<% } else { %>
+  <table>
+    <thead><tr><th>Date</th><th>Class</th><th>Reason</th><th>Status</th><th>Match</th></tr></thead>
+    <tbody>
+      <% for (const r of recalls) { %>
+        <tr>
+          <td><%= r.recall_date || r.report_date || '' %></td>
+          <td><%= r.classification || '' %></td>
+          <td><%= (r.reason || '').slice(0, 200) %></td>
+          <td><%= r.status || '' %></td>
+          <td>
+            <span class="conf conf-<%= (r.match_confidence || 0) >= 0.7 ? 'high' : 'low' %>">
+              <%= r.match_method %> · <%= Math.round((r.match_confidence || 0) * 100) %>%
+            </span>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('_footer') %>

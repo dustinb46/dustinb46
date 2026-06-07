@@ -1,0 +1,29 @@
+{
+  "name": "plant-track",
+  "version": "0.1.0",
+  "description": "Dairy plant transparency lookup — IMS codes, brand-to-plant mappings, FDA recall history.",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:init": "node scripts/init-db.js",
+    "db:reset": "node scripts/init-db.js --reset",
+    "seed:load": "node scripts/load-seeds.js",
+    "ims:download": "node scripts/download-ims.js",
+    "ims:ingest": "node scripts/ingest-ims.js",
+    "ims:sanity": "node scripts/ingest-ims-sanity.js",
+    "recalls:sync": "node scripts/sync-recalls.js",
+    "build": "npm run db:init && npm run seed:load"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "csv-parse": "^5.5.6",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "pdf-parse": "^1.1.1"
+  }
+}

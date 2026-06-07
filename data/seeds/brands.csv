@@ -1,0 +1,5 @@
+brand_name,brand_type,parent_company
+EXAMPLE Brand A,national,Example Dairy Co
+EXAMPLE Brand B,regional,Example Dairy Co
+EXAMPLE Store Brand,private_label,Example Retailer
+EXAMPLE Cheese Brand,national,Example Cheese Co

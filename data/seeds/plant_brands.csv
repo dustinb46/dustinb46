@@ -1,0 +1,6 @@
+plant_code,brand_name,product_category,region,source,confidence,notes,last_verified,verified_by
+EX-001,EXAMPLE Brand A,milk,Northeast US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
+EX-001,EXAMPLE Store Brand,milk,Northeast US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
+EX-002,EXAMPLE Brand B,yogurt,Midwest US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
+EX-003,EXAMPLE Cheese Brand,cheese,National,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
+EX-004,EXAMPLE Store Brand,milk,Mountain US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed

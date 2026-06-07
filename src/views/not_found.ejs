@@ -1,0 +1,18 @@
+<% const title = 'Not found'; %>
+<%- include('_header', { title, disclaimer }) %>
+
+<h1>Not found</h1>
+<% if (kind === 'plant') { %>
+  <p>
+    No plant matched code <code><%= value %></code>. v1 only covers IMS
+    codes (state-number format like <code>55-23</code>). If your code is
+    longer or alphanumeric, it likely comes from a different system.
+  </p>
+<% } else if (kind === 'brand') { %>
+  <p>No brand with id <code><%= value %></code>.</p>
+<% } else { %>
+  <p>No page at <code><%= value %></code>.</p>
+<% } %>
+<p><a href="/">Back to home</a></p>
+
+<%- include('_footer') %>

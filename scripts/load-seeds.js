@@ -1,0 +1,162 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const { parse } = require('csv-parse/sync');
+const { db } = require('../src/db');
+
+const SEED_DIR = path.join(__dirname, '..', 'data', 'seeds');
+
+function readCsv(name) {
+  const file = path.join(SEED_DIR, name);
+  if (!fs.existsSync(file)) return [];
+  const text = fs.readFileSync(file, 'utf8');
+  return parse(text, { columns: true, skip_empty_lines: true, trim: true });
+}
+
+const runStarted = new Date().toISOString();
+let plantsIn = 0, plantsWritten = 0;
+let brandsIn = 0, brandsWritten = 0;
+let mappingsIn = 0, mappingsWritten = 0;
+
+const upsertPlant = db.prepare(`
+  INSERT INTO plants (plant_code, name, address, city, state, category,
+                      parent_company, fmmo_pool, ims_rating, source, last_verified)
+  VALUES (@plant_code, @name, @address, @city, @state, @category,
+          @parent_company, @fmmo_pool, @ims_rating, @source, @last_verified)
+  ON CONFLICT(plant_code) DO UPDATE SET
+    name=excluded.name,
+    address=excluded.address,
+    city=excluded.city,
+    state=excluded.state,
+    category=excluded.category,
+    parent_company=excluded.parent_company,
+    fmmo_pool=excluded.fmmo_pool,
+    ims_rating=excluded.ims_rating,
+    source=excluded.source,
+    last_verified=excluded.last_verified,
+    updated_at=datetime('now')
+`);
+
+const upsertBrand = db.prepare(`
+  INSERT INTO brands (brand_name, brand_type, parent_company)
+  VALUES (@brand_name, @brand_type, @parent_company)
+  ON CONFLICT(brand_name) DO UPDATE SET
+    brand_type=excluded.brand_type,
+    parent_company=excluded.parent_company
+`);
+
+const findPlantByCode = db.prepare(`SELECT id FROM plants WHERE plant_code = ?`);
+const findBrandByName = db.prepare(`SELECT id FROM brands WHERE brand_name = ?`);
+const insertBrandShallow = db.prepare(
+  `INSERT INTO brands (brand_name) VALUES (?) ON CONFLICT(brand_name) DO NOTHING`
+);
+
+const findMapping = db.prepare(`
+  SELECT id FROM plant_brands
+  WHERE plant_id = ? AND brand_id = ? AND IFNULL(region,'') = IFNULL(?, '')
+`);
+const updateMapping = db.prepare(`
+  UPDATE plant_brands SET
+    product_category = @product_category,
+    source = @source,
+    confidence = @confidence,
+    notes = @notes,
+    last_verified = @last_verified,
+    verified_by = @verified_by
+  WHERE id = @id
+`);
+const insertMapping = db.prepare(`
+  INSERT INTO plant_brands (plant_id, brand_id, product_category, region,
+                            source, confidence, notes, last_verified, verified_by)
+  VALUES (@plant_id, @brand_id, @product_category, @region,
+          @source, @confidence, @notes, @last_verified, @verified_by)
+`);
+
+const load = db.transaction(() => {
+  for (const row of readCsv('plants.csv')) {
+    plantsIn++;
+    upsertPlant.run({
+      plant_code: row.plant_code,
+      name: row.name,
+      address: row.address || null,
+      city: row.city || null,
+      state: row.state || null,
+      category: row.category || null,
+      parent_company: row.parent_company || null,
+      fmmo_pool: row.fmmo_pool || null,
+      ims_rating: row.ims_rating || null,
+      source: row.source || 'seed',
+      last_verified: row.last_verified || null,
+    });
+    plantsWritten++;
+  }
+
+  for (const row of readCsv('brands.csv')) {
+    brandsIn++;
+    upsertBrand.run({
+      brand_name: row.brand_name,
+      brand_type: row.brand_type || null,
+      parent_company: row.parent_company || null,
+    });
+    brandsWritten++;
+  }
+
+  const skipped = [];
+  for (const row of readCsv('plant_brands.csv')) {
+    mappingsIn++;
+    const plant = findPlantByCode.get(row.plant_code);
+    if (!plant) {
+      skipped.push(`plant_code ${row.plant_code} not found for brand ${row.brand_name}`);
+      continue;
+    }
+    if (!row.confidence || !['high', 'medium', 'low'].includes(row.confidence)) {
+      skipped.push(`confidence missing/invalid for ${row.plant_code} -> ${row.brand_name}`);
+      continue;
+    }
+    if (!row.source) {
+      skipped.push(`source missing for ${row.plant_code} -> ${row.brand_name}`);
+      continue;
+    }
+    insertBrandShallow.run(row.brand_name);
+    const brand = findBrandByName.get(row.brand_name);
+    const region = row.region || null;
+    const existing = findMapping.get(plant.id, brand.id, region);
+    const payload = {
+      plant_id: plant.id,
+      brand_id: brand.id,
+      product_category: row.product_category || null,
+      region,
+      source: row.source,
+      confidence: row.confidence,
+      notes: row.notes || null,
+      last_verified: row.last_verified || null,
+      verified_by: row.verified_by || null,
+    };
+    if (existing) {
+      updateMapping.run({ ...payload, id: existing.id });
+    } else {
+      insertMapping.run(payload);
+    }
+    mappingsWritten++;
+  }
+
+  if (skipped.length) {
+    console.warn(`[load-seeds] skipped ${skipped.length} mapping rows:`);
+    for (const s of skipped) console.warn(`  - ${s}`);
+  }
+});
+
+load();
+
+db.prepare(`
+  INSERT INTO ingest_runs (source, started_at, finished_at, rows_in, rows_written, notes)
+  VALUES ('seeds', ?, ?, ?, ?, ?)
+`).run(
+  runStarted,
+  new Date().toISOString(),
+  plantsIn + brandsIn + mappingsIn,
+  plantsWritten + brandsWritten + mappingsWritten,
+  `plants=${plantsWritten}/${plantsIn} brands=${brandsWritten}/${brandsIn} mappings=${mappingsWritten}/${mappingsIn}`
+);
+
+console.log(`[load-seeds] plants ${plantsWritten}/${plantsIn}, brands ${brandsWritten}/${brandsIn}, mappings ${mappingsWritten}/${mappingsIn}`);

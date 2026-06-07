@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= typeof title !== 'undefined' ? title + ' · ' : '' %>Plant Track</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="site">
+    <a class="brand" href="/">Plant Track</a>
+    <nav>
+      <a href="/search">Search</a>
+      <a href="/recalls">Recalls</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+  <div class="disclaimer"><strong>Heads up:</strong> <%= disclaimer %></div>
+  <main>
