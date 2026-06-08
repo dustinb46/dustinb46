@@ -1,4 +1,5 @@
 const path = require('path');
+const { spawn } = require('child_process');
 const express = require('express');
 const { db } = require('./db');
 
@@ -304,6 +305,50 @@ app.get('/admin/ingest', (_req, res) => {
     matched:  db.prepare(`SELECT COUNT(*) AS n FROM recalls WHERE plant_id IS NOT NULL`).get().n,
   };
   res.render('admin_ingest', { runs, counts });
+});
+
+// ---------------- admin: trigger ingest jobs ----------------
+// Protected by ADMIN_TOKEN env var. Send as X-Admin-Token header.
+// Streams script stdout/stderr back so you can see the run.
+
+const ADMIN_SCRIPTS = {
+  'ims-download': 'scripts/download-ims.js',
+  'ims-ingest':   'scripts/ingest-ims.js',
+  'ims-sanity':   'scripts/ingest-ims-sanity.js',
+  'recalls-sync': 'scripts/sync-recalls.js',
+  'seeds-load':   'scripts/load-seeds.js',
+};
+
+function requireAdmin(req, res, next) {
+  const expected = process.env.ADMIN_TOKEN;
+  if (!expected) return res.status(503).json({ error: 'ADMIN_TOKEN not configured' });
+  const got = req.header('X-Admin-Token') || req.query.token;
+  if (got !== expected) return res.status(401).json({ error: 'unauthorized' });
+  next();
+}
+
+app.post('/admin/run/:name', requireAdmin, (req, res) => {
+  const script = ADMIN_SCRIPTS[req.params.name];
+  if (!script) return res.status(404).json({ error: 'unknown script', allowed: Object.keys(ADMIN_SCRIPTS) });
+  const env = { ...process.env };
+  if (req.query.url)       env.IMS_PDF_URL = String(req.query.url);
+  if (req.query.max_pages) env.RECALL_MAX_PAGES = String(req.query.max_pages);
+  const child = spawn('node', [script], {
+    cwd: path.join(__dirname, '..'),
+    env,
+  });
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.write(`# running ${script}\n`);
+  child.stdout.on('data', d => res.write(d));
+  child.stderr.on('data', d => res.write(d));
+  child.on('close', code => {
+    res.write(`\n# exit ${code}\n`);
+    res.end();
+  });
+  child.on('error', err => {
+    res.write(`\n# spawn error: ${err.message}\n`);
+    res.end();
+  });
 });
 
 app.get('/about', (_req, res) => res.render('about'));
