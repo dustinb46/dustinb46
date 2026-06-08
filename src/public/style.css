@@ -83,3 +83,14 @@ dl.meta dt { color: var(--muted); }
 .aliases li { padding: 0.2rem 0; }
 
 code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+.timeline-bars .bar-cell { width: 35%; }
+.timeline-bars .bar { display: block; height: 0.85rem; background: var(--accent);
+  border-radius: 2px; min-width: 2px; }
+
+.export-row { font-size: 0.9rem; margin: 0.5rem 0 1.5rem; }
+.export-row a { color: var(--accent); }
+.notes-cell { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #444; }

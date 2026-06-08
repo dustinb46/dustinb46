@@ -1,0 +1,42 @@
+<% const title = 'Ingest history'; %>
+<%- include('_header', { title, disclaimer }) %>
+
+<h1>Ingest history</h1>
+<p class="lede">
+  Read-only audit of what's been loaded and when. Nothing here is
+  user-private — the entire site is built from public sources.
+</p>
+
+<section class="stats">
+  <div><strong><%= counts.plants.toLocaleString() %></strong><span>plants total</span></div>
+  <div><strong><%= counts.ims.toLocaleString() %></strong><span>from IMS</span></div>
+  <div><strong><%= counts.brands.toLocaleString() %></strong><span>brands</span></div>
+  <div><strong><%= counts.mappings.toLocaleString() %></strong><span>brand mappings</span></div>
+  <div><strong><%= counts.recalls.toLocaleString() %></strong><span>recalls</span></div>
+  <div><strong><%= counts.matched.toLocaleString() %></strong><span>recalls matched</span></div>
+</section>
+
+<h2>Runs (latest 100)</h2>
+<% if (!runs.length) { %>
+  <p class="empty">No ingest runs logged yet.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr><th>Source</th><th>Started</th><th>Finished</th><th>Rows in</th><th>Rows written</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <% for (const r of runs) { %>
+        <tr>
+          <td><%= r.source %></td>
+          <td><%= r.started_at %></td>
+          <td><%= r.finished_at || '' %></td>
+          <td><%= r.rows_in == null ? '' : r.rows_in.toLocaleString() %></td>
+          <td><%= r.rows_written == null ? '' : r.rows_written.toLocaleString() %></td>
+          <td class="notes-cell"><%= r.notes || '' %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('_footer') %>

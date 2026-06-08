@@ -15,10 +15,31 @@ const SEARCH = '(product_description:milk+OR+product_description:cheese+OR+produ
 const PAGE_SIZE = 100;
 const MAX_PAGES = parseInt(process.env.RECALL_MAX_PAGES || '10', 10);
 
+const STATE_NAME_TO_ABBR = {
+  alabama:'AL', alaska:'AK', arizona:'AZ', arkansas:'AR', california:'CA',
+  colorado:'CO', connecticut:'CT', delaware:'DE', florida:'FL', georgia:'GA',
+  hawaii:'HI', idaho:'ID', illinois:'IL', indiana:'IN', iowa:'IA',
+  kansas:'KS', kentucky:'KY', louisiana:'LA', maine:'ME', maryland:'MD',
+  massachusetts:'MA', michigan:'MI', minnesota:'MN', mississippi:'MS', missouri:'MO',
+  montana:'MT', nebraska:'NE', nevada:'NV', 'new hampshire':'NH', 'new jersey':'NJ',
+  'new mexico':'NM', 'new york':'NY', 'north carolina':'NC', 'north dakota':'ND', ohio:'OH',
+  oklahoma:'OK', oregon:'OR', pennsylvania:'PA', 'rhode island':'RI', 'south carolina':'SC',
+  'south dakota':'SD', tennessee:'TN', texas:'TX', utah:'UT', vermont:'VT',
+  virginia:'VA', washington:'WA', 'west virginia':'WV', wisconsin:'WI', wyoming:'WY',
+  'puerto rico':'PR', 'district of columbia':'DC',
+};
+
+function normState(s) {
+  if (!s) return null;
+  const t = s.trim();
+  if (/^[A-Z]{2}$/i.test(t)) return t.toUpperCase();
+  return STATE_NAME_TO_ABBR[t.toLowerCase()] || null;
+}
+
 function normalize(s) {
   return (s || '')
     .toLowerCase()
-    .replace(/\b(llc|inc|co|corp|corporation|company|cooperative|coop|the|of|usa)\b/g, '')
+    .replace(/\b(llc|inc|co|corp|corporation|company|cooperative|coop|the|of|usa|dba|d\/b\/a|ltd|holdings|group|brands|foods|dairy|dairies)\b/g, '')
     .replace(/[^a-z0-9 ]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
@@ -37,15 +58,36 @@ function jaccard(a, b) {
 
 function matchPlant(firmName, firmCity, firmState, plants) {
   const fnTokens = tokenSet(firmName);
+  if (!fnTokens.size) return null;
+  const firmStateAbbr = normState(firmState);
   let best = null;
   for (const p of plants) {
-    const pTokens = tokenSet(p.name);
-    let score = jaccard(fnTokens, pTokens);
-    if (!score) continue;
-    // Geography bonus: same state +0.2, same city +0.15.
-    if (firmState && p.state && firmState.toUpperCase() === p.state.toUpperCase()) score += 0.2;
-    if (firmCity && p.city && firmCity.toLowerCase() === p.city.toLowerCase()) score += 0.15;
-    if (!best || score > best.score) best = { plant: p, score };
+    const candidates = [p.name];
+    if (p.parent_company && p.parent_company !== p.name) candidates.push(p.parent_company);
+    let nameScore = 0;
+    for (const c of candidates) {
+      const cScore = jaccard(fnTokens, tokenSet(c));
+      if (cScore > nameScore) nameScore = cScore;
+    }
+    if (!nameScore) continue;
+    let score = nameScore;
+    // Geography bonus / penalty.
+    if (firmStateAbbr && p.state) {
+      if (firmStateAbbr === p.state.toUpperCase()) {
+        score += 0.2;
+      } else {
+        // Cross-state mismatches are a strong signal that this is the
+        // wrong plant. Penalize but don't zero out, since the recalling
+        // firm's HQ state often differs from the manufacturing plant's
+        // state — we want to lose to a same-state competitor, not block
+        // every cross-state match.
+        score -= 0.15;
+      }
+    }
+    if (firmCity && p.city && firmCity.toLowerCase() === p.city.toLowerCase()) {
+      score += 0.15;
+    }
+    if (!best || score > best.score) best = { plant: p, score, nameScore };
   }
   return best;
 }
@@ -59,7 +101,7 @@ function fmtDate(d) {
 (async () => {
   const runStarted = new Date().toISOString();
   const plants = db.prepare(
-    `SELECT id, name, city, state FROM plants`
+    `SELECT id, name, city, state, parent_company FROM plants`
   ).all();
   console.log(`[recalls] ${plants.length} plants available for matching`);
 

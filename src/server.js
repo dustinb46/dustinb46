@@ -169,6 +169,143 @@ app.get('/recalls', (req, res) => {
   res.render('recalls', { recalls, cls, matched });
 });
 
+// ---------------- timeline (journalist view) ----------------
+
+function buildRecallFilter(query) {
+  const where = ['1=1'];
+  const params = [];
+  if (query.class) {
+    where.push('r.classification = ?');
+    params.push(String(query.class));
+  }
+  if (query.state) {
+    where.push('UPPER(r.firm_state) = UPPER(?)');
+    params.push(String(query.state));
+  }
+  if (query.from) {
+    where.push("COALESCE(r.recall_date, r.report_date) >= ?");
+    params.push(String(query.from));
+  }
+  if (query.to) {
+    where.push("COALESCE(r.recall_date, r.report_date) <= ?");
+    params.push(String(query.to));
+  }
+  if (query.firm) {
+    where.push("LOWER(r.firm_name) LIKE ?");
+    params.push('%' + String(query.firm).toLowerCase() + '%');
+  }
+  if (query.matched === 'yes') where.push('r.plant_id IS NOT NULL');
+  if (query.matched === 'no')  where.push('r.plant_id IS NULL');
+  return { sql: where.join(' AND '), params };
+}
+
+app.get('/timeline', (req, res) => {
+  const { sql: filterSql, params } = buildRecallFilter(req.query);
+  const baseFrom = `FROM recalls r LEFT JOIN plants p ON p.id = r.plant_id WHERE ${filterSql}`;
+
+  const monthly = db.prepare(`
+    SELECT substr(COALESCE(r.recall_date, r.report_date), 1, 7) AS ym,
+           COUNT(*) AS n,
+           SUM(CASE WHEN r.classification = 'Class I'   THEN 1 ELSE 0 END) AS c1,
+           SUM(CASE WHEN r.classification = 'Class II'  THEN 1 ELSE 0 END) AS c2,
+           SUM(CASE WHEN r.classification = 'Class III' THEN 1 ELSE 0 END) AS c3
+    ${baseFrom} AND COALESCE(r.recall_date, r.report_date) IS NOT NULL
+    GROUP BY ym ORDER BY ym DESC LIMIT 60
+  `).all(...params);
+
+  const topFirms = db.prepare(`
+    SELECT r.firm_name, COUNT(*) AS n,
+           SUM(CASE WHEN r.classification = 'Class I' THEN 1 ELSE 0 END) AS c1
+    ${baseFrom} AND r.firm_name IS NOT NULL
+    GROUP BY r.firm_name ORDER BY n DESC LIMIT 15
+  `).all(...params);
+
+  const byClass = db.prepare(`
+    SELECT COALESCE(r.classification, '(unknown)') AS classification, COUNT(*) AS n
+    ${baseFrom} GROUP BY classification ORDER BY n DESC
+  `).all(...params);
+
+  const total = db.prepare(`SELECT COUNT(*) AS n ${baseFrom}`).get(...params).n;
+  const matched = db.prepare(`SELECT COUNT(*) AS n ${baseFrom} AND r.plant_id IS NOT NULL`).get(...params).n;
+
+  const recent = db.prepare(`
+    SELECT r.*, p.plant_code, p.name AS plant_name
+    ${baseFrom}
+    ORDER BY COALESCE(r.recall_date, r.report_date) DESC
+    LIMIT 50
+  `).all(...params);
+
+  res.render('timeline', {
+    filters: req.query,
+    monthly,
+    topFirms,
+    byClass,
+    total,
+    matched,
+    recent,
+  });
+});
+
+// ---------------- JSON / CSV exports for press use ----------------
+
+function recallRowsForExport(query) {
+  const { sql, params } = buildRecallFilter(query);
+  return db.prepare(`
+    SELECT r.recall_number, r.recall_date, r.report_date, r.classification,
+           r.status, r.firm_name, r.firm_city, r.firm_state,
+           r.reason, r.product_description,
+           r.match_method, r.match_confidence,
+           p.plant_code, p.name AS plant_name
+    FROM recalls r LEFT JOIN plants p ON p.id = r.plant_id
+    WHERE ${sql}
+    ORDER BY COALESCE(r.recall_date, r.report_date) DESC
+    LIMIT 5000
+  `).all(...params);
+}
+
+app.get('/api/recalls.json', (req, res) => {
+  const rows = recallRowsForExport(req.query);
+  res.json({ count: rows.length, generated_at: new Date().toISOString(), recalls: rows });
+});
+
+function csvEscape(v) {
+  if (v === null || v === undefined) return '';
+  const s = String(v);
+  if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+
+app.get('/api/recalls.csv', (req, res) => {
+  const rows = recallRowsForExport(req.query);
+  const cols = [
+    'recall_number','recall_date','report_date','classification','status',
+    'firm_name','firm_city','firm_state','reason','product_description',
+    'match_method','match_confidence','plant_code','plant_name'
+  ];
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="plant-track-recalls.csv"');
+  res.write(cols.join(',') + '\n');
+  for (const r of rows) res.write(cols.map(c => csvEscape(r[c])).join(',') + '\n');
+  res.end();
+});
+
+// ---------------- admin: ingest run history (read-only) ----------------
+
+app.get('/admin/ingest', (_req, res) => {
+  const runs = db.prepare(`
+    SELECT * FROM ingest_runs ORDER BY started_at DESC LIMIT 100
+  `).all();
+  const counts = {
+    plants:   db.prepare(`SELECT COUNT(*) AS n FROM plants`).get().n,
+    ims:      db.prepare(`SELECT COUNT(*) AS n FROM plants WHERE source='IMS'`).get().n,
+    brands:   db.prepare(`SELECT COUNT(*) AS n FROM brands`).get().n,
+    mappings: db.prepare(`SELECT COUNT(*) AS n FROM plant_brands`).get().n,
+    recalls:  db.prepare(`SELECT COUNT(*) AS n FROM recalls`).get().n,
+    matched:  db.prepare(`SELECT COUNT(*) AS n FROM recalls WHERE plant_id IS NOT NULL`).get().n,
+  };
+  res.render('admin_ingest', { runs, counts });
+});
+
 app.get('/about', (_req, res) => res.render('about'));
 
 app.use((req, res) => res.status(404).render('not_found', { kind: 'page', value: req.path }));
