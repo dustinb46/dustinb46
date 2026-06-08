@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
+    "prestart": "node scripts/init-db.js && node scripts/load-seeds.js",
     "dev": "node --watch src/server.js",
     "db:init": "node scripts/init-db.js",
     "db:reset": "node scripts/init-db.js --reset",
