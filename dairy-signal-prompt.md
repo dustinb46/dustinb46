@@ -29,6 +29,13 @@ brunndairy88@gmail.com.
 4. **Select:** ~7 NEW, deduplicated items, each in a distinct category, each with
    a direct source link inline. Include exactly ONE generalized "Wider Lens"
    item — no more.
+   - **Outside-in mandate:** Most items should be stories from OUTSIDE the dairy
+     industry (energy, fuel/freight, labor/immigration, trade/tariffs, weather,
+     fertilizer/inputs, consumer health, materials/packaging, macro/finance,
+     tech) read for their second-order effect on a dairy operation. Every such
+     item must end with a bolded **IMPLICATION:** line that spells out the
+     concrete dairy consequence. Direct dairy-industry news is allowed only when
+     it's genuinely fresh and material; default to the outside-in lens.
 5. **Keep generic:** Masthead "The Dairy Signal". No personal name or location.
    Increment the edition/issue number from the last edition and set today's date.
 6. **Design:** Reuse the established HTML layout — cream background, dark-green
@@ -50,3 +57,9 @@ brunndairy88@gmail.com.
   split; MMPA $122M Remus/cottage-cheese acquisition; MSU high-oleic soybeans;
   U. Nebraska broad-spectrum H5N1 vaccine; precision feeding + wearable biosensors;
   2026 global milk glut (wider lens).
+- **Vol. 1 No. 3 (Jun 8, 2026) — Outside-In Edition:** diesel $5.35 + hot freight
+  market; farm worksite immigration enforcement vs. dairy's year-round labor;
+  fertilizer/urea spike from Mideast conflict (manure value up); GLP-1 high-protein
+  demand tailwind; hot/dry June over forage + heat stress; Section 232 metal tariffs
+  (Jun 8) + China 10% soybean tariff; containerboard 2nd price wave; AI data-center
+  electricity boom raising power bills (wider lens). Established the outside-in format.
