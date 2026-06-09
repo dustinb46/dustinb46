@@ -119,16 +119,61 @@ data/
 - `recall_overrides` is a manual correction table; values survive
   resyncs.
 
+## Journalist features
+
+- `/timeline` — monthly recall volume, class breakdown, most-recalled
+  firms, filterable by class / state / date range / firm / match status.
+- `/api/recalls.json` and `/api/recalls.csv` — exports with the same
+  filter surface (`?class=Class+I&state=WI&from=2023-01-01&firm=...`),
+  capped at 5000 rows.
+- `/admin/ingest` — read-only audit of every ingest run and current row
+  counts. No auth; it's all public-source metadata.
+
 ## Deploying to Railway
 
-`railway.json` is set up to run `db:init` and `seed:load` at build time.
-On Railway:
+The app is deployed from the GitHub repo with these settings:
 
-1. Add a persistent volume mounted at `/data`.
-2. Set `PLANT_TRACK_DB=/data/plant_track.db`.
-3. Set `IMS_PDF_URL` and run `npm run ims:ingest` once (manually, via
-   Railway shell) for the first IMS load.
-4. Schedule `npm run recalls:sync` as a daily cron service.
+1. **Branch**: point the service at this branch.
+2. **Volume**: add a persistent volume mounted at `/data`.
+3. **Variables**:
+   - `PLANT_TRACK_DB=/data/plant_track.db`
+   - `ADMIN_TOKEN=<long random string>` (e.g.
+     `node -e "console.log(require('crypto').randomBytes(24).toString('hex'))"`)
+4. Node is pinned to 20 (`.node-version` / `.nvmrc`) because
+   `better-sqlite3` has no prebuilt binary for newer majors on
+   Railway's build image.
+
+Schema init and seed loading run automatically on every container
+start (`prestart`), against the volume. Both are idempotent, and the
+illustrative placeholder rows are automatically retired once real IMS
+data exists.
+
+### Running ingests on the deployed container
+
+`POST /admin/run/:name` triggers a script inside the running container
+and streams its output back. Authenticate with the `X-Admin-Token`
+header. Available names: `ims-download`, `ims-ingest`, `ims-sanity`,
+`recalls-sync`, `seeds-load`.
+
+```bash
+URL=https://your-app.up.railway.app
+TOKEN=your-admin-token
+
+# 1. Recalls (no input needed). max_pages of 100 records each.
+curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/recalls-sync?max_pages=20"
+
+# 2. IMS plants. Get the current PDF link from the FDA IMS List page first.
+curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/ims-download?url=<PDF_URL>"
+curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/ims-ingest"
+curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/ims-sanity"
+# Read the sanity output before trusting the data.
+
+# 3. Re-sync recalls so they match against the real IMS plants.
+curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/recalls-sync?max_pages=20"
+```
+
+For ongoing freshness, schedule `recalls-sync` daily (Railway cron
+service hitting the endpoint, or any external cron + curl).
 
 ## Sandbox / restricted egress
 
