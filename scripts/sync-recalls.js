@@ -7,6 +7,7 @@
 // genuinely cannot be matched to a plant; those are stored with
 // match_method='unmatched' and surfaced separately in the UI.
 
+const crypto = require('crypto');
 const { db } = require('../src/db');
 
 const BASE = 'https://api.fda.gov/food/enforcement.json';
@@ -175,8 +176,16 @@ function fmtDate(d) {
         } else {
           unmatched++;
         }
+        // Records occasionally lack a recall_number. A random fallback
+        // would duplicate the row on every re-sync, so derive a stable
+        // key from identifying fields. event_id alone is not enough —
+        // one event can span several product records — so hash the
+        // product fields too.
+        const fallbackKey = 'hash-' + crypto.createHash('sha1')
+          .update([r.event_id, r.recalling_firm, r.recall_initiation_date, r.product_description].join('|'))
+          .digest('hex').slice(0, 16);
         upsertRecall.run({
-          recall_number: r.recall_number || `unknown-${Math.random().toString(36).slice(2)}`,
+          recall_number: r.recall_number || fallbackKey,
           firm_name: r.recalling_firm || null,
           firm_city: r.city || null,
           firm_state: r.state || null,

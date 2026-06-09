@@ -73,8 +73,30 @@ const insertMapping = db.prepare(`
 `);
 
 const load = db.transaction(() => {
+  // Once real IMS data exists, the illustrative placeholders must not
+  // come back — prestart re-runs this loader on every container start.
+  // Skip loading them and retire any that are already in the DB
+  // (plant deletion cascades to their plant_brands rows).
+  const hasRealPlants = db.prepare(
+    `SELECT COUNT(*) AS n FROM plants WHERE source = 'IMS'`
+  ).get().n > 0;
+
+  if (hasRealPlants) {
+    const gonePlants = db.prepare(
+      `DELETE FROM plants WHERE source = 'illustrative_seed'`
+    ).run().changes;
+    const goneBrands = db.prepare(
+      `DELETE FROM brands WHERE brand_name LIKE 'EXAMPLE%'
+       AND id NOT IN (SELECT brand_id FROM plant_brands)`
+    ).run().changes;
+    if (gonePlants || goneBrands) {
+      console.log(`[load-seeds] real IMS data present: retired ${gonePlants} placeholder plants, ${goneBrands} placeholder brands`);
+    }
+  }
+
   for (const row of readCsv('plants.csv')) {
     plantsIn++;
+    if (hasRealPlants && row.source === 'illustrative_seed') continue;
     upsertPlant.run({
       plant_code: row.plant_code,
       name: row.name,
@@ -93,6 +115,7 @@ const load = db.transaction(() => {
 
   for (const row of readCsv('brands.csv')) {
     brandsIn++;
+    if (hasRealPlants && row.brand_name.startsWith('EXAMPLE')) continue;
     upsertBrand.run({
       brand_name: row.brand_name,
       brand_type: row.brand_type || null,
@@ -104,6 +127,7 @@ const load = db.transaction(() => {
   const skipped = [];
   for (const row of readCsv('plant_brands.csv')) {
     mappingsIn++;
+    if (hasRealPlants && row.source === 'illustrative_seed') continue;
     const plant = findPlantByCode.get(row.plant_code);
     if (!plant) {
       skipped.push(`plant_code ${row.plant_code} not found for brand ${row.brand_name}`);
