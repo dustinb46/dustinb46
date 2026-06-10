@@ -137,9 +137,15 @@ function parseImsText(text) {
         continue;
       }
       const { city, state: cityState } = parseCityLine(cityLine);
+      // A few names print their code inline, e.g. "CYPRESS GROVE BTU(41-134)".
+      // Strip a trailing parenthetical code so it isn't duplicated.
+      const cleanName = name
+        .replace(/\s*\(\d{1,3}-\d{1,5}\)\s*$/, '')
+        .replace(/\s+/g, ' ')
+        .trim();
       plants.push({
         plant_code: `${stateCode}-${data.plantNum}`,
-        name: name.replace(/\s+/g, ' ').trim(),
+        name: cleanName,
         city,
         state: cityState || stateAbbr,
         ims_rating: data.ims_rating,
