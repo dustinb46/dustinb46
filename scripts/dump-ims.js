@@ -26,6 +26,24 @@ const argTo = parseInt(process.argv[3], 10);
   const lines = pdf.text.split('\n');
   console.log(`[dump-ims] total lines: ${lines.length}`);
 
+  const grep = process.env.IMS_GREP;
+  if (grep) {
+    const re = new RegExp(grep, 'i');
+    console.log(`\n=== lines matching /${grep}/i (2 lines context) ===`);
+    let shown = 0;
+    for (let i = 0; i < lines.length && shown < 30; i++) {
+      if (re.test(lines[i])) {
+        for (let j = Math.max(0, i - 2); j <= Math.min(lines.length - 1, i + 1); j++) {
+          console.log(`${j === i ? '>' : ' '}${String(j).padStart(5)} | ${lines[j]}`);
+        }
+        console.log('  ---');
+        shown++;
+      }
+    }
+    console.log(`\n[dump-ims] match groups shown: ${shown}`);
+    return;
+  }
+
   if (!Number.isNaN(argFrom)) {
     const from = argFrom;
     const to = Number.isNaN(argTo) ? from + 40 : argTo;

@@ -334,6 +334,7 @@ app.post('/admin/run/:name', requireAdmin, (req, res) => {
   const env = { ...process.env };
   if (req.query.url)       env.IMS_PDF_URL = String(req.query.url);
   if (req.query.max_pages) env.RECALL_MAX_PAGES = String(req.query.max_pages);
+  if (req.query.grep)      env.IMS_GREP = String(req.query.grep);
   const extraArgs = [];
   if (req.query.from) extraArgs.push(String(req.query.from));
   if (req.query.to)   extraArgs.push(String(req.query.to));
