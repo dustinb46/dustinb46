@@ -317,6 +317,7 @@ const ADMIN_SCRIPTS = {
   'ims-sanity':   'scripts/ingest-ims-sanity.js',
   'recalls-sync': 'scripts/sync-recalls.js',
   'seeds-load':   'scripts/load-seeds.js',
+  'ims-dump':     'scripts/dump-ims.js',
 };
 
 function requireAdmin(req, res, next) {
@@ -333,7 +334,10 @@ app.post('/admin/run/:name', requireAdmin, (req, res) => {
   const env = { ...process.env };
   if (req.query.url)       env.IMS_PDF_URL = String(req.query.url);
   if (req.query.max_pages) env.RECALL_MAX_PAGES = String(req.query.max_pages);
-  const child = spawn('node', [script], {
+  const extraArgs = [];
+  if (req.query.from) extraArgs.push(String(req.query.from));
+  if (req.query.to)   extraArgs.push(String(req.query.to));
+  const child = spawn('node', [script, ...extraArgs], {
     cwd: path.join(__dirname, '..'),
     env,
   });
