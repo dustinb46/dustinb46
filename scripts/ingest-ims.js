@@ -15,93 +15,160 @@ const { imsPdfPath } = require('../src/paths');
 
 const PDF_PATH = imsPdfPath();
 
-if (!fs.existsSync(PDF_PATH)) {
-  console.error(`[ingest-ims] PDF not found at ${PDF_PATH}`);
-  console.error(`[ingest-ims] run: npm run ims:download (with IMS_PDF_URL set)`);
-  process.exit(2);
+// The IMS List is a multi-column table that pdf-parse flattens into a
+// vertical stream. Each plant occupies three consecutive content lines:
+//
+//   DFA INC                          <- name
+//   KNOXVILLE, TN                    <- city[, ST]
+//   3224 1 91 --91 SHD 04/30/2025    <- plant#  product-codes  ratings  agency  exp-date
+//
+// State sections are introduced by a header line:
+//   ALABAMA (STATECODE  01)
+// and the full plant code is <statecode>-<plant#>, e.g. 01-3224.
+//
+// The reliable anchor is the data line: it starts with the plant number
+// and ends with an MM/DD/YYYY date. Phone numbers, foreign single-service
+// entries, and column headers don't match that shape, so they're skipped.
+
+const STATE_NAME_TO_ABBR = {
+  ALABAMA:'AL', ALASKA:'AK', ARIZONA:'AZ', ARKANSAS:'AR', CALIFORNIA:'CA',
+  COLORADO:'CO', CONNECTICUT:'CT', DELAWARE:'DE', FLORIDA:'FL', GEORGIA:'GA',
+  HAWAII:'HI', IDAHO:'ID', ILLINOIS:'IL', INDIANA:'IN', IOWA:'IA',
+  KANSAS:'KS', KENTUCKY:'KY', LOUISIANA:'LA', MAINE:'ME', MARYLAND:'MD',
+  MASSACHUSETTS:'MA', MICHIGAN:'MI', MINNESOTA:'MN', MISSISSIPPI:'MS', MISSOURI:'MO',
+  MONTANA:'MT', NEBRASKA:'NE', NEVADA:'NV', 'NEW HAMPSHIRE':'NH', 'NEW JERSEY':'NJ',
+  'NEW MEXICO':'NM', 'NEW YORK':'NY', 'NORTH CAROLINA':'NC', 'NORTH DAKOTA':'ND', OHIO:'OH',
+  OKLAHOMA:'OK', OREGON:'OR', PENNSYLVANIA:'PA', 'RHODE ISLAND':'RI', 'SOUTH CAROLINA':'SC',
+  'SOUTH DAKOTA':'SD', TENNESSEE:'TN', TEXAS:'TX', UTAH:'UT', VERMONT:'VT',
+  VIRGINIA:'VA', WASHINGTON:'WA', 'WEST VIRGINIA':'WV', WISCONSIN:'WI', WYOMING:'WY',
+  'PUERTO RICO':'PR', 'DISTRICT OF COLUMBIA':'DC',
+};
+
+// Column-header tokens that appear (each on its own line) at the top of
+// every state section. Filtered out so they never enter the name/city
+// window. Exact-match only, so they won't clip real names like
+// "VENTURE MILK".
+const HEADER_TOKENS = new Set([
+  'NAME/CITY PLANT/BTU #', 'PRODUCT', 'CODES', 'RAW', 'MILK', 'RS/TR',
+  'STATN', 'PLANT', 'ENFORCE', 'RATING', 'AGENCY', 'EXP RATING', 'DATE',
+  'HACCP', 'LIST',
+  'SANITATION COMPLIANCE AND ENFORCEMENT RATINGS OF INTERSTATE MILK SHIPPERS',
+]);
+
+const SECTION_RE = /^(.+?)\s*\(STATECODE\s+(\d+)\)\s*$/;
+const PAGE_RE = /^PAGE:\s*\d+/i;
+// plant# ... MM/DD/YYYY  (data/anchor line)
+const DATA_RE = /^(\d{1,4})\s+(.*?)\s+(\d{2}\/\d{2}\/\d{4})\s*$/;
+// rating agency token immediately before the date, e.g. SHD/SDA/OTH/HD
+const AGENCY_RE = /\b([A-Z]{2,4})\s+\d{2}\/\d{2}\/\d{4}\s*$/;
+const PLANT_RATING_RE = /--\s*(\d{2,3})\b/;
+
+function stateAbbrFromName(name) {
+  return STATE_NAME_TO_ABBR[name.trim().toUpperCase()] || null;
 }
 
-// Plant code shape: digits-digits (commonly 2-3 / 2-5).
-// Examples in the IMS List: "06-42", "36-1407", "55-23".
-const CODE_RE = /\b(\d{1,3})-(\d{1,5})\b/;
-
-// State two-letter postal abbrev, used as a section header marker.
-const STATE_RE = /^[A-Z]{2}\b/;
-
-function inferStateFromHeader(line, current) {
-  // IMS sections begin with a centered state name in title case.
-  // We rely on the PDF text dump preserving the line, with a fallback
-  // to the previous detected state.
-  const trimmed = line.trim();
-  const STATES = {
-    'ALABAMA':'AL','ALASKA':'AK','ARIZONA':'AZ','ARKANSAS':'AR','CALIFORNIA':'CA',
-    'COLORADO':'CO','CONNECTICUT':'CT','DELAWARE':'DE','FLORIDA':'FL','GEORGIA':'GA',
-    'HAWAII':'HI','IDAHO':'ID','ILLINOIS':'IL','INDIANA':'IN','IOWA':'IA',
-    'KANSAS':'KS','KENTUCKY':'KY','LOUISIANA':'LA','MAINE':'ME','MARYLAND':'MD',
-    'MASSACHUSETTS':'MA','MICHIGAN':'MI','MINNESOTA':'MN','MISSISSIPPI':'MS','MISSOURI':'MO',
-    'MONTANA':'MT','NEBRASKA':'NE','NEVADA':'NV','NEW HAMPSHIRE':'NH','NEW JERSEY':'NJ',
-    'NEW MEXICO':'NM','NEW YORK':'NY','NORTH CAROLINA':'NC','NORTH DAKOTA':'ND','OHIO':'OH',
-    'OKLAHOMA':'OK','OREGON':'OR','PENNSYLVANIA':'PA','RHODE ISLAND':'RI','SOUTH CAROLINA':'SC',
-    'SOUTH DAKOTA':'SD','TENNESSEE':'TN','TEXAS':'TX','UTAH':'UT','VERMONT':'VT',
-    'VIRGINIA':'VA','WASHINGTON':'WA','WEST VIRGINIA':'WV','WISCONSIN':'WI','WYOMING':'WY',
-    'PUERTO RICO':'PR',
-  };
-  const up = trimmed.toUpperCase();
-  if (STATES[up]) return STATES[up];
-  return current;
+function isHeaderLine(line) {
+  return HEADER_TOKENS.has(line.trim());
 }
 
-function parseLine(line, state) {
-  const m = line.match(CODE_RE);
+// Parse a data/anchor line into its structured fields. Returns null if it
+// doesn't match the expected shape.
+function parseDataLine(line) {
+  const m = line.match(DATA_RE);
   if (!m) return null;
-  const code = `${m[1]}-${m[2]}`;
-  // Strip the code from the line, then take the leading non-numeric chunk
-  // as the plant name. IMS rows commonly look like:
-  //   06-42  HP Hood LLC  Agawam  MA  21
-  // We pull name = text before city/state/rating.
-  const after = line.slice(m.index + m[0].length).trim();
-  // Heuristic: split on 2+ spaces if present; otherwise take everything
-  // up to the first all-caps two-letter token that matches a state.
-  let name = after;
-  let city = null;
-  let rating = null;
-  const parts = after.split(/\s{2,}/).map(s => s.trim()).filter(Boolean);
-  if (parts.length >= 2) {
-    name = parts[0];
-    // Look for a trailing 2-digit rating, then a state, then a city in
-    // reverse order. This is intentionally lenient.
-    const last = parts[parts.length - 1];
-    if (/^\d{1,3}$/.test(last)) {
-      rating = last;
-      parts.pop();
-    }
-    const maybeState = parts[parts.length - 1];
-    if (/^[A-Z]{2}$/.test(maybeState)) {
-      state = maybeState;
-      parts.pop();
-    }
-    city = parts.length > 1 ? parts[parts.length - 1] : null;
-  }
+  const plantNum = m[1];
+  const middle = m[2];
+  const date = m[3];
+  const agencyMatch = (middle + ' ' + date).match(AGENCY_RE);
+  const ratingMatch = middle.match(PLANT_RATING_RE);
   return {
-    plant_code: code,
-    name: name.replace(/\s+/g, ' ').trim(),
-    city,
-    state,
-    ims_rating: rating,
+    plantNum,
+    ims_rating: ratingMatch ? ratingMatch[1] : null,
+    rating_agency: agencyMatch ? agencyMatch[1] : null,
+    exp_date: date,
   };
 }
 
-(async () => {
+// Split a city line into city + optional 2-letter state.
+function parseCityLine(line) {
+  const m = line.trim().match(/^(.*?),\s*([A-Z]{2})$/);
+  if (m) return { city: m[1].trim(), state: m[2] };
+  return { city: line.trim(), state: null };
+}
+
+// Pure parser: text -> { plants, parsed, skipped, skippedSamples }.
+// No DB or filesystem dependency, so it can be unit-tested directly.
+function parseImsText(text) {
+  const lines = text.split('\n');
+  const plants = [];
+  let parsed = 0, skipped = 0;
+  const skippedSamples = [];
+
+  let stateCode = null;     // numeric statecode for current section, e.g. "01"
+  let stateAbbr = null;     // postal abbrev, e.g. "AL"
+  let recentContent = [];   // sliding window of recent name/city candidate lines
+
+  for (const raw of lines) {
+    const line = raw.replace(/\s+$/, '').trim();
+    if (!line) continue;
+
+    // Section header: update current state, reset the window.
+    const section = line.match(SECTION_RE);
+    if (section) {
+      stateCode = section[2].padStart(2, '0');
+      stateAbbr = stateAbbrFromName(section[1]);
+      recentContent = [];
+      continue;
+    }
+
+    if (PAGE_RE.test(line) || isHeaderLine(line)) continue;
+
+    // Data/anchor line: the two preceding content lines are name + city.
+    const data = parseDataLine(line);
+    if (data) {
+      parsed++;
+      const name = recentContent.length >= 2 ? recentContent[recentContent.length - 2] : null;
+      const cityLine = recentContent.length >= 1 ? recentContent[recentContent.length - 1] : null;
+      recentContent = [];
+
+      if (!stateCode || !name || !cityLine || name.length < 2) {
+        skipped++;
+        if (skippedSamples.length < 12) skippedSamples.push(line);
+        continue;
+      }
+      const { city, state: cityState } = parseCityLine(cityLine);
+      plants.push({
+        plant_code: `${stateCode}-${data.plantNum}`,
+        name: name.replace(/\s+/g, ' ').trim(),
+        city,
+        state: cityState || stateAbbr,
+        ims_rating: data.ims_rating,
+      });
+      continue;
+    }
+
+    // Otherwise it's a name/city candidate; keep the last few.
+    recentContent.push(line);
+    if (recentContent.length > 4) recentContent.shift();
+  }
+
+  return { plants, parsed, skipped, skippedSamples };
+}
+
+async function main() {
+  if (!fs.existsSync(PDF_PATH)) {
+    console.error(`[ingest-ims] PDF not found at ${PDF_PATH}`);
+    console.error(`[ingest-ims] run: npm run ims:download (with IMS_PDF_URL set)`);
+    process.exit(2);
+  }
   const runStarted = new Date().toISOString();
   const buf = fs.readFileSync(PDF_PATH);
   console.log(`[ingest-ims] parsing ${PDF_PATH} (${buf.length.toLocaleString()} bytes)`);
   const pdf = await pdfParse(buf);
-  const lines = pdf.text.split('\n');
-  console.log(`[ingest-ims] extracted ${lines.length} lines from PDF`);
+  console.log(`[ingest-ims] extracted ${pdf.text.split('\n').length} lines from PDF`);
 
-  let state = null;
-  let parsed = 0, written = 0, skipped = 0;
-  const skippedSamples = [];
+  const { plants, parsed, skipped, skippedSamples } = parseImsText(pdf.text);
+  let written = 0;
 
   const upsert = db.prepare(`
     INSERT INTO plants (plant_code, name, city, state, ims_rating, source, last_verified)
@@ -122,20 +189,9 @@ function parseLine(line, state) {
   `);
 
   const txn = db.transaction(() => {
-    for (const raw of lines) {
-      const line = raw.replace(/\s+$/, '');
-      if (!line.trim()) continue;
-      state = inferStateFromHeader(line, state);
-      const row = parseLine(line, state);
-      if (!row) continue;
-      parsed++;
-      if (!row.name || row.name.length < 2) {
-        skipped++;
-        if (skippedSamples.length < 10) skippedSamples.push(line);
-        continue;
-      }
-      upsert.run(row);
-      insertAlias.run(row.plant_code, row.plant_code);
+    for (const p of plants) {
+      upsert.run(p);
+      insertAlias.run(p.plant_code, p.plant_code);
       written++;
     }
   });
@@ -158,7 +214,14 @@ function parseLine(line, state) {
     for (const s of skippedSamples) console.log(`  | ${s}`);
   }
   console.log('[ingest-ims] next: npm run ims:sanity');
-})().catch(err => {
-  console.error('[ingest-ims] failed:', err);
-  process.exit(1);
-});
+}
+
+module.exports = { parseImsText, parseDataLine, parseCityLine };
+
+// Run as a script (not when require()'d by a test).
+if (require.main === module) {
+  main().catch(err => {
+    console.error('[ingest-ims] failed:', err);
+    process.exit(1);
+  });
+}
