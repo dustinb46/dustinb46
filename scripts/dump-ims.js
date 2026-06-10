@@ -7,11 +7,10 @@
 //   node scripts/dump-ims.js 500 560  -> prints raw lines [500, 560)
 
 const fs = require('fs');
-const path = require('path');
 const pdfParse = require('pdf-parse');
+const { imsPdfPath } = require('../src/paths');
 
-const PDF_PATH = process.env.IMS_PDF_PATH
-  || path.join(__dirname, '..', 'data', 'ims', 'ims-list.pdf');
+const PDF_PATH = imsPdfPath();
 
 if (!fs.existsSync(PDF_PATH)) {
   console.error(`[dump-ims] PDF not found at ${PDF_PATH}`);

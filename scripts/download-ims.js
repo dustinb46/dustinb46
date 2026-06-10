@@ -3,10 +3,9 @@
 // The exact URL changes each quarter; pass --url=https://... to override.
 
 const fs = require('fs');
-const path = require('path');
+const { ensureImsDir, imsPdfPath } = require('../src/paths');
 
-const OUT_DIR = path.join(__dirname, '..', 'data', 'ims');
-const OUT_PATH = path.join(OUT_DIR, 'ims-list.pdf');
+const OUT_PATH = imsPdfPath();
 
 const urlArg = process.argv.find(a => a.startsWith('--url='));
 const url = urlArg ? urlArg.slice('--url='.length) : process.env.IMS_PDF_URL;
@@ -28,7 +27,7 @@ if (!url) {
 }
 
 (async () => {
-  fs.mkdirSync(OUT_DIR, { recursive: true });
+  ensureImsDir();
   console.log(`[download-ims] GET ${url}`);
   const res = await fetch(url);
   if (!res.ok) {

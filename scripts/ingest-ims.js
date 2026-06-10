@@ -11,9 +11,9 @@ const fs = require('fs');
 const path = require('path');
 const pdfParse = require('pdf-parse');
 const { db } = require('../src/db');
+const { imsPdfPath } = require('../src/paths');
 
-const PDF_PATH = process.env.IMS_PDF_PATH
-  || path.join(__dirname, '..', 'data', 'ims', 'ims-list.pdf');
+const PDF_PATH = imsPdfPath();
 
 if (!fs.existsSync(PDF_PATH)) {
   console.error(`[ingest-ims] PDF not found at ${PDF_PATH}`);
