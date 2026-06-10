@@ -168,7 +168,7 @@ async function main() {
   console.log(`[ingest-ims] extracted ${pdf.text.split('\n').length} lines from PDF`);
 
   const { plants, parsed, skipped, skippedSamples } = parseImsText(pdf.text);
-  let written = 0;
+  let written = 0, removed = 0;
 
   const upsert = db.prepare(`
     INSERT INTO plants (plant_code, name, city, state, ims_rating, source, last_verified)
@@ -189,10 +189,24 @@ async function main() {
   `);
 
   const txn = db.transaction(() => {
+    const seenCodes = new Set();
     for (const p of plants) {
       upsert.run(p);
       insertAlias.run(p.plant_code, p.plant_code);
+      seenCodes.add(p.plant_code);
       written++;
+    }
+    // Remove IMS-sourced rows no longer in the current PDF. Upserts above
+    // refresh collisions, but orphans from earlier (possibly broken) runs
+    // would otherwise linger. Brand mappings on real plants are preserved
+    // because the upsert kept those plant rows in place.
+    const existing = db.prepare(`SELECT plant_code FROM plants WHERE source = 'IMS'`).all();
+    const del = db.prepare(`DELETE FROM plants WHERE plant_code = ? AND source = 'IMS'`);
+    for (const row of existing) {
+      if (!seenCodes.has(row.plant_code)) {
+        del.run(row.plant_code);
+        removed++;
+      }
     }
   });
   txn();
@@ -205,10 +219,10 @@ async function main() {
     new Date().toISOString(),
     parsed,
     written,
-    `skipped=${skipped}; pdf=${path.basename(PDF_PATH)}`
+    `skipped=${skipped} removed=${removed}; pdf=${path.basename(PDF_PATH)}`
   );
 
-  console.log(`[ingest-ims] parsed=${parsed} written=${written} skipped=${skipped}`);
+  console.log(`[ingest-ims] parsed=${parsed} written=${written} removed=${removed} skipped=${skipped}`);
   if (skippedSamples.length) {
     console.log('[ingest-ims] sample skipped lines:');
     for (const s of skippedSamples) console.log(`  | ${s}`);
