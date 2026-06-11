@@ -370,6 +370,7 @@ const ADMIN_SCRIPTS = {
   'ims-dump':     'scripts/dump-ims.js',
   'resolve-plants': 'scripts/resolve-plants.js',
   'harvest-codes':  'scripts/harvest-recall-codes.js',
+  'usda-ingest':    'scripts/ingest-usda.js',
 };
 
 function requireAdmin(req, res, next) {
