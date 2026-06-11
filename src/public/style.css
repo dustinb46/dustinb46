@@ -94,3 +94,8 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0
 .export-row { font-size: 0.9rem; margin: 0.5rem 0 1.5rem; }
 .export-row a { color: var(--accent); }
 .notes-cell { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #444; }
+
+.map-link { margin: 0.75rem 0 1.25rem; font-size: 0.95rem; }
+.map-link a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.map-link a:hover { text-decoration: underline; }
+.map-link .muted { margin-left: 0.5rem; font-size: 0.85rem; }

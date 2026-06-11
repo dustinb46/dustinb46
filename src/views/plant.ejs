@@ -23,6 +23,19 @@
   <% if (plant.last_verified) { %><dt>Last verified</dt><dd><%= plant.last_verified %></dd><% } %>
 </dl>
 
+<%
+  const mapQuery = [plant.name, plant.address, plant.city, plant.state]
+    .filter(Boolean).join(' ');
+  const mapsUrl = 'https://www.google.com/maps/search/?api=1&query='
+    + encodeURIComponent(mapQuery);
+%>
+<p class="map-link">
+  <a href="<%= mapsUrl %>" target="_blank" rel="noopener noreferrer">
+    View on Google Maps &rarr;
+  </a>
+  <span class="muted">opens a search for this plant; verify the pin before citing it.</span>
+</p>
+
 <% if (aliases && aliases.length > 1) { %>
   <h2>Code aliases</h2>
   <ul class="aliases">
