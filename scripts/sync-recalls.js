@@ -119,9 +119,15 @@ function fmtDate(d) {
       firm_name=excluded.firm_name,
       firm_city=excluded.firm_city,
       firm_state=excluded.firm_state,
-      plant_id=excluded.plant_id,
-      match_confidence=excluded.match_confidence,
-      match_method=excluded.match_method,
+      -- Don't let fuzzy name matching clobber stronger evidence:
+      -- plt_code comes from a plant code printed in the recall itself,
+      -- manual comes from a human. Keep those.
+      plant_id=CASE WHEN recalls.match_method IN ('plt_code','manual')
+                    THEN recalls.plant_id ELSE excluded.plant_id END,
+      match_confidence=CASE WHEN recalls.match_method IN ('plt_code','manual')
+                    THEN recalls.match_confidence ELSE excluded.match_confidence END,
+      match_method=CASE WHEN recalls.match_method IN ('plt_code','manual')
+                    THEN recalls.match_method ELSE excluded.match_method END,
       reason=excluded.reason,
       classification=excluded.classification,
       status=excluded.status,

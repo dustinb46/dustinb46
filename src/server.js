@@ -333,6 +333,7 @@ const ADMIN_SCRIPTS = {
   'seeds-load':   'scripts/load-seeds.js',
   'ims-dump':     'scripts/dump-ims.js',
   'resolve-plants': 'scripts/resolve-plants.js',
+  'harvest-codes':  'scripts/harvest-recall-codes.js',
 };
 
 function requireAdmin(req, res, next) {
@@ -351,6 +352,7 @@ app.post('/admin/run/:name', requireAdmin, (req, res) => {
   if (req.query.max_pages) env.RECALL_MAX_PAGES = String(req.query.max_pages);
   if (req.query.grep)      env.IMS_GREP = String(req.query.grep);
   if (req.query.queries)   env.IMS_QUERIES = String(req.query.queries);
+  if (req.query.apply)     env.APPLY = String(req.query.apply);
   const extraArgs = [];
   if (req.query.from) extraArgs.push(String(req.query.from));
   if (req.query.to)   extraArgs.push(String(req.query.to));
