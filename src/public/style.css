@@ -20,8 +20,16 @@ header.site {
   padding: 1rem 1.5rem; border-bottom: 1px solid var(--line); background: white;
 }
 header.site .brand { font-weight: 700; font-size: 1.1rem; text-decoration: none; color: var(--accent); }
-header.site nav a { margin-right: 1rem; color: var(--fg); text-decoration: none; }
+header.site .beta-pill {
+  display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px;
+  background: #f0e8c4; color: #6b5300; border: 1px solid #d9c477;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+header.site nav { margin-left: auto; }
+header.site nav a { margin-left: 1rem; color: var(--fg); text-decoration: none; }
 header.site nav a:hover { text-decoration: underline; }
+header.site nav a.feedback { color: var(--accent); font-weight: 600; }
 
 .disclaimer {
   padding: 0.6rem 1.5rem; background: var(--warn-bg);

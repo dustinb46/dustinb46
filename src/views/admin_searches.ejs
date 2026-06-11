@@ -1,0 +1,73 @@
+<% const title = 'Search log'; %>
+<%- include('_header', { title, disclaimer }) %>
+
+<h1>Search log</h1>
+<p class="lede">
+  What people are searching for. No IPs, no user agents — just the
+  query and the result counts so we can see which mappings are missing.
+</p>
+
+<section class="stats">
+  <div><strong><%= totals.total.toLocaleString() %></strong><span>total searches</span></div>
+  <div><strong><%= totals.zero.toLocaleString() %></strong><span>returned nothing</span></div>
+  <div><strong><%= totals.total ? Math.round(100 * totals.zero / totals.total) : 0 %>%</strong><span>zero-result rate</span></div>
+</section>
+
+<h2>Zero-result queries (the punch list)</h2>
+<% if (!zero.length) { %>
+  <p class="empty">No zero-result searches yet — or no searches at all.</p>
+<% } else { %>
+  <table>
+    <thead><tr><th>Query</th><th>Count</th><th>Last seen</th></tr></thead>
+    <tbody>
+      <% for (const r of zero) { %>
+        <tr>
+          <td><code><%= r.q %></code></td>
+          <td><%= r.n %></td>
+          <td><%= r.last_seen %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } %>
+
+<div class="two-col">
+  <section>
+    <h2>Top queries</h2>
+    <% if (!top.length) { %>
+      <p class="empty">No queries yet.</p>
+    <% } else { %>
+      <table>
+        <thead><tr><th>Query</th><th>Count</th></tr></thead>
+        <tbody>
+          <% for (const r of top) { %>
+            <tr><td><code><%= r.q %></code></td><td><%= r.n %></td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+  </section>
+
+  <section>
+    <h2>Most recent</h2>
+    <% if (!recent.length) { %>
+      <p class="empty">No searches yet.</p>
+    <% } else { %>
+      <table>
+        <thead><tr><th>Time</th><th>Query</th><th>Plants</th><th>Brands</th></tr></thead>
+        <tbody>
+          <% for (const r of recent.slice(0, 50)) { %>
+            <tr>
+              <td><%= r.ts %></td>
+              <td><code><%= r.q %></code><% if (r.state_filter) { %> <span class="muted">/ <%= r.state_filter %></span><% } %></td>
+              <td><%= r.plant_hits %><% if (r.alias_hit) { %> <span class="muted">+alias</span><% } %></td>
+              <td><%= r.brand_hits %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+  </section>
+</div>
+
+<%- include('_footer') %>

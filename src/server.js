@@ -68,6 +68,11 @@ function recallsForPlant(plant_id) {
   `).all(plant_id);
 }
 
+const logSearch = db.prepare(`
+  INSERT INTO search_log (q, state_filter, parent_filter, plant_hits, brand_hits, alias_hit)
+  VALUES (?, ?, ?, ?, ?, ?)
+`);
+
 function plantsForBrand(brand_id) {
   return db.prepare(`
     SELECT pb.*, p.plant_code, p.name AS plant_name, p.city, p.state
@@ -143,6 +148,16 @@ app.get('/search', (req, res) => {
   if (parent) {
     const needle = parent.toLowerCase();
     plants = plants.filter(p => (p.parent_company || '').toLowerCase().includes(needle));
+  }
+
+  // Log only non-empty queries so we can see what peers searched for
+  // (especially zero-result queries — those tell us which mappings to
+  // add next). No IP or user agent stored.
+  if (q) {
+    try {
+      logSearch.run(q, state || null, parent || null,
+        plants.length, brands.length, aliasHit ? 1 : 0);
+    } catch (e) { /* swallow — never block a search on logging */ }
   }
 
   res.render('search', { q, state, parent, plants, brands, aliasHit });
@@ -305,6 +320,27 @@ app.get('/api/recalls.csv', (req, res) => {
 });
 
 // ---------------- admin: ingest run history (read-only) ----------------
+
+app.get('/admin/searches', (_req, res) => {
+  const recent = db.prepare(
+    `SELECT * FROM search_log ORDER BY ts DESC LIMIT 200`
+  ).all();
+  const zero = db.prepare(`
+    SELECT q, COUNT(*) AS n, MAX(ts) AS last_seen
+    FROM search_log
+    WHERE plant_hits = 0 AND brand_hits = 0 AND alias_hit = 0
+    GROUP BY LOWER(q) ORDER BY n DESC, last_seen DESC LIMIT 50
+  `).all();
+  const top = db.prepare(`
+    SELECT q, COUNT(*) AS n
+    FROM search_log GROUP BY LOWER(q) ORDER BY n DESC LIMIT 30
+  `).all();
+  const totals = {
+    total: db.prepare(`SELECT COUNT(*) AS n FROM search_log`).get().n,
+    zero:  db.prepare(`SELECT COUNT(*) AS n FROM search_log WHERE plant_hits=0 AND brand_hits=0 AND alias_hit=0`).get().n,
+  };
+  res.render('admin_searches', { recent, zero, top, totals });
+});
 
 app.get('/admin/ingest', (_req, res) => {
   const runs = db.prepare(`

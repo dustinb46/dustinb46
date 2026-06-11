@@ -92,6 +92,22 @@ CREATE TABLE IF NOT EXISTS recall_overrides (
   created_at    TEXT DEFAULT (datetime('now'))
 );
 
+-- Lightweight search-query log for beta feedback. No PII (no IP, no UA),
+-- just the query and the result counts so we can see what peers searched
+-- for that returned nothing — that tells us which mappings to add next.
+CREATE TABLE IF NOT EXISTS search_log (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts            TEXT NOT NULL DEFAULT (datetime('now')),
+  q             TEXT,
+  state_filter  TEXT,
+  parent_filter TEXT,
+  plant_hits    INTEGER,
+  brand_hits    INTEGER,
+  alias_hit     INTEGER       -- 1 if the query was a direct plant-code match
+);
+CREATE INDEX IF NOT EXISTS idx_search_log_ts ON search_log(ts);
+CREATE INDEX IF NOT EXISTS idx_search_log_q  ON search_log(q);
+
 -- Lightweight ingest log so we can see what ran when.
 CREATE TABLE IF NOT EXISTS ingest_runs (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
