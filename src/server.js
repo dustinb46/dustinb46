@@ -96,6 +96,20 @@ app.get('/', (req, res) => {
   res.render('index', { stats, recent });
 });
 
+// JSON plant search — useful for programmatic lookups and resolving
+// exact plant codes by name.
+app.get('/api/plants.json', (req, res) => {
+  const q = (req.query.q || '').trim();
+  if (!q) return res.json({ count: 0, plants: [] });
+  const rows = db.prepare(`
+    SELECT p.plant_code, p.name, p.city, p.state, p.parent_company, p.ims_rating
+    FROM plants_fts JOIN plants p ON p.id = plants_fts.rowid
+    WHERE plants_fts MATCH ?
+    ORDER BY rank LIMIT 50
+  `).all(ftsQuery(q));
+  res.json({ count: rows.length, plants: rows });
+});
+
 app.get('/search', (req, res) => {
   const q = (req.query.q || '').trim();
   const state = (req.query.state || '').trim().toUpperCase();
