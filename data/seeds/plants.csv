@@ -1,5 +1,1 @@
 plant_code,name,address,city,state,category,parent_company,fmmo_pool,ims_rating,source,last_verified
-EX-001,EXAMPLE Northeast Fluid Plant,100 Example Rd,Springfield,MA,Grade A fluid,Example Dairy Co,1,,illustrative_seed,2025-01-01
-EX-002,EXAMPLE Midwest Cultured Plant,200 Example Ave,Madison,WI,Cultured,Example Dairy Co,30,,illustrative_seed,2025-01-01
-EX-003,EXAMPLE Cheese Plant,300 Example Blvd,Green Bay,WI,Cheese,Example Cheese Co,30,,illustrative_seed,2025-01-01
-EX-004,EXAMPLE Mountain Region Fluid,400 Example St,Denver,CO,Grade A fluid,Example Dairy Co,32,,illustrative_seed,2025-01-01

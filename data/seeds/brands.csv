@@ -1,5 +1,22 @@
 brand_name,brand_type,parent_company
-EXAMPLE Brand A,national,Example Dairy Co
-EXAMPLE Brand B,regional,Example Dairy Co
-EXAMPLE Store Brand,private_label,Example Retailer
-EXAMPLE Cheese Brand,national,Example Cheese Co
+Gossner,regional,Gossner Foods Inc
+Rutter's,regional,Rutter's Dairy Inc
+fairlife,national,The Coca-Cola Company
+Daisy,national,Daisy Brand LLC
+Cabot,national,Agri-Mark Inc
+Shamrock Farms,national,Shamrock Foods Company
+Tillamook,national,Tillamook County Creamery Association
+Oberweis,regional,Oberweis Dairy
+Turkey Hill,national,Turkey Hill Dairy
+Great Value,private_label,Walmart Inc
+Knudsen,regional,Lactalis North America
+Breakstone's,national,Lactalis North America
+Lactaid,national,HP Hood LLC
+Dannon,national,Danone North America
+Hiland,regional,Hiland Dairy Foods
+Belfonte,regional,Belfonte Ice Cream & Dairy Foods Co
+Westby,regional,Westby Cooperative Creamery
+Food Club,private_label,Topco Associates
+Shurfine,private_label,Topco Associates
+Hartzler,regional,Hartzler Family Dairy
+Earth Grown,private_label,Aldi Inc

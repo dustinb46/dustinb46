@@ -1,6 +1,31 @@
 plant_code,brand_name,product_category,region,source,confidence,notes,last_verified,verified_by
-EX-001,EXAMPLE Brand A,milk,Northeast US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
-EX-001,EXAMPLE Store Brand,milk,Northeast US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
-EX-002,EXAMPLE Brand B,yogurt,Midwest US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
-EX-003,EXAMPLE Cheese Brand,cheese,National,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
-EX-004,EXAMPLE Store Brand,milk,Mountain US,illustrative_seed,low,Placeholder mapping. Replace with verified data.,2025-01-01,seed
+49-301,Gossner,milk,,gossner.com; en.wikipedia.org/wiki/Gossner_Foods,high,Company-owned Logan UT plant; UHT shelf-stable milk and Swiss cheese,2026-06-11,claude (web)
+16-40,Gossner,cheese,,en.wikipedia.org/wiki/Gossner_Foods,medium,Second plant at Heyburn ID (Magic Valley); 16-366 is a related listing,2026-06-11,claude (web)
+42-040,Rutter's,milk,Central PA / Northern MD,ruttersdairy.com; dairyfoods.com,high,On-site bottling at York PA; 24-801 is the same operation listed under MD section,2026-06-11,claude (web)
+26-207,fairlife,milk,,en.wikipedia.org/wiki/Fairlife,high,Original fairlife plant at Coopersville MI,2026-06-11,claude (web)
+04-197,fairlife,milk,,fairlife.com press release 2021; foodbusinessnews.net,high,Goodyear AZ plant; ultrafiltered milk and Core Power; aseptic line shares code,2026-06-11,claude (web)
+35-0306,fairlife,milk,,IMS listing (FAIRLIFE LLC Dexter NM),medium,Dexter NM listing under fairlife's own name; Select Milk partnership territory,2026-06-11,claude (web)
+04-140,Daisy,cream,,daisybrand.com; dairyfoods.com plant directory,high,Casa Grande AZ plant opened 2008; sour cream and cottage cheese,2026-06-11,claude (web)
+39-221,Daisy,cream,,daisybrand.com,high,Wooster OH plant,2026-06-11,claude (web)
+48-0957,Daisy,cream,,daisybrand.com,high,Garland TX plant (HQ Dallas),2026-06-11,claude (web)
+50-19,Cabot,cheese,,agrimark.coop/our_plants,high,Cabot VT campus; cheddar plus cultured products and cut-and-wrap,2026-06-11,claude (web)
+50-40,Cabot,cheese,,agrimark.coop/our_plants,high,Middlebury VT; Agri-Mark's largest cheese plant; cheddar and whey,2026-06-11,claude (web)
+04-05,Shamrock Farms,milk,Southwest US,shamrockfarms.net; en.wikipedia.org/wiki/Shamrock_Farms,high,Phoenix AZ plant; Class I/II since 1955 plus ESL products,2026-06-11,claude (web)
+51-0500,Shamrock Farms,milk,East Coast,en.wikipedia.org/wiki/Shamrock_Farms,high,Verona VA plant for East Coast distribution,2026-06-11,claude (web)
+41-80,Tillamook,cheese,,tillamook.com (farmer-owned cooperative),high,Tillamook OR creamery; brand owned by the cooperative that runs the plant,2026-06-11,claude (web)
+17-61,Oberweis,milk,Chicagoland,IMS listing self-named; oberweis.com,high,North Aurora IL home dairy,2026-06-11,claude (web)
+42-092,Turkey Hill,other,,IMS listing self-named; turkeyhill.com,high,Conestoga PA; ice cream and drinks,2026-06-11,claude (web)
+37-087,Turkey Hill,other,Southeast US,FDA recall F-0731-2019,medium,3-gal foodservice ice cream co-packed by Hunter Farms (Harris Teeter) High Point NC,2026-06-11,claude (FDA recall)
+06-71,Great Value,cheese,National (Walmart),FDA recalls H-0581-2026 H-0582-2026 H-0583-2026,high,Walmart cottage cheese made by Saputo Tulare CA; plant code printed on recalled product,2026-06-11,claude (FDA recall)
+06-245,Knudsen,cheese,West US,FDA recalls F-2208-2014 F-2212-2014 F-2217-2014,medium,Cottage cheese; 2014 recalls when plant was Kraft; facility now Lactalis Heritage Tulare CA,2026-06-11,claude (FDA recall)
+06-245,Breakstone's,cheese,,FDA recall F-2208-2014,medium,Cottage cheese; 2014 recall era; same Tulare CA facility,2026-06-11,claude (FDA recall)
+51-4109,Lactaid,milk,,FDA recall F-0054-2025,high,Lactaid lactose-reduced milk produced at HP Hood Winchester VA,2026-06-11,claude (FDA recall)
+49-64,Dannon,yogurt,,FDA recall F-1954-2013,medium,Activia produced at Dannon West Jordan UT; recall is from 2013,2026-06-11,claude (FDA recall)
+29-162,Hiland,milk,Midwest,FDA recall F-1056-2019,high,Plant code on recalled chocolate milk points to Hiland Kansas City MO plant,2026-06-11,claude (FDA recall)
+29-050,Belfonte,other,Kansas City metro,FDA recall F-1791-2022,high,Plant code 29-050 printed in recall product description; ice cream,2026-06-11,claude (FDA recall)
+55-372,Westby,cheese,Upper Midwest,FDA recall F-0504-2017,high,Cottage cheese at Westby Coop Creamery WI,2026-06-11,claude (FDA recall)
+55-372,Food Club,cheese,Upper Midwest,FDA recall F-0504-2017,high,Private-label cottage cheese co-packed at Westby Coop,2026-06-11,claude (FDA recall)
+55-372,Oberweis,cheese,Upper Midwest,FDA recall F-0504-2017,high,Oberweis-branded cottage cheese co-packed at Westby Coop,2026-06-11,claude (FDA recall)
+55-372,Shurfine,cheese,Upper Midwest,FDA recall F-0504-2017,high,Private-label cottage cheese co-packed at Westby Coop,2026-06-11,claude (FDA recall)
+39-020,Hartzler,milk,Ohio,FDA recall F-0341-2023,high,Hartzler Family Dairy Wooster OH; eggnog recall printed plant identity,2026-06-11,claude (FDA recall)
+39-111,Earth Grown,other,US (Aldi),FDA recall F-1162-2020,high,Aldi private-label frozen dessert made by Smithfoods (Eastside Jersey Dy) Orrville OH,2026-06-11,claude (FDA recall)
