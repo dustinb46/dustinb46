@@ -332,6 +332,7 @@ const ADMIN_SCRIPTS = {
   'recalls-sync': 'scripts/sync-recalls.js',
   'seeds-load':   'scripts/load-seeds.js',
   'ims-dump':     'scripts/dump-ims.js',
+  'resolve-plants': 'scripts/resolve-plants.js',
 };
 
 function requireAdmin(req, res, next) {
@@ -349,6 +350,7 @@ app.post('/admin/run/:name', requireAdmin, (req, res) => {
   if (req.query.url)       env.IMS_PDF_URL = String(req.query.url);
   if (req.query.max_pages) env.RECALL_MAX_PAGES = String(req.query.max_pages);
   if (req.query.grep)      env.IMS_GREP = String(req.query.grep);
+  if (req.query.queries)   env.IMS_QUERIES = String(req.query.queries);
   const extraArgs = [];
   if (req.query.from) extraArgs.push(String(req.query.from));
   if (req.query.to)   extraArgs.push(String(req.query.to));
