@@ -45,18 +45,32 @@ function normCode(code) {
   return `${parseInt(m[1], 10)}-${parseInt(m[2], 10)}`;
 }
 
-// Build normalized lookup of IMS plants. Skip ambiguous keys (two plants
-// whose codes differ only in zero-padding) rather than guess.
+// Build normalized lookup from BOTH plants.plant_code AND
+// plant_code_aliases.code. The aliases table holds bare codes for
+// USDA-AMS plants ("06-50"), state license codes, and any future code
+// system — without checking it we'd silently miss every non-IMS plant.
+// Plants are linked back via their id so we report a canonical plant_code.
 const plantsByNorm = new Map();
 const ambiguous = new Set();
-for (const p of db.prepare(`SELECT id, plant_code, name, city, state FROM plants`).all()) {
-  const key = normCode(p.plant_code);
-  if (!key) continue;
-  if (plantsByNorm.has(key) && plantsByNorm.get(key).plant_code !== p.plant_code) {
-    ambiguous.add(key);
-    continue;
-  }
-  plantsByNorm.set(key, p);
+
+function record(key, p) {
+  if (!key) return;
+  const existing = plantsByNorm.get(key);
+  if (!existing) { plantsByNorm.set(key, p); return; }
+  if (existing.id === p.id) return;            // same plant via two routes; fine
+  ambiguous.add(key);                          // two different plants -> refuse to guess
+}
+
+for (const p of db.prepare(`
+  SELECT id, plant_code, name, city, state FROM plants
+`).all()) {
+  record(normCode(p.plant_code), p);
+}
+for (const a of db.prepare(`
+  SELECT p.id, p.plant_code, p.name, p.city, p.state, a.code
+  FROM plant_code_aliases a JOIN plants p ON p.id = a.plant_id
+`).all()) {
+  record(normCode(a.code), { id: a.id, plant_code: a.plant_code, name: a.name, city: a.city, state: a.state });
 }
 
 const recalls = db.prepare(`
