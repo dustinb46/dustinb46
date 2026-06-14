@@ -1,48 +1,119 @@
-<% const title = 'Home'; %>
+<% const title = 'Look up any dairy plant'; %>
 <%- include('_header', { title, disclaimer }) %>
 
-<h1>Who actually made your dairy?</h1>
-<p class="lede">
-  Every dairy package carries a plant code identifying the actual processor.
-  This site maps those codes to plants, brands, and recall history.
-</p>
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">An atlas of the plants that make America's dairy</p>
+    <h1>Where does your dairy actually come from?</h1>
+    <p class="hero-lede">
+      Every carton, tub, and wedge carries a plant code that tells you
+      the facility that made it. Type a code, a brand, or a plant name —
+      we'll show you who, where, and what else they make.
+    </p>
 
-<%- include('_search-form', { q: '', state: '', parent: '' }) %>
+    <form class="hero-search" action="/search" method="get" role="search">
+      <input type="search" name="q" autofocus
+             placeholder='Try a code like "55-372", or "Cabot", or "fairlife"' />
+      <button type="submit">Look it up</button>
+    </form>
 
-<section class="stats">
-  <div><strong><%= stats.plants.toLocaleString() %></strong><span>plants</span></div>
-  <div><strong><%= stats.brands.toLocaleString() %></strong><span>brands</span></div>
-  <div><strong><%= stats.mappings.toLocaleString() %></strong><span>brand mappings</span></div>
-  <div><strong><%= stats.recalls.toLocaleString() %></strong><span>recalls tracked</span></div>
+    <p class="hero-hints">
+      <span>Quick examples:</span>
+      <a href="/search?q=cabot">Cabot</a>
+      <a href="/search?q=fairlife">fairlife</a>
+      <a href="/search?q=Hilmar">Hilmar Cheese</a>
+      <a href="/plant/55-372">55-372</a>
+      <a href="/plant/06-71">06-71</a>
+    </p>
+  </div>
 </section>
 
-<h2>Recent recalls</h2>
-<% if (!recent.length) { %>
-  <p class="empty">No recalls loaded yet. Run <code>npm run recalls:sync</code>.</p>
-<% } else { %>
-  <table>
-    <thead><tr><th>Date</th><th>Firm</th><th>Plant match</th><th>Class</th><th>Reason</th></tr></thead>
-    <tbody>
-      <% for (const r of recent) { %>
-        <tr>
-          <td><%= r.recall_date || r.report_date || '' %></td>
-          <td><%= r.firm_name || '' %></td>
-          <td>
-            <% if (r.plant_id) { %>
-              <a href="/plant/<%= r.plant_code %>"><%= r.plant_name %></a>
-              <span class="conf conf-<%= (r.match_confidence || 0) >= 0.7 ? 'high' : 'low' %>">
-                <%= Math.round((r.match_confidence || 0) * 100) %>%
-              </span>
-            <% } else { %>
-              <span class="muted">unmatched</span>
-            <% } %>
-          </td>
-          <td><%= r.classification || '' %></td>
-          <td><%= (r.reason || '').slice(0, 120) %></td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
-<% } %>
+<section class="stats-row">
+  <div><strong><%= stats.plants.toLocaleString() %></strong><span>plants mapped</span></div>
+  <div><strong><%= stats.brands.toLocaleString() %></strong><span>brands traced</span></div>
+  <div><strong><%= stats.mappings.toLocaleString() %></strong><span>brand-to-plant links</span></div>
+  <div><strong>50</strong><span>states covered</span></div>
+</section>
+
+<section class="map-section">
+  <h2>Every plant we know about</h2>
+  <p class="muted">Click a dot to open the plant.</p>
+  <div id="plant-map" class="plant-map" aria-label="Map of U.S. dairy plants"></div>
+</section>
+
+<section class="explainer">
+  <h2>How to read a plant code</h2>
+  <div class="explainer-grid">
+    <div>
+      <h3>Find it on the package</h3>
+      <p>
+        Look for a stamp like <code>55-23</code> on the carton, lid, or
+        side of the package. It's usually near the date code.
+      </p>
+    </div>
+    <div>
+      <h3>What the numbers mean</h3>
+      <p>
+        The first part is the state (FIPS code). The second is the
+        plant's number within that state. Together they identify one
+        specific facility — even if the carton says a different brand.
+      </p>
+    </div>
+    <div>
+      <h3>Why brands differ from makers</h3>
+      <p>
+        Many dairy products are co-packed: a single plant can produce
+        cottage cheese for four different brands at once. The plant
+        code is the only honest way to know which facility made yours.
+      </p>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script>
+  (async function () {
+    var el = document.getElementById('plant-map');
+    if (!el || typeof L === 'undefined') return;
+    var map = L.map(el, { scrollWheelZoom: false }).setView([39.5, -98.35], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 12,
+    }).addTo(map);
+
+    try {
+      var res = await fetch('/api/plants/geo.json');
+      var data = await res.json();
+      var cluster = L.markerClusterGroup({ chunkedLoading: true });
+      data.plants.forEach(function (p) {
+        var m = L.marker([p.lat, p.lon]);
+        var cat = p.category ? ' &middot; ' + p.category : '';
+        m.bindPopup(
+          '<strong><a href="/plant/' + encodeURIComponent(p.plant_code) + '">' +
+          p.name + '</a></strong><br>' +
+          (p.city || '') + ', ' + (p.state || '') + cat
+        );
+        cluster.addLayer(m);
+      });
+      map.addLayer(cluster);
+      if (data.plants.length === 0) {
+        el.insertAdjacentHTML('beforeend',
+          '<div class="map-empty">No plants geocoded yet. Run <code>geocode</code> on the admin endpoint.</div>');
+      }
+    } catch (e) {
+      el.insertAdjacentHTML('beforeend',
+        '<div class="map-empty">Map couldn\'t load: ' + (e && e.message || e) + '</div>');
+    }
+  })();
+</script>
 
 <%- include('_footer') %>

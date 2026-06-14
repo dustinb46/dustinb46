@@ -4,15 +4,16 @@
 <h1>Not found</h1>
 <% if (kind === 'plant') { %>
   <p>
-    No plant matched code <code><%= value %></code>. v1 only covers IMS
-    codes (state-number format like <code>55-23</code>). If your code is
-    longer or alphanumeric, it likely comes from a different system.
+    No plant in our atlas matches <code><%= value %></code>. It might
+    be a code from a system we haven't added yet (FDA food facility
+    registration, USDA establishment number, or a state license), or
+    just a typo. Try <a href="/search?q=<%= encodeURIComponent(value) %>">searching</a> instead.
   </p>
 <% } else if (kind === 'brand') { %>
-  <p>No brand with id <code><%= value %></code>.</p>
+  <p>No brand with id <code><%= value %></code>. Try the <a href="/search">search</a>.</p>
 <% } else { %>
   <p>No page at <code><%= value %></code>.</p>
 <% } %>
-<p><a href="/">Back to home</a></p>
+<p><a href="/">← Back to the atlas</a></p>
 
 <%- include('_footer') %>

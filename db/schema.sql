@@ -18,6 +18,9 @@ CREATE TABLE IF NOT EXISTS plants (
   ims_rating      TEXT,
   source          TEXT,                        -- e.g. "IMS 2024-Q4", "manual"
   last_verified   TEXT,                        -- ISO date
+  lat             REAL,                        -- city centroid lat (geocoded)
+  lon             REAL,                        -- city centroid lon (geocoded)
+  geocoded_at     TEXT,                        -- ISO timestamp of last geocode
   created_at      TEXT DEFAULT (datetime('now')),
   updated_at      TEXT DEFAULT (datetime('now'))
 );

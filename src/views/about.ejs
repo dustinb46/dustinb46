@@ -1,43 +1,66 @@
 <% const title = 'About'; %>
 <%- include('_header', { title, disclaimer }) %>
 
-<h1>About Plant Track</h1>
-<p>
-  A dairy plant transparency lookup. Maps plant codes printed on dairy
-  packaging to the plant that made the product, the brands that come out of
-  that plant, and the recall history attached to it.
+<h1>About DairyPlant Atlas</h1>
+<p class="lede">
+  An educational lookup for U.S. dairy plants. We take the codes
+  printed on cartons, tubs, and wedges and tell you the real facility
+  behind them — plus what other brands come out of the same plant.
 </p>
 
-<h2>Data sources</h2>
+<h2>What you can do here</h2>
 <ul>
-  <li><a href="https://www.fda.gov/food/milk-guidance-documents-regulatory-information/interstate-milk-shippers-list">FDA Interstate Milk Shippers List</a> — authoritative roster of Grade A plants.</li>
-  <li><a href="https://open.fda.gov/apis/food/enforcement/">openFDA Food Enforcement API</a> — recall records.</li>
-  <li><a href="https://www.ams.usda.gov/rules-regulations/moa/dairy">USDA AMS Pool Plant Reports</a> — FMMO affiliation.</li>
-  <li>Hand-curated brand-to-plant mappings, each with a source and confidence level.</li>
+  <li><strong>Look up a code.</strong> Type the stamp from your package — like <code>55-372</code> — into the search bar and we'll show you the plant.</li>
+  <li><strong>Search by brand or company.</strong> Type "Cabot" or "fairlife" and we'll show the plants that make those products.</li>
+  <li><strong>Browse the map.</strong> See every plant we've geocoded, by state and category.</li>
+  <li><strong>Trace recall history.</strong> For journalists and researchers — every FDA dairy enforcement record, linked to plants where possible.</li>
 </ul>
 
-<h2>What v1 covers (and what it doesn't)</h2>
+<h2>Where the data comes from</h2>
+<ul>
+  <li><a href="https://www.fda.gov/food/milk-guidance-documents-regulatory-information/interstate-milk-shippers-list" target="_blank" rel="noopener">FDA Interstate Milk Shippers List</a> — Grade A fluid and cultured plants.</li>
+  <li>USDA AMS Approved Dairy Plants — manufactured products (cheese, butter, dry milk, frozen desserts).</li>
+  <li><a href="https://open.fda.gov/apis/food/enforcement/" target="_blank" rel="noopener">openFDA Food Enforcement API</a> — recall records.</li>
+  <li>Hand-curated brand-to-plant mappings, each with a source citation.</li>
+</ul>
+
+<h2>About the codes</h2>
 <p>
-  v1 lists IMS-coded Grade A fluid and cultured plants only. Packaging codes
-  from other systems — FDA food facility registration numbers, USDA
-  establishment numbers, state-specific codes — are not yet supported. If
-  your code starts with <code>EST.</code> or is a long all-digit string, it
-  probably is not an IMS code.
+  Every dairy plant in the U.S. is registered with one or more federal
+  agencies. The code stamped on your package usually starts with a
+  state-FIPS number (the first two digits) followed by the plant's
+  number inside that state. <code>55-372</code> means "Wisconsin, plant
+  372" — which happens to be Westby Cooperative Creamery.
+</p>
+<p>
+  Some plants appear under multiple code systems. A Grade A fluid
+  facility shows up in the FDA IMS list with one number, while its
+  manufactured-cheese line may carry a different USDA number. We
+  surface both when we can.
 </p>
 
-<h2>How confidence works</h2>
+<h2>How sure are we?</h2>
 <p>
-  Every brand-to-plant mapping carries a confidence level (high / medium /
-  low) and a source. Recall matches carry a numeric confidence and a method
-  (name, name + geography, manual). Below "high" / above 70% should be
-  treated as a lead, not a fact.
+  Where data comes straight from a federal database (IMS, USDA AMS,
+  openFDA), it's as authoritative as those sources are. For
+  brand-to-plant mappings, every row carries a citation — usually the
+  manufacturer's own published statement or an FDA recall notice that
+  identified the producing plant by code. We mark our confidence as
+  high, medium, or low so you can judge for yourself.
 </p>
 
-<h2>Corrections</h2>
+<h2>Found something wrong?</h2>
 <p>
-  Found a mistake? Email <code>brunndairy88@gmail.com</code> with the plant
-  code or recall number and what should change. Manual overrides are
-  preserved across data refreshes.
+  Email <a href="mailto:brunndairy88@gmail.com?subject=DairyPlant%20Atlas%20correction">brunndairy88@gmail.com</a>
+  with the plant code or recall number and what we got wrong. Manual
+  corrections are preserved across data refreshes.
 </p>
+
+<h2>What's coming</h2>
+<ul>
+  <li>More brand mappings (we're at the start of a long list).</li>
+  <li>Street-level pin accuracy via FDA facility registration.</li>
+  <li>State-licensed plants for cheesemakers and creameries that don't appear in the federal databases.</li>
+</ul>
 
 <%- include('_footer') %>

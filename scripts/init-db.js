@@ -21,5 +21,20 @@ if (RESET && fs.existsSync(DB_PATH)) {
 const db = new Database(DB_PATH);
 const schema = fs.readFileSync(SCHEMA_PATH, 'utf8');
 db.exec(schema);
+
+// Defensive column adds for live databases that predate later schema
+// changes. SQLite can't ADD COLUMN IF NOT EXISTS, so we probe first.
+function ensureColumn(table, column, type) {
+  const exists = db.prepare(`PRAGMA table_info(${table})`).all()
+    .some(c => c.name === column);
+  if (!exists) {
+    db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${type}`);
+    console.log(`[init-db] added ${table}.${column}`);
+  }
+}
+ensureColumn('plants', 'lat', 'REAL');
+ensureColumn('plants', 'lon', 'REAL');
+ensureColumn('plants', 'geocoded_at', 'TEXT');
+
 console.log(`[init-db] applied schema to ${DB_PATH}`);
 db.close();

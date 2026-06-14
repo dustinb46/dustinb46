@@ -11,10 +11,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.locals.disclaimer = (
-  'Plant Track is informational and not authoritative. Mappings show a ' +
-  'source and a confidence level — verify before publishing or citing. ' +
-  'Corrections welcome.'
+  'An educational reference built from public sources. ' +
+  'Spot something off? Send us a note.'
 );
+app.locals.siteName = 'DairyPlant Atlas';
 
 // ---------------- helpers ----------------
 
@@ -103,6 +103,25 @@ app.get('/', (req, res) => {
 
 // JSON plant search — useful for programmatic lookups and resolving
 // exact plant codes by name.
+// Compact lat/lon dump for the home-page map. Cached for an hour
+// because plants change infrequently and the map fetches it on every
+// page load.
+let geoCache = null, geoCacheTs = 0;
+app.get('/api/plants/geo.json', (_req, res) => {
+  const now = Date.now();
+  if (!geoCache || (now - geoCacheTs) > 60 * 60 * 1000) {
+    const rows = db.prepare(`
+      SELECT plant_code, name, city, state, category, lat, lon
+      FROM plants
+      WHERE lat IS NOT NULL AND lon IS NOT NULL
+    `).all();
+    geoCache = { count: rows.length, plants: rows };
+    geoCacheTs = now;
+  }
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.json(geoCache);
+});
+
 app.get('/api/plants.json', (req, res) => {
   const q = (req.query.q || '').trim();
   if (!q) return res.json({ count: 0, plants: [] });
@@ -313,7 +332,7 @@ app.get('/api/recalls.csv', (req, res) => {
     'match_method','match_confidence','plant_code','plant_name'
   ];
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', 'attachment; filename="plant-track-recalls.csv"');
+  res.setHeader('Content-Disposition', 'attachment; filename="dairyplant-atlas-recalls.csv"');
   res.write(cols.join(',') + '\n');
   for (const r of rows) res.write(cols.map(c => csvEscape(r[c])).join(',') + '\n');
   res.end();
@@ -371,6 +390,7 @@ const ADMIN_SCRIPTS = {
   'resolve-plants': 'scripts/resolve-plants.js',
   'harvest-codes':  'scripts/harvest-recall-codes.js',
   'usda-ingest':    'scripts/ingest-usda.js',
+  'geocode':        'scripts/geocode-plants.js',
 };
 
 function requireAdmin(req, res, next) {
