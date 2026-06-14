@@ -18,6 +18,9 @@
     "ims:ingest": "node scripts/ingest-ims.js",
     "ims:sanity": "node scripts/ingest-ims-sanity.js",
     "recalls:sync": "node scripts/sync-recalls.js",
+    "usda:ingest": "node scripts/ingest-usda.js",
+    "geocode": "node scripts/geocode-plants.js",
+    "test": "node --test",
     "build": "npm run db:init && npm run seed:load"
   },
   "dependencies": {
