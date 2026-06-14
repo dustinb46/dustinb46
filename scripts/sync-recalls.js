@@ -8,7 +8,6 @@
 // match_method='unmatched' and surfaced separately in the UI.
 
 const crypto = require('crypto');
-const { db } = require('../src/db');
 
 const BASE = 'https://api.fda.gov/food/enforcement.json';
 // Dairy-ish search. Broad on purpose; we filter further by product text.
@@ -98,6 +97,13 @@ function fmtDate(d) {
   if (!d || d.length !== 8) return null;
   return `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`;
 }
+
+module.exports = { normState, normalize, jaccard, matchPlant, fmtDate, STATE_NAME_TO_ABBR };
+
+// Everything below touches the DB and network; only run it as a script.
+if (require.main !== module) return;
+
+const { db } = require('../src/db');
 
 (async () => {
   const runStarted = new Date().toISOString();

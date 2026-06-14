@@ -13,10 +13,6 @@
 //
 // It never writes brand mappings — emit candidates, human curates.
 
-const { db } = require('../src/db');
-
-const APPLY = process.env.APPLY === '1';
-
 // Conservative extraction: require PLT prefix or explicit "plant" context
 // so we don't harvest dates, UPC fragments, or lot numbers.
 const CODE_PATTERNS = [
@@ -44,6 +40,15 @@ function normCode(code) {
   if (!m) return null;
   return `${parseInt(m[1], 10)}-${parseInt(m[2], 10)}`;
 }
+
+module.exports = { extractCodes, normCode, CODE_PATTERNS };
+
+// Everything below touches the DB; only run it as a script.
+if (require.main !== module) return;
+
+const { db } = require('../src/db');
+
+const APPLY = process.env.APPLY === '1';
 
 // Build normalized lookup from BOTH plants.plant_code AND
 // plant_code_aliases.code. The aliases table holds bare codes for
