@@ -28,13 +28,36 @@
     .filter(Boolean).join(' ');
   const mapsUrl = 'https://www.google.com/maps/search/?api=1&query='
     + encodeURIComponent(mapQuery);
+  const hasGeo = plant.lat != null && plant.lon != null;
 %>
+<% if (hasGeo) { %>
+  <div id="plant-mini-map" class="plant-mini-map"
+       data-lat="<%= plant.lat %>" data-lon="<%= plant.lon %>"
+       data-label="<%= (plant.name || '').replace(/"/g, '&quot;') %>"></div>
+<% } %>
 <p class="map-link">
   <a href="<%= mapsUrl %>" target="_blank" rel="noopener noreferrer">
-    View on Google Maps &rarr;
+    Open in Google Maps &rarr;
   </a>
-  <span class="muted">opens a search for this plant; verify the pin before citing it.</span>
+  <span class="muted">Pin shows the city; verify the exact building before citing.</span>
 </p>
+
+<% if (hasGeo) { %>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    (function () {
+      var el = document.getElementById('plant-mini-map');
+      if (!el || typeof L === 'undefined') return;
+      var lat = parseFloat(el.dataset.lat), lon = parseFloat(el.dataset.lon);
+      var map = L.map(el, { scrollWheelZoom: false, attributionControl: false }).setView([lat, lon], 9);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 14 }).addTo(map);
+      L.marker([lat, lon]).addTo(map).bindPopup(el.dataset.label);
+    })();
+  </script>
+<% } %>
 
 <% if (aliases && aliases.length > 1) { %>
   <h2>Code aliases</h2>
