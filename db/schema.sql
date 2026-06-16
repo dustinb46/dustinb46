@@ -67,6 +67,7 @@ CREATE INDEX IF NOT EXISTS idx_plant_brands_brand ON plant_brands(brand_id);
 CREATE TABLE IF NOT EXISTS recalls (
   id                  INTEGER PRIMARY KEY AUTOINCREMENT,
   recall_number       TEXT UNIQUE,
+  event_id            TEXT,                    -- openFDA event_id; one event spans many product rows
   firm_name           TEXT,                    -- raw from openFDA (often the recalling firm, not the plant)
   firm_city           TEXT,
   firm_state          TEXT,
@@ -85,6 +86,8 @@ CREATE TABLE IF NOT EXISTS recalls (
 CREATE INDEX IF NOT EXISTS idx_recalls_plant ON recalls(plant_id);
 CREATE INDEX IF NOT EXISTS idx_recalls_date  ON recalls(recall_date);
 CREATE INDEX IF NOT EXISTS idx_recalls_firm  ON recalls(firm_name);
+-- idx_recalls_event is created in init-db.js after event_id is ensured,
+-- so it works on databases whose recalls table predates the column.
 
 -- Manual override table for corrections. Reviewers can pin a recall to a plant
 -- (or explicitly unpin a bad fuzzy match) without losing the original data.

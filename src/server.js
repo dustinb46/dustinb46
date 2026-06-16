@@ -62,10 +62,20 @@ function brandsForPlant(plant_id) {
 }
 
 function recallsForPlant(plant_id) {
+  // Collapse openFDA's per-product rows into one row per recall event.
   return db.prepare(`
-    SELECT * FROM recalls
+    SELECT COALESCE(NULLIF(event_id, ''), recall_number) AS event_key,
+           MAX(COALESCE(recall_date, report_date)) AS recall_date,
+           MAX(classification) AS classification,
+           MAX(reason) AS reason,
+           MAX(status) AS status,
+           MAX(match_method) AS match_method,
+           MAX(match_confidence) AS match_confidence,
+           COUNT(*) AS product_count
+    FROM recalls
     WHERE plant_id = ?
-    ORDER BY COALESCE(recall_date, report_date) DESC
+    GROUP BY event_key
+    ORDER BY recall_date DESC
   `).all(plant_id);
 }
 
@@ -297,39 +307,58 @@ function buildRecallFilter(query) {
   return { sql: where.join(' AND '), params };
 }
 
+// openFDA publishes one row per recalled product, so a single recall
+// event shows up many times. Group everything by event so the timeline
+// counts distinct recalls, not SKUs. EVKEY falls back to recall_number
+// for the rare rows with no event_id.
+const EVKEY = `COALESCE(NULLIF(r.event_id, ''), r.recall_number)`;
+
 app.get('/timeline', (req, res) => {
   const { sql: filterSql, params } = buildRecallFilter(req.query);
   const baseFrom = `FROM recalls r LEFT JOIN plants p ON p.id = r.plant_id WHERE ${filterSql}`;
 
   const monthly = db.prepare(`
     SELECT substr(COALESCE(r.recall_date, r.report_date), 1, 7) AS ym,
-           COUNT(*) AS n,
-           SUM(CASE WHEN r.classification = 'Class I'   THEN 1 ELSE 0 END) AS c1,
-           SUM(CASE WHEN r.classification = 'Class II'  THEN 1 ELSE 0 END) AS c2,
-           SUM(CASE WHEN r.classification = 'Class III' THEN 1 ELSE 0 END) AS c3
+           COUNT(DISTINCT ${EVKEY}) AS n,
+           COUNT(DISTINCT CASE WHEN r.classification = 'Class I'   THEN ${EVKEY} END) AS c1,
+           COUNT(DISTINCT CASE WHEN r.classification = 'Class II'  THEN ${EVKEY} END) AS c2,
+           COUNT(DISTINCT CASE WHEN r.classification = 'Class III' THEN ${EVKEY} END) AS c3
     ${baseFrom} AND COALESCE(r.recall_date, r.report_date) IS NOT NULL
     GROUP BY ym ORDER BY ym DESC LIMIT 60
   `).all(...params);
 
   const topFirms = db.prepare(`
-    SELECT r.firm_name, COUNT(*) AS n,
-           SUM(CASE WHEN r.classification = 'Class I' THEN 1 ELSE 0 END) AS c1
+    SELECT r.firm_name, COUNT(DISTINCT ${EVKEY}) AS n,
+           COUNT(DISTINCT CASE WHEN r.classification = 'Class I' THEN ${EVKEY} END) AS c1
     ${baseFrom} AND r.firm_name IS NOT NULL
     GROUP BY r.firm_name ORDER BY n DESC LIMIT 15
   `).all(...params);
 
   const byClass = db.prepare(`
-    SELECT COALESCE(r.classification, '(unknown)') AS classification, COUNT(*) AS n
+    SELECT COALESCE(r.classification, '(unknown)') AS classification,
+           COUNT(DISTINCT ${EVKEY}) AS n
     ${baseFrom} GROUP BY classification ORDER BY n DESC
   `).all(...params);
 
-  const total = db.prepare(`SELECT COUNT(*) AS n ${baseFrom}`).get(...params).n;
-  const matched = db.prepare(`SELECT COUNT(*) AS n ${baseFrom} AND r.plant_id IS NOT NULL`).get(...params).n;
+  const total = db.prepare(`SELECT COUNT(DISTINCT ${EVKEY}) AS n ${baseFrom}`).get(...params).n;
+  const matched = db.prepare(
+    `SELECT COUNT(DISTINCT CASE WHEN r.plant_id IS NOT NULL THEN ${EVKEY} END) AS n ${baseFrom}`
+  ).get(...params).n;
 
+  // One row per event: representative fields plus a product count.
   const recent = db.prepare(`
-    SELECT r.*, p.plant_code, p.name AS plant_name
+    SELECT ${EVKEY} AS event_key,
+           MAX(COALESCE(r.recall_date, r.report_date)) AS recall_date,
+           MAX(r.firm_name) AS firm_name,
+           MAX(r.classification) AS classification,
+           MAX(r.reason) AS reason,
+           MAX(r.plant_id) AS plant_id,
+           MAX(p.plant_code) AS plant_code,
+           MAX(p.name) AS plant_name,
+           COUNT(*) AS product_count
     ${baseFrom}
-    ORDER BY COALESCE(r.recall_date, r.report_date) DESC
+    GROUP BY event_key
+    ORDER BY recall_date DESC
     LIMIT 50
   `).all(...params);
 

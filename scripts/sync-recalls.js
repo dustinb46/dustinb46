@@ -113,15 +113,16 @@ const { db } = require('../src/db');
   console.log(`[recalls] ${plants.length} plants available for matching`);
 
   const upsertRecall = db.prepare(`
-    INSERT INTO recalls (recall_number, firm_name, firm_city, firm_state,
+    INSERT INTO recalls (recall_number, event_id, firm_name, firm_city, firm_state,
                          plant_id, match_confidence, match_method,
                          reason, classification, status,
                          recall_date, report_date, product_description, raw)
-    VALUES (@recall_number, @firm_name, @firm_city, @firm_state,
+    VALUES (@recall_number, @event_id, @firm_name, @firm_city, @firm_state,
             @plant_id, @match_confidence, @match_method,
             @reason, @classification, @status,
             @recall_date, @report_date, @product_description, @raw)
     ON CONFLICT(recall_number) DO UPDATE SET
+      event_id=excluded.event_id,
       firm_name=excluded.firm_name,
       firm_city=excluded.firm_city,
       firm_state=excluded.firm_state,
@@ -198,6 +199,7 @@ const { db } = require('../src/db');
           .digest('hex').slice(0, 16);
         upsertRecall.run({
           recall_number: r.recall_number || fallbackKey,
+          event_id: r.event_id || null,
           firm_name: r.recalling_firm || null,
           firm_city: r.city || null,
           firm_state: r.state || null,

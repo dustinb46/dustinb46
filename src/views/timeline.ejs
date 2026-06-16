@@ -40,10 +40,11 @@
 </form>
 
 <section class="stats">
-  <div><strong><%= total.toLocaleString() %></strong><span>recalls</span></div>
+  <div><strong><%= total.toLocaleString() %></strong><span>recall events</span></div>
   <div><strong><%= matched.toLocaleString() %></strong><span>matched to plant</span></div>
   <div><strong><%= total ? Math.round(100 * matched / total) : 0 %>%</strong><span>match rate</span></div>
 </section>
+<p class="note">Counts are distinct recall events. A single recall often covers many products; we group those together.</p>
 
 <p class="export-row">
   <a href="/api/recalls.csv?<%= new URLSearchParams(filters).toString() %>">Download CSV</a>
@@ -110,16 +111,16 @@
   </section>
 </div>
 
-<h2>Latest 50 in window</h2>
+<h2>Latest 50 recall events</h2>
 <% if (!recent.length) { %>
   <p class="empty">Nothing to show. Try widening the filters.</p>
 <% } else { %>
   <table>
-    <thead><tr><th>Date</th><th>Firm</th><th>Plant</th><th>Class</th><th>Reason</th></tr></thead>
+    <thead><tr><th>Date</th><th>Firm</th><th>Plant</th><th>Class</th><th>Products</th><th>Reason</th></tr></thead>
     <tbody>
       <% for (const r of recent) { %>
         <tr>
-          <td><%= r.recall_date || r.report_date || '' %></td>
+          <td><%= r.recall_date || '' %></td>
           <td><%= r.firm_name || '' %></td>
           <td>
             <% if (r.plant_id) { %>
@@ -129,6 +130,7 @@
             <% } %>
           </td>
           <td><%= r.classification || '' %></td>
+          <td><%= r.product_count > 1 ? r.product_count + ' products' : '1' %></td>
           <td><%= (r.reason || '').slice(0, 160) %></td>
         </tr>
       <% } %>
