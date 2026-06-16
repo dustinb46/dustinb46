@@ -290,6 +290,18 @@ dl.meta dd { margin: 0; }
   border: 1px solid var(--line); box-shadow: var(--shadow);
   margin: 0.5rem 0 0.75rem; background: #e9efe7;
 }
+
+.related-site {
+  background: var(--bg-elev); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1.1rem 1.25rem;
+  margin: 1.5rem 0; box-shadow: var(--shadow);
+}
+.related-site h2 { margin-top: 0; font-size: 1.2rem; }
+.related-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+.related-list li { padding: 0.4rem 0; border-top: 1px solid var(--line); }
+.related-list li:first-child { border-top: 0; }
+.related-list code { color: var(--accent); font-weight: 600; margin-right: 0.4rem; }
+.related-list .conf { margin-left: 0.5rem; }
 .map-link { margin: 0.4rem 0 1.5rem; font-size: 0.9rem; }
 .map-link a { color: var(--accent); font-weight: 600; text-decoration: none; }
 .map-link a:hover { text-decoration: underline; }

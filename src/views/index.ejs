@@ -94,14 +94,22 @@
       var res = await fetch('/api/plants/geo.json');
       var data = await res.json();
       var cluster = L.markerClusterGroup({ chunkedLoading: true });
+      function esc(s) { return String(s == null ? '' : s).replace(/[<>&"]/g, function (c) { return ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;' })[c]; }); }
       data.plants.forEach(function (p) {
         var m = L.marker([p.lat, p.lon]);
-        var cat = p.category ? ' &middot; ' + p.category : '';
-        m.bindPopup(
-          '<strong><a href="/plant/' + encodeURIComponent(p.plant_code) + '">' +
-          p.name + '</a></strong><br>' +
-          (p.city || '') + ', ' + (p.state || '') + cat
-        );
+        var loc = esc((p.city || '') + ', ' + (p.state || ''));
+        // Facility groups carry one or more codes; render them as a list.
+        var codes = p.codes || [{ plant_code: p.plant_code, name: p.name, category: p.category }];
+        var head = '<strong>' + esc(p.name) + '</strong><br><span style="color:#6b6258">' + loc + '</span>';
+        var body = '<ul style="margin:0.4rem 0 0;padding:0 0 0 1rem;">' +
+          codes.map(function (c) {
+            var cat = c.category ? ' <em style="color:#6b6258">· ' + esc(c.category) + '</em>' : '';
+            return '<li><a href="/plant/' + encodeURIComponent(c.plant_code) + '"><code>' +
+              esc(c.plant_code) + '</code></a>' + cat + '</li>';
+          }).join('') +
+          '</ul>';
+        var label = codes.length > 1 ? ' <em style="color:#6b6258">(' + codes.length + ' codes)</em>' : '';
+        m.bindPopup(head + label + body);
         cluster.addLayer(m);
       });
       map.addLayer(cluster);

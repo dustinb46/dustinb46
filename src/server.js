@@ -2,6 +2,7 @@ const path = require('path');
 const { spawn } = require('child_process');
 const express = require('express');
 const { db } = require('./db');
+const { facilityKey } = require('./facility');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -105,7 +106,10 @@ app.get('/', (req, res) => {
 // exact plant codes by name.
 // Compact lat/lon dump for the home-page map. Cached for an hour
 // because plants change infrequently and the map fetches it on every
-// page load.
+// page load. Plants are grouped into "facilities" (operator + city +
+// state) so codes that describe the same physical building become a
+// single pin with N codes inside, rather than N pins stacked at the
+// same city centroid.
 let geoCache = null, geoCacheTs = 0;
 app.get('/api/plants/geo.json', (_req, res) => {
   const now = Date.now();
@@ -115,7 +119,39 @@ app.get('/api/plants/geo.json', (_req, res) => {
       FROM plants
       WHERE lat IS NOT NULL AND lon IS NOT NULL
     `).all();
-    geoCache = { count: rows.length, plants: rows };
+    const groups = new Map();
+    for (const r of rows) {
+      // Cluster key: facility key when we can compute one, else fall
+      // back to exact lat/lon so unmatched rows still render once.
+      const fk = facilityKey(r.name, r.city, r.state)
+              || `latlon|${r.lat}|${r.lon}|${r.plant_code}`;
+      let g = groups.get(fk);
+      if (!g) {
+        g = { lat: r.lat, lon: r.lon, city: r.city, state: r.state,
+              name: r.name, category: r.category, codes: [] };
+        groups.set(fk, g);
+      }
+      g.codes.push({ plant_code: r.plant_code, name: r.name, category: r.category });
+    }
+    // Tiny lat/lon jitter when multiple distinct facilities share an
+    // exact city centroid, so they don't render perfectly on top of
+    // each other at high zoom.
+    const byPoint = new Map();
+    for (const g of groups.values()) {
+      const k = `${g.lat.toFixed(4)}|${g.lon.toFixed(4)}`;
+      if (!byPoint.has(k)) byPoint.set(k, []);
+      byPoint.get(k).push(g);
+    }
+    for (const arr of byPoint.values()) {
+      if (arr.length <= 1) continue;
+      // Evenly distribute around a tiny circle (~150m at most US lats).
+      arr.forEach((g, i) => {
+        const angle = (2 * Math.PI * i) / arr.length;
+        g.lat = g.lat + 0.0015 * Math.sin(angle);
+        g.lon = g.lon + 0.0015 * Math.cos(angle);
+      });
+    }
+    geoCache = { count: groups.size, plants: [...groups.values()] };
     geoCacheTs = now;
   }
   res.setHeader('Cache-Control', 'public, max-age=3600');
@@ -186,12 +222,25 @@ app.get('/plant/:code', (req, res) => {
   const hit = plantByAnyCode(req.params.code);
   if (!hit) return res.status(404).render('not_found', { kind: 'plant', value: req.params.code });
   const { plant, via } = hit;
+  // Other plant codes in our database that look like the same physical
+  // facility (same operator + city + state). Surfaces IMS/USDA duplicates
+  // and BTU/receiving-line sub-codes as "Also at this site".
+  let related = [];
+  const myKey = facilityKey(plant.name, plant.city, plant.state);
+  if (myKey) {
+    const sameCity = db.prepare(
+      `SELECT id, plant_code, name, source, category FROM plants
+       WHERE city = ? AND state = ? AND id != ?`
+    ).all(plant.city, plant.state, plant.id);
+    related = sameCity.filter(p => facilityKey(p.name, plant.city, plant.state) === myKey);
+  }
   res.render('plant', {
     plant,
     via,
     brands: brandsForPlant(plant.id),
     recalls: recallsForPlant(plant.id),
     aliases: db.prepare(`SELECT * FROM plant_code_aliases WHERE plant_id = ?`).all(plant.id),
+    related,
   });
 });
 

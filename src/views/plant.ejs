@@ -59,6 +59,25 @@
   </script>
 <% } %>
 
+<% if (typeof related !== 'undefined' && related.length) { %>
+  <section class="related-site">
+    <h2>Also at this site</h2>
+    <p class="muted">
+      Other plant codes registered at the same operator in <%= plant.city %>, <%= plant.state %>.
+      Often the main plant plus a bulk tank unit, receiving line, or a separate USDA listing for the same building.
+    </p>
+    <ul class="related-list">
+      <% for (const r of related) { %>
+        <li>
+          <a href="/plant/<%= r.plant_code %>"><code><%= r.plant_code %></code> <%= r.name %></a>
+          <% if (r.category) { %><span class="muted"> · <%= r.category %></span><% } %>
+          <% if (r.source) { %><span class="conf conf-<%= r.source === 'IMS' ? 'high' : 'medium' %>"><%= r.source %></span><% } %>
+        </li>
+      <% } %>
+    </ul>
+  </section>
+<% } %>
+
 <% if (aliases && aliases.length > 1) { %>
   <h2>Code aliases</h2>
   <ul class="aliases">
