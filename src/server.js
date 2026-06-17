@@ -518,4 +518,5 @@ app.use((req, res) => res.status(404).render('not_found', { kind: 'page', value:
 
 app.listen(PORT, () => {
   console.log(`plant-track listening on http://localhost:${PORT}`);
+  require('./scheduler').start();
 });
