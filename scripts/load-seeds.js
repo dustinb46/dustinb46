@@ -172,6 +172,42 @@ const load = db.transaction(() => {
 
 load();
 
+// Parent-company aliasing: many plants are listed in IMS/USDA under the
+// pre-acquisition operating name (e.g. ST. ALBANS CREAMERY is really
+// DFA since 2019). We map those by name pattern and fill parent_company
+// when it's empty, so searching "DFA" or filtering by parent surfaces
+// the acquired operations too. We never overwrite an existing
+// parent_company value — those come from authoritative seeds or the
+// federal ingests.
+let aliasesApplied = 0, aliasRulesApplied = 0;
+const aliasRows = readCsv('parent_aliases.csv');
+// Longest patterns first so a specific match (LACTALIS HERITAGE) wins
+// over a broader one (LACTALIS) on the same plant.
+aliasRows.sort((a, b) => (b.pattern || '').length - (a.pattern || '').length);
+const aliasUpdateContains = db.prepare(`
+  UPDATE plants SET parent_company = ?
+  WHERE (parent_company IS NULL OR parent_company = '')
+    AND UPPER(name) LIKE ?
+`);
+const aliasTxn = db.transaction(() => {
+  for (const a of aliasRows) {
+    if (!a.parent_company || !a.pattern) continue;
+    if (a.match_type === 'name_contains') {
+      const info = aliasUpdateContains.run(
+        a.parent_company, '%' + a.pattern.toUpperCase() + '%'
+      );
+      if (info.changes) {
+        aliasesApplied += info.changes;
+        aliasRulesApplied++;
+      }
+    }
+  }
+});
+aliasTxn();
+if (aliasesApplied) {
+  console.log(`[load-seeds] parent_company set on ${aliasesApplied} plants via ${aliasRulesApplied} alias rule(s)`);
+}
+
 db.prepare(`
   INSERT INTO ingest_runs (source, started_at, finished_at, rows_in, rows_written, notes)
   VALUES ('seeds', ?, ?, ?, ?, ?)
@@ -180,7 +216,7 @@ db.prepare(`
   new Date().toISOString(),
   plantsIn + brandsIn + mappingsIn,
   plantsWritten + brandsWritten + mappingsWritten,
-  `plants=${plantsWritten}/${plantsIn} brands=${brandsWritten}/${brandsIn} mappings=${mappingsWritten}/${mappingsIn}`
+  `plants=${plantsWritten}/${plantsIn} brands=${brandsWritten}/${brandsIn} mappings=${mappingsWritten}/${mappingsIn} alias-plants=${aliasesApplied}`
 );
 
 console.log(`[load-seeds] plants ${plantsWritten}/${plantsIn}, brands ${brandsWritten}/${brandsIn}, mappings ${mappingsWritten}/${mappingsIn}`);

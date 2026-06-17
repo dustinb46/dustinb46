@@ -346,6 +346,8 @@ app.get('/timeline', (req, res) => {
   ).get(...params).n;
 
   // One row per event: representative fields plus a product count.
+  // This is the feed itself, not a sample — bump generously and revisit
+  // with pagination if the page ever gets slow.
   const recent = db.prepare(`
     SELECT ${EVKEY} AS event_key,
            MAX(COALESCE(r.recall_date, r.report_date)) AS recall_date,
@@ -359,7 +361,7 @@ app.get('/timeline', (req, res) => {
     ${baseFrom}
     GROUP BY event_key
     ORDER BY recall_date DESC
-    LIMIT 50
+    LIMIT 100
   `).all(...params);
 
   res.render('timeline', {

@@ -1,141 +1,148 @@
-<% const title = 'Recall timeline'; %>
+<% const title = 'Dairy plant news & recalls'; %>
 <%- include('_header', { title, disclaimer }) %>
 
-<h1>Recall timeline</h1>
+<h1>Dairy plant news &amp; recalls</h1>
 <p class="lede">
-  Dairy recalls over time, drawn from the FDA Food Enforcement database
-  and (where possible) matched to specific manufacturing plants. Use the
-  filters to narrow by class, state, time range, or recalling firm.
+  A running feed of FDA enforcement records for U.S. dairy plants — grouped by recall event, linked to the plant where we can identify it. Plant news from press releases and trade reporting will land here too as we wire those sources in.
 </p>
 
-<form class="filters" method="get">
-  <label>Class
-    <select name="class">
-      <option value="">any</option>
-      <% for (const c of ['Class I','Class II','Class III']) { %>
-        <option value="<%= c %>" <%= filters.class === c ? 'selected' : '' %>><%= c %></option>
-      <% } %>
-    </select>
-  </label>
-  <label>State (firm)
-    <input type="text" name="state" maxlength="2" value="<%= filters.state || '' %>" />
-  </label>
-  <label>From
-    <input type="date" name="from" value="<%= filters.from || '' %>" />
-  </label>
-  <label>To
-    <input type="date" name="to" value="<%= filters.to || '' %>" />
-  </label>
-  <label>Firm contains
-    <input type="text" name="firm" value="<%= filters.firm || '' %>" />
-  </label>
-  <label>Matched
-    <select name="matched">
-      <option value=""    <%= !filters.matched ? 'selected' : '' %>>any</option>
-      <option value="yes" <%= filters.matched === 'yes' ? 'selected' : '' %>>matched</option>
-      <option value="no"  <%= filters.matched === 'no'  ? 'selected' : '' %>>unmatched</option>
-    </select>
-  </label>
-  <button type="submit">Apply</button>
-</form>
-
-<section class="stats">
-  <div><strong><%= total.toLocaleString() %></strong><span>recall events</span></div>
-  <div><strong><%= matched.toLocaleString() %></strong><span>matched to plant</span></div>
-  <div><strong><%= total ? Math.round(100 * matched / total) : 0 %>%</strong><span>match rate</span></div>
-</section>
-<p class="note">Counts are distinct recall events. A single recall often covers many products; we group those together.</p>
-
-<p class="export-row">
-  <a href="/api/recalls.csv?<%= new URLSearchParams(filters).toString() %>">Download CSV</a>
-  <span class="muted"> · </span>
-  <a href="/api/recalls.json?<%= new URLSearchParams(filters).toString() %>">JSON</a>
-</p>
-
-<h2>Monthly volume</h2>
-<% if (!monthly.length) { %>
-  <p class="empty">No date-stamped recalls match these filters.</p>
-<% } else {
-  const maxN = Math.max(...monthly.map(m => m.n));
-%>
-  <table class="timeline-bars">
-    <thead><tr><th>Month</th><th>Class I</th><th>Class II</th><th>Class III</th><th>Total</th><th></th></tr></thead>
-    <tbody>
-      <% for (const m of monthly) {
-           const pct = Math.round(100 * m.n / maxN);
-      %>
-        <tr>
-          <td><%= m.ym %></td>
-          <td><%= m.c1 %></td>
-          <td><%= m.c2 %></td>
-          <td><%= m.c3 %></td>
-          <td><strong><%= m.n %></strong></td>
-          <td class="bar-cell"><span class="bar" style="width:<%= pct %>%"></span></td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
-<% } %>
-
-<div class="two-col">
-  <section>
-    <h2>By class</h2>
-    <table>
-      <thead><tr><th>Class</th><th>Count</th></tr></thead>
-      <tbody>
-        <% for (const c of byClass) { %>
-          <tr><td><%= c.classification %></td><td><%= c.n %></td></tr>
+<details class="filter-bar"<%= Object.keys(filters || {}).length ? ' open' : '' %>>
+  <summary>Filter <span class="muted">(class, state, date, firm, match status)</span></summary>
+  <form class="filters" method="get">
+    <label>Class
+      <select name="class">
+        <option value="">any</option>
+        <% for (const c of ['Class I','Class II','Class III']) { %>
+          <option value="<%= c %>" <%= filters.class === c ? 'selected' : '' %>><%= c %></option>
         <% } %>
-      </tbody>
-    </table>
-  </section>
+      </select>
+    </label>
+    <label>State <span class="muted">(firm)</span>
+      <input type="text" name="state" maxlength="2" value="<%= filters.state || '' %>" placeholder="e.g. CA" />
+    </label>
+    <label>From
+      <input type="date" name="from" value="<%= filters.from || '' %>" />
+    </label>
+    <label>To
+      <input type="date" name="to" value="<%= filters.to || '' %>" />
+    </label>
+    <label>Firm contains
+      <input type="text" name="firm" value="<%= filters.firm || '' %>" />
+    </label>
+    <label>Match status
+      <select name="matched">
+        <option value=""    <%= !filters.matched ? 'selected' : '' %>>any</option>
+        <option value="yes" <%= filters.matched === 'yes' ? 'selected' : '' %>>matched to plant</option>
+        <option value="no"  <%= filters.matched === 'no'  ? 'selected' : '' %>>unmatched</option>
+      </select>
+    </label>
+    <button type="submit">Apply</button>
+    <% if (Object.keys(filters || {}).length) { %>
+      <a class="clear-filters" href="/timeline">Clear</a>
+    <% } %>
+  </form>
+</details>
 
-  <section>
-    <h2>Most-recalled firms</h2>
-    <% if (!topFirms.length) { %>
-      <p class="empty">No firms yet.</p>
-    <% } else { %>
-      <table>
-        <thead><tr><th>Firm</th><th>Total</th><th>Class I</th></tr></thead>
-        <tbody>
-          <% for (const f of topFirms) { %>
-            <tr>
-              <td><a href="/timeline?firm=<%= encodeURIComponent(f.firm_name) %>"><%= f.firm_name %></a></td>
-              <td><%= f.n %></td>
-              <td><%= f.c1 %></td>
-            </tr>
+<section class="feed-stats">
+  <span><strong><%= total.toLocaleString() %></strong> recall event<%= total === 1 ? '' : 's' %></span>
+  <span class="sep">·</span>
+  <span><strong><%= matched.toLocaleString() %></strong> matched to plant</span>
+  <span class="sep">·</span>
+  <span><strong><%= total ? Math.round(100 * matched / total) : 0 %>%</strong> match rate</span>
+  <span class="sep">·</span>
+  <a href="/api/recalls.csv?<%= new URLSearchParams(filters).toString() %>">CSV</a>
+  <span class="sep">·</span>
+  <a href="/api/recalls.json?<%= new URLSearchParams(filters).toString() %>">JSON</a>
+</section>
+
+<%
+  // Group feed items by month for the date headings.
+  function monthLabel(iso) {
+    if (!iso) return 'Undated';
+    const d = new Date(iso + 'T00:00:00Z');
+    return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+  }
+  function dayLabel(iso) {
+    if (!iso) return '';
+    const d = new Date(iso + 'T00:00:00Z');
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+  }
+  function classTag(c) {
+    if (!c) return '';
+    if (/I\b/.test(c) && !/II/.test(c)) return 'class-i';
+    if (/II\b/.test(c) && !/III/.test(c)) return 'class-ii';
+    if (/III/.test(c)) return 'class-iii';
+    return '';
+  }
+%>
+
+<% if (!recent.length) { %>
+  <section class="feed">
+    <p class="empty">Nothing matches these filters. Try clearing them, or widening the date range.</p>
+  </section>
+<% } else { %>
+  <section class="feed" aria-label="Recall and news feed">
+    <% let lastMonth = null; %>
+    <% for (const r of recent) { %>
+      <% const month = monthLabel(r.recall_date); %>
+      <% if (month !== lastMonth) { lastMonth = month; %>
+        <h2 class="feed-month"><%= month %></h2>
+      <% } %>
+      <article class="feed-item">
+        <header class="feed-item-head">
+          <span class="feed-date" title="<%= r.recall_date || '' %>"><%= dayLabel(r.recall_date) %></span>
+          <% if (r.classification) { %>
+            <span class="class-tag <%= classTag(r.classification) %>"><%= r.classification %></span>
           <% } %>
-        </tbody>
-      </table>
+          <span class="feed-kind">Recall</span>
+        </header>
+        <h3 class="feed-headline">
+          <% if (r.plant_id) { %>
+            <a href="/plant/<%= r.plant_code %>"><%= r.plant_name %></a>
+          <% } else { %>
+            <%= r.firm_name || 'Unknown firm' %>
+          <% } %>
+        </h3>
+        <p class="feed-meta">
+          <% if (r.plant_id && r.firm_name && r.firm_name !== r.plant_name) { %>
+            <span class="muted">Recalled by</span> <%= r.firm_name %>
+          <% } else if (!r.plant_id) { %>
+            <span class="muted">Plant not yet identified</span>
+          <% } %>
+          <% if (r.product_count > 1) { %>
+            <span class="sep">·</span> <strong><%= r.product_count %></strong> products affected
+          <% } %>
+        </p>
+        <% if (r.reason) { %>
+          <p class="feed-reason"><%= r.reason.length > 280 ? r.reason.slice(0, 280) + '…' : r.reason %></p>
+        <% } %>
+      </article>
     <% } %>
   </section>
-</div>
-
-<h2>Latest 50 recall events</h2>
-<% if (!recent.length) { %>
-  <p class="empty">Nothing to show. Try widening the filters.</p>
-<% } else { %>
-  <table>
-    <thead><tr><th>Date</th><th>Firm</th><th>Plant</th><th>Class</th><th>Products</th><th>Reason</th></tr></thead>
-    <tbody>
-      <% for (const r of recent) { %>
-        <tr>
-          <td><%= r.recall_date || '' %></td>
-          <td><%= r.firm_name || '' %></td>
-          <td>
-            <% if (r.plant_id) { %>
-              <a href="/plant/<%= r.plant_code %>"><%= r.plant_name %></a>
-            <% } else { %>
-              <span class="muted">unmatched</span>
-            <% } %>
-          </td>
-          <td><%= r.classification || '' %></td>
-          <td><%= r.product_count > 1 ? r.product_count + ' products' : '1' %></td>
-          <td><%= (r.reason || '').slice(0, 160) %></td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
 <% } %>
+
+<aside class="feed-aside">
+  <section>
+    <h3>By class <span class="muted">(matching filters)</span></h3>
+    <ul class="class-breakdown">
+      <% for (const c of byClass) { %>
+        <li><span class="class-tag <%= classTag(c.classification) %>"><%= c.classification %></span> <%= c.n.toLocaleString() %></li>
+      <% } %>
+    </ul>
+  </section>
+  <% if (topFirms.length) { %>
+    <section>
+      <h3>Most active firms</h3>
+      <ul class="top-firms">
+        <% for (const f of topFirms.slice(0, 10)) { %>
+          <li>
+            <a href="/timeline?firm=<%= encodeURIComponent(f.firm_name) %>"><%= f.firm_name %></a>
+            <span class="muted"><%= f.n %><% if (f.c1) { %> · <%= f.c1 %> Class I<% } %></span>
+          </li>
+        <% } %>
+      </ul>
+    </section>
+  <% } %>
+</aside>
 
 <%- include('_footer') %>

@@ -1,0 +1,89 @@
+match_type,pattern,parent_company,notes
+name_contains,DAIRY FARMERS OF AMERICA,Dairy Farmers of America,Direct DFA listings
+name_contains,DFA,Dairy Farmers of America,DFA bulk tank units and operations
+name_contains,ST. ALBANS CREAMERY,Dairy Farmers of America,St. Albans Cooperative Creamery acquired by DFA in 2019
+name_contains,GARELICK FARMS,Dairy Farmers of America,Acquired from Dean Foods bankruptcy 2020
+name_contains,KEMPS,Dairy Farmers of America,Acquired from Dean Foods 2020
+name_contains,MAYFIELD DAIRY,Dairy Farmers of America,Acquired from Dean Foods 2020
+name_contains,FRIENDLY'S ICE CREAM,Dean Foods,
+name_contains,LAND O LAKES,Land O'Lakes Inc,
+name_contains,LAND O'LAKES,Land O'Lakes Inc,
+name_contains,SAPUTO,Saputo Inc,
+name_contains,SORRENTO LACTALIS,Lactalis North America,
+name_contains,LACTALIS HERITAGE,Lactalis North America,Formerly Kraft cottage cheese plant (Tulare CA)
+name_contains,LACTALIS USA,Lactalis North America,
+name_contains,AGROPUR,Agropur Inc,
+name_contains,SCHREIBER,Schreiber Foods Inc,
+name_contains,LEPRINO FOODS,Leprino Foods Company,
+name_contains,GLANBIA,Glanbia Nutritionals,
+name_contains,DARIGOLD,Darigold Inc,Cooperative
+name_contains,H.P. HOOD,HP Hood LLC,
+name_contains,HP HOOD,HP Hood LLC,
+name_contains,SARGENTO,Sargento Foods Inc,
+name_contains,GREAT LAKES CHEESE,Great Lakes Cheese Company,
+name_contains,BELGIOIOSO,BelGioioso Cheese Inc,
+name_contains,GRANDE CHEESE,Grande Cheese Company,
+name_contains,FOREMOST FARMS,Foremost Farms USA,Cooperative
+name_contains,KRAFT HEINZ,The Kraft Heinz Company,
+name_contains,KRAFT FOODS,The Kraft Heinz Company,Pre-2015 entity name; now Kraft Heinz
+name_contains,HILMAR CHEESE,Hilmar Cheese Company,
+name_contains,CABOT,Agri-Mark Inc,Cabot Creamery brand owned by Agri-Mark coop
+name_contains,AGRI-MARK,Agri-Mark Inc,
+name_contains,DANNON,Danone North America,
+name_contains,TILLAMOOK,Tillamook County Creamery Association,Farmer-owned cooperative
+name_contains,GOSSNER,Gossner Foods Inc,
+name_contains,HILAND,Hiland Dairy Foods,
+name_contains,FAIRLIFE,The Coca-Cola Company,fairlife is a Coca-Cola subsidiary
+name_contains,SHAMROCK,Shamrock Foods Company,
+name_contains,SAFEWAY,Albertsons Companies,Safeway is an Albertsons subsidiary
+name_contains,CHOBANI,Chobani LLC,
+name_contains,UPSTATE NIAGARA,Upstate Niagara Cooperative,
+name_contains,PRAIRIE FARMS,Prairie Farms Dairy Cooperative,
+name_contains,GRASSLAND,Grassland Dairy Products,
+name_contains,MICHIGAN MILK PRODUCERS,Michigan Milk Producers Association,Cooperative
+name_contains,SOUTHEAST MILK,Southeast Milk Inc,Cooperative
+name_contains,SELECT MILK,Select Milk Producers,Cooperative
+name_contains,UNITED DAIRYMEN OF ARIZONA,United Dairymen of Arizona,Cooperative
+name_contains,O-AT-KA,O-AT-KA Milk Products Cooperative,
+name_contains,CALIFORNIA DAIRIES,California Dairies Inc,Cooperative
+name_contains,CONTINENTAL DAIRY,Continental Dairy Facilities,
+name_contains,SMITH DAIRY,Smith Dairy Products Company,
+name_contains,SMITH FOODS,Smith Foods Inc,Eastside Jersey Dairy / Smithfoods (Orrville OH)
+name_contains,SMITHFOODS,Smith Foods Inc,
+name_contains,EASTSIDE JERSEY,Smith Foods Inc,Smithfoods Orrville OH
+name_contains,WESTBY COOP,Westby Cooperative Creamery,
+name_contains,ELLSWORTH COOP,Ellsworth Cooperative Creamery,
+name_contains,ASSOCIATED MILK PRODUCERS,Associated Milk Producers Inc,AMPI cooperative
+name_contains,ARLA FOODS,Arla Foods Inc,
+name_contains,BONGARDS,Bongards' Creameries,Cooperative
+name_contains,BURNETT DAIRY,Burnett Dairy Cooperative,
+name_contains,DAIRICONCEPTS,DairiConcepts LP,DFA/Fonterra joint venture
+name_contains,FIRST DISTRICT,First District Association,Cooperative
+name_contains,FROZEN FARMER,The Frozen Farmer,
+name_contains,HARTZLER,Hartzler Family Dairy,
+name_contains,JOSEPH GALLO,Joseph Gallo Farms,
+name_contains,MAPLE ISLAND,Maple Island Inc,
+name_contains,MARATHON CHEESE,Marathon Cheese Corporation,
+name_contains,MASTERS GALLERY,Masters Gallery Foods Inc,
+name_contains,MEISTER CHEESE,Meister Cheese Company,
+name_contains,MULLINS CHEESE,Mullins Cheese Inc,
+name_contains,NESTLE,Nestle USA,
+name_contains,O-AT-KA,O-AT-KA Milk Products Cooperative,
+name_contains,ORGANIC VALLEY,Organic Valley / CROPP Cooperative,
+name_contains,CROPP COOP,Organic Valley / CROPP Cooperative,
+name_contains,ORNUA,Ornua Ingredients,
+name_contains,PACIFIC CHEESE,Pacific Cheese Company,
+name_contains,RUTTER,Rutter's Dairy Inc,Including RUTTER'S DY and RUTTER BROS
+name_contains,SARTORI,Sartori Company,
+name_contains,SAVENCIA,Savencia Cheese USA,
+name_contains,VALLEY QUEEN,Valley Queen Cheese Factory,
+name_contains,WEST POINT DAIRY,West Point Dairy Products,
+name_contains,YANCEY'S FANCY,Yancey's Fancy Inc,
+name_contains,CONAGRA,Conagra Brands,
+name_contains,BEL BRANDS,Bel Brands USA,
+name_contains,KERRY,Kerry Group plc,
+name_contains,TREE HOUSE,TreeHouse Foods,
+name_contains,DIPPIN DOTS,Dippin' Dots LLC,
+name_contains,WORKING COWS,Working Cows Dairy,
+name_contains,MARYLAND-VIRGINIA MILK,Maryland & Virginia Milk Producers Cooperative,
+name_contains,DAISY BRAND,Daisy Brand LLC,
