@@ -28,65 +28,34 @@
     .filter(Boolean).join(' ');
   const mapsUrl = 'https://www.google.com/maps/search/?api=1&query='
     + encodeURIComponent(mapQuery);
-  const hasGeo = plant.lat != null && plant.lon != null;
+  const locationLabel = [plant.city, plant.state].filter(Boolean).join(', ');
+  // Category-themed visual we control — no logo licensing, no map that
+  // implies precision we don't have.
+  const cat = (plant.category || '').toLowerCase();
+  const catIcon =
+      cat.includes('cheese')   ? '🧀'
+    : cat.includes('butter')   ? '🧈'
+    : cat.includes('frozen')   ? '🍦'
+    : cat.includes('dry')      ? '🥛'
+    : cat.includes('whey')     ? '💪'
+    : cat.includes('specialty')? '✨'
+    : cat.includes('packag')   ? '📦'
+    : '🥛';
 %>
-<% if (hasGeo) { %>
-  <div id="plant-mini-map" class="plant-mini-map"
-       data-lat="<%= plant.lat %>" data-lon="<%= plant.lon %>"
-       data-label="<%= (plant.name || '').replace(/"/g, '&quot;') %>"></div>
-<% } %>
-<p class="map-link">
-  <a href="<%= mapsUrl %>" target="_blank" rel="noopener noreferrer">
-    Open in Google Maps &rarr;
-  </a>
-  <span class="muted">Satellite view centers on the city; zoom to find the facility. Open in Google Maps for Street View.</span>
-</p>
-
-<% if (hasGeo) { %>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script>
-    (function () {
-      var el = document.getElementById('plant-mini-map');
-      if (!el || typeof L === 'undefined') return;
-      var lat = parseFloat(el.dataset.lat), lon = parseFloat(el.dataset.lon);
-
-      function build() {
-        // Moderate zoom: coords are city centroids, so this shows the
-        // town and surroundings honestly. Zoom in further to hunt the
-        // building; tighten the default once we have street-level coords.
-        var map = L.map(el, { scrollWheelZoom: false }).setView([lat, lon], 13);
-
-        // Free satellite imagery from Esri — no API key, no billing.
-        var satellite = L.tileLayer(
-          'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-          { maxZoom: 18, attribution: 'Imagery &copy; Esri' }
-        );
-        // Street fallback so the toggle has a non-aerial option.
-        var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' });
-
-        satellite.addTo(map);
-        L.control.layers({ 'Satellite': satellite, 'Street': street }, null,
-          { collapsed: false }).addTo(map);
-        L.marker([lat, lon]).addTo(map).bindPopup(el.dataset.label);
-      }
-
-      // Lazy-load: the satellite tiles are the heaviest thing on the page,
-      // so only build the map once it scrolls into view.
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries, obs) {
-          if (entries[0].isIntersecting) { build(); obs.disconnect(); }
-        }, { rootMargin: '200px' });
-        io.observe(el);
-      } else {
-        build();
-      }
-    })();
-  </script>
-<% } %>
+<section class="location-card cat-<%= cat.split(/[ /]/)[0] || 'milk' %>">
+  <div class="location-visual" aria-hidden="true"><%= catIcon %></div>
+  <div class="location-body">
+    <h2><%= plant.name %></h2>
+    <p class="location-meta">
+      <% if (plant.category) { %><span class="loc-cat"><%= plant.category %></span><% } %>
+      <% if (locationLabel) { %><span class="muted"><%= locationLabel %></span><% } %>
+    </p>
+    <a class="btn-maps" href="<%= mapsUrl %>" target="_blank" rel="noopener noreferrer">
+      📍 View on Google Maps
+    </a>
+    <p class="note">Opens a Google search for this plant — satellite and Street View included.</p>
+  </div>
+</section>
 
 <% if (typeof related !== 'undefined' && related.length) { %>
   <section class="related-site">

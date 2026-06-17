@@ -285,10 +285,44 @@ dl.meta dd { margin: 0; }
 .export-row { font-size: 0.9rem; margin: 0.5rem 0 1.5rem; }
 .notes-cell { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #444; }
 
-.plant-mini-map {
-  height: 340px; border-radius: var(--radius);
-  border: 1px solid var(--line); box-shadow: var(--shadow);
-  margin: 0.5rem 0 0.75rem; background: #1a2a1a;
+.location-card {
+  display: flex; align-items: stretch; gap: 0;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow); margin: 0.5rem 0 1.5rem;
+  background: var(--bg-elev);
+}
+.location-visual {
+  flex: 0 0 130px; display: flex; align-items: center; justify-content: center;
+  font-size: 3.4rem; background: var(--accent-soft);
+}
+.location-body { padding: 1.1rem 1.25rem; flex: 1; }
+.location-body h2 { margin: 0 0 0.35rem; font-size: 1.3rem; }
+.location-meta { margin: 0 0 0.9rem; display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+.loc-cat {
+  display: inline-block; padding: 0.12rem 0.6rem; border-radius: 999px;
+  background: var(--butter-soft); color: #6b5300;
+  font-size: 0.78rem; font-weight: 600; text-transform: capitalize;
+}
+.btn-maps {
+  display: inline-block; padding: 0.7rem 1.3rem; border-radius: 8px;
+  background: var(--accent); color: #fff; font-weight: 600; font-size: 1rem;
+  text-decoration: none;
+}
+.btn-maps:hover { background: #244829; text-decoration: none; }
+
+/* Category tints for the visual panel */
+.cat-cheese    .location-visual { background: #f6e7c4; }
+.cat-butter    .location-visual { background: #f7ecc8; }
+.cat-frozen    .location-visual { background: #e3ecf2; }
+.cat-dry       .location-visual { background: #eef0ea; }
+.cat-fluid     .location-visual { background: #eaf1ec; }
+.cat-whey      .location-visual { background: #efeae0; }
+.cat-specialty .location-visual { background: #efe6f0; }
+.cat-packaging .location-visual { background: #ece8e2; }
+
+@media (max-width: 560px) {
+  .location-card { flex-direction: column; }
+  .location-visual { flex-basis: 90px; font-size: 2.6rem; }
 }
 
 .related-site {
@@ -302,10 +336,6 @@ dl.meta dd { margin: 0; }
 .related-list li:first-child { border-top: 0; }
 .related-list code { color: var(--accent); font-weight: 600; margin-right: 0.4rem; }
 .related-list .conf { margin-left: 0.5rem; }
-.map-link { margin: 0.4rem 0 1.5rem; font-size: 0.9rem; }
-.map-link a { color: var(--accent); font-weight: 600; text-decoration: none; }
-.map-link a:hover { text-decoration: underline; }
-.map-link .muted { margin-left: 0.5rem; font-size: 0.85rem; }
 
 /* ---------- subtle reassurance pill (replaces old disclaimer bar) ---------- */
 .note-pill {
