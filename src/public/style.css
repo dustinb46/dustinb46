@@ -286,9 +286,9 @@ dl.meta dd { margin: 0; }
 .notes-cell { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #444; }
 
 .plant-mini-map {
-  height: 260px; border-radius: var(--radius);
+  height: 340px; border-radius: var(--radius);
   border: 1px solid var(--line); box-shadow: var(--shadow);
-  margin: 0.5rem 0 0.75rem; background: #e9efe7;
+  margin: 0.5rem 0 0.75rem; background: #1a2a1a;
 }
 
 .related-site {

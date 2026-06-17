@@ -39,7 +39,7 @@
   <a href="<%= mapsUrl %>" target="_blank" rel="noopener noreferrer">
     Open in Google Maps &rarr;
   </a>
-  <span class="muted">Pin shows the city; verify the exact building before citing.</span>
+  <span class="muted">Satellite view centers on the city; zoom to find the facility. Open in Google Maps for Street View.</span>
 </p>
 
 <% if (hasGeo) { %>
@@ -52,9 +52,38 @@
       var el = document.getElementById('plant-mini-map');
       if (!el || typeof L === 'undefined') return;
       var lat = parseFloat(el.dataset.lat), lon = parseFloat(el.dataset.lon);
-      var map = L.map(el, { scrollWheelZoom: false, attributionControl: false }).setView([lat, lon], 9);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 14 }).addTo(map);
-      L.marker([lat, lon]).addTo(map).bindPopup(el.dataset.label);
+
+      function build() {
+        // Moderate zoom: coords are city centroids, so this shows the
+        // town and surroundings honestly. Zoom in further to hunt the
+        // building; tighten the default once we have street-level coords.
+        var map = L.map(el, { scrollWheelZoom: false }).setView([lat, lon], 13);
+
+        // Free satellite imagery from Esri — no API key, no billing.
+        var satellite = L.tileLayer(
+          'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+          { maxZoom: 18, attribution: 'Imagery &copy; Esri' }
+        );
+        // Street fallback so the toggle has a non-aerial option.
+        var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' });
+
+        satellite.addTo(map);
+        L.control.layers({ 'Satellite': satellite, 'Street': street }, null,
+          { collapsed: false }).addTo(map);
+        L.marker([lat, lon]).addTo(map).bindPopup(el.dataset.label);
+      }
+
+      // Lazy-load: the satellite tiles are the heaviest thing on the page,
+      // so only build the map once it scrolls into view.
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries, obs) {
+          if (entries[0].isIntersecting) { build(); obs.disconnect(); }
+        }, { rootMargin: '200px' });
+        io.observe(el);
+      } else {
+        build();
+      }
     })();
   </script>
 <% } %>
