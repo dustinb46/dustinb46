@@ -469,6 +469,7 @@ const ADMIN_SCRIPTS = {
   'harvest-codes':  'scripts/harvest-recall-codes.js',
   'usda-ingest':    'scripts/ingest-usda.js',
   'geocode':        'scripts/geocode-plants.js',
+  'match-brands':   'scripts/match-brands.js',
 };
 
 function requireAdmin(req, res, next) {
