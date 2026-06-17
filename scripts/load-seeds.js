@@ -208,6 +208,71 @@ if (aliasesApplied) {
   console.log(`[load-seeds] parent_company set on ${aliasesApplied} plants via ${aliasRulesApplied} alias rule(s)`);
 }
 
+// News items: upsert by stable fingerprint (sha1 of event_date + headline)
+// so re-runs are idempotent. Plant resolution by plant_code where the
+// CSV supplies one; unresolved is fine — the item still renders with
+// firm name and location, just without the plant link.
+const crypto = require('crypto');
+let newsIn = 0, newsWritten = 0, newsSkipped = 0;
+const newsRows = readCsv('news_items.csv');
+const findPlantIdByCode = db.prepare(`SELECT id FROM plants WHERE plant_code = ?`);
+const upsertNews = db.prepare(`
+  INSERT INTO news_items (event_date, kind, headline, body, plant_id, plant_code,
+                          firm_name, city, state, source_url, source_name,
+                          added_by, fingerprint)
+  VALUES (@event_date, @kind, @headline, @body, @plant_id, @plant_code,
+          @firm_name, @city, @state, @source_url, @source_name,
+          @added_by, @fingerprint)
+  ON CONFLICT(fingerprint) DO UPDATE SET
+    event_date = excluded.event_date,
+    kind = excluded.kind,
+    headline = excluded.headline,
+    body = excluded.body,
+    plant_id = excluded.plant_id,
+    plant_code = excluded.plant_code,
+    firm_name = excluded.firm_name,
+    city = excluded.city,
+    state = excluded.state,
+    source_url = excluded.source_url,
+    source_name = excluded.source_name,
+    added_by = excluded.added_by
+`);
+const ALLOWED_KINDS = new Set([
+  'closure', 'opening', 'sale', 'expansion', 'acquisition',
+  'leadership', 'investment', 'other',
+]);
+const newsTxn = db.transaction(() => {
+  for (const row of newsRows) {
+    newsIn++;
+    if (!row.event_date || !row.headline) { newsSkipped++; continue; }
+    if (!row.source_url)                  { newsSkipped++; continue; }   // every item needs a source
+    if (!ALLOWED_KINDS.has(row.kind))     { newsSkipped++; continue; }
+    const plantHit = row.plant_code ? findPlantIdByCode.get(row.plant_code) : null;
+    const fingerprint = crypto.createHash('sha1')
+      .update(row.event_date + '|' + row.headline).digest('hex').slice(0, 16);
+    upsertNews.run({
+      event_date: row.event_date,
+      kind: row.kind,
+      headline: row.headline,
+      body: row.body || null,
+      plant_id: plantHit ? plantHit.id : null,
+      plant_code: row.plant_code || null,
+      firm_name: row.firm_name || null,
+      city: row.city || null,
+      state: row.state || null,
+      source_url: row.source_url,
+      source_name: row.source_name || null,
+      added_by: row.added_by || 'seed',
+      fingerprint,
+    });
+    newsWritten++;
+  }
+});
+newsTxn();
+if (newsIn) {
+  console.log(`[load-seeds] news_items ${newsWritten}/${newsIn} (skipped ${newsSkipped})`);
+}
+
 db.prepare(`
   INSERT INTO ingest_runs (source, started_at, finished_at, rows_in, rows_written, notes)
   VALUES ('seeds', ?, ?, ?, ?, ?)

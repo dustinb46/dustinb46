@@ -340,6 +340,42 @@ dl.meta dd { margin: 0; }
   line-height: 1.5;
 }
 
+.kind-toggle {
+  display: inline-flex; gap: 0.25rem; padding: 0.25rem; margin: 0.5rem 0 1.25rem;
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 999px;
+}
+.kind-toggle a {
+  padding: 0.35rem 0.95rem; border-radius: 999px;
+  color: var(--fg-muted); font-size: 0.88rem; font-weight: 500; text-decoration: none;
+}
+.kind-toggle a:hover { color: var(--accent); text-decoration: none; }
+.kind-toggle a.on {
+  background: var(--accent); color: #fff;
+}
+
+.feed-source {
+  margin: 0.5rem 0 0; padding-top: 0.5rem;
+  border-top: 1px dashed var(--line);
+  font-size: 0.82rem; color: var(--fg-muted);
+}
+.feed-source a { color: var(--accent); }
+
+/* News kind chips — one tone per kind so the feed scans at a glance. */
+.news-kind {
+  display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.news-closure     { background: #f1d4d4; color: var(--berry); }
+.news-opening     { background: #d6ebd9; color: #1f4a28; }
+.news-expansion   { background: #d6ebd9; color: #1f4a28; }
+.news-sale        { background: var(--butter-soft); color: #7a5d00; }
+.news-acquisition { background: var(--butter-soft); color: #7a5d00; }
+.news-leadership  { background: #e3ecf2; color: #2c4f6b; }
+.news-investment  { background: #efe6f0; color: #6b2c5e; }
+.news-other       { background: var(--line); color: var(--fg-muted); }
+.kind-news { background: #efe6f0 !important; color: #6b2c5e !important; }
+
 /* Class tags */
 .class-tag {
   display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px;

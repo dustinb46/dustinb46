@@ -345,24 +345,56 @@ app.get('/timeline', (req, res) => {
     `SELECT COUNT(DISTINCT CASE WHEN r.plant_id IS NOT NULL THEN ${EVKEY} END) AS n ${baseFrom}`
   ).get(...params).n;
 
-  // One row per event: representative fields plus a product count.
-  // This is the feed itself, not a sample — bump generously and revisit
-  // with pagination if the page ever gets slow.
-  const recent = db.prepare(`
-    SELECT ${EVKEY} AS event_key,
-           MAX(COALESCE(r.recall_date, r.report_date)) AS recall_date,
-           MAX(r.firm_name) AS firm_name,
-           MAX(r.classification) AS classification,
-           MAX(r.reason) AS reason,
-           MAX(r.plant_id) AS plant_id,
-           MAX(p.plant_code) AS plant_code,
-           MAX(p.name) AS plant_name,
-           COUNT(*) AS product_count
-    ${baseFrom}
-    GROUP BY event_key
-    ORDER BY recall_date DESC
-    LIMIT 100
-  `).all(...params);
+  // The feed shows two item kinds — recall events and plant news — in
+  // one chronological list. Each query returns its own normalized
+  // shape and we merge in JS sorted by date.
+  const kindFilter = (req.query.kind || '').toString().toLowerCase();
+  const showRecalls = kindFilter !== 'news';
+  const showNews    = kindFilter !== 'recalls';
+
+  let recallItems = [];
+  if (showRecalls) {
+    recallItems = db.prepare(`
+      SELECT ${EVKEY} AS event_key,
+             MAX(COALESCE(r.recall_date, r.report_date)) AS event_date,
+             MAX(r.firm_name) AS firm_name,
+             MAX(r.classification) AS classification,
+             MAX(r.reason) AS reason,
+             MAX(r.plant_id) AS plant_id,
+             MAX(p.plant_code) AS plant_code,
+             MAX(p.name) AS plant_name,
+             COUNT(*) AS product_count
+      ${baseFrom}
+      GROUP BY event_key
+      ORDER BY event_date DESC
+      LIMIT 100
+    `).all(...params).map(r => ({ ...r, kind: 'recall' }));
+  }
+
+  // News items respect the firm/state/date filters where they overlap;
+  // recall-only filters (class, matched) suppress news entirely.
+  let newsItems = [];
+  if (showNews && !req.query.class && !req.query.matched) {
+    const w = ['1=1'];
+    const np = [];
+    if (req.query.state) { w.push('UPPER(state) = UPPER(?)'); np.push(String(req.query.state)); }
+    if (req.query.firm)  { w.push('LOWER(firm_name) LIKE ?'); np.push('%' + String(req.query.firm).toLowerCase() + '%'); }
+    if (req.query.from)  { w.push('event_date >= ?'); np.push(String(req.query.from)); }
+    if (req.query.to)    { w.push('event_date <= ?'); np.push(String(req.query.to)); }
+    newsItems = db.prepare(`
+      SELECT n.id, n.event_date, n.kind AS news_kind, n.headline, n.body,
+             n.firm_name, n.city, n.state, n.source_url, n.source_name,
+             n.plant_id, p.plant_code, p.name AS plant_name
+      FROM news_items n LEFT JOIN plants p ON p.id = n.plant_id
+      WHERE ${w.join(' AND ')}
+      ORDER BY event_date DESC LIMIT 100
+    `).all(...np).map(r => ({ ...r, kind: 'news' }));
+  }
+
+  // Merge and clamp to the most recent 100 of either kind combined.
+  const feed = [...recallItems, ...newsItems]
+    .sort((a, b) => (b.event_date || '').localeCompare(a.event_date || ''))
+    .slice(0, 100);
 
   res.render('timeline', {
     filters: req.query,
@@ -371,7 +403,8 @@ app.get('/timeline', (req, res) => {
     byClass,
     total,
     matched,
-    recent,
+    newsTotal: newsItems.length,   // for the stats strip
+    recent: feed,
   });
 });
 

@@ -43,12 +43,25 @@
   </form>
 </details>
 
+<%
+  const kindCur = (filters.kind || '').toLowerCase();
+  const kindHref = k => {
+    const q = { ...filters }; if (k) q.kind = k; else delete q.kind;
+    return '?' + new URLSearchParams(q).toString();
+  };
+%>
+<nav class="kind-toggle" aria-label="Filter feed by item kind">
+  <a class="<%= !kindCur ? 'on' : '' %>" href="<%= kindHref('') %>">All</a>
+  <a class="<%= kindCur === 'recalls' ? 'on' : '' %>" href="<%= kindHref('recalls') %>">Recalls only</a>
+  <a class="<%= kindCur === 'news' ? 'on' : '' %>" href="<%= kindHref('news') %>">News only</a>
+</nav>
+
 <section class="feed-stats">
   <span><strong><%= total.toLocaleString() %></strong> recall event<%= total === 1 ? '' : 's' %></span>
   <span class="sep">·</span>
-  <span><strong><%= matched.toLocaleString() %></strong> matched to plant</span>
+  <span><strong><%= matched.toLocaleString() %></strong> matched</span>
   <span class="sep">·</span>
-  <span><strong><%= total ? Math.round(100 * matched / total) : 0 %>%</strong> match rate</span>
+  <span><strong><%= (typeof newsTotal !== 'undefined' ? newsTotal : 0).toLocaleString() %></strong> news item<%= newsTotal === 1 ? '' : 's' %></span>
   <span class="sep">·</span>
   <a href="/api/recalls.csv?<%= new URLSearchParams(filters).toString() %>">CSV</a>
   <span class="sep">·</span>
@@ -84,39 +97,72 @@
   <section class="feed" aria-label="Recall and news feed">
     <% let lastMonth = null; %>
     <% for (const r of recent) { %>
-      <% const month = monthLabel(r.recall_date); %>
+      <% const month = monthLabel(r.event_date); %>
       <% if (month !== lastMonth) { lastMonth = month; %>
         <h2 class="feed-month"><%= month %></h2>
       <% } %>
-      <article class="feed-item">
-        <header class="feed-item-head">
-          <span class="feed-date" title="<%= r.recall_date || '' %>"><%= dayLabel(r.recall_date) %></span>
-          <% if (r.classification) { %>
-            <span class="class-tag <%= classTag(r.classification) %>"><%= r.classification %></span>
+      <% if (r.kind === 'news') { %>
+        <article class="feed-item feed-news">
+          <header class="feed-item-head">
+            <span class="feed-date" title="<%= r.event_date || '' %>"><%= dayLabel(r.event_date) %></span>
+            <span class="news-kind news-<%= r.news_kind %>"><%= r.news_kind %></span>
+            <span class="feed-kind kind-news">News</span>
+          </header>
+          <h3 class="feed-headline">
+            <% if (r.plant_id) { %>
+              <a href="/plant/<%= r.plant_code %>"><%= r.headline %></a>
+            <% } else { %>
+              <%= r.headline %>
+            <% } %>
+          </h3>
+          <p class="feed-meta">
+            <% if (r.firm_name) { %><%= r.firm_name %><% } %>
+            <% if (r.city || r.state) { %>
+              <% if (r.firm_name) { %><span class="sep">·</span><% } %>
+              <%= [r.city, r.state].filter(Boolean).join(', ') %>
+            <% } %>
+            <% if (r.plant_id) { %>
+              <span class="sep">·</span> <a href="/plant/<%= r.plant_code %>"><%= r.plant_code %></a>
+            <% } %>
+          </p>
+          <% if (r.body) { %>
+            <p class="feed-reason"><%= r.body %></p>
           <% } %>
-          <span class="feed-kind">Recall</span>
-        </header>
-        <h3 class="feed-headline">
-          <% if (r.plant_id) { %>
-            <a href="/plant/<%= r.plant_code %>"><%= r.plant_name %></a>
-          <% } else { %>
-            <%= r.firm_name || 'Unknown firm' %>
+          <p class="feed-source">
+            Source: <a href="<%= r.source_url %>" target="_blank" rel="noopener noreferrer"><%= r.source_name || r.source_url %></a>
+          </p>
+        </article>
+      <% } else { %>
+        <article class="feed-item">
+          <header class="feed-item-head">
+            <span class="feed-date" title="<%= r.event_date || '' %>"><%= dayLabel(r.event_date) %></span>
+            <% if (r.classification) { %>
+              <span class="class-tag <%= classTag(r.classification) %>"><%= r.classification %></span>
+            <% } %>
+            <span class="feed-kind">Recall</span>
+          </header>
+          <h3 class="feed-headline">
+            <% if (r.plant_id) { %>
+              <a href="/plant/<%= r.plant_code %>"><%= r.plant_name %></a>
+            <% } else { %>
+              <%= r.firm_name || 'Unknown firm' %>
+            <% } %>
+          </h3>
+          <p class="feed-meta">
+            <% if (r.plant_id && r.firm_name && r.firm_name !== r.plant_name) { %>
+              <span class="muted">Recalled by</span> <%= r.firm_name %>
+            <% } else if (!r.plant_id) { %>
+              <span class="muted">Plant not yet identified</span>
+            <% } %>
+            <% if (r.product_count > 1) { %>
+              <span class="sep">·</span> <strong><%= r.product_count %></strong> products affected
+            <% } %>
+          </p>
+          <% if (r.reason) { %>
+            <p class="feed-reason"><%= r.reason.length > 280 ? r.reason.slice(0, 280) + '…' : r.reason %></p>
           <% } %>
-        </h3>
-        <p class="feed-meta">
-          <% if (r.plant_id && r.firm_name && r.firm_name !== r.plant_name) { %>
-            <span class="muted">Recalled by</span> <%= r.firm_name %>
-          <% } else if (!r.plant_id) { %>
-            <span class="muted">Plant not yet identified</span>
-          <% } %>
-          <% if (r.product_count > 1) { %>
-            <span class="sep">·</span> <strong><%= r.product_count %></strong> products affected
-          <% } %>
-        </p>
-        <% if (r.reason) { %>
-          <p class="feed-reason"><%= r.reason.length > 280 ? r.reason.slice(0, 280) + '…' : r.reason %></p>
-        <% } %>
-      </article>
+        </article>
+      <% } %>
     <% } %>
   </section>
 <% } %>

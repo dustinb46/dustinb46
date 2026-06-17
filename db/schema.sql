@@ -114,6 +114,31 @@ CREATE TABLE IF NOT EXISTS search_log (
 CREATE INDEX IF NOT EXISTS idx_search_log_ts ON search_log(ts);
 CREATE INDEX IF NOT EXISTS idx_search_log_q  ON search_log(q);
 
+-- Plant news: closures, openings, sales, expansions, leadership
+-- changes, investments. Hand-curated from press releases, trade
+-- journals, and state filings — every row carries a source URL.
+-- Renders in the same feed as recall events on /timeline.
+CREATE TABLE IF NOT EXISTS news_items (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  event_date    TEXT NOT NULL,        -- ISO date when the event happened/was announced
+  kind          TEXT NOT NULL,        -- closure | opening | sale | expansion | acquisition | leadership | investment | other
+  headline      TEXT NOT NULL,
+  body          TEXT,                 -- 1-3 sentence summary
+  plant_id      INTEGER REFERENCES plants(id) ON DELETE SET NULL,
+  plant_code    TEXT,                 -- resolved against plants on load
+  firm_name     TEXT,
+  city          TEXT,
+  state         TEXT,
+  source_url    TEXT NOT NULL,
+  source_name   TEXT,                 -- e.g. "Dairy Foods Magazine"
+  added_by      TEXT,
+  -- Stable identity for upserts so re-running the loader is idempotent.
+  fingerprint   TEXT NOT NULL UNIQUE,
+  created_at    TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_news_date ON news_items(event_date);
+CREATE INDEX IF NOT EXISTS idx_news_plant ON news_items(plant_id);
+
 -- Lightweight ingest log so we can see what ran when.
 CREATE TABLE IF NOT EXISTS ingest_runs (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
