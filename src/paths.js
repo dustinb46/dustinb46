@@ -22,4 +22,24 @@ function ensureImsDir() {
   return dir;
 }
 
-module.exports = { imsDir, imsPdfPath, ensureImsDir };
+// Uploaded site assets (hero image) live on the volume too, so they
+// survive redeploys. Same derivation as the IMS dir.
+function assetDir() {
+  if (process.env.ASSET_DIR) return process.env.ASSET_DIR;
+  if (process.env.PLANT_TRACK_DB) {
+    return path.join(path.dirname(process.env.PLANT_TRACK_DB), 'assets');
+  }
+  return path.join(__dirname, '..', 'data', 'assets');
+}
+
+function heroImagePath() {
+  return path.join(assetDir(), 'hero.jpg');
+}
+
+function ensureAssetDir() {
+  const dir = assetDir();
+  fs.mkdirSync(dir, { recursive: true });
+  return dir;
+}
+
+module.exports = { imsDir, imsPdfPath, ensureImsDir, assetDir, heroImagePath, ensureAssetDir };

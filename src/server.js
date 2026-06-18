@@ -2,7 +2,9 @@ const path = require('path');
 const { spawn } = require('child_process');
 const express = require('express');
 const { db } = require('./db');
+const fs = require('fs');
 const { facilityKey } = require('./facility');
+const { heroImagePath, ensureAssetDir } = require('./paths');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -109,7 +111,22 @@ app.get('/', (req, res) => {
     ORDER BY COALESCE(r.recall_date, r.report_date) DESC
     LIMIT 10
   `).all();
-  res.render('index', { stats, recent });
+  // Cache-busted hero photo URL when one has been uploaded, so we set
+  // --hero-photo only when the file exists (no 404s on every load).
+  let heroPhoto = null;
+  try {
+    const st = fs.statSync(heroImagePath());
+    heroPhoto = `/hero-image?v=${Math.floor(st.mtimeMs)}`;
+  } catch { /* no hero uploaded yet */ }
+  res.render('index', { stats, recent, heroPhoto });
+});
+
+// Serve the uploaded hero image off the volume.
+app.get('/hero-image', (_req, res) => {
+  const p = heroImagePath();
+  if (!fs.existsSync(p)) return res.status(404).end();
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.sendFile(p);
 });
 
 // JSON plant search — useful for programmatic lookups and resolving
@@ -514,6 +531,27 @@ function requireAdmin(req, res, next) {
   if (got !== expected) return res.status(401).json({ error: 'unauthorized' });
   next();
 }
+
+// Upload (or replace) the homepage hero photo. Send the raw image bytes
+// as the request body with an image/* content type:
+//   curl -X POST -H "X-Admin-Token: $TOKEN" -H "Content-Type: image/jpeg" \
+//        --data-binary "@hero.jpg" "$URL/admin/hero-image"
+app.post('/admin/hero-image',
+  requireAdmin,
+  express.raw({ type: ['image/*'], limit: '12mb' }),
+  (req, res) => {
+    if (!req.body || !req.body.length) {
+      return res.status(400).json({ error: 'empty body; send raw image bytes with --data-binary' });
+    }
+    try {
+      ensureAssetDir();
+      fs.writeFileSync(heroImagePath(), req.body);
+      res.json({ ok: true, bytes: req.body.length, path: '/hero-image' });
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  }
+);
 
 app.post('/admin/run/:name', requireAdmin, (req, res) => {
   const script = ADMIN_SCRIPTS[req.params.name];

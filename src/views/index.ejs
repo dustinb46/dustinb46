@@ -1,7 +1,7 @@
 <% const title = 'Look up any dairy plant'; %>
 <%- include('_header', { title, disclaimer }) %>
 
-<section class="hero">
+<section class="hero"<% if (typeof heroPhoto !== 'undefined' && heroPhoto) { %> style="--hero-photo: url('<%= heroPhoto %>')"<% } %>>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <p class="eyebrow">The reference atlas for U.S. dairy plants</p>
