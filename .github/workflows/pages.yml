@@ -3,6 +3,7 @@ name: Deploy brief to GitHub Pages
 on:
   push:
     branches:
+      - main
       - claude/beautiful-hamilton-g8741s
   workflow_dispatch:
 
