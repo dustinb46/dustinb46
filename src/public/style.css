@@ -17,16 +17,20 @@
                  0 6px 22px rgba(43, 38, 32, 0.06);
   --radius:      10px;
 
-  /* Hero background image — override via inline style or set this
-     variable from a config to drop in a licensed photo later. */
-  --hero-image: linear-gradient(135deg, #2f5d3a 0%, #1a3d23 60%, #11281a 100%);
+  /* Hero background. The gradient is the guaranteed-good base; --hero-photo
+     layers a real image on top of it when set. To use a dairy photo:
+       1. drop a file at src/public/img/hero.jpg (see that folder's README), or
+       2. set --hero-photo to any image URL you have the rights to use.
+     If the photo is missing or fails to load, the gradient shows — no breakage. */
+  --hero-gradient: linear-gradient(135deg, #2f5d3a 0%, #1a3d23 60%, #11281a 100%);
+  --hero-photo: none;   /* e.g. url('/img/hero.jpg') */
 }
 
 * { box-sizing: border-box; }
 html, body {
   margin: 0; padding: 0;
   background: var(--bg); color: var(--fg);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: 16px; line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -43,7 +47,7 @@ h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; }
 h3 { font-size: 1.15rem; margin: 1rem 0 0.5rem; }
 a  { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+code { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
 
 /* ---------- site header ---------- */
 header.site {
@@ -105,14 +109,20 @@ footer {
   position: relative;
   margin: -1.5rem -1.5rem 2rem;     /* break out of main's padding */
   padding: 5rem 1.5rem 4.5rem;
-  background: var(--hero-image);
-  background-size: cover; background-position: center;
+  /* Photo (if any) over the gradient base; gradient shows if photo absent. */
+  background-color: #1a3d23;
+  background-image: var(--hero-photo, none), var(--hero-gradient);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
   color: #faf7f1;
   overflow: hidden;
 }
+/* Scrim: keeps the white hero text readable over any photo. Darker at the
+   bottom where the search box and hint chips sit. */
 .hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(17, 40, 26, 0.05) 0%, rgba(17, 40, 26, 0.55) 100%);
+  background: linear-gradient(180deg, rgba(17, 40, 26, 0.35) 0%, rgba(17, 40, 26, 0.72) 100%);
   pointer-events: none;
 }
 .hero-inner {
@@ -237,7 +247,7 @@ td a { color: var(--accent); }
 .badge {
   display: inline-block; background: var(--accent); color: white;
   padding: 0.2rem 0.6rem; border-radius: 6px;
-  font-family: ui-monospace, monospace; font-size: 0.95rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.95rem;
 }
 .code-line { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
 
@@ -410,7 +420,7 @@ dl.meta dd { margin: 0; }
 .top-firms a { font-weight: 500; }
 
 .export-row { font-size: 0.9rem; margin: 0.5rem 0 1.5rem; }
-.notes-cell { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #444; }
+.notes-cell { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.8rem; color: #444; }
 
 .location-card {
   display: flex; align-items: stretch; gap: 0;
