@@ -522,6 +522,7 @@ const ADMIN_SCRIPTS = {
   'usda-ingest':    'scripts/ingest-usda.js',
   'geocode':        'scripts/geocode-plants.js',
   'match-brands':   'scripts/match-brands.js',
+  'datcp-ingest':   'scripts/ingest-datcp.js',
 };
 
 function requireAdmin(req, res, next) {

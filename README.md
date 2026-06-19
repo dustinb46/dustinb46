@@ -33,6 +33,7 @@ Live: https://dairyplant-atlas.up.railway.app
 |--------|--------|---------------|
 | FDA Interstate Milk Shippers (IMS) List (PDF, quarterly) | Grade A fluid + cultured plants | `source='IMS'`, codes like `55-372` |
 | USDA AMS Approved Dairy Plant List | Manufactured products: cheese, butter, dry milk, frozen desserts, whey | `source='USDA-AMS'`, codes like `USDA-55-322` (+ bare-code alias) |
+| Wisconsin DATCP licensed dairy plants | All WI state-licensed dairy operations (long tail not in federal data); supplies street addresses for IMS overlaps | `source='WI-DATCP'` (or supplements existing IMS rows); license no. as alias |
 | openFDA Food Enforcement API | Recalls | `recalls` table |
 | Hand-curated CSV + recall code harvest | Brand→plant mappings | `plant_brands`, each row sourced |
 
@@ -75,6 +76,12 @@ curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/ims-sanity"   # eyeball 
 #    The list text is checked in at data/usda/usda-list.txt; refresh it
 #    quarterly from apps.ams.usda.gov/dairy/ApprovedPlantList.
 curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/usda-ingest"
+
+# 2b. Wisconsin DATCP licensed plants (long tail of WI cheese/cream/butter
+#     not in federal data; also supplies street addresses for IMS overlaps).
+#     CSV at data/datcp/wi-licensed-plants.csv; refresh quarterly from
+#     mydatcp.wisconsin.gov -> Registries/Lists -> Dairy Plant License Holders.
+curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/datcp-ingest"
 
 # 3. Geocode plants for the map (~15 min first run; cached by city after).
 curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/geocode"
