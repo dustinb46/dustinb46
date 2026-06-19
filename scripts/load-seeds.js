@@ -94,6 +94,31 @@ const load = db.transaction(() => {
     }
   }
 
+  // Reconcile manually-seeded plants too: if a row was removed from
+  // plants.csv it should drop from the DB. Same policy as the
+  // illustrative rows, scoped to source='manual' so we never touch
+  // federally-sourced data. Runs before the upsert loop so we don't
+  // delete a row we're about to re-insert.
+  const csvManualCodes = new Set(
+    readCsv('plants.csv')
+      .filter(r => (r.source || '') === 'manual' && r.plant_code)
+      .map(r => r.plant_code)
+  );
+  const existingManual = db.prepare(
+    `SELECT plant_code FROM plants WHERE source = 'manual'`
+  ).all();
+  let goneManual = 0;
+  const delManual = db.prepare(
+    `DELETE FROM plants WHERE plant_code = ? AND source = 'manual'`
+  );
+  for (const row of existingManual) {
+    if (!csvManualCodes.has(row.plant_code)) {
+      delManual.run(row.plant_code);
+      goneManual++;
+    }
+  }
+  if (goneManual) console.log(`[load-seeds] retired ${goneManual} manual plant(s) no longer in plants.csv`);
+
   for (const row of readCsv('plants.csv')) {
     plantsIn++;
     if (hasRealPlants && row.source === 'illustrative_seed') continue;
