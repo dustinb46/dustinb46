@@ -5,7 +5,7 @@ carton, tub, or wedge and find the facility that actually made it — plus
 the other brands that come out of the same plant and its FDA recall
 history.
 
-Live: https://dustinb46-production.up.railway.app
+Live: https://dairyplant-atlas.up.railway.app
 
 ## What it does
 
@@ -57,7 +57,7 @@ token-protected admin endpoint, so data lands on the Railway volume.
 Set two shell variables first:
 
 ```bash
-URL=https://dustinb46-production.up.railway.app
+URL=https://dairyplant-atlas.up.railway.app
 TOKEN=<the ADMIN_TOKEN you set in Railway>
 ```
 
