@@ -85,15 +85,27 @@
     var el = document.getElementById('plant-map');
     if (!el || typeof L === 'undefined') return;
     var map = L.map(el, { scrollWheelZoom: false }).setView([39.5, -98.35], 4);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+    // Two layers: pasture street view default, satellite when the user
+    // wants to see the actual buildings (works best on facilities that
+    // have a street-level address; city-centroid pins still help locate
+    // the town).
+    var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
-      maxZoom: 12,
-    }).addTo(map);
+      maxZoom: 18,
+    });
+    var satellite = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      { attribution: 'Imagery &copy; Esri', maxZoom: 18 }
+    );
+    street.addTo(map);
+    L.control.layers({ 'Street': street, 'Satellite': satellite }, null,
+      { collapsed: false, position: 'topright' }).addTo(map);
 
     try {
       var res = await fetch('/api/plants/geo.json');
       var data = await res.json();
-      var cluster = L.markerClusterGroup({ chunkedLoading: true });
+      var cluster = L.markerClusterGroup({ chunkedLoading: true, maxClusterRadius: 50 });
       function esc(s) { return String(s == null ? '' : s).replace(/[<>&"]/g, function (c) { return ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;' })[c]; }); }
       data.plants.forEach(function (p) {
         var m = L.marker([p.lat, p.lon]);

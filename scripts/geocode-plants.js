@@ -25,14 +25,20 @@ const CENSUS_URL = 'https://geocoding.geo.census.gov/geocoder/locations/onelinea
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-async function geocodeNominatim(city, state) {
-  const q = `${city}, ${state}, USA`;
+async function geocodeNominatim(city, state, address) {
+  // Build the most specific query we have: street address when available,
+  // otherwise city-level. Street-level returns a building-precise pin
+  // (good for WI DATCP plants that ship with addresses); city-level
+  // returns a town centroid (the existing behavior).
+  const q = address
+    ? `${address}, ${city}, ${state}, USA`
+    : `${city}, ${state}, USA`;
   const url = `${NOMINATIM_URL}?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=us`;
   const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT, 'Accept': 'application/json' } });
   if (!res.ok) throw new Error(`nominatim HTTP ${res.status}`);
   const body = await res.json();
   if (!Array.isArray(body) || !body.length) return null;
-  return { lat: parseFloat(body[0].lat), lon: parseFloat(body[0].lon), source: 'osm' };
+  return { lat: parseFloat(body[0].lat), lon: parseFloat(body[0].lon), source: address ? 'osm-street' : 'osm' };
 }
 
 async function geocodeCensus(city, state) {
@@ -50,8 +56,17 @@ async function geocodeCensus(city, state) {
   return { lat: parseFloat(c.y), lon: parseFloat(c.x), source: 'census' };
 }
 
+// City-level cache only — street-level lookups are unique per plant so
+// they're not cacheable, but they're a small fraction of the workload
+// and worth the precision.
 const cityCache = new Map();
-async function cachedGeocode(city, state) {
+async function cachedGeocode(city, state, address) {
+  if (address) {
+    // Street-level: no cache, always a fresh lookup. Caller has already
+    // throttled at the top-level loop.
+    try { return await geocodeNominatim(city, state, address); }
+    catch (e) { /* fall through to city-level fallback */ }
+  }
   const key = `${city.toUpperCase()}|${state.toUpperCase()}`;
   if (cityCache.has(key)) return cityCache.get(key);
   let result = null;
@@ -69,26 +84,28 @@ async function cachedGeocode(city, state) {
   const runStarted = new Date().toISOString();
   const where = FORCE ? '' : ' AND (lat IS NULL OR lon IS NULL)';
   const rows = db.prepare(`
-    SELECT id, plant_code, city, state FROM plants
+    SELECT id, plant_code, address, city, state FROM plants
     WHERE city IS NOT NULL AND state IS NOT NULL${where}
     LIMIT ${MAX}
   `).all();
-  console.log(`[geocode] ${rows.length} plants to geocode${FORCE ? ' (FORCE)' : ''}; ~${SLEEP_MS}ms per unique city`);
+  console.log(`[geocode] ${rows.length} plants to geocode${FORCE ? ' (FORCE)' : ''}; ~${SLEEP_MS}ms per network call`);
 
   const update = db.prepare(`
     UPDATE plants SET lat = ?, lon = ?, geocoded_at = datetime('now') WHERE id = ?
   `);
 
-  let ok = 0, miss = 0, err = 0, sourceCounts = { osm: 0, census: 0 };
+  let ok = 0, miss = 0, err = 0, sourceCounts = { osm: 0, 'osm-street': 0, census: 0 };
   for (let i = 0; i < rows.length; i++) {
     const r = rows[i];
-    const cached = cityCache.has(`${r.city.toUpperCase()}|${r.state.toUpperCase()}`);
+    const cityKey = `${r.city.toUpperCase()}|${r.state.toUpperCase()}`;
+    // Street lookups always hit the network; city lookups are cached.
+    const willHitNetwork = !!r.address || !cityCache.has(cityKey);
     try {
-      const hit = await cachedGeocode(r.city, r.state);
+      const hit = await cachedGeocode(r.city, r.state, r.address);
       if (hit) {
         update.run(hit.lat, hit.lon, r.id);
         ok++;
-        if (hit.source) sourceCounts[hit.source]++;
+        if (hit.source) sourceCounts[hit.source] = (sourceCounts[hit.source] || 0) + 1;
       } else {
         miss++;
       }
@@ -97,17 +114,16 @@ async function cachedGeocode(city, state) {
       if (err <= 5) console.error(`  err ${r.plant_code} (${r.city}, ${r.state}): ${e.message}`);
     }
     if ((i + 1) % 100 === 0) {
-      console.log(`  ${i + 1}/${rows.length}  ok=${ok} miss=${miss} err=${err}  cities cached=${cityCache.size}  (osm=${sourceCounts.osm} census=${sourceCounts.census})`);
+      console.log(`  ${i + 1}/${rows.length}  ok=${ok} miss=${miss} err=${err}  cities cached=${cityCache.size}  (street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census})`);
     }
-    // Only throttle on a real network call; cache hits go through immediately.
-    if (!cached) await sleep(SLEEP_MS);
+    if (willHitNetwork) await sleep(SLEEP_MS);
   }
 
   db.prepare(`
     INSERT INTO ingest_runs (source, started_at, finished_at, rows_in, rows_written, notes)
     VALUES ('geocode', ?, ?, ?, ?, ?)
   `).run(runStarted, new Date().toISOString(), rows.length, ok,
-    `miss=${miss} err=${err} cities=${cityCache.size} osm=${sourceCounts.osm} census=${sourceCounts.census}`);
+    `miss=${miss} err=${err} cities=${cityCache.size} street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census}`);
 
   console.log(`[geocode] done. ok=${ok} miss=${miss} err=${err} (${cityCache.size} unique cities; osm=${sourceCounts.osm} census=${sourceCounts.census})`);
 })().catch(e => { console.error(e); process.exit(1); });
