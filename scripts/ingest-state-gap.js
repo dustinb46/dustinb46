@@ -81,12 +81,17 @@ async function main() {
     console.log(`[gap-ingest] loaded ${file.length} rows from ${path.basename(p)}`);
   }
 
-  // Build a lookup of every existing plant by normalized code (from both
-  // plants.plant_code and plant_code_aliases). Same union the recall
-  // harvester uses, so we never duplicate a plant we already have via
-  // IMS, USDA, or DATCP.
+  // Two lookups against existing plants:
+  //   byExact = literal plant_code string match. Catches re-runs against
+  //     non-normalizable codes (PA-LIC-..., KERRY-ALBANY-MN, USDA-39-430)
+  //     and is the only protection against duplicate-insert on re-run.
+  //   byNorm  = normalized FIPS code match (19-0150 == 19-150). Catches
+  //     cross-source merging with IMS bare codes and USDA bare-code aliases.
+  // Exact wins when both are present.
+  const byExact = new Map();
   const byNorm = new Map();
   for (const p of db.prepare(`SELECT id, plant_code FROM plants`).all()) {
+    byExact.set(p.plant_code, p);
     const k = normCode(p.plant_code);
     if (k && !byNorm.has(k)) byNorm.set(k, p);
   }
@@ -94,8 +99,10 @@ async function main() {
     SELECT p.id, p.plant_code, a.code FROM plant_code_aliases a
     JOIN plants p ON p.id = a.plant_id
   `).all()) {
+    const ref = { id: a.id, plant_code: a.plant_code };
+    if (!byExact.has(a.code)) byExact.set(a.code, ref);
     const k = normCode(a.code);
-    if (k && !byNorm.has(k)) byNorm.set(k, { id: a.id, plant_code: a.plant_code });
+    if (k && !byNorm.has(k)) byNorm.set(k, ref);
   }
 
   const insertNew = db.prepare(`
@@ -138,7 +145,9 @@ async function main() {
         .filter(Boolean).join(' / ');
 
       const key = normCode(code);
-      const existing = key ? byNorm.get(key) : null;
+      // Exact match first (re-runs, PA-LIC, custom codes); fall back to
+      // normalized match (IMS/USDA bare codes that share FIPS shape).
+      const existing = byExact.get(code) || (key ? byNorm.get(key) : null);
 
       if (existing) {
         supplement.run({
@@ -162,6 +171,11 @@ async function main() {
         insertAlias.run(newId, code, aliasSystem, aliasNote || null);
         // Add the normalized form too so future ingests dedup correctly.
         if (key && key !== code) insertAlias.run(newId, key, aliasSystem, 'normalized form');
+        // Register the new plant in both lookups so a later row in the same
+        // run that references the same code goes through the supplement path.
+        const ref = { id: newId, plant_code: code };
+        byExact.set(code, ref);
+        if (key) byNorm.set(key, ref);
         inserted++;
       }
     }
