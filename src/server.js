@@ -523,6 +523,7 @@ const ADMIN_SCRIPTS = {
   'geocode':        'scripts/geocode-plants.js',
   'match-brands':   'scripts/match-brands.js',
   'datcp-ingest':   'scripts/ingest-datcp.js',
+  'state-gap-ingest': 'scripts/ingest-state-gap.js',
 };
 
 function requireAdmin(req, res, next) {

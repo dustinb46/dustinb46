@@ -83,6 +83,12 @@ curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/usda-ingest"
 #     mydatcp.wisconsin.gov -> Registries/Lists -> Dairy Plant License Holders.
 curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/datcp-ingest"
 
+# 2c. State-license gap pack (IA + MN + PA candidates curated from each
+#     state's plant licensing data). CSV at data/state-gap/import-candidates.csv;
+#     respects 'Review Status' and dedups against IMS/USDA/DATCP via normalized
+#     code lookup. Replace the CSV with a new revision to ingest more.
+curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/state-gap-ingest"
+
 # 3. Geocode plants for the map (~15 min first run; cached by city after).
 curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/geocode"
 
