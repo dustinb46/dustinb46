@@ -24,8 +24,17 @@ const path = require('path');
 const { parse } = require('csv-parse/sync');
 const { db } = require('../src/db');
 
-const CSV_PATH = process.env.GAP_CSV_PATH
-  || path.join(__dirname, '..', 'data', 'state-gap', 'import-candidates.csv');
+// Default: ingest every *.csv in data/state-gap/. Successive curation
+// rounds (round-1, round-2-states.csv, etc.) can each have their own
+// file for a per-round audit trail; the loader merges them. Override
+// with GAP_CSV_PATH to load a single file.
+const GAP_DIR = path.join(__dirname, '..', 'data', 'state-gap');
+const CSV_PATHS = process.env.GAP_CSV_PATH
+  ? [process.env.GAP_CSV_PATH]
+  : (fs.existsSync(GAP_DIR)
+      ? fs.readdirSync(GAP_DIR).filter(f => f.endsWith('.csv')).sort()
+          .map(f => path.join(GAP_DIR, f))
+      : []);
 
 function normCode(code) {
   // Strip zero-padding from each numeric segment so "19-0150" == "19-150".
@@ -59,13 +68,18 @@ function categoryFromHint(row) {
 }
 
 async function main() {
-  if (!fs.existsSync(CSV_PATH)) {
-    console.error(`[gap-ingest] CSV not found at ${CSV_PATH}`);
+  if (!CSV_PATHS.length) {
+    console.error(`[gap-ingest] no CSV files found in ${GAP_DIR}`);
     process.exit(2);
   }
   const runStarted = new Date().toISOString();
-  const text = fs.readFileSync(CSV_PATH, 'utf8');
-  const rows = parse(text, { columns: true, skip_empty_lines: true, trim: true, bom: true });
+  const rows = [];
+  for (const p of CSV_PATHS) {
+    const text = fs.readFileSync(p, 'utf8');
+    const file = parse(text, { columns: true, skip_empty_lines: true, trim: true, bom: true });
+    rows.push(...file);
+    console.log(`[gap-ingest] loaded ${file.length} rows from ${path.basename(p)}`);
+  }
 
   // Build a lookup of every existing plant by normalized code (from both
   // plants.plant_code and plant_code_aliases). Same union the recall
