@@ -419,6 +419,10 @@ app.get('/timeline', (req, res) => {
      WHERE source = 'openfda' AND finished_at IS NOT NULL
      ORDER BY finished_at DESC LIMIT 1`
   ).get();
+  // News freshness: the most recent news item we've curated + total count.
+  const newsMeta = db.prepare(
+    `SELECT COUNT(*) AS n, MAX(event_date) AS latest FROM news_items`
+  ).get();
 
   res.render('timeline', {
     filters: req.query,
@@ -430,6 +434,7 @@ app.get('/timeline', (req, res) => {
     newsTotal: newsItems.length,   // for the stats strip
     recent: feed,
     lastRecallSync: lastRecallSync ? lastRecallSync.finished_at : null,
+    newsMeta,
   });
 });
 

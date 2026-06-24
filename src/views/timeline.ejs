@@ -13,6 +13,9 @@
   %>
   <br><span class="muted" style="font-size:0.85rem">Recalls last synced from openFDA <strong><%= ago %></strong> (<%= lastRecallSync %> UTC). Auto-syncs daily.</span>
   <% } %>
+  <% if (typeof newsMeta !== 'undefined' && newsMeta && newsMeta.n) { %>
+  <br><span class="muted" style="font-size:0.85rem"><strong><%= newsMeta.n %></strong> curated news item<%= newsMeta.n === 1 ? '' : 's' %><% if (newsMeta.latest) { %>, latest <strong><%= newsMeta.latest %></strong><% } %>. News is hand-curated for now.</span>
+  <% } %>
 </p>
 
 <details class="filter-bar"<%= Object.keys(filters || {}).length ? ' open' : '' %>>

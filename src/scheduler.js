@@ -23,6 +23,13 @@ const JOBS = [
     intervalHours: 24,
     script: 'scripts/sync-recalls.js',
     env: { RECALL_MAX_PAGES: '20' },
+    // After a fresh recall pull, re-harvest plant codes printed in the
+    // recall notices and pin them (match_method='plt_code'). Runs only
+    // when the sync actually fired, so it stays in step with new data.
+    then: {
+      script: 'scripts/harvest-recall-codes.js',
+      env: { APPLY: '1' },
+    },
   },
 ];
 
@@ -67,6 +74,16 @@ async function tickOne(job) {
   try {
     const tail = await runScript(job.script, job.env || {});
     console.log(`[scheduler] ${job.name}: done. ${tail}`);
+    // Chained follow-up (e.g. harvest plant codes after a recall sync).
+    // Only runs if the primary job succeeded, so it tracks fresh data.
+    if (job.then) {
+      try {
+        const tail2 = await runScript(job.then.script, job.then.env || {});
+        console.log(`[scheduler] ${job.name} > ${job.then.script}: done. ${tail2}`);
+      } catch (err2) {
+        console.error(`[scheduler] ${job.name} > ${job.then.script}: FAILED. ${err2.message}`);
+      }
+    }
   } catch (err) {
     console.error(`[scheduler] ${job.name}: FAILED. ${err.message}`);
   }
