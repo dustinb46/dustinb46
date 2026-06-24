@@ -4,6 +4,15 @@
 <h1>Dairy plant news &amp; recalls</h1>
 <p class="lede">
   A running feed of FDA enforcement records for U.S. dairy plants — grouped by recall event, linked to the plant where we can identify it. Plant news from press releases and trade reporting will land here too as we wire those sources in.
+  <% if (typeof lastRecallSync !== 'undefined' && lastRecallSync) {
+       const syncedAt = new Date(lastRecallSync + 'Z');
+       const hours = Math.floor((Date.now() - syncedAt.getTime()) / 3600000);
+       const ago = hours < 1 ? 'just now'
+                 : hours < 24 ? hours + 'h ago'
+                 : Math.floor(hours / 24) + 'd ago';
+  %>
+  <br><span class="muted" style="font-size:0.85rem">Recalls last synced from openFDA <strong><%= ago %></strong> (<%= lastRecallSync %> UTC). Auto-syncs daily.</span>
+  <% } %>
 </p>
 
 <details class="filter-bar"<%= Object.keys(filters || {}).length ? ' open' : '' %>>
@@ -89,6 +98,7 @@
   }
 %>
 
+<div class="feed-layout">
 <% if (!recent.length) { %>
   <section class="feed">
     <p class="empty">Nothing matches these filters. Try clearing them, or widening the date range.</p>
@@ -190,5 +200,6 @@
     </section>
   <% } %>
 </aside>
+</div>
 
 <%- include('_footer') %>

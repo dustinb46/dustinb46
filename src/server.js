@@ -413,6 +413,13 @@ app.get('/timeline', (req, res) => {
     .sort((a, b) => (b.event_date || '').localeCompare(a.event_date || ''))
     .slice(0, 100);
 
+  // Freshness — when did we last successfully pull from openFDA?
+  const lastRecallSync = db.prepare(
+    `SELECT finished_at FROM ingest_runs
+     WHERE source = 'openfda' AND finished_at IS NOT NULL
+     ORDER BY finished_at DESC LIMIT 1`
+  ).get();
+
   res.render('timeline', {
     filters: req.query,
     monthly,
@@ -422,6 +429,7 @@ app.get('/timeline', (req, res) => {
     matched,
     newsTotal: newsItems.length,   // for the stats strip
     recent: feed,
+    lastRecallSync: lastRecallSync ? lastRecallSync.finished_at : null,
   });
 });
 

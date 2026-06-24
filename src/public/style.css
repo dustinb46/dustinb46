@@ -397,12 +397,33 @@ dl.meta dd { margin: 0; }
 .class-ii  { background: var(--butter-soft); color: #7a5d00; }
 .class-iii { background: var(--accent-soft); color: var(--accent); }
 
-/* Aside (by-class and top firms) — below the feed for now;
-   could float right on wide screens. */
+/* Feed layout: 2-col on wide screens (feed | sticky aside), stacked on
+   mobile. Wide enough that aside doesn't squeeze the cards. */
+.feed-layout {
+  display: grid; gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .feed-layout { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Aside sits beside the feed at wide widths, sticks while scrolling. */
 .feed-aside {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem; margin-top: 2.5rem;
-  padding-top: 1.5rem; border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 1.25rem;
+  position: sticky; top: 5rem;
+}
+.feed-aside section {
+  background: var(--bg-elev); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 0.9rem 1rem; box-shadow: var(--shadow);
+}
+@media (max-width: 960px) {
+  .feed-aside {
+    position: static; margin-top: 1.5rem;
+    padding-top: 1.5rem; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .feed-aside section { border: 1px solid var(--line); }
 }
 .feed-aside h3 { font-size: 1rem; margin: 0 0 0.5rem; }
 .class-breakdown, .top-firms { list-style: none; padding: 0; margin: 0; }
