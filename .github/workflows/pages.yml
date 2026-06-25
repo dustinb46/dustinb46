@@ -2,7 +2,9 @@ name: Deploy Brief to Pages
 
 on:
   push:
-    branches: [claude/beautiful-hamilton-fr0j61]
+    branches:
+      - main
+      - claude/beautiful-hamilton-fr0j61
     paths:
       - 'site/**'
       - '.github/workflows/pages.yml'
