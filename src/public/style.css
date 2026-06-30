@@ -350,6 +350,17 @@ dl.meta dd { margin: 0; }
   line-height: 1.5;
 }
 
+.state-grid {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 2rem;
+}
+.state-grid a {
+  padding: 0.35rem 0.7rem; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg-elev); color: var(--fg); font-size: 0.9rem; text-decoration: none;
+}
+.state-grid a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.state-grid a.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.state-grid a.on .muted { color: #e3ecdf; }
+
 .kind-toggle {
   display: inline-flex; gap: 0.25rem; padding: 0.25rem; margin: 0.5rem 0 1.25rem;
   background: var(--bg-elev); border: 1px solid var(--line); border-radius: 999px;

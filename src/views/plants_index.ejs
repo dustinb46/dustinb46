@@ -1,0 +1,39 @@
+<%- include('_header', { title, disclaimer, metaDescription, canonical }) %>
+
+<h1><%= stateParam ? 'Dairy plants in ' + stateParam : 'Browse all dairy plants' %></h1>
+<p class="lede">
+  Every plant in the atlas, grouped by state. Pick a state to see its
+  plants, codes, and locations — or
+  <a href="/search">search by code, operator, or brand</a>.
+</p>
+
+<nav class="state-grid" aria-label="States">
+  <% for (const s of states) { %>
+    <a href="/plants?state=<%= s.state %>" class="<%= s.state === stateParam ? 'on' : '' %>">
+      <%= s.state %> <span class="muted">(<%= s.n %>)</span>
+    </a>
+  <% } %>
+</nav>
+
+<% if (stateParam) { %>
+  <h2><%= plants.length %> plant<%= plants.length === 1 ? '' : 's' %> in <%= stateParam %></h2>
+  <% if (!plants.length) { %>
+    <p class="empty">No plants found for <%= stateParam %>.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Code</th><th>Plant</th><th>City</th><th>Category</th></tr></thead>
+      <tbody>
+        <% for (const p of plants) { %>
+          <tr>
+            <td><a href="/plant/<%= encodeURIComponent(p.plant_code) %>"><code><%= p.plant_code %></code></a></td>
+            <td><a href="/plant/<%= encodeURIComponent(p.plant_code) %>"><%= p.name %></a></td>
+            <td><%= p.city || '' %></td>
+            <td><%= p.category || '' %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  <% } %>
+<% } %>
+
+<%- include('_footer') %>

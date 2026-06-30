@@ -1,5 +1,4 @@
-<% const title = `${plant.plant_code} — ${plant.name}`; %>
-<%- include('_header', { title, disclaimer }) %>
+<%- include('_header', { title, disclaimer, metaDescription, canonical, jsonLd }) %>
 
 <h1><%= plant.name %></h1>
 <p class="code-line">

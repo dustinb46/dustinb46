@@ -5,6 +5,7 @@ const { db } = require('./db');
 const fs = require('fs');
 const { facilityKey } = require('./facility');
 const { heroImagePath, ensureAssetDir } = require('./paths');
+const { SITE_URL, abs } = require('./site');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -95,6 +96,78 @@ function plantsForBrand(brand_id) {
     ORDER BY pb.confidence DESC, p.name
   `).all(brand_id);
 }
+
+// ---------------- SEO: robots, sitemap, crawlable browse ----------------
+
+app.get('/robots.txt', (_req, res) => {
+  res.type('text/plain').send(
+    [
+      'User-agent: *',
+      'Allow: /',
+      'Disallow: /admin',
+      'Disallow: /api/',
+      'Disallow: /hero-image',
+      '',
+      `Sitemap: ${abs('/sitemap.xml')}`,
+      '',
+    ].join('\n')
+  );
+});
+
+// Dynamic sitemap of every indexable page. Cached an hour. We stay well
+// under the 50k-URL single-file limit (plants + brands + a few statics).
+let sitemapCache = null, sitemapTs = 0;
+app.get('/sitemap.xml', (_req, res) => {
+  const now = Date.now();
+  if (!sitemapCache || now - sitemapTs > 3600 * 1000) {
+    const urls = [
+      { loc: abs('/'), pri: '1.0' },
+      { loc: abs('/timeline'), pri: '0.8' },
+      { loc: abs('/about'), pri: '0.5' },
+      { loc: abs('/plants'), pri: '0.6' },
+    ];
+    for (const p of db.prepare(`SELECT plant_code FROM plants ORDER BY plant_code`).all()) {
+      urls.push({ loc: abs('/plant/' + encodeURIComponent(p.plant_code)), pri: '0.7' });
+    }
+    for (const b of db.prepare(`SELECT id FROM brands ORDER BY id`).all()) {
+      urls.push({ loc: abs('/brand/' + b.id), pri: '0.6' });
+    }
+    const body = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+      urls.map(u => `  <url><loc>${u.loc}</loc><priority>${u.pri}</priority></url>`).join('\n') +
+      '\n</urlset>\n';
+    sitemapCache = body;
+    sitemapTs = now;
+  }
+  res.type('application/xml').set('Cache-Control', 'public, max-age=3600').send(sitemapCache);
+});
+
+// Crawlable index of every plant, grouped by state. The home-page map's
+// markers are JS (Googlebot won't follow them) and search is query-gated,
+// so without this page the plant pages are effectively orphaned. Linked
+// from the footer so crawlers can reach every plant via plain <a> hrefs.
+app.get('/plants', (req, res) => {
+  const stateParam = (req.query.state || '').trim().toUpperCase();
+  const states = db.prepare(
+    `SELECT state, COUNT(*) AS n FROM plants WHERE state IS NOT NULL AND state != ''
+     GROUP BY state ORDER BY state`
+  ).all();
+  let plants = [];
+  if (stateParam) {
+    plants = db.prepare(
+      `SELECT plant_code, name, city, state, category FROM plants
+       WHERE UPPER(state) = ? ORDER BY name`
+    ).all(stateParam);
+  }
+  res.render('plants_index', {
+    states, stateParam, plants,
+    canonical: stateParam ? abs('/plants?state=' + stateParam) : abs('/plants'),
+    title: stateParam ? `Dairy plants in ${stateParam}` : 'Browse all dairy plants',
+    metaDescription: stateParam
+      ? `Directory of dairy plants in ${stateParam} — plant codes, operators, and locations.`
+      : 'Browse every U.S. dairy plant in the atlas by state — plant codes, operators, brands, and recall history.',
+  });
+});
 
 // ---------------- routes ----------------
 
@@ -261,13 +334,44 @@ app.get('/plant/:code', (req, res) => {
     ).all(plant.city, plant.state, plant.id);
     related = sameCity.filter(p => facilityKey(p.name, plant.city, plant.state) === myKey);
   }
+  const brands = brandsForPlant(plant.id);
+  const loc = [plant.city, plant.state].filter(Boolean).join(', ');
+  // SEO: title/description carry the code + name + location, the way
+  // people search after reading a package code.
+  const seoTitle = `Plant code ${plant.plant_code} — ${plant.name}${loc ? ', ' + loc : ''}`;
+  const brandList = brands.map(b => b.brand_name).slice(0, 5).join(', ');
+  const metaDescription =
+    `Dairy plant code ${plant.plant_code}: ${plant.name}${loc ? ' in ' + loc : ''}.` +
+    (plant.category ? ` ${plant.category}.` : '') +
+    (brandList ? ` Brands made here: ${brandList}.` : '') +
+    ' See location, operator, and FDA recall history.';
+  // JSON-LD so search engines understand this is a specific facility.
+  const jsonLd = '<script type="application/ld+json">' + JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: plant.name,
+    identifier: plant.plant_code,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: plant.city || undefined,
+      addressRegion: plant.state || undefined,
+      streetAddress: plant.address || undefined,
+      addressCountry: 'US',
+    },
+    parentOrganization: plant.parent_company || undefined,
+    url: abs('/plant/' + encodeURIComponent(plant.plant_code)),
+  }) + '</script>';
   res.render('plant', {
     plant,
     via,
-    brands: brandsForPlant(plant.id),
+    brands,
     recalls: recallsForPlant(plant.id),
     aliases: db.prepare(`SELECT * FROM plant_code_aliases WHERE plant_id = ?`).all(plant.id),
     related,
+    title: seoTitle,
+    metaDescription,
+    canonical: abs('/plant/' + encodeURIComponent(plant.plant_code)),
+    jsonLd,
   });
 });
 
