@@ -16,6 +16,59 @@ app.locals.disclaimer = (
   'Corrections welcome.'
 );
 
+// ---------------- location imagery (Mapbox) ----------------
+// A "plant" here is a physical processing facility, so we show a satellite
+// view of its address. Mapbox's Static Images API needs coordinates, not an
+// address, so we geocode first. Both calls are gated on MAPBOX_TOKEN being
+// set; with no token the plant page simply renders without an image.
+//
+// The token ends up in the <img> src, which is client-visible — that is the
+// intended use of a Mapbox *public* token (pk.*). Restrict it by URL in the
+// Mapbox account dashboard. Don't put a secret token (sk.*) here.
+
+const MAPBOX_TOKEN = process.env.MAPBOX_TOKEN || '';
+const MAPBOX_STYLE = process.env.MAPBOX_STYLE || 'satellite-streets-v12';
+
+// address string -> { lon, lat } | null. Cached in-process so we don't
+// re-geocode the same plant on every page view. Cache resets on restart;
+// storing lat/lng on the plants row is the durable upgrade for later.
+const geocodeCache = new Map();
+
+async function geocodeAddress(address) {
+  if (!MAPBOX_TOKEN || !address) return null;
+  if (geocodeCache.has(address)) return geocodeCache.get(address);
+  let coords = null;
+  try {
+    const url =
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/` +
+      `${encodeURIComponent(address)}.json?limit=1&country=US` +
+      `&access_token=${MAPBOX_TOKEN}`;
+    const r = await fetch(url);
+    if (r.ok) {
+      const data = await r.json();
+      const center = data.features && data.features[0] && data.features[0].center;
+      if (Array.isArray(center) && center.length === 2) {
+        coords = { lon: center[0], lat: center[1] };
+      }
+    }
+  } catch {
+    // Network/parse failure: treat as "no image", cache the null so a flaky
+    // lookup doesn't get retried on every request.
+    coords = null;
+  }
+  geocodeCache.set(address, coords);
+  return coords;
+}
+
+function mapboxStaticUrl({ lon, lat }) {
+  const zoom = 16;
+  const marker = `pin-s+e74c3c(${lon},${lat})`;
+  return (
+    `https://api.mapbox.com/styles/v1/mapbox/${MAPBOX_STYLE}/static/` +
+    `${marker}/${lon},${lat},${zoom}/640x360@2x?access_token=${MAPBOX_TOKEN}`
+  );
+}
+
 // ---------------- helpers ----------------
 
 function ftsQuery(raw) {
@@ -134,16 +187,24 @@ app.get('/search', (req, res) => {
   res.render('search', { q, state, parent, plants, brands, aliasHit });
 });
 
-app.get('/plant/:code', (req, res) => {
+app.get('/plant/:code', async (req, res) => {
   const hit = plantByAnyCode(req.params.code);
   if (!hit) return res.status(404).render('not_found', { kind: 'plant', value: req.params.code });
   const { plant, via } = hit;
+
+  const mapAddress = [plant.address, plant.city, plant.state].filter(Boolean).join(', ');
+  let mapImageUrl = null;
+  const coords = await geocodeAddress(mapAddress);
+  if (coords) mapImageUrl = mapboxStaticUrl(coords);
+
   res.render('plant', {
     plant,
     via,
     brands: brandsForPlant(plant.id),
     recalls: recallsForPlant(plant.id),
     aliases: db.prepare(`SELECT * FROM plant_code_aliases WHERE plant_id = ?`).all(plant.id),
+    mapImageUrl,
+    mapAddress,
   });
 });
 

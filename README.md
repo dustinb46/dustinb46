@@ -139,6 +139,12 @@ The app is deployed from the GitHub repo with these settings:
    - `PLANT_TRACK_DB=/data/plant_track.db`
    - `ADMIN_TOKEN=<long random string>` (e.g.
      `node -e "console.log(require('crypto').randomBytes(24).toString('hex'))"`)
+   - `MAPBOX_TOKEN=<mapbox public token>` (optional) — enables a satellite
+     view of each plant's location on its detail page. Use a **public**
+     token (`pk.*`); it appears in the image URL by design. Restrict it by
+     URL in the Mapbox dashboard. Without this variable the plant page just
+     renders without an image. Override the basemap with `MAPBOX_STYLE`
+     (default `satellite-streets-v12`).
 4. Node is pinned to 20 (`.node-version` / `.nvmrc`) because
    `better-sqlite3` has no prebuilt binary for newer majors on
    Railway's build image.

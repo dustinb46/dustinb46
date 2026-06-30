@@ -23,6 +23,17 @@
   <% if (plant.last_verified) { %><dt>Last verified</dt><dd><%= plant.last_verified %></dd><% } %>
 </dl>
 
+<% if (typeof mapImageUrl !== 'undefined' && mapImageUrl) { %>
+  <figure class="plant-map">
+    <img src="<%= mapImageUrl %>" width="640" height="360" loading="lazy"
+         alt="Satellite view near <%= plant.name %><%= mapAddress ? ' at ' + mapAddress : '' %>">
+    <figcaption class="muted">
+      Approximate location, geocoded from the address — the pin may not sit
+      exactly on the facility. Verify before publishing or citing.
+    </figcaption>
+  </figure>
+<% } %>
+
 <% if (aliases && aliases.length > 1) { %>
   <h2>Code aliases</h2>
   <ul class="aliases">
