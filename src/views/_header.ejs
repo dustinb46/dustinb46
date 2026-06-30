@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><%= typeof title !== 'undefined' ? title + ' · ' : '' %>DairyPlant Atlas</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%A5%9B</text></svg>" />
+  <title><%= typeof title !== 'undefined' ? title + ' · ' : '' %>Dairy Plant Atlas</title>
   <% const _desc = (typeof metaDescription !== 'undefined' && metaDescription)
        ? metaDescription
        : 'Look up any U.S. dairy plant by the code printed on the package. Find the facility, who runs it, the brands it makes, and its FDA recall history.'; %>
@@ -11,9 +12,9 @@
   <% if (typeof canonical !== 'undefined' && canonical) { %>
   <link rel="canonical" href="<%= canonical %>" />
   <% } %>
-  <meta property="og:site_name" content="DairyPlant Atlas" />
+  <meta property="og:site_name" content="Dairy Plant Atlas" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="<%= typeof title !== 'undefined' && title ? title : 'DairyPlant Atlas' %>" />
+  <meta property="og:title" content="<%= typeof title !== 'undefined' && title ? title : 'Dairy Plant Atlas' %>" />
   <meta property="og:description" content="<%= _desc %>" />
   <% if (typeof canonical !== 'undefined' && canonical) { %>
   <meta property="og:url" content="<%= canonical %>" />
@@ -29,14 +30,14 @@
   <header class="site">
     <a class="brand" href="/">
       <span class="brand-mark">🥛</span>
-      <span class="brand-name">DairyPlant <em>Atlas</em></span>
+      <span class="brand-name">Dairy Plant <em>Atlas</em></span>
     </a>
     <span class="beta-pill">Beta</span>
     <nav>
       <a href="/search">Search</a>
       <a href="/timeline">News &amp; recalls</a>
       <a href="/about">About</a>
-      <a class="feedback" href="mailto:brunndairy88@gmail.com?subject=DairyPlant%20Atlas%20feedback">Send feedback</a>
+      <a class="feedback" href="mailto:brunndairy88@gmail.com?subject=Dairy%20Plant%20Atlas%20feedback">Send feedback</a>
     </nav>
   </header>
   <main>

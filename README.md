@@ -1,4 +1,4 @@
-# DairyPlant Atlas
+# Dairy Plant Atlas
 
 An educational lookup for U.S. dairy plants. Take the code printed on a
 carton, tub, or wedge and find the facility that actually made it — plus

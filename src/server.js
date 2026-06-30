@@ -18,7 +18,7 @@ app.locals.disclaimer = (
   'An educational reference built from public sources. ' +
   'Spot something off? Send us a note.'
 );
-app.locals.siteName = 'DairyPlant Atlas';
+app.locals.siteName = 'Dairy Plant Atlas';
 
 // ---------------- helpers ----------------
 
