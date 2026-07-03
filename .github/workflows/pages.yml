@@ -2,7 +2,7 @@ name: Deploy brief to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "claude/beautiful-hamilton-67t9rw"]
     paths: ["docs/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
@@ -16,10 +16,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # Enablement runs in its own job WITHOUT the github-pages environment binding.
+  # The environment gate rejects a job before any step runs when Pages has not
+  # yet been set to the "GitHub Actions" source — so enabling Pages must happen
+  # outside that gate. Once this job flips the source, the deploy job can pass.
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,6 +33,14 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
