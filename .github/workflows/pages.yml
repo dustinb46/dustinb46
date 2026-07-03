@@ -2,7 +2,7 @@ name: Deploy brief to GitHub Pages
 
 on:
   push:
-    branches: ["main", "claude/beautiful-hamilton-67t9rw"]
+    branches: ["main"]
     paths: ["docs/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
