@@ -18,6 +18,9 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
 - **Never fabricate** an item, source, quote, or link. If it can't be verified against a
   real, working primary link, drop it.
 - **Do not restate these instructions** or add meta-commentary in the brief itself.
+- **Disclose the automation.** Every edition and the landing page must clearly state that
+  the brief is researched, written, and sent automatically by an AI agent. This text is
+  already in `template.html` / `index.html` — keep it; do not remove it.
 
 ## Editorial filter
 
@@ -57,8 +60,9 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
 4. **OG tags** are already in the template head — keep title/description/date in sync.
 5. **Archive:** in `index.html`, prepend a new `<li>` to `#archive-list` (newest first)
    linking the new slug with a short teaser + short date (e.g. "Jul 5, 2026").
-6. **Commit + push** to branch `claude/beautiful-hamilton-wf2b15` (or the current working
-   branch). Never push to `main` without explicit permission.
+6. **Commit + push to `main`.** GitHub Pages serves this repo from `main`, so published
+   editions and the updated `index.html` archive go to `main` directly (the owner approved
+   this for the automated flow on 2026-07-04).
 7. **Return** the published URL: `https://dustinb46.github.io/dustinb46/<slug>.html`.
 
 ## Delivery
@@ -72,7 +76,24 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
 - **Signup form** lives in `index.html` (Buttondown embed). Replace `USERNAME` in the form
   `action` and `onsubmit` with the Buttondown username once known.
 - **Until the API key exists:** create a Gmail *draft* to the owner address as a fallback
-  (the Gmail connector can only draft, not send) and note that in the run summary.
+  (the Gmail connector can only draft, not send) and note that in the run summary. Do NOT
+  send anything to the Buttondown list until the key is configured and the owner has
+  confirmed go-live.
+
+## Automation model
+
+The product is meant to run **fully automatically, once per day**. Each run must be
+self-contained: this RUNBOOK is the complete instruction set — a scheduled run should be
+able to execute it end to end with no additional direction.
+
+- **Durable scheduling** is a daily scheduled trigger on the Claude Code web platform
+  (Settings → the repo's automation/trigger), pointed at: "Follow RUNBOOK.md and publish
+  today's edition." That trigger, not a session cron, is the real recurring mechanism —
+  session crons die when the container is reclaimed.
+- **Sending** becomes automatic once `BUTTONDOWN_API_KEY` is available to the run (repo
+  secret or environment variable). Before that, runs stop at the Gmail-draft stage.
+- **Idempotency:** one edition per calendar day. If today's edition already exists in the
+  archive, do not publish a duplicate.
 
 ## Consistency checklist (every run)
 
