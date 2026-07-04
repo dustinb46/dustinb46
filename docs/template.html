@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+  DAIRY INTELLIGENCE BRIEF — edition template (house style).
+  See /RUNBOOK.md before editing. Replace every {{PLACEHOLDER}}.
+  Duplicate the <article class="item"> block per item (6–12 total); renumber 01…N.
+  Keep the design identical run-to-run — only the content changes.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dairy Intelligence Brief — {{DATE_LONG}}</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dairy Intelligence Brief — {{DATE_LONG}}">
+<meta property="og:description" content="{{META_DESCRIPTION}}">
+<meta property="og:site_name" content="Dairy Intelligence Brief">
+<meta property="article:published_time" content="{{DATE_ISO}}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dairy Intelligence Brief — {{DATE_LONG}}">
+<meta name="twitter:description" content="{{META_DESCRIPTION}}">
+
+<style>
+  :root{
+    --ink:#1d2327; --muted:#5d6b73; --line:#e4e7e9; --accent:#1f6f43;
+    --accent-soft:#eef5f0; --bg:#f6f7f5; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:660px; margin:0 auto; padding:24px 18px 56px}
+  .subbar{text-align:right; font-size:12px; margin:0 2px 12px}
+  .subbar a{color:var(--accent); text-decoration:none; font-weight:700}
+  header.masthead{
+    background:var(--card); border:1px solid var(--line); border-top:6px solid var(--accent);
+    border-radius:10px; padding:26px 26px 22px; margin-bottom:20px;
+  }
+  .kicker{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 6px}
+  h1{font-size:30px; line-height:1.15; margin:0 0 10px; letter-spacing:-.01em}
+  .dateline{font-size:14px; color:var(--muted); margin:0 0 14px; font-weight:600}
+  .dek{font-size:15px; color:var(--muted); margin:0; border-top:1px solid var(--line); padding-top:14px}
+  article.item{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 22px; margin:0 0 14px}
+  .num{display:inline-block; font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border-radius:20px; padding:3px 10px; margin-bottom:10px; letter-spacing:.03em}
+  h2{font-size:19px; line-height:1.25; margin:0 0 9px; letter-spacing:-.01em}
+  .body{font-size:15px; margin:0 0 14px; color:#28323a}
+  .why{font-weight:600; color:var(--ink)}
+  a.src{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; border:1px solid var(--line); background:#fbfdfb; border-radius:8px; padding:7px 12px}
+  a.src:hover{background:var(--accent-soft); border-color:#cfe3d6}
+  a.src .arrow{font-weight:700}
+  .cta{background:var(--accent-soft); border:1px solid #cfe3d6; border-radius:10px; padding:20px 22px; margin:4px 0 14px; text-align:center}
+  .cta h3{font-size:17px; margin:0 0 4px}
+  .cta p{font-size:13.5px; color:var(--muted); margin:0 0 14px}
+  .cta a.btn{display:inline-block; padding:11px 22px; background:var(--accent); color:#fff; text-decoration:none; font-weight:700; font-size:14.5px; border-radius:8px}
+  footer{margin-top:20px; padding-top:18px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted); text-align:center; line-height:1.6}
+  footer a{color:var(--muted)}
+  @media (max-width:520px){ h1{font-size:25px} .wrap{padding:16px 12px 44px} header.masthead,article.item,.cta{padding:18px 16px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="subbar"><a href="index.html">Subscribe&nbsp;→</a></p>
+
+  <header class="masthead">
+    <p class="kicker">Dairy Intelligence Brief</p>
+    <h1>The 48-Hour Read for Dairy Operators</h1>
+    <p class="dateline">Daily Edition · {{DATE_LONG}}</p>
+    <p class="dek">{{INTRO}}</p>
+  </header>
+
+  <main>
+
+    <!-- ITEM BLOCK — duplicate per item (6–12) -->
+    <article class="item">
+      <span class="num">01 · {{CATEGORY}}</span>
+      <h2>{{ITEM_HEADLINE}}</h2>
+      <p class="body">{{ITEM_BODY}} <span class="why">Why it matters:</span> {{ITEM_WHY}}</p>
+      <a class="src" href="{{ITEM_URL}}">{{ITEM_SOURCE}} <span class="arrow">→</span></a>
+    </article>
+    <!-- /ITEM BLOCK -->
+
+  </main>
+
+  <div class="cta">
+    <h3>Forwarded this?</h3>
+    <p>Get the brief in your own inbox — free, one edition a day.</p>
+    <a class="btn" href="index.html">Subscribe</a>
+  </div>
+
+  <footer>
+    <b>This is an automated newsletter</b> — researched, written and sent by an AI agent, with every item linked to a primary source you can verify yourself. Compiled from primary sources and trade press over roughly the last 24–48 hours. Independent; not affiliated with any cooperative, processor or government agency.
+    <br><br>
+    <!-- Buttondown replaces {{ unsubscribe_url }} automatically in emailed copies; inert on the web page. -->
+    You're receiving this because you subscribed. <a href="{{ unsubscribe_url }}">Unsubscribe</a>.
+  </footer>
+
+</div>
+</body>
+</html>

@@ -46,24 +46,41 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
 - Tech/AI/science/biotech news **only** where it plausibly applies to dairy production,
   processing, animal health, genetics, supply chain, or policy.
 
+## Repo layout
+
+- `docs/` is the **published site root** (GitHub Pages serves this folder).
+  - `docs/index.html` — landing page: signup form + "Recent editions" archive.
+  - `docs/template.html` — the edition template (house style). Single source of truth for look.
+  - `docs/brief-<hex>.html` — one file per edition.
+- `.github/workflows/pages.yml` — deploys `docs/` to Pages on every push to `main`.
+- `/RUNBOOK.md`, `/README.md` — repo root, not served.
+
 ## Build steps
 
-1. **Slug:** `brief-<16 hex chars>.html` at the repo root. Random, never the date, so the
-   URL is unlisted. Generate with `openssl rand -hex 8`.
-2. **Template:** copy `template.html`, replace every `{{PLACEHOLDER}}`, and duplicate the
-   item block per item. Keep the design byte-for-byte identical run-to-run — only content
-   changes. `template.html` is the single source of truth for look and feel.
+1. **Slug:** `docs/brief-<16 hex chars>.html`. Random, never the date, so the URL is
+   unlisted. Generate with `openssl rand -hex 8`.
+2. **Template:** copy `docs/template.html`, replace every `{{PLACEHOLDER}}`, and duplicate
+   the `<article class="item">` block per item. Keep the design byte-for-byte identical
+   run-to-run — only content changes. `docs/template.html` is the single source of truth.
 3. **Fill placeholders:** `{{DATE_LONG}}` (e.g. "Sunday, July 5, 2026"), `{{DATE_ISO}}`
-   (YYYY-MM-DD), `{{HEADLINE_STANDFIRST}}`, `{{INTRO}}`, `{{META_DESCRIPTION}}`, and per item
-   `{{CATEGORY}}` `{{ITEM_HEADLINE}}` `{{ITEM_BODY}}` `{{ITEM_URL}}` `{{ITEM_SOURCE}}`
-   `{{ITEM_DATE}}`. Renumber items 01…N.
+   (YYYY-MM-DD), `{{INTRO}}`, `{{META_DESCRIPTION}}`, and per item `{{CATEGORY}}`
+   `{{ITEM_HEADLINE}}` `{{ITEM_BODY}}` `{{ITEM_WHY}}` (the one-line "why it matters")
+   `{{ITEM_URL}}` `{{ITEM_SOURCE}}`. Renumber the `01 · Category` pills 01…N.
 4. **OG tags** are already in the template head — keep title/description/date in sync.
-5. **Archive:** in `index.html`, prepend a new `<li>` to `#archive-list` (newest first)
+5. **Archive:** in `docs/index.html`, prepend a new `<li>` to `#archive-list` (newest first)
    linking the new slug with a short teaser + short date (e.g. "Jul 5, 2026").
-6. **Commit + push to `main`.** GitHub Pages serves this repo from `main`, so published
-   editions and the updated `index.html` archive go to `main` directly (the owner approved
-   this for the automated flow on 2026-07-04).
+6. **Commit + push to `main`.** The Pages workflow then deploys `docs/` automatically.
+   (The owner approved publishing to `main` for the automated flow on 2026-07-04.)
 7. **Return** the published URL: `https://dustinb46.github.io/dustinb46/<slug>.html`.
+
+## GitHub Pages (one-time setup, then hands-off)
+
+Pages is deployed by `.github/workflows/pages.yml` using the **GitHub Actions** source.
+This requires a one-time manual enable that the workflow itself cannot do:
+**repo Settings → Pages → Build and deployment → Source = "GitHub Actions".**
+Until that is set, every deploy run fails (as they did June 30–July 3). After it is set,
+pushes to `main` that touch `docs/**` publish automatically; re-run the latest failed run
+to publish immediately.
 
 ## Delivery
 
@@ -71,10 +88,10 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
   `POST https://api.buttondown.email/v1/emails` with header
   `Authorization: Token <API_KEY>`, body `{ "subject": "...", "body": "<html>" }`.
   Use the inline-styled HTML (Gmail/most clients strip `<head><style>`, so inline the
-  styles from `template.html` onto elements for the email copy). Buttondown fills
+  styles from `docs/template.html` onto elements for the email copy). Buttondown fills
   `{{ unsubscribe_url }}` automatically.
-- **Signup form** lives in `index.html` (Buttondown embed). Replace `USERNAME` in the form
-  `action` and `onsubmit` with the Buttondown username once known.
+- **Signup form** lives in `docs/index.html` (Buttondown embed). Replace `USERNAME` (two
+  places: the form `action` and the `onsubmit`) with the Buttondown username once known.
 - **Until the API key exists:** create a Gmail *draft* to the owner address as a fallback
   (the Gmail connector can only draft, not send) and note that in the run summary. Do NOT
   send anything to the Buttondown list until the key is configured and the owner has
@@ -99,7 +116,8 @@ able to execute it end to end with no additional direction.
 
 - [ ] 6–12 items, each with a one-line "why it matters" and a working primary link
 - [ ] No personal/identifying info anywhere
-- [ ] Design identical to `template.html`
-- [ ] Dedup checked against `index.html` archive
+- [ ] Design identical to `docs/template.html`
+- [ ] Dedup checked against `docs/index.html` archive
+- [ ] Automation-disclosure text present in the edition and landing footer
 - [ ] OG tags + dates correct
 - [ ] Archive updated, page pushed, URL returned
