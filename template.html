@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+  DAIRY INTELLIGENCE BRIEF — edition template
+  See RUNBOOK.md before editing. Replace every {{PLACEHOLDER}}.
+  Item blocks: duplicate the <div class="item"> ... </div> block per item (6–12 total).
+  Keep the design identical run-to-run; only the content between markers changes.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dairy Intelligence Brief — {{DATE_LONG}}</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dairy Intelligence Brief — {{DATE_LONG}}">
+<meta property="og:description" content="{{META_DESCRIPTION}}">
+<meta property="article:published_time" content="{{DATE_ISO}}">
+<meta name="date" content="{{DATE_ISO}}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dairy Intelligence Brief — {{DATE_LONG}}">
+<meta name="twitter:description" content="{{META_DESCRIPTION}}">
+<style>
+  :root{
+    --ink:#1f2933; --body:#3e4c59; --muted:#7b8794; --line:#e4e9ee;
+    --green:#14342b; --accent:#0b6e4f; --tagbg:#e3f3ec; --tagink:#0b6e4f;
+    --page:#eef1f4; --card:#ffffff; --sand:#f7f9fa;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:var(--page);color:var(--ink);
+    font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;background:var(--card);}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 32px;
+    background:var(--sand);border-bottom:1px solid var(--line);font-size:12px;}
+  .topbar .brand{letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .topbar a{color:var(--accent);text-decoration:none;font-weight:600;}
+  .masthead{background:var(--green);color:#fff;padding:30px 32px 24px;}
+  .kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9fd2b8;margin:0 0 8px;}
+  .masthead h1{font-family:Georgia,'Times New Roman',serif;font-size:29px;line-height:1.15;margin:0 0 10px;font-weight:700;}
+  .edition{font-size:13px;color:#c8d8cf;margin:0;}
+  .standfirst{padding:20px 32px 4px;font-size:15px;line-height:1.55;color:var(--body);border-bottom:1px solid var(--line);}
+  .standfirst p{margin:0 0 16px;}
+  .items{padding:8px 32px;}
+  .item{padding:22px 0;border-bottom:1px solid var(--line);}
+  .item:last-child{border-bottom:none;}
+  .tag{display:inline-block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--tagink);
+    background:var(--tagbg);padding:3px 9px;border-radius:3px;margin:0 0 10px;font-weight:600;}
+  .item h2{font-family:Georgia,serif;font-size:20px;line-height:1.3;margin:0 0 8px;color:var(--green);font-weight:700;}
+  .num{color:#9aa5b1;font-family:Georgia,serif;margin-right:8px;}
+  .item p{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--body);}
+  .src{font-size:13px;}
+  .src a{color:var(--accent);text-decoration:none;font-weight:600;border-bottom:1px solid #b9ddca;}
+  .src .pub{color:var(--muted);font-weight:400;}
+  .cta{margin:8px 32px 28px;padding:24px;background:var(--sand);border:1px solid var(--line);border-radius:10px;text-align:center;}
+  .cta h3{font-family:Georgia,serif;font-size:19px;color:var(--green);margin:0 0 6px;}
+  .cta p{font-size:14px;color:var(--muted);margin:0 0 16px;}
+  .cta a.btn{display:inline-block;padding:12px 24px;background:var(--accent);color:#fff;text-decoration:none;
+    font-weight:600;font-size:15px;border-radius:8px;}
+  .footer{padding:24px 32px 32px;font-size:12px;line-height:1.6;color:var(--muted);background:var(--sand);border-top:1px solid var(--line);}
+  .footer a{color:var(--muted);}
+  @media (max-width:520px){
+    .topbar,.masthead,.standfirst,.items,.footer{padding-left:22px;padding-right:22px;}
+    .masthead h1{font-size:25px;} .cta{margin-left:22px;margin-right:22px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span class="brand">Dairy Intelligence Brief</span>
+    <a href="index.html">Subscribe&nbsp;→</a>
+  </div>
+
+  <div class="masthead">
+    <p class="kicker">Dairy Intelligence Brief</p>
+    <h1>{{HEADLINE_STANDFIRST}}</h1>
+    <p class="edition">{{DATE_LONG}} &nbsp;·&nbsp; Daily Edition</p>
+  </div>
+
+  <div class="standfirst">
+    <p>{{INTRO}}</p>
+  </div>
+
+  <div class="items">
+
+    <!-- ITEM BLOCK — duplicate per item (6–12) -->
+    <div class="item">
+      <span class="tag">{{CATEGORY}}</span>
+      <h2><span class="num">01</span>{{ITEM_HEADLINE}}</h2>
+      <p>{{ITEM_BODY}}</p>
+      <p class="src"><a href="{{ITEM_URL}}">{{ITEM_SOURCE}}</a> <span class="pub">· {{ITEM_DATE}}</span></p>
+    </div>
+    <!-- /ITEM BLOCK -->
+
+  </div>
+
+  <div class="cta">
+    <h3>Forwarded this?</h3>
+    <p>Get the brief in your own inbox — free, one edition a day.</p>
+    <a class="btn" href="index.html">Subscribe</a>
+  </div>
+
+  <div class="footer">
+    <b>This is an automated newsletter</b> — researched, written and sent by an AI agent, with every item linked to a primary source you can verify yourself. Compiled from trade press, cooperative and processor releases, government and university sources, and peer-reviewed research over the trailing 24–48 hours, and selected for operational relevance. An independent industry digest — not affiliated with any cooperative, processor or government agency.
+    <br><br>
+    <!-- Buttondown replaces {{ unsubscribe_url }} automatically in emailed copies. Leave as-is for the email; on the web page this line is inert. -->
+    You're receiving this because you subscribed. <a href="{{ unsubscribe_url }}">Unsubscribe</a>.
+  </div>
+
+</div>
+</body>
+</html>
