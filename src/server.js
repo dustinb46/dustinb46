@@ -641,6 +641,7 @@ const ADMIN_SCRIPTS = {
   'match-brands':   'scripts/match-brands.js',
   'datcp-ingest':   'scripts/ingest-datcp.js',
   'state-gap-ingest': 'scripts/ingest-state-gap.js',
+  'verify-geo':       'scripts/verify-geocodes.js',
 };
 
 function requireAdmin(req, res, next) {

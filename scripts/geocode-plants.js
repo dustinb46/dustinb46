@@ -14,6 +14,7 @@
 // roughly 800-1000 unique city lookups.
 
 const { db } = require('../src/db');
+const { isOutsideState } = require('../src/us-state-bounds');
 
 const SLEEP_MS = parseInt(process.env.GEOCODE_SLEEP_MS || '1100', 10);  // Nominatim wants >=1s
 const MAX = parseInt(process.env.GEOCODE_MAX || '5000', 10);
@@ -94,7 +95,7 @@ async function cachedGeocode(city, state, address) {
     UPDATE plants SET lat = ?, lon = ?, geocoded_at = datetime('now') WHERE id = ?
   `);
 
-  let ok = 0, miss = 0, err = 0, sourceCounts = { osm: 0, 'osm-street': 0, census: 0 };
+  let ok = 0, miss = 0, err = 0, rejected = 0, sourceCounts = { osm: 0, 'osm-street': 0, census: 0 };
   for (let i = 0; i < rows.length; i++) {
     const r = rows[i];
     const cityKey = `${r.city.toUpperCase()}|${r.state.toUpperCase()}`;
@@ -102,7 +103,12 @@ async function cachedGeocode(city, state, address) {
     const willHitNetwork = !!r.address || !cityCache.has(cityKey);
     try {
       const hit = await cachedGeocode(r.city, r.state, r.address);
-      if (hit) {
+      if (hit && isOutsideState(hit.lat, hit.lon, r.state)) {
+        // Nominatim matched a same-named town in the wrong state. Reject
+        // rather than plant a phantom pin.
+        rejected++;
+        if (rejected <= 5) console.error(`  rejected out-of-state ${r.plant_code} (${r.city}, ${r.state}): ${hit.lat.toFixed(2)},${hit.lon.toFixed(2)}`);
+      } else if (hit) {
         update.run(hit.lat, hit.lon, r.id);
         ok++;
         if (hit.source) sourceCounts[hit.source] = (sourceCounts[hit.source] || 0) + 1;
@@ -114,7 +120,7 @@ async function cachedGeocode(city, state, address) {
       if (err <= 5) console.error(`  err ${r.plant_code} (${r.city}, ${r.state}): ${e.message}`);
     }
     if ((i + 1) % 100 === 0) {
-      console.log(`  ${i + 1}/${rows.length}  ok=${ok} miss=${miss} err=${err}  cities cached=${cityCache.size}  (street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census})`);
+      console.log(`  ${i + 1}/${rows.length}  ok=${ok} miss=${miss} rejected=${rejected} err=${err}  cities cached=${cityCache.size}  (street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census})`);
     }
     if (willHitNetwork) await sleep(SLEEP_MS);
   }
@@ -125,6 +131,6 @@ async function cachedGeocode(city, state, address) {
   `).run(runStarted, new Date().toISOString(), rows.length, ok,
     `miss=${miss} err=${err} cities=${cityCache.size} street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census}`);
 
-  console.log(`[geocode] done. ok=${ok} miss=${miss} err=${err} (${cityCache.size} unique cities; osm=${sourceCounts.osm} census=${sourceCounts.census})`);
+  console.log(`[geocode] done. ok=${ok} miss=${miss} rejected=${rejected} err=${err} (${cityCache.size} unique cities; osm=${sourceCounts.osm} census=${sourceCounts.census})`);
 })().catch(e => { console.error(e); process.exit(1); });
 
