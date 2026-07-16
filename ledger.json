@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-07-16",
+    "headline": "June Class III milk settles at $15.98; July Class I steps down to $21.33",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "milk price"
+  },
+  {
+    "date": "2026-07-16",
+    "headline": "U.S. dairy exports set a May value record ($931.9M); cheese exports +18%",
+    "url": "https://cheesereporter.com/news/global-trade-tariffs/2026/07/08/us-dairy-exports-set-new-monthly-record-in-may-cheese-exports-jumped-18/",
+    "topic": "trade/exports"
+  },
+  {
+    "date": "2026-07-16",
+    "headline": "Cold storage reads bearish butter, bullish cheese; CME butter near multi-month lows",
+    "url": "https://www.dairyherd.com/markets/milk-prices/cold-storage-report-bearish-butter-bullish-cheese",
+    "topic": "inventories/butter"
+  },
+  {
+    "date": "2026-07-16",
+    "headline": "Record cull-cow and beef-on-dairy calf values mask a replacement-heifer squeeze",
+    "url": "https://www.dairyherd.com/news/replacement-cow-prices-hit-records-heifer-and-beef-dairy-calf-values-stay-strong",
+    "topic": "herd economics"
+  },
+  {
+    "date": "2026-07-16",
+    "headline": "2026 drought threatens Northern Plains new-crop corn silage; nitrate/mycotoxin risk",
+    "url": "https://cropsandsoils.extension.wisc.edu/articles/drought-stress-reduces-corn-silage-yield-more-than-quality/",
+    "topic": "feed/inputs"
+  },
+  {
+    "date": "2026-07-16",
+    "headline": "Research: H5N1 mammary tropism explains silent dairy spread; silo testing catches it early",
+    "url": "https://phys.org/news/2026-06-h5n1-bird-flu-hid-unrecognized.html",
+    "topic": "animal health"
+  }
+]
