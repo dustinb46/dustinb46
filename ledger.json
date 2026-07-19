@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2026-07-19",
+    "headline": "USDA July WASDE cuts 2026 all-milk price to $20.00 as production forecast rises to 236.6B lb",
+    "url": "https://www.ers.usda.gov/topics/animal-products/dairy/market-outlook",
+    "topic": "milk price outlook"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "European Council approves tariff-free quota opening EU market to US cheese (~10,000 mt) and dairy",
+    "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/06/25/eu-us-trade-council-gives-final-approval-for-the-tariff-commitments-under-joint-statement/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "US dairy exports set a record May by value; cheese up 18% YoY to 135.1M lb",
+    "url": "https://blog.usdec.org/usdairyexporter/us-dairy-exports-lagged-in-may-as-global-headwinds-persist-0",
+    "topic": "trade exports"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "H5N1 resurges in dairy cattle; Idaho confirms ~40 infected herds in 30 days ending June 29",
+    "url": "https://www.agdaily.com/livestock/idaho-leads-nation-new-dairy-bird-flu-cases-h5n1-resurges/",
+    "topic": "animal health h5n1"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "Summer heat cuts Central-region milk output and components (DMN week of July 13-17)",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "production weather"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "July 2026 advanced Class I base skim milk price set at $15.91/cwt, down 84 cents from June",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk price class I"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "JDS July interpretive summaries: MALDI-TOF as low-cost tool for Staph mastitis strain typing",
+    "url": "https://www.journalofdairyscience.org/article/S0022-0302(26)02950-4/fulltext",
+    "topic": "research mastitis"
+  }
+]
