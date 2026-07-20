@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-07-20",
+    "headline": "Ransomware halts Fairlife's U.S. production — a $4B milk buyer goes dark",
+    "url": "https://techcrunch.com/2026/07/16/coca-cola-suspended-production-at-its-fairlife-dairy-after-a-ransomware-attack/",
+    "topic": "processing-cybersecurity"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Cheese rips higher as heat squeezes milk; butter goes the other way",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "cme-weekly-markets"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "USDA's July outlook: more milk, 70¢ off the 2026 all-milk price",
+    "url": "https://www.agproud.com/articles/63817-usda-milk-production-forecasts-edge-slightly-higher",
+    "topic": "wasde-price-outlook"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Screwworm count keeps climbing: 39 U.S. infestations by mid-July",
+    "url": "https://www.tpr.org/public-health/2026-07-03/31-confirmed-new-world-screwworm-infestations-texas-tracker-and-what-you-need-to-know",
+    "topic": "screwworm"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Corn holds 68% good-to-excellent — feed markets stay heavy",
+    "url": "https://www.dtnpf.com/agriculture/web/ag/news/article/2026/07/13/usda-crop-progress-corn-rated-68-65",
+    "topic": "feed-crop-conditions"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Three weeks left: SDRP disaster applications close August 12",
+    "url": "https://www.usda.gov/about-usda/news/press-releases/2026/04/24/usda-issues-second-supplemental-disaster-payment-farmers-extends-program-application-deadline-august",
+    "topic": "sdrp-disaster-aid"
+  }
+]
