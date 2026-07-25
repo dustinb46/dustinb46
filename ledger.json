@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-07-25",
+    "headline": "US hits Canadian dairy inputs with a first-ever Section 338 tariff — 50%, effective Aug 19",
+    "url": "https://www.federalregister.gov/d/2026-14992",
+    "topic": "trade-tariff"
+  },
+  {
+    "date": "2026-07-25",
+    "headline": "June US milk output jumped 2.4% as the herd keeps growing",
+    "url": "https://usda.library.cornell.edu/concern/publications/h989r321c",
+    "topic": "milk-supply"
+  },
+  {
+    "date": "2026-07-25",
+    "headline": "August Class I base price drops $2.57 — the year's first big cut",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-07-25",
+    "headline": "Prairie Farms to shut a Wisconsin creamery and cheese plant, cutting 97 jobs",
+    "url": "https://dwd.wisconsin.gov/dislocatedworker/warn/2026/2026072001.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-07-25",
+    "headline": "H5N1 dairy-herd count passes 1,160, with Idaho far out front",
+    "url": "https://www.aphis.usda.gov/livestock-poultry-disease/avian/avian-influenza/hpai-detections/hpai-dairy-cattle",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-07-25",
+    "headline": "Global Dairy Trade index edges up 1.5%, led by powders",
+    "url": "https://www.globaldairytrade.info/en/product-results/",
+    "topic": "trade-markets"
+  }
+]
