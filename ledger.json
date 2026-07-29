@@ -1,0 +1,19 @@
+[
+  { "date": "2026-06-30", "headline": "House moves to crack open H-2A for dairy — Securing Agriculture's Workforce Act", "url": "https://www.agri-pulse.com/articles/24899-farm-groups-hope-fresh-attempt-to-revamp-ag-labor-law-sticks", "topic": "labor" },
+  { "date": "2026-06-30", "headline": "May DMC margin lands at $10.62 — no payout", "url": "https://www.fsa.usda.gov/resources/programs/dairy-margin-coverage-program-dmc/prices-updates", "topic": "dmc-margin" },
+  { "date": "2026-06-30", "headline": "Nonfat powder posts biggest one-day jump in a decade; Class IV rips higher", "url": "https://insights.ever.ag/category/milk-market-minute/", "topic": "class-iv-powder" },
+  { "date": "2026-06-30", "headline": "USDA finalizes carbon-scoring rule for biofuel feedstocks", "url": "https://www.federalregister.gov/documents/2026/06/29/2026-13092/technical-guidelines-for-the-production-of-regenerative-agricultural-biofuel-feedstocks", "topic": "feed-policy" },
+  { "date": "2026-06-30", "headline": "Protein craze becomes a milk-routing problem", "url": "https://www.cnbc.com/2026/06/28/america-cant-get-enough-protein-the-dairy-industry-cant-keep-up.html", "topic": "protein-components" },
+  { "date": "2026-06-30", "headline": "MN Ag Water Quality-certified farms out-earn peers for 7th year", "url": "https://www.mda.state.mn.us/minnesota-farmers-see-seven-straight-years-higher-profits", "topic": "nutrient-environment" },
+  { "date": "2026-06-30", "headline": "Compostable bale net wrap that breaks down in the rumen", "url": "https://www.farmprogress.com/livestock/a-new-hay-net-wrap-that-disappears", "topic": "herd-health" },
+  { "date": "2026-06-30", "headline": "Vermont becomes first state to ban paraquat", "url": "https://vtdigger.org/2026/05/28/vermont-enacts-the-countrys-first-ban-on-herbicide-linked-with-parkinsons-disease/", "topic": "herbicide-regulation" },
+
+  { "date": "2026-07-29", "headline": "August Class I base price falls $2.57 to $18.76", "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf", "topic": "class-i-price" },
+  { "date": "2026-07-29", "headline": "June US milk production up 2.4% as herd expands", "url": "https://cheesereporter.com/news/production-supply-chain/2026/07/23/us-milk-production-rose-2-4-in-june-output-fell-in-only-2-of-24-reporting-states/", "topic": "milk-production" },
+  { "date": "2026-07-29", "headline": "Corn good-to-excellent rating drops 4 points to 63% on heat", "url": "https://esmis.nal.usda.gov/sites/default/release-files/795977/prog2826.pdf", "topic": "feed-corn" },
+  { "date": "2026-07-29", "headline": "US imposes first-ever 50% Section 338 tariff on Canadian dairy", "url": "https://www.whitecase.com/insight-alert/trump-administration-imposes-50-tariffs-certain-canadian-products-first-use-section", "topic": "trade-canada" },
+  { "date": "2026-07-29", "headline": "USDA announces phased reopening of southern cattle ports Aug 24", "url": "https://www.usda.gov/about-usda/news/press-releases/2026/07/24/usda-announces-phased-reopening-southern-ports-livestock-trade", "topic": "screwworm-cattle-trade" },
+  { "date": "2026-07-29", "headline": "fairlife halts then resumes US production after ransomware attack", "url": "https://www.cbsnews.com/news/coca-cola-fairlife-milk-production-ransomware-attack/", "topic": "processing-cyber" },
+  { "date": "2026-07-29", "headline": "Westby Cooperative Creamery invests $15.5M in cottage cheese expansion", "url": "https://www.q106.com/2026/07/27/rural-investment-fuels-growth-at-wisconsins-only-cottage-cheese-producer/", "topic": "processing-protein" },
+  { "date": "2026-07-29", "headline": "New Zealand confirmed world's largest single-country dairy exporter — Rabobank 2026 map", "url": "https://www.rabobank.co.nz/media-releases/2026/20072026-new-zealand-retains-spot-as-worlds-largest-single-country-dairy-exporter-rabobank-world-dairy-map-2026", "topic": "global-trade-map" }
+]
