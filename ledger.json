@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-08-01",
+    "headline": "U.S. exports set up as the release valve for record milkfat and protein",
+    "url": "https://www.fas.usda.gov/sites/default/files/2026-07/dairy.pdf",
+    "topic": "trade/exports"
+  },
+  {
+    "date": "2026-08-01",
+    "headline": "U.S. and Mexican dairy leaders close ranks as the USMCA review advances",
+    "url": "https://www.nmpf.org/u-s-mexican-dairy-leaders-deepen-partnership-as-usmca-talks-continue/",
+    "topic": "trade/USMCA"
+  },
+  {
+    "date": "2026-08-01",
+    "headline": "Idaho is now the epicenter of H5N1 in dairy cattle",
+    "url": "https://www.cidrap.umn.edu/avian-influenza-bird-flu/h5n1-avian-flu-surges-idahos-dairy-cattle",
+    "topic": "animal health/H5N1"
+  },
+  {
+    "date": "2026-08-01",
+    "headline": "Class IV components firm as cheese softens at the CME (week ending July 31)",
+    "url": "https://www.brownfieldagnews.com/market-news/cheese-blocks-slip-friday-despite-strength-in-butter-and-dry-whey/",
+    "topic": "milk price/CME spot"
+  },
+  {
+    "date": "2026-08-01",
+    "headline": "August Class I base price drops the most in a year to $18.76/cwt",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk price/Class I"
+  },
+  {
+    "date": "2026-08-01",
+    "headline": "Alfalfa growers underwater — a quiet risk to forage supply",
+    "url": "https://www.fb.org/market-intel/alfalfa-in-the-red-rising-costs-falling-returns",
+    "topic": "inputs/forage"
+  }
+]
