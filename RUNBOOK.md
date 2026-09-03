@@ -54,6 +54,13 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
   - `docs/brief-<hex>.html` — one file per edition.
 - `.github/workflows/pages.yml` — deploys `docs/` to Pages on every push to `main`.
 - `/RUNBOOK.md`, `/README.md` — repo root, not served.
+- `/ledger.json` — the dedup ledger: every item ever sent, as
+  `{ "date", "headline", "url", "topic" }`. Read it at the start of every run and use the
+  last 30 days as the exclusion set; append the run's kept items at the end.
+  **Caveat:** each scheduled run gets a fresh working branch, so a ledger written on a
+  previous run's branch is invisible to the next one. The ledger only persists if it is
+  merged to `main`. If `ledger.json` is missing at the start of a run, reconstruct it from
+  the Gmail drafts of prior editions before treating the exclusion set as empty.
 
 ## Build steps
 
