@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "Canada's counter-tariffs hit dairy on September 8 — powder and whey at 50%, cheese at 25%",
+    "url": "https://www.canada.ca/en/department-finance/news/2026/08/list-of-products-from-the-united-states-subject-to-counter-tariffs-effective-september-8-2026.html",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "August closes with Class III up $1.12 and Class IV down 98 cents — spread collapses to 72 cents",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "Blocks trading nearly 6 cents under barrels; butter slips into the $1.40s",
+    "url": "https://www.brownfieldagnews.com/market-news/butter-rebounds-while-cheese-holds-steady-in-wednesday-cme-dairy-trade/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "Screwworm treatment cleared for lactating cows carries a 19.5-day milk discard",
+    "url": "https://www.fda.gov/animal-veterinary/cvm-updates/fda-issues-emergency-use-authorization-over-counter-injectable-drug-new-world-screwworm-dairy-cattle",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "Chobani's $1.2 billion Allentown campus will pull three billion pounds of Pennsylvania milk",
+    "url": "https://www.prnewswire.com/news-releases/chobani-begins-its-next-chapter-of-growth-with-approximately-1-2-billion-investment-in-allentown-pennsylvania-302865637.html",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "New Zealand posts a record July — milk solids up 7.9% to 30.3 million kilograms",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "2027 dairy import-quota terms set: $325 license fee and volume shifted to the lottery category",
+    "url": "https://www.federalregister.gov/documents/2026/09/02/2026-17952/adjustment-of-appendices-under-the-dairy-tariff-rate-quota-import-licensing-regulation",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "USDA unveils a Data Modernization Plan for the surveys milk price formulas run on",
+    "url": "https://www.brownfieldagnews.com/news/rollins-unveils-usdas-data-modernization-plan-at-fps/",
+    "topic": "policy"
   }
 ]
