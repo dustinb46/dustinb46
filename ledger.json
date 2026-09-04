@@ -340,5 +340,101 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "Canada's counter-tariffs hit dairy on September 8 — and powder is hit twice as hard as cheese",
+    "url": "https://www.canada.ca/en/department-finance/news/2026/08/list-of-products-from-the-united-states-subject-to-counter-tariffs-effective-september-8-2026.html",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "August closes with Class III up $1.12 and Class IV down 98 cents — the spread collapses to 72 cents",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "Blocks are trading nearly 6 cents under barrels — and butter has slipped into the $1.40s",
+    "url": "https://www.brownfieldagnews.com/market-news/butter-rebounds-while-cheese-holds-steady-in-wednesday-cme-dairy-trade/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "The screwworm treatment cleared for lactating cows carries a 19.5-day milk discard",
+    "url": "https://www.fda.gov/animal-veterinary/cvm-updates/fda-issues-emergency-use-authorization-over-counter-injectable-drug-new-world-screwworm-dairy-cattle",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "A $1.2 billion yogurt-and-protein campus will pull three billion pounds of milk in one state",
+    "url": "https://www.prnewswire.com/news-releases/chobani-begins-its-next-chapter-of-growth-with-approximately-1-2-billion-investment-in-allentown-pennsylvania-302865637.html",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "New Zealand just posted a record July — solids up 7.9% into the season's build",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "The 2027 dairy import-quota year is being set now, and some licenses are moving to the lottery",
+    "url": "https://www.federalregister.gov/documents/2026/09/02/2026-17952/adjustment-of-appendices-under-the-dairy-tariff-rate-quota-import-licensing-regulation",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-03",
+    "headline": "USDA is rebuilding how it collects farm data — the same data your milk price formulas run on",
+    "url": "https://www.brownfieldagnews.com/news/rollins-unveils-usdas-data-modernization-plan-at-fps/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "The powder price your Class IV check runs on is about 20 cents behind the market",
+    "url": "https://www.ams.usda.gov/mnreports/dywdairyproductssales.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "Butter runs the same gap in reverse — and July output fell 9% in a single month",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "Driers walked away from the export powder spec — skim milk powder output halved",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/dary0926.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "American-type cheese is the only major category still running below last year",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/dary0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "Whey stocks are up 37% on the year — the one clearly bearish line in the report",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/dary0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "Fluid milk sales rose 3.3% — and whole milk did all of the lifting",
+    "url": "https://www.ams.usda.gov/mnreports/ams_3358.pdf",
+    "topic": "demand"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "Four more Texas counties came out from under screwworm movement rules on September 3",
+    "url": "https://www.tahc.texas.gov/emergency/nws.html",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-04",
+    "headline": "The import volumes that trigger extra duties on butter and cheese were reset this week",
+    "url": "https://www.federalregister.gov/documents/2026/09/02/2026-17953/wto-agricultural-quantity-based-safeguard-trigger-levels",
+    "topic": "policy"
   }
 ]
