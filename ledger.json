@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "August Class III breaks its summer slide — up $1.12, while the other classes fall",
+    "url": "https://www.agproud.com/articles/64089-class-iii-milk-price-rebounds-in-august-as-others-fall",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "Cheddar hits a five-year low on GDT while skim powder jumps 5.3%",
+    "url": "https://en.edairynews.com/global-dairy-prices-holding-steady-despite-increase-in-seasonal-supply/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "Barrels closed Friday 6.75 cents ABOVE blocks — an unusual inversion",
+    "url": "https://www.brownfieldagnews.com/market-news/cheese-declines-while-butter-holds-steady-friday-at-cme/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "The cheddar vat is shrinking: July American-type output down while mozzarella runs hard",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/dary0926.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "Powder plants made 26.6% more nonfat — and still drew stocks down 5%",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/dary0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "USDA now forecasts dairy cash receipts down $2.1 billion this year",
+    "url": "https://www.ers.usda.gov/topics/farm-economy/farm-sector-income-finances/farm-sector-income-forecast",
+    "topic": "economy"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "One new plant will take 30% of a state's milk",
+    "url": "https://www.pa.gov/governor/newsroom/2026-press-releases/-governor-shapiro-secures-historic--1-2-billion-investment-from-",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "The new over-the-counter screwworm shot is not authorized for lactating cows",
+    "url": "https://www.fda.gov/news-events/press-announcements/fda-issues-emergency-use-authorization-generic-drug-prevent-new-world-screwworm-cattle",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "USDA will pilot satellite-based crop estimates — the reports your futures trade on are being rebuilt",
+    "url": "https://www.brownfieldagnews.com/news/rollins-unveils-usdas-data-modernization-plan-at-fps/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-06",
+    "headline": "A new H-2A bill would stretch contracts to 350 days — the number that decides whether dairy qualifies",
+    "url": "https://www.midwestfarmreport.com/2026/09/01/how-a-new-h-2a-bill-could-help-wisconsin-dairy-farms-with-labor-issues/",
+    "topic": "policy"
   }
 ]
