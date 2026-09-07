@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "August class prices land with Class IV still on top — and September widens the gap",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "Barrels closed the week 6.75 cents over blocks — and only blocks set your cheese price now",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "Powder is being shipped out faster than it is being made — that is what is holding $1.88",
+    "url": "https://esmis.nal.usda.gov/publication/dairy-products/2026-09-03",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "July DMC margin prints $9.93 — the first sub-$10 month of 2026, still 43 cents short of a payment",
+    "url": "https://www.fsa.usda.gov/resources/programs/dairy-margin-coverage-program-dmc/prices-updates",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "The forward-pricing window closes September 30 — contracts signed before it runs to 2029",
+    "url": "https://www.federalregister.gov/documents/2026/02/27/2026-03985/reauthorization-of-dairy-forward-pricing-program",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "$34 million in manure-management grants closes to applications September 14",
+    "url": "https://www.cdfa.ca.gov/oars/dairyplus/docs/2026/2026_DairyPlus_RGA.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "A single plant just contracted for roughly 3 billion pounds of one state's milk",
+    "url": "https://www.prnewswire.com/news-releases/chobani-begins-its-next-chapter-of-growth-with-approximately-1-2-billion-investment-in-allentown-pennsylvania-302865637.html",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "Cull cows keep going regardless: slaughter is running 73,900 head ahead of last year",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-07",
+    "headline": "A seaweed additive cut methane 46% and pulled 1.5 kg off dry matter intake with no milk lost",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42617845/",
+    "topic": "animal-health"
   }
 ]
