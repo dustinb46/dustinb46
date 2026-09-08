@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "Canada's counter-tariffs on U.S. dairy went live at 12:01 this morning",
+    "url": "https://www.canada.ca/en/department-finance/programs/international-trade-finance-policy/canadas-response-us-tariffs/complete-list-us-products-subject-to-counter-tariffs.html",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "August class prices split three ways — III up, IV down, II down $3.18",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "Barrels closed above blocks every day last week — by 6.75 cents on Friday",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "July's powder mix flipped: NDM up 26.6%, skim milk powder down 50.3%",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796049/dary0926.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "Milk down 80 cents in a month while hay and replacements keep climbing",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796040/agpr0826.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "A federal packaging-claims bill clears its first House hurdle",
+    "url": "https://www.idfa.org/news/idfa-thanks-house-subcommittee-for-advancing-the-pack-act-urges-full-house-passage",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "Infant formula gets a botulism research roadmap — and it starts upstream",
+    "url": "https://www.idfa.org/news/idfa-supports-new-report-charting-path-forward-on-infant-formula-safety",
+    "topic": "food-safety"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "Organic fluid growth is concentrated almost entirely in whole milk",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "demand"
+  },
+  {
+    "date": "2026-09-08",
+    "headline": "SNAP milk-matching program adds Oklahoma, now in 32 states",
+    "url": "https://www.idfa.org/news/add-milk-snap-dairy-incentive-program-expands-to-oklahoma",
+    "topic": "demand"
   }
 ]
