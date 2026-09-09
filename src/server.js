@@ -1,7 +1,7 @@
 const path = require('path');
 const { spawn } = require('child_process');
 const express = require('express');
-const { db } = require('./db');
+const { db, DB_PATH } = require('./db');
 const fs = require('fs');
 const { facilityKey } = require('./facility');
 const { heroImagePath, ensureAssetDir } = require('./paths');
@@ -166,6 +166,65 @@ app.get('/plants', (req, res) => {
     metaDescription: stateParam
       ? `Directory of dairy plants in ${stateParam} — plant codes, operators, and locations.`
       : 'Browse every U.S. dairy plant in the atlas by state — plant codes, operators, brands, and recall history.',
+  });
+});
+
+// ---------------- health ----------------
+
+// Unauthenticated status probe. Deliberately reports only counts and
+// deployment shape — no env values, no secrets. Exists so the deploy can
+// be diagnosed from outside without a Railway login: it distinguishes
+// "app is up but the volume didn't mount" from "app is up but empty"
+// from "no app at all" (which never reaches this handler at all).
+app.get('/healthz', (req, res) => {
+  const dbPath = DB_PATH;
+  let dbFile = null;
+  try {
+    const st = fs.statSync(dbPath);
+    dbFile = { exists: true, bytes: st.size, modified: st.mtime.toISOString() };
+  } catch {
+    dbFile = { exists: false };
+  }
+
+  // A DB path outside the repo means an env var pointed us at a mounted
+  // volume. Sitting inside the repo in production means writes are going
+  // to ephemeral container disk and will vanish on the next deploy.
+  const repoRoot = path.join(__dirname, '..');
+  const onVolume = Boolean(process.env.PLANT_TRACK_DB)
+    && !path.resolve(dbPath).startsWith(path.resolve(repoRoot) + path.sep);
+
+  const count = (sql) => {
+    try { return db.prepare(sql).get().n; } catch { return null; }
+  };
+
+  const data = {
+    plants:      count('SELECT COUNT(*) AS n FROM plants'),
+    geocoded:    count('SELECT COUNT(*) AS n FROM plants WHERE lat IS NOT NULL'),
+    brands:      count('SELECT COUNT(*) AS n FROM brands'),
+    mappings:    count('SELECT COUNT(*) AS n FROM plant_brands'),
+    recalls:     count('SELECT COUNT(*) AS n FROM recalls'),
+    overrides:   count('SELECT COUNT(*) AS n FROM recall_overrides'),
+  };
+
+  // Warnings are the point of this endpoint: a 200 with an empty database
+  // is still a broken deploy, and the old failure mode was that nothing
+  // said so out loud.
+  const warnings = [];
+  if (!onVolume) {
+    warnings.push('db_not_on_volume: PLANT_TRACK_DB is unset or points inside the repo; '
+      + 'data written here is lost on redeploy');
+  }
+  if (!data.plants) warnings.push('no_plants: database has no plant rows; ingests have not been run');
+  if (data.plants && !data.geocoded) warnings.push('no_geocodes: map will be empty');
+  if (!process.env.ADMIN_TOKEN) warnings.push('no_admin_token: /admin/run is disabled');
+
+  res.json({
+    ok: warnings.length === 0,
+    uptime_s: Math.round(process.uptime()),
+    node: process.version,
+    db: { path: dbPath, on_volume: onVolume, file: dbFile },
+    data,
+    warnings,
   });
 });
 
