@@ -340,5 +340,47 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-09",
+    "headline": "Butter breaks to $1.4025 while powder pushes to $1.8925",
+    "url": "https://www.brownfieldagnews.com/market-news/butter-leads-dairy-market-lower-while-nonfat-dry-milk-moves-higher/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-09",
+    "headline": "August component prices: protein at $2.8281, butterfat at $1.5107",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-09-09",
+    "headline": "July nonfat dry milk output jumped 26.6% as skim milk powder halved",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/dary0926.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-09",
+    "headline": "Central spot milk is trading up to $4.00 over Class — because trucks are short, not milk",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "logistics"
+  },
+  {
+    "date": "2026-09-09",
+    "headline": "Common cheese names have become the sticking point in the U.S.–Mexico talks",
+    "url": "https://www.bnnbloomberg.ca/business/international/2026/08/28/dispute-over-cheese-names-causes-stumbling-block-in-us-mexico-trade-negotiations/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-09",
+    "headline": "FDA is now 15 emergency authorizations deep on screwworm drugs",
+    "url": "https://www.fda.gov/animal-veterinary/safety-health/animal-drugs-new-world-screwworm",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-09",
+    "headline": "Organic milk exports fell 83% year over year in July",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "organic"
   }
 ]
