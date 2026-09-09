@@ -26,6 +26,29 @@ const CENSUS_URL = 'https://geocoding.geo.census.gov/geocoder/locations/onelinea
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+// Nominatim enforces its 1 req/sec policy hard, and enforces it per source
+// IP — behind a shared or proxied egress address it starts returning 429
+// well before our own pacing looks abusive. A 429 is a "come back later",
+// not "this city does not exist", so it gets retried with backoff and, if
+// it still fails, reported as an error rather than a miss. Conflating the
+// two is what previously left the map half empty with err=0 in the log.
+const RETRIES = parseInt(process.env.GEOCODE_RETRIES || '4', 10);
+
+class RateLimited extends Error {}
+
+async function nominatimOnce(q) {
+  const url = `${NOMINATIM_URL}?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=us`;
+  const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT, 'Accept': 'application/json' } });
+  if (res.status === 429 || res.status === 503) {
+    const retryAfter = parseInt(res.headers.get('retry-after') || '0', 10);
+    throw Object.assign(new RateLimited(`nominatim HTTP ${res.status}`), { retryAfter });
+  }
+  if (!res.ok) throw new Error(`nominatim HTTP ${res.status}`);
+  const body = await res.json();
+  if (!Array.isArray(body) || !body.length) return null;   // genuinely no match
+  return body[0];
+}
+
 async function geocodeNominatim(city, state, address) {
   // Build the most specific query we have: street address when available,
   // otherwise city-level. Street-level returns a building-precise pin
@@ -34,12 +57,22 @@ async function geocodeNominatim(city, state, address) {
   const q = address
     ? `${address}, ${city}, ${state}, USA`
     : `${city}, ${state}, USA`;
-  const url = `${NOMINATIM_URL}?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=us`;
-  const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT, 'Accept': 'application/json' } });
-  if (!res.ok) throw new Error(`nominatim HTTP ${res.status}`);
-  const body = await res.json();
-  if (!Array.isArray(body) || !body.length) return null;
-  return { lat: parseFloat(body[0].lat), lon: parseFloat(body[0].lon), source: address ? 'osm-street' : 'osm' };
+
+  let wait = SLEEP_MS;
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const hit = await nominatimOnce(q);
+      if (!hit) return null;
+      return { lat: parseFloat(hit.lat), lon: parseFloat(hit.lon), source: address ? 'osm-street' : 'osm' };
+    } catch (e) {
+      if (!(e instanceof RateLimited) || attempt >= RETRIES) throw e;
+      // Honour Retry-After when offered, otherwise back off exponentially.
+      const delay = e.retryAfter ? e.retryAfter * 1000 : wait;
+      rateLimitHits++;
+      await sleep(delay);
+      wait = Math.min(wait * 2, 30000);
+    }
+  }
 }
 
 async function geocodeCensus(city, state) {
@@ -60,24 +93,49 @@ async function geocodeCensus(city, state) {
 // City-level cache only — street-level lookups are unique per plant so
 // they're not cacheable, but they're a small fraction of the workload
 // and worth the precision.
+//
+// Only *negative results* are cached, never *failures*. A city that
+// Nominatim genuinely has no record of will not appear on a retry, so
+// caching that null saves a request. A city we failed to look up because
+// of a 429 or a network blip must not be cached, or one transient error
+// silently drops every plant in that city for the rest of the run.
 const cityCache = new Map();
+let rateLimitHits = 0;
+
 async function cachedGeocode(city, state, address) {
   if (address) {
     // Street-level: no cache, always a fresh lookup. Caller has already
-    // throttled at the top-level loop.
-    try { return await geocodeNominatim(city, state, address); }
-    catch (e) { /* fall through to city-level fallback */ }
+    // throttled at the top-level loop. A null here means the street
+    // address simply isn't in OSM, which is common for rural plants, so
+    // we fall through to the city centroid rather than giving up.
+    try {
+      const hit = await geocodeNominatim(city, state, address);
+      if (hit) return hit;
+    } catch (e) {
+      // Fall through to the city-level attempt below.
+    }
   }
   const key = `${city.toUpperCase()}|${state.toUpperCase()}`;
   if (cityCache.has(key)) return cityCache.get(key);
+
   let result = null;
-  try { result = await geocodeNominatim(city, state); }
-  catch (e) { /* try fallback */ }
-  if (!result) {
-    try { result = await geocodeCensus(city, state); }
-    catch (e) { /* both failed */ }
+  let failed = false;
+  try {
+    result = await geocodeNominatim(city, state);
+  } catch (e) {
+    failed = true;
   }
-  cityCache.set(key, result);
+  if (!result) {
+    try {
+      result = await geocodeCensus(city, state);
+    } catch (e) {
+      failed = true;
+    }
+  }
+  // Cache a confirmed "no such place", but leave a failed lookup uncached
+  // so a later plant in the same city gets another chance.
+  if (result || !failed) cityCache.set(key, result);
+  if (!result && failed) throw new Error(`lookup failed for ${city}, ${state}`);
   return result;
 }
 
@@ -120,7 +178,7 @@ async function cachedGeocode(city, state, address) {
       if (err <= 5) console.error(`  err ${r.plant_code} (${r.city}, ${r.state}): ${e.message}`);
     }
     if ((i + 1) % 100 === 0) {
-      console.log(`  ${i + 1}/${rows.length}  ok=${ok} miss=${miss} rejected=${rejected} err=${err}  cities cached=${cityCache.size}  (street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census})`);
+      console.log(`  ${i + 1}/${rows.length}  ok=${ok} miss=${miss} rejected=${rejected} err=${err} throttled=${rateLimitHits}  cities cached=${cityCache.size}  (street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census})`);
     }
     if (willHitNetwork) await sleep(SLEEP_MS);
   }
@@ -129,8 +187,11 @@ async function cachedGeocode(city, state, address) {
     INSERT INTO ingest_runs (source, started_at, finished_at, rows_in, rows_written, notes)
     VALUES ('geocode', ?, ?, ?, ?, ?)
   `).run(runStarted, new Date().toISOString(), rows.length, ok,
-    `miss=${miss} err=${err} cities=${cityCache.size} street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census}`);
+    `miss=${miss} err=${err} throttled=${rateLimitHits} cities=${cityCache.size} street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census}`);
 
-  console.log(`[geocode] done. ok=${ok} miss=${miss} rejected=${rejected} err=${err} (${cityCache.size} unique cities; osm=${sourceCounts.osm} census=${sourceCounts.census})`);
+  console.log(`[geocode] done. ok=${ok} miss=${miss} rejected=${rejected} err=${err} throttled=${rateLimitHits} (${cityCache.size} unique cities; street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census})`);
+  if (err) {
+    console.log(`[geocode] ${err} lookups FAILED (not the same as "not found") — re-run to retry just those rows.`);
+  }
 })().catch(e => { console.error(e); process.exit(1); });
 
