@@ -154,6 +154,77 @@ test/                      node --test unit tests
 - `recall_overrides` is a manual correction table; survives resyncs.
 - `plants.lat/lon/geocoded_at` back the map; populated by `geocode`.
 
+## Durable state (survives a lost volume)
+
+Most of the database rebuilds from files in git: plants come from the
+USDA/DATCP/state-gap ingests, brand mappings from `data/seeds/`, recalls
+from a re-sync. Two things did not, and were lost when the Railway trial
+lapsed and took the volume with it:
+
+- **Geocodes.** Cheap per lookup, but Nominatim allows about one request
+  per second, so a full run is 20-30 minutes of wall clock that cannot be
+  hurried.
+- **Recall overrides.** Hand-typed corrections pinning a recall to a
+  plant. Nothing regenerates these.
+
+Both now export to CSV under `data/durable/` and are restored on every
+container start.
+
+```bash
+npm run durable:export    # DB  -> data/durable/*.csv   (then commit)
+npm run durable:import    # CSV -> DB                   (runs in prestart)
+```
+
+`durable:import` runs automatically as part of `prestart`, so a fresh
+volume comes back with its map and corrections already populated and
+makes zero network calls doing it. It is deliberately non-fatal: a
+missing, partial, or corrupt file logs and is skipped, never blocking a
+boot.
+
+**After any geocode run, export and commit**, or the work only exists on
+the volume again:
+
+```bash
+npm run geocode
+npm run durable:export
+git add data/durable && git commit -m "Refresh geocache"
+```
+
+Notes on how the files are keyed, both of which matter:
+
+- Geocodes are keyed on `(address, city, state)`, the inputs to the
+  lookup, not on `plant_code`. A plant that moves to a new address misses
+  the cache and gets re-geocoded rather than silently keeping a stale
+  pin. Because many plants share a town, roughly 430 cached lookups
+  restore around 550 plants.
+- Overrides are exported against `plant_code`, never `plant_id`.
+  `plant_id` is an autoincrement rowid that gets reassigned on every
+  rebuild; a correction stored against it would come back pointing at an
+  unrelated plant.
+
+Not covered, on purpose: `recalls` (re-syncs from openFDA), harvested
+recall codes (derived, re-runnable), and `search_log` (telemetry). The
+uploaded hero image under `data/assets/` is still volume-only.
+
+## Health check
+
+`GET /healthz` reports the database path, whether it resolves to a
+mounted volume, row counts, the state of the durable files, and explicit
+warnings. It returns counts and deployment shape only, never environment
+values. It exists so a deploy can be diagnosed without a Railway login:
+"up but the volume didn't mount" and "up but empty" otherwise look
+identical from outside.
+
+```json
+{
+  "ok": false,
+  "db": { "path": "/data/plant_track.db", "on_volume": true },
+  "data": { "plants": 955, "geocoded": 941, "recalls": 0 },
+  "durable": { "geocache_rows": 434, "override_rows": 1 },
+  "warnings": ["no_plants: database has no plant rows; ingests have not been run"]
+}
+```
+
 ## Deploying to Railway
 
 1. Service branch points at this branch; build runs `db:init` + `seed:load`.
@@ -162,6 +233,17 @@ test/                      node --test unit tests
    `ADMIN_TOKEN=<long random string>`.
 4. Node pinned to 20 (`.node-version`/`.nvmrc`) — `better-sqlite3` has no
    prebuilt binary for newer majors on Railway's image.
+
+The volume is load-bearing. If `PLANT_TRACK_DB` points at `/data` and no
+volume is mounted there, the app refuses to start with an error naming
+the path, rather than creating the directory and quietly writing to
+ephemeral container disk that vanishes on the next deploy.
+
+If the service ever comes back on a hostname that returns Railway's
+`{"code":404,"message":"Application not found"}`, that is the edge saying
+no service claims that domain — the app is not the problem. Regenerate
+the public domain in the service's networking settings. A crashed app
+returns a 502 instead, which is a different fix.
 
 Schema init + seed load run on every container start (`prestart`), both
 idempotent, against the volume.

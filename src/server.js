@@ -218,12 +218,31 @@ app.get('/healthz', (req, res) => {
   if (data.plants && !data.geocoded) warnings.push('no_geocodes: map will be empty');
   if (!process.env.ADMIN_TOKEN) warnings.push('no_admin_token: /admin/run is disabled');
 
+  // Durable state: the checked-in files that repopulate a fresh volume.
+  // Reported because "map is empty after a deploy" is otherwise
+  // indistinguishable from "the export was never committed".
+  let durable = { geocache_rows: null, override_rows: null };
+  try {
+    const { GEOCACHE_CSV, OVERRIDES_CSV } = require('./durable');
+    const countRows = (f) => {
+      if (!fs.existsSync(f)) return null;
+      const lines = fs.readFileSync(f, 'utf8').trim().split('\n');
+      return Math.max(0, lines.length - 1);   // minus the header
+    };
+    durable = { geocache_rows: countRows(GEOCACHE_CSV), override_rows: countRows(OVERRIDES_CSV) };
+  } catch { /* reporting only */ }
+  if (durable.geocache_rows === null) {
+    warnings.push('no_geocache: data/durable/geocache.csv is missing, so a fresh volume '
+      + 'must re-geocode from scratch');
+  }
+
   res.json({
     ok: warnings.length === 0,
     uptime_s: Math.round(process.uptime()),
     node: process.version,
     db: { path: dbPath, on_volume: onVolume, file: dbFile },
     data,
+    durable,
     warnings,
   });
 });

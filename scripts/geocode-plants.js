@@ -13,6 +13,8 @@
 // per run and reuse, which cuts a 2400-plant run from 40+ minutes to
 // roughly 800-1000 unique city lookups.
 
+const fs = require('fs');
+const { parse } = require('csv-parse/sync');
 const { db } = require('../src/db');
 const { isOutsideState } = require('../src/us-state-bounds');
 
@@ -102,6 +104,30 @@ async function geocodeCensus(city, state) {
 const cityCache = new Map();
 let rateLimitHits = 0;
 
+// Warm the cache from the checked-in geocache so a run after a rebuild
+// spends its network budget on genuinely new plants instead of re-asking
+// Nominatim for towns we already resolved. Plants restored by
+// durable:import are already skipped by the lat IS NULL filter; this
+// covers new plants that happen to sit in a town we know.
+function warmCacheFromDisk() {
+  try {
+    const { GEOCACHE_CSV, geoKey } = require('../src/durable');
+    if (!fs.existsSync(GEOCACHE_CSV)) return 0;
+    const rows = parse(fs.readFileSync(GEOCACHE_CSV, 'utf8'), { columns: true, skip_empty_lines: true, trim: true });
+    let n = 0;
+    for (const r of rows) {
+      if (r.address) continue;               // street rows are per-plant, not reusable
+      const lat = parseFloat(r.lat), lon = parseFloat(r.lon);
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+      cityCache.set(`${String(r.city).toUpperCase()}|${String(r.state).toUpperCase()}`, { lat, lon, source: 'osm' });
+      n++;
+    }
+    return n;
+  } catch (e) {
+    return 0;   // a warm cache is an optimisation, never a requirement
+  }
+}
+
 async function cachedGeocode(city, state, address) {
   if (address) {
     // Street-level: no cache, always a fresh lookup. Caller has already
@@ -147,7 +173,9 @@ async function cachedGeocode(city, state, address) {
     WHERE city IS NOT NULL AND state IS NOT NULL${where}
     LIMIT ${MAX}
   `).all();
-  console.log(`[geocode] ${rows.length} plants to geocode${FORCE ? ' (FORCE)' : ''}; ~${SLEEP_MS}ms per network call`);
+  const warmed = warmCacheFromDisk();
+  console.log(`[geocode] ${rows.length} plants to geocode${FORCE ? ' (FORCE)' : ''}; ~${SLEEP_MS}ms per network call` +
+    (warmed ? ` (${warmed} cities pre-loaded from data/durable/geocache.csv)` : ''));
 
   const update = db.prepare(`
     UPDATE plants SET lat = ?, lon = ?, geocoded_at = datetime('now') WHERE id = ?
@@ -192,6 +220,9 @@ async function cachedGeocode(city, state, address) {
   console.log(`[geocode] done. ok=${ok} miss=${miss} rejected=${rejected} err=${err} throttled=${rateLimitHits} (${cityCache.size} unique cities; street=${sourceCounts['osm-street']} osm=${sourceCounts.osm} census=${sourceCounts.census})`);
   if (err) {
     console.log(`[geocode] ${err} lookups FAILED (not the same as "not found") — re-run to retry just those rows.`);
+  }
+  if (ok) {
+    console.log('[geocode] run "npm run durable:export" and commit data/durable/ so this survives the next deploy.');
   }
 })().catch(e => { console.error(e); process.exit(1); });
 
