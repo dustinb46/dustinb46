@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "The U.S. ban on Canadian dairy takes effect Sept. 29 — and the list is nothing but whey",
+    "url": "https://www.whitehouse.gov/presidential-actions/2026/09/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued-discrimination-against-the-commerce-of-the-united-states-with-respect-to-dairy/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "Canada's counter-tariffs went live Sept. 8: 50% on U.S. powders and proteins, 25% on all U.S. cheese",
+    "url": "https://www.morningagclips.com/canadas-2026-retaliatory-dairy-tariffs/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "Butter is now cheaper than powder, and the component check is being rebuilt around it",
+    "url": "https://www.brownfieldagnews.com/market-news/nonfat-dry-milk-leads-gains-at-the-cme-group-wednesday/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "Whey protein is the scarcest thing in the plant, and GLP-1 demand is why",
+    "url": "https://www.dairyreporter.com/Article/2026/09/10/us-and-europe-vie-for-premium-whey-as-demand-climbs/",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "Two livestock executive orders put cull-cow and beef-cross revenue on a 60-to-90-day clock",
+    "url": "https://www.federalregister.gov/documents/2026/09/10/2026-18567/promoting-fair-competition-in-livestock-markets-and-expanding-market-access-for-american-meat",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "Dairies are culling harder than last year — 73,900 more cows gone",
+    "url": "https://www.ams.usda.gov/mnreports/ams_3658.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "USDA's own index says the cost-price squeeze got worse in July",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796040/agpr0826.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-10",
+    "headline": "22 recommendations land on C. botulinum in infant formula — and they point upstream",
+    "url": "https://www.reaganudall.org/publications/applying-science-infant-formula-safety",
+    "topic": "processing"
   }
 ]
