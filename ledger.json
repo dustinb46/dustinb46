@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "USDA splits the classes: Class III cut again, Class IV raised to $18.55",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "Canadian dairy is barred from entry outright on Sept. 29, not just tariffed",
+    "url": "https://www.whitehouse.gov/presidential-actions/2026/09/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued-discrimination-against-the-commerce-of-the-united-states-with-respect-to-dairy/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "The quiet line in WASDE: exports get cut a full billion pounds for 2027",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde0926.pdf",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "Corn yield cut 2.2 bushels and the season-average price jumps 30 cents",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde0926.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "Powder closes at $1.97 while butter sits at $1.37 — and butter's PPI is down 38.7%",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "Class I keeps shrinking: 24% of pooled milk in July, uniform price down to $19.18",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "New Zealand herds see salmonella diagnoses climb as spring calving peaks",
+    "url": "https://www.farmersweekly.co.nz/news/dairy/dairy-farmers-warned-as-salmonella-cases-surge/",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-12",
+    "headline": "Dairy lines up against a bill that would put warning labels on whole milk and cheese",
+    "url": "https://dairybusiness.com/u-s-dairy-industry-urges-congress-to-reject-s-5026/",
+    "topic": "policy"
   }
 ]
