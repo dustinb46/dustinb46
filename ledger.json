@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "Washington's ban on Canadian whey now has a date: Sept. 29",
+    "url": "https://www.federalregister.gov/documents/2026/09/14/2026-18836/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "Canada's retaliation is live: 25% on U.S. cheese, 50% on powders and whey",
+    "url": "https://www.canada.ca/en/department-finance/news/2026/08/list-of-products-from-the-united-states-subject-to-counter-tariffs-effective-september-8-2026.html",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "USDA splits the classes: Class III cut, Class IV raised, all-milk nudged to $19.90",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "Butter closes the week at $1.37 — and holiday demand hasn't shown up",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "Corn's season-average price jumps 30 cents as USDA trims the yield",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde0926.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "More milk in the pool, less of it going to Class I",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "Screwworm detections fell to four in August — and USDA's own people are skeptical",
+    "url": "https://www.washingtonsun.com/policy/screwworm-cases-down",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "A Senate bill would put warning labels on whole milk, cheese and most yogurt",
+    "url": "https://dairybusiness.com/u-s-dairy-industry-urges-congress-to-reject-s-5026/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-14",
+    "headline": "Butter plant workers settle for 27% over four years",
+    "url": "https://teamster.org/2026/09/teamsters-at-foremost-farms-reedsburg-ratify-strong-contract/",
+    "topic": "processing"
   }
 ]
