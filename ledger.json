@@ -340,5 +340,47 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-17",
+    "headline": "Canadian dairy imports are banned outright starting September 29",
+    "url": "https://www.federalregister.gov/documents/2026/09/14/2026-18836/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-17",
+    "headline": "GDT cheddar jumps 16.5% — opening a 39-cent gap over CME blocks",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1604.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-17",
+    "headline": "USDA lifts all-milk to $19.90 but flips Class III and Class IV",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde0926.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-09-17",
+    "headline": "Butter closes at $1.37 while powder pushes $2.00",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-17",
+    "headline": "Half the nation's pasture is now rated poor or worse",
+    "url": "https://usda.library.cornell.edu/sites/default/release-files/796060/prog3726.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-17",
+    "headline": "Dairy cow slaughter is running 74,000 head ahead of last year",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "herd"
+  },
+  {
+    "date": "2026-09-17",
+    "headline": "August class prices: Class III up $1.12, Class II down $3.18",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "milk-price"
   }
 ]
