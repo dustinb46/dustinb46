@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "Cheddar blocks break to $1.35 while powder runs to $2.08",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "Short corn silage is already tightening milk supplies in the Central region",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "Washington bans certain Canadian dairy imports outright, starting September 29",
+    "url": "https://www.whitehouse.gov/presidential-actions/2026/09/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued-discrimination-against-the-commerce-of-the-united-states-with-respect-to-dairy/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "Canada's counter-tariffs are live: 25% on all U.S. cheese, 50% on proteins and powders",
+    "url": "https://farms.extension.wisc.edu/articles/canadas-2026-retaliatory-dairy-tariffs/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "USDA pulls checkoff dollars out of ESG and net-zero work",
+    "url": "https://www.agproud.com/articles/64161-economic-update-usda-ends-mandatory-farmer-funding-of-esg-commitments-in-dairy-checkoff",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "USDA cuts the corn yield again and lifts the season-average price to $4.80",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796054/wasde0926.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "The same report raises milk output, cuts exports, and splits Class III from Class IV",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796054/wasde0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "H5N1 picks back up as fall migration starts — two more Idaho dairy herds",
+    "url": "https://www.natureworldnews.com/articles/73313/20260918/bird-flu-hits-commercial-flocks-holding-more-417000-birds-minnesota-dakotas-fall-migration.htm",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-19",
+    "headline": "One H5 antibody test that works on cattle, birds and people",
+    "url": "https://globalbiodefense.com/2026/09/15/multi-species-h5n1-assay-birds-cattle-humans/",
+    "topic": "animal-health"
   }
 ]
