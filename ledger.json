@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "The dairy action against Canada is, in practice, a whey ban",
+    "url": "https://www.federalregister.gov/documents/2026/09/14/2026-18836/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "Farm bill clears Senate Ag 12–11, nine working days before the extension lapses",
+    "url": "https://www.agproud.com/articles/64160-2026-farm-bill-advances-to-senate-floor",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "Cheddar blocks broke 7.25¢ in one Friday session and closed under barrels",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "Nonfat closed at $2.08 while butter sat at $1.37",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "ARC/PLC enrollment opened with 30 million new base acres — and a 3.69% haircut",
+    "url": "https://www.fsa.usda.gov/news-events/news/09-15-2026/usda-announces-2026-2027-enrollment-key-price-revenue-safety-net",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "USDA cuts dairy checkoff funding for ESG work",
+    "url": "https://www.agproud.com/articles/64161-economic-update-usda-ends-mandatory-farmer-funding-of-esg-commitments-in-dairy-checkoff",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "Dairy cow slaughter is running 16% above last year",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "H5N1 turns up in Idaho dairy herds; 88 cattle detections so far this year",
+    "url": "https://www.thepoultrysite.com/news/2026/09/h5n1-hits-commercial-poultry-across-four-us-states",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "A cooperative butter plant's Teamsters just won 27% over four years",
+    "url": "https://teamster.org/2026/09/teamsters-at-foremost-farms-reedsburg-ratify-strong-contract/",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-21",
+    "headline": "Seventy-six dairy organizations moved against a front-of-pack warning label bill",
+    "url": "https://en.edairynews.com/us-dairy-sector-urges-congress-to-reject-s-5026/",
+    "topic": "policy"
   }
 ]
