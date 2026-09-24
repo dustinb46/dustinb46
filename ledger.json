@@ -340,5 +340,47 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-24",
+    "headline": "October's Class I base price is $18.88 — and powder, not cheese, is paying for the raise",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-09-24",
+    "headline": "Class II skim jumps $1.96 in one month — the yogurt-and-ice-cream class is suddenly the expensive one",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-09-24",
+    "headline": "Dry whey pushed to $0.7975 on Wednesday while blocks kept sliding",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-24",
+    "headline": "Diesel added another 24 cents to $6.529 — and the Midwest took the worst of it",
+    "url": "https://www.eia.gov/petroleum/gasdiesel/",
+    "topic": "inputs-fuel"
+  },
+  {
+    "date": "2026-09-24",
+    "headline": "The Southeast hauling credit for October is being calculated on $5.804 diesel",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk-price-transport"
+  },
+  {
+    "date": "2026-09-24",
+    "headline": "USDA proposes cutting the post-outbreak import standdown for avian products from 90 days to 28",
+    "url": "https://www.federalregister.gov/documents/2026/09/24/2026-19532/amendments-to-import-requirements-for-highly-pathogenic-avian-influenza",
+    "topic": "policy-hpai"
+  },
+  {
+    "date": "2026-09-24",
+    "headline": "There is no organized October 1 trucking strike — only the fuel bill behind the rumor",
+    "url": "https://www.newsweek.com/are-truckers-going-on-strike-october-1-what-diesel-prices-say-12468623",
+    "topic": "inputs-logistics"
   }
 ]
