@@ -340,5 +340,47 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-25",
+    "headline": "August milk is up 1.7% — and none of it came from the cow",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796070/mkpr0926.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-25",
+    "headline": "October Class I jumps $1.84 — and powder, not cheese, is paying for it",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-25",
+    "headline": "Dairy is now 10% of the U.S. cattle kill as beef cow slaughter collapses",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796074/lstk0926.txt",
+    "topic": "cull-market"
+  },
+  {
+    "date": "2026-09-25",
+    "headline": "CoBank puts a number on the components gap: up to $474 per cow",
+    "url": "https://www.globenewswire.com/news-release/2026/09/24/3368629/0/en/higher-component-dairy-herds-capture-bigger-milk-checks-as-consumer-demand-shifts-toward-manufactured-dairy-products.html",
+    "topic": "components"
+  },
+  {
+    "date": "2026-09-25",
+    "headline": "Fonterra books a NZ$9.69 season and guides to NZ$9.50 on 1.6 billion kgMS",
+    "url": "https://www.nzx.com/announcements/480427",
+    "topic": "global"
+  },
+  {
+    "date": "2026-09-25",
+    "headline": "Pasture and range hits 53% poor or very poor, against 36% a year ago",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/prog3826.txt",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-25",
+    "headline": "August feedlot placements were the lowest for the month since the series began in 1996",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/cofd0926.pdf",
+    "topic": "cattle"
   }
 ]
