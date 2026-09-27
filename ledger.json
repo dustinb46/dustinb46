@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "A raw-milk cheese outbreak put eight of 13 patients in the hospital",
+    "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-e-coli-o26h11-raw-milk-cheese-september-2026",
+    "topic": "food-safety"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "Butter stocks are 10% above last year — with butter sitting at $1.40",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796075/cost0926.txt",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "Every pound of the cheese build is in the “other” pile; American is dead flat",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796075/cost0926.txt",
+    "topic": "cheese"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "The FARM Version 2028 comment window closes Friday",
+    "url": "https://hoards.com/article-38446-FARM-program-launches-open-comment-period.html",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "USDA now has retail dairy finishing 2026 at plus 0.1 percent",
+    "url": "https://www.ers.usda.gov/data-products/food-price-outlook/summary-findings",
+    "topic": "demand"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "Rabobank now forecasts the Big 7 exporters to contract in the fourth quarter",
+    "url": "https://www.australianmanufacturing.com.au/production-growth-to-slow-as-global-dairy-markets-enter-transition-rabobank/",
+    "topic": "global-supply"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "Europe's producers are pushing Brussels to intervene earlier — and to police imports",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "global-policy"
+  },
+  {
+    "date": "2026-09-27",
+    "headline": "Ice cream makers covering 90% of the market set a December 2027 colors deadline",
+    "url": "https://www.idfa.org/news/u-s-ice-cream-makers-join-rollins-kennedy-to-highlight-industry-wide-action-on-artificial-colors",
+    "topic": "processing"
   }
 ]
