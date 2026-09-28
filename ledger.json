@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "U.S. ban on Canadian whey imports takes effect September 29",
+    "url": "https://www.idfa.org/news/idfa-urges-u-s-canada-to-resume-dairy-trade-talks-following-new-whey-import-ban",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "Barrels held 14.5 cents over blocks while powder ran to $2.17",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1602.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "October Class I base lands at $18.88, set entirely off Class IV",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "August milk rose 1.7 percent on head count, not output per cow",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796070/mkpr0926.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "Kansas added 29,000 cows year over year while California lost milk",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796070/mkpr0926.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "Butter inventory is 10 percent heavier than a year ago",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796075/cost0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "West Texas screwworm zones changed twice over the weekend",
+    "url": "https://www.tahc.texas.gov/emergency/nws.html",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "Fonterra lifts its 2026/27 midpoint to NZ$9.50",
+    "url": "https://www.fonterra.com/nz/en/our-stories/media/fonterra-revises-forecast-2026-27-farmgate-milk-price.html",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-28",
+    "headline": "Wisconsin processor grants close at noon on November 3",
+    "url": "https://datcp.wi.gov/Pages/AgDevelopment/DairyProcessorGrants.aspx",
+    "topic": "processing"
   }
 ]
