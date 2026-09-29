@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "China's tariff-relief list names 22 U.S. dairy tariff lines",
+    "url": "https://www.whitehouse.gov/releases/2026/09/u-s-china-board-of-trade/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "ICE operations in southwest Kansas cut a day's fed-cattle kill by 17,000 head",
+    "url": "https://www.dtnpf.com/agriculture/web/ag/livestock/article/2026/09/28/ice-enforcement-hampers-beef-packing",
+    "topic": "labor"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "The farm bill extension lapses tomorrow. Margin coverage does not.",
+    "url": "https://uscode.house.gov/view.xhtml?req=(title:7%20section:9059%20edition:prelim)",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "Corteva pays $35 million and gives up loyalty pricing for ten years",
+    "url": "https://www.ftc.gov/news-events/news/press-releases/2026/09/ftc-states-win-protections-lower-pesticide-prices-american-farmers-antitrust-case-against-corteva",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "Butter gave up another three cents Monday; powder is now 81 cents above it",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "September's margin now pencils at $7.77 - well under the trigger",
+    "url": "https://www.agproud.com/articles/64203-dairy-risk-management-calendar-october-2026",
+    "topic": "risk-management"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "Schreiber puts $267 million into a new process-cheese plant in Missouri",
+    "url": "https://www.schreiberfoods.com/whats-happening/schreiber-foods-expands-process-cheese-network-with-267-million-investment-in-missouri/",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-09-29",
+    "headline": "Synlait books a NZ$75.4 million loss and a profitable second half",
+    "url": "https://www.synlait.com/wp-content/uploads/2026/09/Market-Announcement-FY26-Result-FINAL-NEW.pdf",
+    "topic": "global"
   }
 ]
