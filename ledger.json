@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "Diesel slips off a record but still sits $2.63 a gallon above last year",
+    "url": "https://www.eia.gov/petroleum/gasdiesel/",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "Barrels are trading 17.75 cents over blocks — a wide and persistent inversion",
+    "url": "https://www.indexbox.io/blog/cme-cash-cheese-barrels-hold-at-14525-blocks-drop-to-12750-on-september-29-2026/",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "October Class I base price lands at $18.88, up $1.84 from September",
+    "url": "https://www.agproud.com/articles/64191-weekly-digest-markets-improve-for-an-october-advanced-class-i-base-milk-price-of-1888-per-cwt",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "2027 Dairy Margin Coverage signup opens October 5 with a bigger Tier 1 and cheaper multi-year premiums",
+    "url": "https://www.fsa.usda.gov/news-events/news/09-30-2026/usda-announces-2027-dairy-margin-coverage-enrollment",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "Raw-milk cheese E. coli outbreak reaches 13 cases across nine states, three with kidney complications",
+    "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-e-coli-o26h11-raw-milk-cheese-september-2026",
+    "topic": "food-safety"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "August milk was up 1.7% — and every bit of it came from more cows, not better cows",
+    "url": "https://www.agproud.com/articles/64184-dairy-cow-numbers-milk-production-edge-higher-in-august",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "Calf monitoring extends to bucket-fed pens, with a mortality figure attached",
+    "url": "https://www.merck-animal-health-usa.com/newsroom/merck-animal-health-expands-sensehub-dairy-monitoring-with-bucket-fed-calf-capability-and-new-herd-level-insights/",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "Canada's 25% tariff on U.S. cheese is now three weeks old, with a $0.20–0.35/cwt price drag estimated",
+    "url": "https://farms.extension.wisc.edu/articles/canadas-2026-retaliatory-dairy-tariffs/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "A Wisconsin culture plant just added two-thirds more fermentation capacity",
+    "url": "https://www.globenewswire.com/news-release/2026/09/28/3369949/0/en/novonesis-celebrates-major-expansion-of-west-allis-production-facility-strengthening-north-american-dairy-innovation-and-manufacturing.html",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-01",
+    "headline": "Wisconsin processor grants close at noon November 3 — up to $50,000 on a 20% match",
+    "url": "https://datcp.wi.gov/Pages/AgDevelopment/DairyProcessorGrants.aspx",
+    "topic": "policy"
   }
 ]
