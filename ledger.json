@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "China's tariff-cut list covers the entire dairy chapter — 22 tariff lines",
+    "url": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/september/ambassador-greer-issues-statement-announcement-recommendations-us-china-board-trade",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "2027 Dairy Margin Coverage signup opens Oct. 5 — and multi-year electors still have to sign",
+    "url": "https://www.fsa.usda.gov/news-events/news/09-30-2026/usda-announces-2027-dairy-margin-coverage-enrollment",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "August DMC margin lands at $9.34 — and it was the milk price, not feed, that did it",
+    "url": "https://www.fsa.usda.gov/resources/programs/dairy-margin-coverage-program-dmc/prices-updates",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "Barrels finished the week 13.75 cents over blocks — an inverted cheddar spread",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "October Class I base set at $18.88, with a $2.94 skim gap favoring Class IV",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "Corn carry-in hits a seven-year high at 2.10 billion bushels, above every trade estimate",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/grst0926.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "August milk up 1.7% — every pound of it from more cows, none from the cow",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796070/mkpr0926.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-03",
+    "headline": "Butter stocks flip to 10% above year-ago, just as spot butter sits at $1.34",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/cost0926.pdf",
+    "topic": "markets"
   }
 ]
