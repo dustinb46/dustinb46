@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "September Class IV landed $2.90 over Class III — and the futures board has October at $5.21",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "August DMC margin came in at $9.34 — the first actual trip below the trigger since February",
+    "url": "https://www.fsa.usda.gov/resources/programs/dairy-margin-coverage-program-dmc/prices-updates",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "Freight is running 50% above year-ago levels and it is widening regional price spreads",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "Dry whey at 82.50 cents and isolate in the $14s — the whey stream is repricing your Class III check",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "Federally pooled milk ran 5.3% above year-ago in August — and the uniform price still fell",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "Idaho now has 18 dairies under H5N1 quarantine spread across nine counties",
+    "url": "https://agri.idaho.gov/animals/animal-disease/hpai-in-cattle/",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "Dairy cow slaughter is 4.2% ahead of last year, and dairy cows are nearly a fifth of the kill",
+    "url": "https://www.ams.usda.gov/mnreports/ams_3658.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "Butter stocks closed August 10% above year-ago, and the forward curve gave way",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/cost0926.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-04",
+    "headline": "The $100 million organic transition program ended September 30 with no successor funding",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "policy"
   }
 ]

@@ -1,0 +1,222 @@
+<!-- ============================================================
+     --- OPERATOR QA (DELETE BEFORE SEND) ---
+
+     RUN: 2026-10-04 (Sunday). Web publishing disabled this run per
+     standing instruction; delivery is Gmail draft only.
+
+     VOLUME: 21 candidates considered -> 9 kept.
+
+     DROPPED THIS RUN (with reason):
+      1. NASS Dairy Products, August data - not released until Oct 5. Nothing to verify yet.
+      2. New World screwworm / Texas released infested zones - APHIS news dated Sep 16-21,
+         outside the window; also collides with ledger 2026-08-08 screwworm entry.
+      3. FDA E. coli O26:H11 raw-milk cheese outbreak (Sierra Nevada / Graziers, 13 ill,
+         8 hospitalized, 9 states) - page last updated Sep 25, outside the window. Live
+         item if it updates.
+      4. Whey-protein supply scramble (Land O'Lakes, FrieslandCampina, ADM, Every Co.) -
+         only reachable via aggregator (briefs.co, Sep 30); original is paywalled. Its
+         price figures ($11-13/lb) CONFLICT with the USDA primary (WPI in the $14s), so
+         the figures could not be confirmed. Cut the story; kept only the USDA-sourced
+         whey item (#4).
+      5. Novonesis West Allis expansion completion (+66% fermentation, +17% packaging,
+         360 staff) - release verified at Sep 28, trade pickup Oct 3, but the company
+         press room primary was not reachable, and the consequence for a dairy operation
+         is indirect. Cut on consequence (rule 3).
+      6. AMPI Blair, WI cheddar-to-cottage-cheese conversion - February 2026 news. Far
+         outside the window.
+      7. DHS H-2A policy memo for dairy - June 17 effective date, outside window; collides
+         with ledger entries 2026-06-30 and 2026-08-07.
+      8. Global Dairy Trade auction - last event mid-September, outside window.
+      9. NMPF/USDEC statement on the U.S.-China Board of Trade (Sep 28) - nmpf.org
+         returned HTTP 403 on two fetch attempts. Could not verify against the source,
+         so cut under rule 1. Worth retrying next run.
+     10. CIDRAP "H5N1 surges in Idaho's dairy cattle" - the page content is from 2024,
+         not current. Discarded and replaced with the Idaho ISDA primary (item #6).
+     11. October Class I base price $18.88 (+$1.84) - announced Sep 23, outside window on
+         its own. Verified and used only as context inside item #1.
+
+     DEDUP COLLISIONS CAUGHT AGAINST LEDGER (57 entries read; kept items checked against
+     all of them, not just the 30-day window, since the ledger's last entry is 2026-09-01):
+      - Item 1 vs "Powder keeps climbing while cheese sags" (08-31) and "Powder does the
+        heavy lifting... nonfat at $1.8650" (08-30). Powder-vs-cheese has been sent.
+        REFRAMED to lead with what is new: the published September class spread and the
+        futures board. Powder is now $2.22, up 35.5c from the level last sent.
+      - Item 2 vs "DMC margins now forecast below the $9.50 trigger" (08-03) and "DMC is
+        now projected to pay every month through December" (08-30). Those were forecasts.
+        This is the first ACTUAL sub-trigger month. Leads with actual-vs-forecast.
+      - Item 3 vs "Diesel closes in on its all-time record" (08-31). Partial overlap -
+        that was fuel price, this is freight rates. Kept.
+      - Item 6 vs H5N1 entries on 08-30, 08-31 (three herds, TX/UT) and 09-01 (bulk-tank
+        testing). Idaho-specific standing quarantine count is new. Leads with the count.
+      - Item 8 vs "Butter stocks fall below year-ago - even with spot butter at $1.46"
+        (08-30). Direction has changed. Leads with the August figure.
+
+     FIGURES CONFIRMED ONLY PARTIALLY - FLAGGED BY ITEM:
+      - Item 1: Friday CME 40-lb block close. AMS reports $1.3150; Brownfield reports
+        $1.3125 with sales ranging $1.3025-$1.3150 (different close convention). Used the
+        AMS figure. Both sources fetched.
+      - Item 8: the August +10% year-over-year butter stock figure is confirmed from the
+        NASS report. Whether this REVERSES the prior month's year-over-year direction was
+        NOT verified (July 2025 comparative not in hand), so no reversal is claimed in the
+        copy even though the ledger's 08-30 entry implies one.
+      - Item 2: two alfalfa series exist and both are verified. AMS weekly cites $206.00/ton
+        (NASS all-alfalfa, +$35 YoY); the DMC formula uses premium/supreme at $243.00/ton.
+        The item uses the DMC figure, as that is the one in the margin calculation.
+      - SOURCE URL DURABILITY: five cited AMS links (ams_1054, dywweeklyreport,
+        dymclassprices, dymadvancedprices, ams_3658) are "current edition" URLs that roll
+        forward each week or month. Every figure cited was read from Report 40 / week of
+        Sep 28 - Oct 2, 2026 today. Dated archive permalinks are not published for these.
+        The NASS, FSA and ISDA links are stable.
+
+     TEMPLATE DEVIATIONS (both are omissions, no restyling):
+      - Unsubscribe line omitted entirely. No real URL exists and the raw merge tag must
+        never ship. Restore the line when Buttondown is live.
+      - Subscribe subbar and the "Forwarded this?" CTA block omitted. Both point at
+        index.html, and https://dustinb46.github.io/dustinb46/index.html currently returns
+        HTTP 404 - GitHub Pages source is still not enabled (Settings -> Pages -> Source =
+        "GitHub Actions"). Rather than email two dead links, both were dropped. Restore
+        them verbatim from docs/template.html the moment Pages resolves.
+
+     --- END OPERATOR QA ---
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dairy Intelligence Brief — Sunday, October 4, 2026</title>
+<meta name="description" content="September Class IV settled $2.90 over Class III, August DMC margins broke the trigger, freight is up 50% year over year, and the whey stream is quietly repricing the Class III check.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dairy Intelligence Brief — Sunday, October 4, 2026">
+<meta property="og:description" content="September Class IV settled $2.90 over Class III, August DMC margins broke the trigger, freight is up 50% year over year, and the whey stream is quietly repricing the Class III check.">
+<meta property="og:site_name" content="Dairy Intelligence Brief">
+<meta property="article:published_time" content="2026-10-04">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dairy Intelligence Brief — Sunday, October 4, 2026">
+<meta name="twitter:description" content="September Class IV settled $2.90 over Class III, August DMC margins broke the trigger, freight is up 50% year over year, and the whey stream is quietly repricing the Class III check.">
+
+<style>
+  :root{
+    --ink:#1d2327; --muted:#5d6b73; --line:#e4e7e9; --accent:#1f6f43;
+    --accent-soft:#eef5f0; --bg:#f6f7f5; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:660px; margin:0 auto; padding:24px 18px 56px}
+  .subbar{text-align:right; font-size:12px; margin:0 2px 12px}
+  .subbar a{color:var(--accent); text-decoration:none; font-weight:700}
+  header.masthead{
+    background:var(--card); border:1px solid var(--line); border-top:6px solid var(--accent);
+    border-radius:10px; padding:26px 26px 22px; margin-bottom:20px;
+  }
+  .kicker{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 6px}
+  h1{font-size:30px; line-height:1.15; margin:0 0 10px; letter-spacing:-.01em}
+  .dateline{font-size:14px; color:var(--muted); margin:0 0 14px; font-weight:600}
+  .dek{font-size:15px; color:var(--muted); margin:0; border-top:1px solid var(--line); padding-top:14px}
+  article.item{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 22px; margin:0 0 14px}
+  .num{display:inline-block; font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border-radius:20px; padding:3px 10px; margin-bottom:10px; letter-spacing:.03em}
+  h2{font-size:19px; line-height:1.25; margin:0 0 9px; letter-spacing:-.01em}
+  .body{font-size:15px; margin:0 0 14px; color:#28323a}
+  .why{font-weight:600; color:var(--ink)}
+  a.src{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; border:1px solid var(--line); background:#fbfdfb; border-radius:8px; padding:7px 12px}
+  a.src:hover{background:var(--accent-soft); border-color:#cfe3d6}
+  a.src .arrow{font-weight:700}
+  .cta{background:var(--accent-soft); border:1px solid #cfe3d6; border-radius:10px; padding:20px 22px; margin:4px 0 14px; text-align:center}
+  .cta h3{font-size:17px; margin:0 0 4px}
+  .cta p{font-size:13.5px; color:var(--muted); margin:0 0 14px}
+  .cta a.btn{display:inline-block; padding:11px 22px; background:var(--accent); color:#fff; text-decoration:none; font-weight:700; font-size:14.5px; border-radius:8px}
+  footer{margin-top:20px; padding-top:18px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted); text-align:center; line-height:1.6}
+  footer a{color:var(--muted)}
+  @media (max-width:520px){ h1{font-size:25px} .wrap{padding:16px 12px 44px} header.masthead,article.item,.cta{padding:18px 16px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">Dairy Intelligence Brief</p>
+    <h1>The 48-Hour Read for Dairy Operators</h1>
+    <p class="dateline">Daily Edition · Sunday, October 4, 2026</p>
+    <p class="dek">The headline milk price is no longer the story — the spread between classes is. September's final prices put Class IV $2.90 above Class III, the whey and powder streams are carrying the market while cheese and butter sag, and the first actual sub-trigger margin of the year just printed.</p>
+  </header>
+
+  <main>
+
+    <article class="item">
+      <span class="num">01 · Milk Price</span>
+      <h2>September Class IV landed $2.90 over Class III — and the futures board has October at $5.21</h2>
+      <p class="body">USDA's final September class prices, announced September 30, put Class III at $16.04 and Class IV at $18.94 — Class III down $0.60 on the month while Class IV jumped $1.58. The split is a product split: nonfat dry milk closed Friday at $2.2200, up 5.80 cents on the weekly average, while 40-pound cheddar blocks closed at $1.3150 with the weekly average down 5.05 cents to $1.2940. Futures widen the gap rather than close it — on October 1, October Class III settled at $15.13 against Class IV at $20.34, and November at $15.96 against $20.65. <span class="why">Why it matters:</span> Whether your milk pools Class III or Class IV is now worth more than $2.90 a hundredweight, so plant assignment and component mix — not the all-milk headline — will decide the next two mailbox checks.</p>
+      <a class="src" href="https://www.ams.usda.gov/mnreports/dymclassprices.pdf">USDA AMS (CLS-0926) <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">02 · Milk Price</span>
+      <h2>August DMC margin came in at $9.34 — the first actual trip below the trigger since February</h2>
+      <p class="body">Forecasts have pointed below the $9.50 line for months; August is the first month to actually get there. USDA's Farm Service Agency posted an August margin of $9.34 per hundredweight, built on an all-milk price of $19.80 and total feed costs of $10.46. That is a third consecutive monthly decline — $10.88 in June, $9.93 in July, $9.34 in August — and the feed side is doing the damage, with premium alfalfa at $243.00 a ton and corn at $4.45 a bushel. <span class="why">Why it matters:</span> Producers enrolled at the $9.50 coverage level have an August payment coming for the first time since February, and the three-month slope means the budgeting question is no longer whether DMC pays but for how many months.</p>
+      <a class="src" href="https://www.fsa.usda.gov/resources/programs/dairy-margin-coverage-program-dmc/prices-updates">USDA FSA <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">03 · Inputs</span>
+      <h2>Freight is running 50% above year-ago levels and it is widening regional price spreads</h2>
+      <p class="body">Buried in last week's federal market report: "freight costs are up roughly 50 percent from year-ago levels and continue to affect long-distance hauling and widen market spreads." Butter manufacturers report the same pressure, and USDA's October price announcement carries a diesel reference price of $5.804 a gallon with a mileage rate factor of $0.00853 per hundredweight per mile. Central Class III spot milk is trading anywhere from $0.50 to $3.50 over class — a $3.00 range that freight is helping stretch. <span class="why">Why it matters:</span> Hauling is one of the few line items moving this fast, and it is now large enough to decide whether distant milk clears at all — which shows up as both a bigger hauling deduct and a wider gap between what neighboring plants will pay.</p>
+      <a class="src" href="https://www.ams.usda.gov/mnreports/ams_1054.pdf">USDA AMS Dairy Market News <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">04 · Processing</span>
+      <h2>Dry whey at 82.50 cents and isolate in the $14s — the whey stream is repricing your Class III check</h2>
+      <p class="body">Extra grade dry whey closed Friday at $0.8250 with the weekly average up 1.90 cents, and November dry whey futures ran from 72.75 cents to 78.00 cents in a single week. Up the value chain, whey protein isolate is holding in the $14s with what USDA calls "a firmer tone and tighter availability" than WPC 80, which is trading from the low $10s to the mid $11s. Lactose rose at both ends of its range. The September other-solids price, which is derived from dry whey, was only $0.4147 a pound — calculated off a September dry whey average of $0.6694. <span class="why">Why it matters:</span> Spot dry whey is now roughly 15 cents above the average that set September's other-solids price, so the whey side is poised to add real money to the Class III formula even while the cheese price stays weak.</p>
+      <a class="src" href="https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf">USDA AMS Dairy Market News <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">05 · Supply</span>
+      <h2>Federally pooled milk ran 5.3% above year-ago in August — and the uniform price still fell</h2>
+      <p class="body">Federal orders pooled 13.7 billion pounds of producer milk in August, 5.3 percent more than a year earlier. Almost none of it went to the bottle: Class I pooled volume rose just 0.8 percent, and all-market utilization came in at 24 percent Class I, 13 percent Class II, 54 percent Class III and 9 percent Class IV. The weighted average statistical uniform price was $18.75, down $0.43 from July and down $0.60 from August 2025. <span class="why">Why it matters:</span> Essentially all of this year's extra milk is landing in manufacturing classes, which is why a 5 percent production gain is showing up as a lower uniform price rather than a higher one.</p>
+      <a class="src" href="https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf">USDA AMS Dairy Market News <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">06 · Animal Health</span>
+      <h2>Idaho now has 18 dairies under H5N1 quarantine spread across nine counties</h2>
+      <p class="body">The Idaho State Department of Agriculture's H5N1 cattle page, updated September 30, lists 18 currently quarantined dairy facilities: Canyon and Gooding four each, Owyhee three, Twin Falls two, and Ada, Cassia, Franklin, Jerome and Payette one apiece. That geography matters — the outbreak is no longer confined to the Magic Valley dairy belt but is now running through southwestern and eastern counties as well. The state attributes transmission to a mix of cow-to-cow contact, fomites on boots, trucks and equipment, housing and ventilation, and continued wild bird exposure, and notes the primary economic damage is on-farm production loss. Lactating cattle on affected premises are quarantined, and additional import requirements apply to lactating dairy cattle entering the state. <span class="why">Why it matters:</span> Nine counties with standing quarantines means the exposure risk now travels with routine cattle movement and shared equipment across most of southern Idaho, and anyone sourcing lactating animals from the state should expect added import paperwork.</p>
+      <a class="src" href="https://agri.idaho.gov/animals/animal-disease/hpai-in-cattle/">Idaho State Dept. of Agriculture <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">07 · Supply</span>
+      <h2>Dairy cow slaughter is 4.2% ahead of last year, and dairy cows are nearly a fifth of the kill</h2>
+      <p class="body">Federally inspected dairy cow slaughter for the week ending September 19 was 55,844 head, and cumulative 2026 slaughter stands at 1,972,000 head against 1,892,600 a year ago — 79,400 more cows gone, or 4.2 percent. In that week's cattle mix, dairy and other cows made up 17.9 percent of all federally inspected cattle slaughter. <span class="why">Why it matters:</span> Culling is accelerating even with cull-cow values historically strong, which says the beef check is winning more close calls on marginal cows and tightens the replacement math for anyone planning to grow the milking string.</p>
+      <a class="src" href="https://www.ams.usda.gov/mnreports/ams_3658.pdf">USDA AMS Livestock Market News <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">08 · Inputs</span>
+      <h2>Butter stocks closed August 10% above year-ago, and the forward curve gave way</h2>
+      <p class="body">NASS put butter in refrigerated warehouses at 315.7 million pounds on August 31 — down 5 percent from July but 10 percent above August 2025. Natural cheese stocks were up 2 percent year over year, with American-style flat at 815.5 million pounds and the "other" category up 5 percent. The futures response was immediate: November butter fell from 147.00 cents on September 25 to 137.50 cents on October 1, with October down to 136.275. Spot butter closed Friday at $1.3400, unchanged, with no sales reported. <span class="why">Why it matters:</span> A 10 percent inventory cushion heading into the holiday draw removes the usual seasonal floor under butterfat, which is a direct hit to anyone whose pay price leans on a high butterfat test.</p>
+      <a class="src" href="https://www.nass.usda.gov/Publications/Todays_Reports/reports/cost0926.pdf">USDA NASS Cold Storage <span class="arrow">→</span></a>
+    </article>
+
+    <article class="item">
+      <span class="num">09 · Policy</span>
+      <h2>The $100 million organic transition program ended September 30 with no successor funding</h2>
+      <p class="body">USDA's Transition to Organic Partnership Program, which put $100 million into technical assistance and mentoring for transitioning and existing organic farmers from 2022 through 2026, closed on September 30. Participating organizations say they intend to keep supporting transitioning farmers, and Arizona State University's Swette Center launched a follow-on mentorship program called Kernel on October 1 — but neither carries the federal funding. Separately, the National Organic Program has a Federal Register notice open on extending an existing information collection, with comments accepted through November 24. <span class="why">Why it matters:</span> Anyone midway through a three-year organic transition just lost the free technical assistance that was built into the plan, and the replacement is a university mentorship program rather than funded federal support.</p>
+      <a class="src" href="https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf">USDA AMS Organic Dairy Market News <span class="arrow">→</span></a>
+    </article>
+
+  </main>
+
+  <footer>
+    <b>This is an automated newsletter</b> — researched, written and sent by an AI agent, with every item linked to a primary source you can verify yourself. Compiled from primary sources and trade press over roughly the last 24–48 hours. Independent; not affiliated with any cooperative, processor or government agency.
+  </footer>
+
+</div>
+</body>
+</html>
