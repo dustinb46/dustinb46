@@ -59,8 +59,11 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
   last 30 days as the exclusion set; append the run's kept items at the end.
   **Caveat:** each scheduled run gets a fresh working branch, so a ledger written on a
   previous run's branch is invisible to the next one. The ledger only persists if it is
-  merged to `main`. If `ledger.json` is missing at the start of a run, reconstruct it from
-  the Gmail drafts of prior editions before treating the exclusion set as empty.
+  merged to `main`. If `ledger.json` is missing **or its newest entry is older than
+  yesterday**, reconstruct the gap from the Gmail drafts of prior editions (parse the `<h2>`
+  headlines and source links out of each draft's `htmlBody`) before treating the exclusion
+  set as complete. Gmail rewrites stored hrefs as `google.com/url?q=` redirects — unwrap
+  them to canonical URLs before writing to the ledger.
 
 ## Build steps
 
