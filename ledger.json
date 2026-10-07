@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "Cheddar blocks touch a five-year low; October Class III settles under $15",
+    "url": "https://www.milkproducerscouncil.org/post/milk-dairy-and-grain-market-commentary-226",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "September finals put Class IV $2.90 above Class III",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "Feed got more expensive, not cheaper, while the milk check shrank",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/agpr0926.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "Fourteen cooperatives sued over the export program that moved record volume",
+    "url": "https://www.pymnts.com/cpi-posts/milk-buyers-sue-dairy-cooperatives-alleging-price-fixing-scheme/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "Texas eases one screwworm zone as the rest stay locked down",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/texas-modifies-new-world-screwworm-infested-zone",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "The Canada dairy fight escalated to an outright whey ban",
+    "url": "https://farms.extension.wisc.edu/articles/canadas-2026-retaliatory-dairy-tariffs/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "Freight is running about 50% above year-ago levels",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "Butter stocks are 10% above last year even with spot butter at $1.31",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "Cull cow values have given back 18% since spring",
+    "url": "https://southernagtoday.org/2026/09/29/cull-cow-prices-continue-slide/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-07",
+    "headline": "The organic transition program ended Sept. 30; a comment window is still open",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "policy"
   }
 ]
