@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "H5N1 reaches Washington dairy herds — after both herds had tested clean",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-two-dairy-herds",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "The Dairy Forward Pricing Program quietly lapsed on October 1",
+    "url": "https://www.agproud.com/articles/64231-weekly-digest-farm-bill-extension-expired-on-sept-30",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "Class IV finished September $2.90 above Class III",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "Cheese barrels are trading over blocks — and butter keeps sliding",
+    "url": "https://brownfieldagnews.com/market-news/cme-cash-dairy-prices-mixed-64",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "August exports held on value, but powder to Southeast Asia fell off a cliff",
+    "url": "https://blog.usdec.org/usdairyexporter/u.s.-dairy-exports-rebound-in-august",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "Freight is running about 50% above year-ago levels",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "Corn harvest is behind and condition slipped to 54% good-to-excellent",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796095/prog4026.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "FSA loan rates stepped up again for October",
+    "url": "https://www.agproud.com/articles/64231-weekly-digest-farm-bill-extension-expired-on-sept-30",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-09",
+    "headline": "The $100 million organic transition program ended September 30",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "policy"
   }
 ]
