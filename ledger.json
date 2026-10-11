@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "USDA now forecasts a second straight year of Class IV over Class III",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "Spot butter at $1.2750 undercuts the butterfat price every class is built on",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "Cheddar blocks are trading below barrels while plants still pay up for spot milk",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "The feed side of the margin just got cheaper: corn stocks up 282 million bushels",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "Washington's first H5N1 dairy herds followed more than 7,000 clean surveillance tests",
+    "url": "https://agr.wa.gov/about-wsda/news-and-media-relations/news-releases?article=47359",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "DMC's 2027 election is open — and the multi-year sign-up is not automatic",
+    "url": "https://www.fsa.usda.gov/news-events/news/09-30-2026/usda-announces-2027-dairy-margin-coverage-enrollment",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "Export value is up 10%, but U.S. powder is losing Southeast Asia outright",
+    "url": "https://blog.usdec.org/usdairyexporter/u.s.-dairy-exports-rebound-in-august",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "FDA's salt-substitute rule reopens the standards of identity for cheese and milk",
+    "url": "https://www.federalregister.gov/documents/2026/10/13/2026-20848/use-of-salt-substitutes-to-reduce-the-sodium-content-in-standardized-foods",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "A new 25% match on dairy processing grants lands on all four regional programs",
+    "url": "https://www.wischeesemakersassn.org/news/wcma-calls-on-usda-to-reverse-new-cost-share-requirement-for-dairy-business-innovation-initiatives",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-11",
+    "headline": "Ireland's milk is down 8.4% and its components are moving the wrong way",
+    "url": "https://www.cso.ie/en/releasesandpublications/ep/p-ms/milkstatisticsaugust2026/",
+    "topic": "supply"
   }
 ]
