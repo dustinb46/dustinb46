@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Butter closes at $1.2750 while powder closes at $2.2675",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "October WASDE splits the classes: Class III cut to $15.80, Class IV lifted to $18.90",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "US powder now sits roughly $950 to $1,375 a tonne above European SMP",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "August exports: value up 10%, volume up just 2%, powder down 19%",
+    "url": "https://blog.usdec.org/usdairyexporter/u.s.-dairy-exports-rebound-in-august",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "H5N1 confirmed in two Washington dairy herds - a first for the state",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-two-dairy-herds",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "The forward-contracting exemption quietly ran out on October 1",
+    "url": "https://public-inspection.federalregister.gov/2026-03985.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Corn forecast cut to $4.70 on a 16-billion-bushel crop",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Dyed diesel opened to highway use, with the 24.4-cent federal tax deferred to year-end",
+    "url": "https://www.whitehouse.gov/releases/2026/10/president-trump-takes-decisive-action-to-lower-diesel-costs-for-american-truckers-farmers/",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Australia's cheese and butter shelves are going American",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Wisconsin's next processor grant round closes at noon on November 3",
+    "url": "https://content.govdelivery.com/accounts/WIGOV/bulletins/42d6794",
+    "topic": "processing"
   }
 ]
