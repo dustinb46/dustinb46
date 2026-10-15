@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "Cheese blocks jump 14 cents in three sessions while barrels never move",
+    "url": "https://www.cheesemarketnews.com/markets/dailymarkets.html",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "Butter is the cheapest thing on the board, and powder now carries a 99-cent premium over it",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "USDA pencils Class IV above Class III all the way through 2027",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "H5N1 reaches Washington dairy herds for the first time, in herds that had been testing clean",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-two-dairy-herds",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "The cooperatives' export assistance program is now an antitrust defendant",
+    "url": "https://www.courthousenews.com/consumers-accuse-milk-cartel-of-antitrust-violations/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "2027 Dairy Margin Coverage enrollment runs to December 18, with Tier 1 now at 6 million pounds",
+    "url": "https://hpj.com/2026/10/09/dairy-margin-coverage-enrollment-opens-for-2027/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "August's margin came in at $9.34, the third payment trigger of 2026",
+    "url": "https://www.agproud.com/articles/64210-dairy-margin-coverage-payment-triggered-in-august",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "August exports rebounded, but the powder leg is breaking",
+    "url": "https://blog.usdec.org/usdairyexporter/u.s.-dairy-exports-rebound-in-august",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "Ireland's August milk take fell 8.4 percent, and the UK is short too",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-15",
+    "headline": "EuroTier's award list is now mostly cameras pointed at cows",
+    "url": "https://foodagribusiness.world/dairy/award-winning-dairy-technologies-from-eurotier-2026",
+    "topic": "technology"
   }
 ]
