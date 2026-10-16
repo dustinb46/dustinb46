@@ -1,0 +1,1258 @@
+{
+  "note": "Exclusion set reconstructed on 2026-10-16 from the Gmail drafts of prior editions, because ledger.json in main stops at 2026-09-01 (each scheduled run gets a fresh branch, so per-run ledgers were never merged). Headlines only - canonical URLs were not recoverable from the drafts, which return Gmail-rewritten redirect links. Use for dedup, not for citation.",
+  "window": {
+    "from": "2026-09-20",
+    "to": "2026-10-15"
+  },
+  "count": 208,
+  "items": [
+    {
+      "date": "2026-10-15",
+      "headline": "Cheese blocks jump 14 cents in three sessions while barrels never move",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "Butter is the cheapest thing on the board, and powder now carries a 99-cent premium over it",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "USDA pencils Class IV above Class III all the way through 2027",
+      "topic": "outlook",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "H5N1 reaches Washington dairy herds for the first time, in herds that had been testing clean",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "The cooperatives' export assistance program is now an antitrust defendant",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "2027 Dairy Margin Coverage enrollment runs to December 18, with Tier 1 now at 6 million pounds",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "August's margin came in at $9.34, the third payment trigger of 2026",
+      "topic": "margins",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "August exports rebounded, but the powder leg is breaking",
+      "topic": "trade",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "Ireland's August milk take fell 8.4 percent, and the UK is short too",
+      "topic": "global supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "EuroTier's award list is now mostly cameras pointed at cows",
+      "topic": "technology",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "Blocks rally 5.75 cents in two sessions and all but close the barrel inversion",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "The salt-substitute rule is final - and the only window to object to the dairy half closes November",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "There is finally a per-cow number on an H5N1 herd break: a median $152",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "Texas released three more screwworm zones in four days",
+      "topic": "compliance",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "Corn harvest closed the gap to six points - but Iowa is still 20 points behind",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "Hybrid rye silage is not a free swap for a short silage inventory",
+      "topic": "feed",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "A methionine target expressed per unit of energy moved fat and protein without moving intake",
+      "topic": "feed",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-14",
+      "headline": "Ornua lifts the 2026 global milk forecast to 2.2% and the EU back to pre-drought",
+      "topic": "global supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-13",
+      "headline": "Low milk fever rates can hide a calcium problem that shows up on day four",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-13",
+      "headline": "An antitrust class action puts cooperative export assistance in front of a judge",
+      "topic": "legal",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-13",
+      "headline": "A senator now wants the dairy processing grant match reversed - with $12.65 million in play",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-13",
+      "headline": "Farm debt is at a record, and USDA's own researchers think the real number is higher",
+      "topic": "finance",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-13",
+      "headline": "FDA opens two traceability windows that close before the new year",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-13",
+      "headline": "Europe's largest co-op raises its per-practice payment by a third for 2027",
+      "topic": "sustainability",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-13",
+      "headline": "UK milk is shrinking while its cheese exports set a record - and bluetongue is the wild card",
+      "topic": "trade",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "USDA now forecasts a second straight year of Class IV over Class III",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "Spot butter at $1.2750 undercuts the butterfat price every class is built on",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "Cheddar blocks are trading below barrels while plants still pay up for spot milk",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "The feed side of the margin just got cheaper: corn stocks up 282 million bushels",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "Washington's first H5N1 dairy herds followed more than 7,000 clean surveillance tests",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "DMC's 2027 election is open - and the multi-year sign-up is not automatic",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "Export value is up 10%, but U.S. powder is losing Southeast Asia outright",
+      "topic": "trade",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "FDA's salt-substitute rule reopens the standards of identity for cheese and milk",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "A new 25% match on dairy processing grants lands on all four regional programs",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-11",
+      "headline": "Ireland's milk is down 8.4% and its components are moving the wrong way",
+      "topic": "trade",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "MILK PRICE — Class IV is running more than $5 over Class III",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "MILK PRICE — USDA's October forecast makes the class inversion a two-year problem",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "feed relief is only half a loaf",
+      "topic": "inputs — corn br",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "PROCESSING — Butter hits its lowest price since February 2021 as butterfat floods the market",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "TRADE — Powder is near a record price and exports are at a seven-year low at the same time",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "PROCESSING — Whey is within a penny of its all-time high and quietly carrying Class III",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "ANIMAL HEALTH — H5N1 confirmed in two Washington dairy herds, the state's first livestock detections",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "POLICY — 2027 Dairy Margin Coverage enrollment is open, and Tier 1 now covers six million pounds",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "PROCESSING — Wisconsin's processor grant round names 10 winners and reopens with a Nov. 3 deadline",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-10",
+      "headline": "TECHNOLOGY — The Expo floor has shifted from sensors that watch cows to tools that replace labour",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "ANIMAL HEALTH — H5N1 reaches Washington dairy herds, after both herds had tested clean",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "POLICY — The Dairy Forward Pricing Program quietly lapsed on October 1",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "MILK PRICE — Class IV finished September $2.90 above Class III",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "MILK PRICE — Cheese barrels are trading over blocks, and butter keeps sliding",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "TRADE — August exports held on value, but powder to Southeast Asia fell off a cliff",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "INPUTS — Freight is running about 50% above year-ago levels",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "INPUTS — Corn harvest is behind and condition slipped to 54% good-to-excellent",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "INPUTS — FSA loan rates stepped up again for October",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-09",
+      "headline": "POLICY — The $100 million organic transition program ended September 30",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "Skim powder is now $242 a tonne above whole milk powder - a first",
+      "topic": "global markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "The calf check has already given up a third of its peak",
+      "topic": "farm economy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "Retailers reversed course on dairy ads - organic cheese features more than doubled",
+      "topic": "demand",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "A midge-borne virus that cuts milk yield just reached Ireland - with no reporting requirement attach",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "Pediatricians renew the call for an outright ban on raw milk and raw-milk cheese",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "Canada's housing and calf standards stop being recommendations in 18 months",
+      "topic": "compliance",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "A $25 million bet on drying capability lands in southern Wisconsin",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "Cheddar blocks touch a five-year low; October Class III settles under $15",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "September finals put Class IV $2.90 above Class III",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "Feed got more expensive, not cheaper, while the milk check shrank",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "Fourteen cooperatives sued over the export program that moved record volume",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "Texas eases one screwworm zone as the rest stay locked down",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "The Canada dairy fight escalated to an outright whey ban",
+      "topic": "trade",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "Freight is running about 50% above year-ago levels",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "Butter stocks are 10% above last year even with spot butter at $1.31",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "Cull cow values have given back 18% since spring",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "The organic transition program ended Sept. 30; a comment window is still open",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-06",
+      "headline": "The butter-powder gap cleared 90 cents on Monday, and the cheddar inversion",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-06",
+      "headline": "Powder stocks are shrinking even as output climbs - and American cheese has now",
+      "topic": "supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-06",
+      "headline": "Harvest is running behind across the Corn Belt, and Iowa's bean crop is barely",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-06",
+      "headline": "Four years of methane-cutting feed on commercial herds: milk held, components",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-06",
+      "headline": "A shallower pit: a new batch-milking layout takes the basement out of a robot",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-06",
+      "headline": "Ten of 14: Wisconsin's processor grant round was barely contested",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-06",
+      "headline": "Every FSA loan rate except emergency moved up on Oct. 1",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "August milk production 9.71M head, per-cow output -1 lb",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> failed verification - https://www.google.com/url?q=http://globaldairytrade.info&source=gmail&ust=",
+      "topic": "global dairy tra",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "Terrain 'all eyes on milk surplus in 2026' analysis",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> no new development - law signed Jan. 14, 2026 and final rule May 8, 2026; a Secretary restating i",
+      "topic": "whole milk back",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> single small plant, local; no consequence statable for a commercial dairy audience at large",
+      "topic": "creamery plant f",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "New Zealand record August milksolids, 102.8M kg (+2.9%)",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> current-status figures trace to Oct. 2025 vintage sources; no live Oct. 2026 development confirme",
+      "topic": "h-2a two-tier ae",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> vendor product launch with no consequence statable in one line beyond marketing claims",
+      "topic": "lely astronaut a",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "World Dairy Expo product auction raised $48,150",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> calendar notice, no consequence",
+      "topic": "dairy food safet",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "NOP information-collection comment period to Nov. 24",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> both fiscal-year results reported months ago; not recent",
+      "topic": "saputo fy2026 an",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "Pennsylvania organic prices slipped in July 2026",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-05",
+      "headline": "-> already sent 10-02",
+      "topic": "california dairy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "page content is from 2024; replaced with the Idaho ISDA primary.",
+      "topic": "cidrap \"h5n1 sur",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "announced Sep 23, outside window; used as context inside item 1 only.",
+      "topic": "october class i",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "September Class IV landed $2.90 over Class III - and the futures board has October at $5.21",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "August DMC margin came in at $9.34 - the first actual trip below the trigger since February",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "Freight is running 50% above year-ago levels and it is widening regional price spreads",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "Dry whey at 82.50 cents and isolate in the $14s - the whey stream is repricing your Class III check",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "Federally pooled milk ran 5.3% above year-ago in August - and the uniform price still fell",
+      "topic": "supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "Idaho now has 18 dairies under H5N1 quarantine spread across nine counties",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "Dairy cow slaughter is 4.2% ahead of last year, and dairy cows are nearly a fifth of the kill",
+      "topic": "supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "Butter stocks closed August 10% above year-ago, and the forward curve gave way",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-04",
+      "headline": "The $100 million organic transition program ended September 30 with no successor funding",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[INPUTS] Corn stocks come in at a seven-year high — 2.10 billion bushels, up 35%",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[MILK PRICE] British processors pushed October farmgate prices past 40 pence while U.S. prices sagge",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[TRADE] The U.S.-China tariff board is now operating — and dairy is on the list it will work from",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[POLICY] USDA put nearly $13 million into dairy business innovation — the money small processors act",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[FOOD SAFETY] A warning label on raw-milk cheese is headed to FDA, and comments close October 9",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[POLICY] California's digester credits are now in court — and 123 dairy digesters are downstream of",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[PROCESSING] Arla puts €63 million behind skyr and cottage cheese as high-protein volumes run double",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "New Zealand first, 10 to 15 percent, every three months",
+      "topic": "[animal health]",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-02",
+      "headline": "[PRODUCTION] Milk loss is 1.8% on farm and 5.5% at the plant — and the farm share is mostly colostru",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[INPUTS] Diesel slips off a record but still sits $2.63 a gallon above last year",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[MILK PRICE] Barrels are trading 17.75 cents over blocks — a wide and persistent inversion",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[MILK PRICE] October Class I base price lands at $18.88, up $1.84 from September",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[POLICY] 2027 Dairy Margin Coverage signup opens October 5 with a bigger Tier 1 and cheaper multi-ye",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[FOOD SAFETY] Raw-milk cheese E. coli outbreak reaches 13 cases across nine states, three with kidne",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[SUPPLY] August milk was up 1.7% — and every bit of it came from more cows, not better cows",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[ANIMAL HEALTH] Calf monitoring extends to bucket-fed pens, with a mortality figure attached",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[TRADE] Canada's 25% tariff on U.S. cheese is now three weeks old, with a $0.20-0.35/cwt price drag",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[PROCESSING] A Wisconsin culture plant just added two-thirds more fermentation capacity",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-10-01",
+      "headline": "[INPUTS] Wisconsin processor grants close at noon November 3 — up to $50,000 on a 20% match",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "August's all-milk price came in at $19.80 - below last month and below last year",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "A pound of milk now buys exactly two pounds of dairy feed",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "Barrels closed 17.75 cents over blocks - and butter is now worth more than block cheddar",
+      "topic": "markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "October Class III settled at $14.90",
+      "topic": "markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "Feeder cattle prices fell $29 in a month - and slipped under year-ago",
+      "topic": "cattle",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "Britain lost more than 240 million litres of milk to heat between May and August",
+      "topic": "global",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "Saputo splits out a dedicated global Ingredients Division",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-30",
+      "headline": "Nearly all the fat in discarded ice cream can be spun back out - at about 40 cents a kilo",
+      "topic": "research",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "China's tariff-relief list names 22 U.S. dairy tariff lines",
+      "topic": "trade",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "ICE operations in southwest Kansas cut a day's fed-cattle kill by 17,000 head",
+      "topic": "labor",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "The farm bill extension lapses tomorrow. Margin coverage does not.",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "Corteva pays $35 million and gives up loyalty pricing for ten years",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "Butter gave up another three cents Monday; powder is now 81 cents above it",
+      "topic": "markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "September's margin now pencils at $7.77 - well under the trigger",
+      "topic": "risk management",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "Schreiber puts $267 million into a new process-cheese plant in Missouri",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-29",
+      "headline": "Synlait books a NZ$75.4 million loss and a profitable second half",
+      "topic": "global",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "U.S. ban on Canadian whey imports takes effect September 29",
+      "topic": "trade",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "Barrels held 14.5 cents over blocks while powder ran to $2.17",
+      "topic": "markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "October Class I base lands at $18.88, set entirely off Class IV",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "August milk rose 1.7 percent on head count, not output per cow",
+      "topic": "supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "Kansas added 29,000 cows year over year while California lost milk",
+      "topic": "regional supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "Butter inventory is 10 percent heavier than a year ago",
+      "topic": "stocks",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "West Texas screwworm zones changed twice over the weekend",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "Fonterra lifts its 2026/27 midpoint to NZ$9.50",
+      "topic": "global markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-28",
+      "headline": "Wisconsin processor grants close at noon on November 3",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "A raw-milk cheese outbreak put eight of 13 patients in the hospital",
+      "topic": "food safety",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "Butter stocks are 10% above last year - with butter sitting at $1.40",
+      "topic": "markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "Every pound of the cheese build is in the \"other\" pile; American is dead flat",
+      "topic": "cheese",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "The FARM Version 2028 comment window closes Friday",
+      "topic": "compliance",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "USDA now has retail dairy finishing 2026 at plus 0.1 percent",
+      "topic": "demand",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "Rabobank now forecasts the Big 7 exporters to contract in the fourth quarter",
+      "topic": "global supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "Europe's producers are pushing Brussels to intervene earlier - and to police imports",
+      "topic": "global policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-27",
+      "headline": "Ice cream makers covering 90% of the market set a December 2027 colors deadline",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "June mailbox prices split the country: $18 in the Upper Midwest, $27 in Florida",
+      "topic": "milk check",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "The survey prices that set your milk check are 37 cents behind powder and 23 cents ahead of cheese",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "Barrels closed 14.5 cents over blocks, and bulk cheese is clearing below the exchange",
+      "topic": "cash markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "New Zealand posted a record August and Australia opened its season up 4%",
+      "topic": "global supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "Retailers pulled dairy ads across the board in week 39",
+      "topic": "demand",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "Cream is widely available, churns are running seven days, and butter is still $1.40",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "The dairy checkoff names only the third CEO in its history",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "Wisconsin reopens dairy processor grants: $50,000 a plant, noon November 3",
+      "topic": "programs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-26",
+      "headline": "48 hours. Independent; not affiliated with any cooperative, processor or government agency.",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "August milk is up 1.7% - and none of it came from the cow",
+      "topic": "milk supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "October Class I jumps $1.84 - and powder, not cheese, is paying for it",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "Dairy is now 10% of the U.S. cattle kill as beef cow slaughter collapses",
+      "topic": "cull market",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "CoBank puts a number on the components gap: up to $474 per cow",
+      "topic": "components",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "Fonterra books a NZ$9.69 season and guides to NZ$9.50 on 1.6 billion kgMS",
+      "topic": "global supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "Pasture and range hits 53% poor or very poor, against 36% a year ago",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "August feedlot placements were the lowest for the month since the series began in 1996",
+      "topic": "cattle",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "October's Class I base price is $18.88 - and powder, not cheese, is paying for the raise",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "Class II skim jumps $1.96 in one month - the yogurt-and-ice-cream class is suddenly the expensive on",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "Dry whey pushed to $0.7975 on Wednesday while blocks kept sliding",
+      "topic": "markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "Diesel added another 24 cents to $6.529 - and the Midwest took the worst of it",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "The Southeast hauling credit for October is being calculated on $5.804 diesel",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "USDA proposes cutting the post-outbreak import standdown for avian products from 90 days to 28",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "There is no organized October 1 trucking strike - only the fuel bill behind the rumor",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "August milk production rose 1.7% — and every pound of it came from more cows",
+      "topic": "supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "Powder closed 78.5 cents above butter on Tuesday",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "The survey prices that set your milk check are on the wrong side of both markets",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "The growth is not where the milk has always been: Kansas up 13.9%, California down",
+      "topic": "supply",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "Fonterra lifted its 2026/27 payout midpoint to NZ$9.50 and narrowed the range",
+      "topic": "global",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "A state is putting $127 million behind cows a new plant does not yet have",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "Texas keeps releasing screwworm zones as the national case count reaches 49",
+      "topic": "animal health",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-22",
+      "headline": "Blocks bounced, powder made another high, and butter gave up a cent",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-22",
+      "headline": "Corn silage came up short in the Central region — and spot milk is already tightening",
+      "topic": "inputs",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-22",
+      "headline": "Plants are rotating the whey stream out of WPC 34% and into isolate for Q4",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-22",
+      "headline": "Dairy is the one aisle deflating while the rest of the store inflates",
+      "topic": "demand",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-22",
+      "headline": "Butter and cheese are both coming out of the cooler, not going in",
+      "topic": "markets",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-22",
+      "headline": "European cheese buyers are running out of spot loads as EU milk seasonally declines",
+      "topic": "global",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-22",
+      "headline": "The number your processor will take into its next retail negotiation",
+      "topic": "demand",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Trade — The dairy action against Canada is, in practice, a whey ban",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Policy — Farm bill clears Senate Ag 12–11, nine working days before the extension lapses",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Milk Price — Cheddar blocks broke 7.25¢ in one Friday session and closed under barrels",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Milk Price — Nonfat closed at $2.08 while butter sat at $1.37",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Policy — ARC/PLC enrollment opened with 30 million new base acres — and a 3.69% haircut",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Policy — USDA cuts dairy checkoff funding for ESG work",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Supply — Dairy cow slaughter is running 16% above last year",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Animal Health — H5N1 turns up in Idaho dairy herds; 88 cattle detections so far this year",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Processing — A cooperative butter plant's Teamsters just won 27% over four years",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "Policy — Seventy-six dairy organizations moved against a front-of-pack warning label bill",
+      "topic": "unknown",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-20",
+      "headline": "Senate Ag sends the farm bill to the floor - and the extension expires September 30",
+      "topic": "policy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-20",
+      "headline": "USDA quietly corrects a Class I differential it got wrong in order reform",
+      "topic": "milk price",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-20",
+      "headline": "Feedlots took in the fewest August cattle since the series began in 1996",
+      "topic": "herd",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-20",
+      "headline": "The Fed raised rates for the first time in three years",
+      "topic": "farm economy",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-20",
+      "headline": "Europe's farmgate price is a fifth below last year - while its milk supply shrinks",
+      "topic": "global",
+      "source": "reconstructed-from-gmail-draft"
+    },
+    {
+      "date": "2026-09-20",
+      "headline": "Dairy processor grants open with a November 3 deadline and a 20% match",
+      "topic": "processing",
+      "source": "reconstructed-from-gmail-draft"
+    }
+  ]
+}
