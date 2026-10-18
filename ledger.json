@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Block cheddar adds 29.75 cents in five sessions — and November Class III repriced with it",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "USDA now forecasts Class IV above Class III by $2.00 in 2027 — on a 19-cent powder revision",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "H5N1 reaches Washington dairy cattle for the first time — 93 U.S. herds now confirmed in 2026",
+    "url": "https://www.cidrap.umn.edu/avian-influenza-bird-flu/washington-state-confirms-first-h5n1-avian-flu-detection-dairy-cattle",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Texas releases a screwworm infested zone — movement rules come off two more counties",
+    "url": "https://www.aphis.usda.gov/news/program-update/texas-releases-new-world-screwworm-infested-zones",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Corn harvest is six points behind — and Iowa is twenty points behind",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796104/prog4126.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "August exports rebounded — but the growth moved out of cheese and powder and into protein",
+    "url": "https://blog.usdec.org/usdairyexporter/u.s.-dairy-exports-rebound-in-august",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Wholesale butter has fallen by a third year over year; the retail shelf has barely moved",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "2027 DMC signup is open through December 18 — and the program's own forecast has nine months below the trigger",
+    "url": "https://www.agproud.com/articles/64230-enrollment-begins-for-2027-dairy-margin-coverage-program",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "August's DMC margin came in at $9.34 — the third payment of 2026, and it is 16 cents",
+    "url": "https://www.centerfordairyexcellence.org/markets-management/dairy-week-in-review/october-7-2026-dairy-week-in-review/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Culling is running 4% ahead of last year — about 81,000 more cows gone",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "supply"
   }
 ]
