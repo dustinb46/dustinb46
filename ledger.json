@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Cheese blocks add 29.75 cents in five sessions — and the futures board only partly followed",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Dry whey closes at 89.5 cents, trading far above its own futures board",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Powder splits: spot nonfat holds above $2.16 while December futures crack to $1.8825",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Butterfat deflation has moved from the spot market into the wholesale price indexes",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "October USDA estimates trim milk output, cut Class III, and lift the 2027 all-milk price to $20.45",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "H5N1 reaches Washington dairy cattle for the first time — after 7,000 clean surveillance tests",
+    "url": "https://agr.wa.gov/about-wsda/news-and-media-relations/news-releases?article=47359",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Raw cheddar recall corrected to seven states and two non-O157 E. coli serogroups",
+    "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/family-farmstead-dairy-announces-recall-raw-mild-cheddar-cheese-due-potential-e-coli-o26h11-and",
+    "topic": "food-safety"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Court keeps USDA's reorganization frozen through at least December 11",
+    "url": "https://farmpolicynews.illinois.edu/2026/10/judge-says-usda-reorg-likely-violates-congressional-directive/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "2027 Dairy Margin Coverage signup is open — and the multi-year election does not enroll you",
+    "url": "https://www.fsa.usda.gov/news-events/news/09-30-2026/usda-announces-2027-dairy-margin-coverage-enrollment",
+    "topic": "risk-management"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "A fermentation group with 16 million litres of capacity just bought the lactoferrin startup",
+    "url": "https://cultivated-x.com/investments-finance/mycofeast-buys-daisy-lab-bringing-new-zealand-lactoferrin-developer-fermentation-group/",
+    "topic": "technology"
   }
 ]
