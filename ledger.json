@@ -340,5 +340,161 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Cheese blocks add 29.75 cents in five sessions - and the futures board only partly followed",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Dry whey closes at 89.5 cents, trading far above its own futures board",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Powder splits: spot nonfat holds above $2.16 while December futures crack to $1.8825",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Butterfat deflation has moved from the spot market into the wholesale price indexes",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "October USDA estimates trim milk output, cut Class III, and lift the 2027 all-milk price to $20.45",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "H5N1 reaches Washington dairy cattle for the first time - after 7,000 clean surveillance tests",
+    "url": "https://agr.wa.gov/about-wsda/news-and-media-relations/news-releases?article=47359",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Raw cheddar recall corrected to seven states and two non-O157 E. coli serogroups",
+    "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/family-farmstead-dairy-announces-recall-raw-mild-cheddar-cheese-due-potential-e-coli-o26h11-and",
+    "topic": "food-safety"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "Court keeps USDA's reorganization frozen through at least December 11",
+    "url": "https://farmpolicynews.illinois.edu/2026/10/judge-says-usda-reorg-likely-violates-congressional-directive/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "2027 Dairy Margin Coverage signup is open - and the multi-year election does not enroll you",
+    "url": "https://www.fsa.usda.gov/news-events/news/09-30-2026/usda-announces-2027-dairy-margin-coverage-enrollment",
+    "topic": "risk-management"
+  },
+  {
+    "date": "2026-10-19",
+    "headline": "A fermentation group with 16 million litres of capacity just bought the lactoferrin startup",
+    "url": "https://cultivated-x.com/investments-finance/mycofeast-buys-daisy-lab-bringing-new-zealand-lactoferrin-developer-fermentation-group/",
+    "topic": "technology"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Block cheddar adds 29.75 cents in five sessions - and November Class III repriced with it",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "USDA now forecasts Class IV above Class III by $2.00 in 2027 - on a 19-cent powder revision",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "H5N1 reaches Washington dairy cattle for the first time - 93 U.S. herds now confirmed in 2026",
+    "url": "https://www.cidrap.umn.edu/avian-influenza-bird-flu/washington-state-confirms-first-h5n1-avian-flu-detection-dairy-cattle",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Texas releases a screwworm infested zone - movement rules come off two more counties",
+    "url": "https://www.aphis.usda.gov/news/program-update/texas-releases-new-world-screwworm-infested-zones",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Corn harvest is six points behind - and Iowa is twenty points behind",
+    "url": "https://esmis.nal.usda.gov/sites/default/release-files/796104/prog4126.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "August exports rebounded - but the growth moved out of cheese and powder and into protein",
+    "url": "https://blog.usdec.org/usdairyexporter/u.s.-dairy-exports-rebound-in-august",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Wholesale butter has fallen by a third year over year; the retail shelf has barely moved",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "2027 DMC signup is open through December 18 - and the program's own forecast has nine months below the trigger",
+    "url": "https://www.agproud.com/articles/64230-enrollment-begins-for-2027-dairy-margin-coverage-program",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "August's DMC margin came in at $9.34 - the third payment of 2026, and it is 16 cents",
+    "url": "https://www.centerfordairyexcellence.org/markets-management/dairy-week-in-review/october-7-2026-dairy-week-in-review/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-18",
+    "headline": "Culling is running 4% ahead of last year - about 81,000 more cows gone",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-20",
+    "headline": "Protein is now worth 1.8 times butterfat in the component milk check",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "components"
+  },
+  {
+    "date": "2026-10-20",
+    "headline": "The whey price that actually pays you is still at 72 cents",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "whey"
+  },
+  {
+    "date": "2026-10-20",
+    "headline": "The corn harvest gap widened again — Iowa is now 24 points behind",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/prog4226.txt",
+    "topic": "corn-harvest"
+  },
+  {
+    "date": "2026-10-20",
+    "headline": "Western hay trade is thinning: confirmed Idaho volume down 44% as dairies buy load by load",
+    "url": "https://www.ams.usda.gov/mnreports/ams_3056.pdf",
+    "topic": "hay"
+  },
+  {
+    "date": "2026-10-20",
+    "headline": "CME will list European dairy futures before year-end",
+    "url": "https://prnewswire.com/news-releases/cme-group-expands-dairy-business-with-new-european-futures-and-options-302912019.html",
+    "topic": "futures"
+  },
+  {
+    "date": "2026-10-20",
+    "headline": "A fermentation-made milk protein clears its US safety hurdle for supplements",
+    "url": "https://www.foodnavigator.com/Article/2026/10/20/better-dairy-self-affirms-gras-status-for-lactopontin/",
+    "topic": "fermentation"
   }
 ]
