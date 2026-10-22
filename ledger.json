@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "November Class I lands at $20.27 — and the mover is powder, not cheese",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "The advanced butterfat factor drops to $1.3730 — the lowest of 2026",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "Screwworm turns up in U.S. wildlife for the first time — four days before another border port reopens",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-first-detection-new-world-screwworm-us-wildlife",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "USDA quietly attached a 25% match to dairy value-added grants — and 16 members of Congress want it gone",
+    "url": "https://pocan.house.gov/media-center/press-releases/pocan-welch-lead-16-members-urging-ag-sec-rollins-reissue-dairy",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "USDA cut its milk forecast for both 2026 and 2027 — and cut fat-basis exports at the same time",
+    "url": "https://www.ers.usda.gov/topics/animal-products/dairy/market-outlook",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "The processing build is now $15 billion — and it is tilting to fluid and cream, not cheese",
+    "url": "https://idfa.org/news/u-s-dairy-processing-invests-15-billion-in-manufacturing-across-23-states",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "Washington loses its HPAI-free herd status 18 months after earning it",
+    "url": "https://agr.wa.gov/about-wsda/news-and-media-relations/news-releases",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "A class action now targets the export program that clears your surplus fat and cheese",
+    "url": "https://www.foodbev.com/news/us-consumers-launch-antitrust-lawsuit-against-dairy-cooperatives-over-alleged-milk-price-inflation",
+    "topic": "legal"
+  },
+  {
+    "date": "2026-10-22",
+    "headline": "Retail is passing through the butter collapse but not the milk decline",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "demand"
   }
 ]
