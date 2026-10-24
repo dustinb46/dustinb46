@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Powder, not cheese, is setting the November Class I mover",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Blocks have given up 15.8 cents in five weeks while powder added 20",
+    "url": "https://www.ams.usda.gov/mnreports/dywdairyproductssales.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "September milk up 2.7% — and the herd is still growing",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/mkpr1026.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Butter stocks are running 16% above last year",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/cost1026.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Retail cheddar set a record in the same month wholesale blocks slid",
+    "url": "https://data.bls.gov/timeseries/APU0000710212",
+    "topic": "demand"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "USDA reopens the exempt-plant question for the first time since 1999",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-23/pdf/2026-21668.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "H5N1 found in two herds that had kept testing clean",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-two-dairy-herds",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Four screwworm zone orders in four days across West Texas",
+    "url": "https://www.tahc.texas.gov/emergency/nws.html",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Diesel has held above $6 a gallon for six straight weeks",
+    "url": "https://www.eia.gov/petroleum/gasdiesel/",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Methane-mitigating concentrates held milk yield but moved milk chemistry",
+    "url": "https://bioengineer.org/methane-cutting-cattle-feed-keeps-milk-flowing-but-shifts-milk-chemistry-on-real-farms/",
+    "topic": "research"
   }
 ]
