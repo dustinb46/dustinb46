@@ -59,8 +59,14 @@ as a standalone page on GitHub Pages and linked from the archive on `index.html`
   last 30 days as the exclusion set; append the run's kept items at the end.
   **Caveat:** each scheduled run gets a fresh working branch, so a ledger written on a
   previous run's branch is invisible to the next one. The ledger only persists if it is
-  merged to `main`. If `ledger.json` is missing at the start of a run, reconstruct it from
-  the Gmail drafts of prior editions before treating the exclusion set as empty.
+  merged to `main`. If `ledger.json` is missing *or its newest entry is more than a day
+  old*, reconstruct the exclusion set from the Gmail drafts of prior editions before
+  treating it as complete — a stale ledger is more dangerous than a missing one, because
+  it looks authoritative. Fastest reconstruction: `list_drafts` with
+  `query: subject:"Dairy Intelligence Brief"` and `view: DRAFT_VIEW_FULL` returns each
+  draft's `plaintextBody`, so prior editions can be parsed in bulk without fetching them
+  one at a time. (On 2026-10-25 the on-`main` ledger ended at 2026-09-01 while drafts
+  existed through 2026-10-24; eight of ten researched items that run were already sent.)
 
 ## Build steps
 
