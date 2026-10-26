@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "November Class I lands at $20.27 — and powder, not cheese, is writing the check",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Spot Class III milk is trading up to $4.00 over class in the Central region",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "September milk was up 2.7% — but the growth has moved to Kansas and the Dakotas",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/mkpr1026.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "USDA cut its Class III forecast and quietly raised the butter and cheese import outlook",
+    "url": "https://www.ers.usda.gov/media/29753/ldp-m-388.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Screwworm reaches U.S. wildlife days before another cattle port reopens",
+    "url": "https://www.aphis.usda.gov/animals/animal-health/livestock-and-poultry-disease/stop-screwworm/current-status",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "H5N1 hit two Washington dairies that had been testing negative right up until they got sick",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-two-dairy-herds",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Culling is running 4% ahead of last year even as the national herd grows",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "The fat-versus-protein split just showed up on the global auction too",
+    "url": "https://ahdb.org.uk/dairy/global-dairy-trade-events",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "The processing build-out tally is now above $15 billion across 23 states",
+    "url": "https://www.idfa.org/news/u-s-dairy-processing-invests-15-billion-in-manufacturing-across-23-states",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Dairy's largest co-op group backs letting nonfat dry milk be protein-standardized",
+    "url": "https://cowsmo.com/news/nmpf-board-votes-to-support-risk-management-enhancements/",
+    "topic": "policy"
   }
 ]
