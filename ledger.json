@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Forward-contract authority lapsed October 1 — and the exemption went with it",
+    "url": "http://www.fmmatlanta.com/Misc_Docs/Expiration%20of%20Dairy%20Forward%20Pricing%20Program%202026.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "November Class I base price jumps $1.39 to $20.27",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Cheese adds nearly 20 cents in a week, and Central spot milk reaches $4-over",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Butter stocks are 16% above a year ago heading into the holiday draw",
+    "url": "https://esmis.nal.usda.gov/publication/cold-storage/2026-10-23",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "September milk production up 2.7% — and it is mostly more cows",
+    "url": "https://esmis.nal.usda.gov/publication/milk-production/2026-10-22",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Dairy culling is climbing at the same time as the herd",
+    "url": "https://esmis.nal.usda.gov/publication/livestock-slaughter/2026-10-22",
+    "topic": "herd"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "USDA reopens a milk-order exemption that has not changed since 1999",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-23/pdf/2026-21668.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "USDA names the cause of its September corn error and keeps October intact",
+    "url": "https://www.nass.usda.gov/Newsroom/Notices/2026/10-24-2026.php",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "The 50% tariff on Canadian cheese is now in front of a trade court",
+    "url": "https://www.aljazeera.com/economy/2026/10/20/us-food-importer-sues-trump-over-50-percent-tariffs-on-canadian-goods",
+    "topic": "trade"
   }
 ]
