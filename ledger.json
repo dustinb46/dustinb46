@@ -340,5 +340,47 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "A six-year DMC lock-in still needs a signature and $100 before December 18",
+    "url": "https://www.fsa.usda.gov/resources/programs/dairy-margin-coverage-program-dmc",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Bird flu reaches a second Washington county — and this time testing found it first",
+    "url": "https://agr.wa.gov/about-wsda/news-and-media-relations/news-releases?article=47441",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Soybeans have passed their average pace; corn is still six points behind it",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/prog4326.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "The big exporters' milk growth is forecast to fall from 3.1% to 0.5%",
+    "url": "https://ahdb.org.uk/news/q3-2026-dairy-market-review",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Eleven fermented milk proteins have now cleared the FDA's safety review",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13564971/",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Organic feed corn fell more than $1.50 a bushel while organic whole milk sales rose 9%",
+    "url": "https://www.ams.usda.gov/mnreports/dybdairyorganic.pdf",
+    "topic": "organic"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "The cull market cracked at a major auction yesterday",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1823.pdf",
+    "topic": "herd"
   }
 ]
