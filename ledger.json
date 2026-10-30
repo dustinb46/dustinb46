@@ -340,5 +340,359 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-23",
+    "headline": "Block cheddar is now 39.5 cents clear of butter, and the gap widened every session this week",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-23",
+    "headline": "Powder and whey broke in the same Wednesday session - the first crack in the skim complex",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-23",
+    "headline": "September uniform prices fell for a third straight month, to an $18.98 average",
+    "url": "https://www.agproud.com/articles/64282-september-uniform-milk-price-stumbles",
+    "topic": "milk-check"
+  },
+  {
+    "date": "2026-10-23",
+    "headline": "New Mexico draws a new 12.4-mile screwworm zone around a single cow",
+    "url": "https://nmdeptag.nmsu.edu/new-release/2026/nm-confirms-new-world-screwworm-case-in-otero-county.html",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-23",
+    "headline": "The $8 billion fuel relief program has a formula but no rates, and nothing for dairy yet",
+    "url": "https://www.dtnpf.com/agriculture/web/ag/news/business-inputs/article/2026/10/20/rollins-announces-8-billion-harvest",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-23",
+    "headline": "The co-op federation's board put its weight behind changes to both federal risk-management programs",
+    "url": "https://www.rrfn.com/2026/10/20/nmpf-board-endorses-risk-management-enhancements/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-23",
+    "headline": "The processors' trade association changes leadership for the first time in a decade",
+    "url": "https://perishablenews.com/?p=436929",
+    "topic": "industry"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Powder, not cheese, is setting the November Class I mover",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Blocks have given up 15.8 cents in five weeks while powder added 20",
+    "url": "https://www.ams.usda.gov/mnreports/dywdairyproductssales.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "September milk up 2.7% - and the herd is still growing",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/mkpr1026.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Butter stocks are running 16% above last year",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/cost1026.pdf",
+    "topic": "inventories"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Retail cheddar set a record in the same month wholesale blocks slid",
+    "url": "https://data.bls.gov/timeseries/APU0000710212",
+    "topic": "consumer"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "USDA reopens the exempt-plant question for the first time since 1999",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-23/pdf/2026-21668.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "H5N1 found in two herds that had kept testing clean",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-two-dairy-herds",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Four screwworm zone orders in four days across West Texas",
+    "url": "https://www.tahc.texas.gov/emergency/nws.html",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Diesel has held above $6 a gallon for six straight weeks",
+    "url": "https://www.eia.gov/petroleum/gasdiesel/",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-24",
+    "headline": "Methane-mitigating concentrates held milk yield but moved milk chemistry",
+    "url": "https://bioengineer.org/methane-cutting-cattle-feed-keeps-milk-flowing-but-shifts-milk-chemistry-on-real-farms/",
+    "topic": "research"
+  },
+  {
+    "date": "2026-10-25",
+    "headline": "Central cheese plants are paying up to $4 over class for spot milk",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-25",
+    "headline": "Dairy cows are now 10.4% of the U.S. cattle kill",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/lstk1026.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-25",
+    "headline": "September feedlot placements were the lowest in the 30-year series",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/cofd1026.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-25",
+    "headline": "European powder now undercuts U.S. spot while Europe's herd hits a record low",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-25",
+    "headline": "Cheddar stocks are shrinking while mozzarella-type cheese sets a September record",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/cost1026.pdf",
+    "topic": "inventories"
+  },
+  {
+    "date": "2026-10-25",
+    "headline": "Four screwworm cases in seven days, across three New Mexico counties",
+    "url": "https://screwwormnm.org/",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "November Class I lands at $20.27 - and powder, not cheese, is writing the check",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Spot Class III milk is trading up to $4.00 over class in the Central region",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "September milk was up 2.7% - but the growth has moved to Kansas and the Dakotas",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/mkpr1026.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "USDA cut its Class III forecast and quietly raised the butter and cheese import outlook",
+    "url": "https://www.ers.usda.gov/media/29753/ldp-m-388.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Screwworm reaches U.S. wildlife days before another cattle port reopens",
+    "url": "https://www.aphis.usda.gov/animals/animal-health/livestock-and-poultry-disease/stop-screwworm/current-status",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "H5N1 hit two Washington dairies that had been testing negative right up until they got sick",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-two-dairy-herds",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Culling is running 4% ahead of last year even as the national herd grows",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "The fat-versus-protein split just showed up on the global auction too",
+    "url": "https://ahdb.org.uk/dairy/global-dairy-trade-events",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "The processing build-out tally is now above $15 billion across 23 states",
+    "url": "https://www.idfa.org/news/u-s-dairy-processing-invests-15-billion-in-manufacturing-across-23-states",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-26",
+    "headline": "Dairy's largest co-op group backs letting nonfat dry milk be protein-standardized",
+    "url": "https://cowsmo.com/news/nmpf-board-votes-to-support-risk-management-enhancements/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Forward-contract authority lapsed October 1 - and the exemption went with it",
+    "url": "http://www.fmmatlanta.com/Misc_Docs/Expiration%20of%20Dairy%20Forward%20Pricing%20Program%202026.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "November Class I base price jumps $1.39 to $20.27",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Cheese adds nearly 20 cents in a week, and Central spot milk reaches $4-over",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Butter stocks are 16% above a year ago heading into the holiday draw",
+    "url": "https://esmis.nal.usda.gov/publication/cold-storage/2026-10-23",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "September milk production up 2.7% - and it is mostly more cows",
+    "url": "https://esmis.nal.usda.gov/publication/milk-production/2026-10-22",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "Dairy culling is climbing at the same time as the herd",
+    "url": "https://esmis.nal.usda.gov/publication/livestock-slaughter/2026-10-22",
+    "topic": "herd"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "USDA reopens a milk-order exemption that has not changed since 1999",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-23/pdf/2026-21668.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "USDA names the cause of its September corn error and keeps October intact",
+    "url": "https://www.nass.usda.gov/Newsroom/Notices/2026/10-24-2026.php",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-27",
+    "headline": "The 50% tariff on Canadian cheese is now in front of a trade court",
+    "url": "https://www.aljazeera.com/economy/2026/10/20/us-food-importer-sues-trump-over-50-percent-tariffs-on-canadian-goods",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "A six-year DMC lock-in still needs a signature and $100 before December 18",
+    "url": "https://www.fsa.usda.gov/resources/programs/dairy-margin-coverage-program-dmc",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Bird flu reaches a second Washington county - and this time testing found it first",
+    "url": "https://agr.wa.gov/about-wsda/news-and-media-relations/news-releases?article=47441",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Soybeans have passed their average pace; corn is still six points behind it",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/prog4326.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "The big exporters' milk growth is forecast to fall from 3.1% to 0.5%",
+    "url": "https://ahdb.org.uk/news/q3-2026-dairy-market-review",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Eleven fermented milk proteins have now cleared the FDA's safety review",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13564971/",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "Organic feed corn fell more than $1.50 a bushel while organic whole milk sales rose 9%",
+    "url": "https://www.ams.usda.gov/mnreports/dybdairyorganic.pdf",
+    "topic": "organic"
+  },
+  {
+    "date": "2026-10-28",
+    "headline": "The cull market cracked at a major auction yesterday",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1823.pdf",
+    "topic": "herd"
+  },
+  {
+    "date": "2026-10-29",
+    "headline": "Whey, powder and butter all broke in the same session while cheese held",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-29",
+    "headline": "U.S. butterfat is clearing 40% under the world price - and U.S. cheese and powder are now above it",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1604.pdf",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-10-29",
+    "headline": "Danone's North American volumes went backwards last quarter",
+    "url": "https://www.danone.com/content/dam/corp/global/danonecom/investors/en-all-publications/2026/pressreleases/prdanone281026.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-10-29",
+    "headline": "An Australian state has written cell-cultured food into its dairy statute, with a milk analogue application pending",
+    "url": "https://www.stockandland.com.au/story/9381584/dairy-leaders-sound-alarm-over-approval-of-cell-cultured-food/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-30",
+    "headline": "Washington's own tally now lists 30 H5N1 dairy herds, 29 of them in one county",
+    "url": "https://agr.wa.gov/departments/animals-livestock-and-pets/avian-health/avian-influenza/hpai-(h5n1)-in-cattle-producer-resources",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-30",
+    "headline": "Milk carton board, filling lines and refrigeration came off a 50% Canadian duty at 12:01 this morning",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-30/pdf/2026-22292.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-30",
+    "headline": "The survey prices that write the milk check all turned up at once - and still sit 32 cents under spot cheese",
+    "url": "https://www.ams.usda.gov/mnreports/dywdairyproductssales.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-10-30",
+    "headline": "Wednesday's break in fat and powder lasted exactly one session",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-30",
+    "headline": "A dog in New Mexico just put part of El Paso County under a livestock movement quarantine",
+    "url": "https://www.tahc.texas.gov/regs/pdf/2026-10-29_NWS_EDO_ElPaso.pdf",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-30",
+    "headline": "The Fed held, and the only two dissents wanted rates higher",
+    "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf",
+    "topic": "inputs"
   }
 ]
