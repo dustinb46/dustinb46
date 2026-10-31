@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "September margin lands at $8.35 — DMC pays $1.15 per cwt",
+    "url": "https://www.agproud.com/articles/64365-september-prices-trigger-dairy-margin-coverage-payment",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "Cheese blocks break 13.75¢ and leave barrels trading above them",
+    "url": "https://brownfieldagnews.com/news/cheese-blocks-drop-sharply-while-butter-dry-whey-gain-friday-at-cme/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "USDA buys $165.5 million in dairy — the largest slice of a $472.5M food package",
+    "url": "https://www.agproud.com/articles/64351-usda-announces-purchase-of-1655m-dairy-products",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "Washington goes from zero to 27 H5N1 herds in three weeks",
+    "url": "https://www.opb.org/article/2026/10/29/washington-state-dairy-farms-bird-flu-spread/",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "Screwworm reaches a third state as USDA reopens another cattle port",
+    "url": "https://www.dtnpf.com/agriculture/web/ag/livestock/article/2026/10/30/new-world-screwworm-found-arizona",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "The September production data shows where the new milk actually is: Kansas, up 14.7%",
+    "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/mkpr1026.pdf",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "November Class I base jumps $1.39 to $20.27 — effective tomorrow",
+    "url": "https://www.agproud.com/articles/64305-november-class-i-base-price-up-to-2027-per-cwt",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "The H-2A wage rule dies December 30, and Labor has to rewrite it first",
+    "url": "https://fortune.com/2026/10/28/trump-h2a-farmworker-pay-cut-ruling-back-pay-deadline/",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-10-31",
+    "headline": "A meta-analysis of 31 trials finds essential oil additives do nothing measurable",
+    "url": "https://www.frontiersin.org/journals/animal-science/articles/10.3389/fanim.2026.1923564/full",
+    "topic": "inputs"
   }
 ]
