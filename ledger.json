@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "Barrels are trading 14.75 cents OVER blocks — a rare, costly inversion",
+    "url": "https://brownfieldagnews.com/news/cme-dairy-prices-mixed-as-cheese-blocks-butter-fall/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "Powder is now worth 86 cents a pound more than butter",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "November Class I is $20.27 — and Class IV is the mover by $5.65",
+    "url": "https://www.ams.usda.gov/mnreports/dymadvancedprices.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "The same fat-versus-protein split just showed up at the global auction",
+    "url": "https://www.indexbox.io/blog/global-dairy-trade-prices-mixed-in-early-november-2026-auction/",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "H5N1 reaches Indiana — and routine milk testing, not pre-movement testing, is what caught it",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-dairy-herd-indiana",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "A dairy worker has died in the Washington outbreak, now at 40 herds",
+    "url": "https://capitalpress.com/2026/11/02/washington-resident-exposed-to-infected-dairy-cattle-dies-of-bird-flu/",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "EPA is terminating the 2005 air agreement and walking away from its own emissions data",
+    "url": "https://www.epa.gov/newsreleases/trump-epa-brings-closure-20-year-old-agreement-ending-decades-long-uncertainty",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "USDA is buying $165.5 million of dairy right as butter hits four-year lows",
+    "url": "https://www.agproud.com/articles/64351-usda-announces-purchase-of-1655m-dairy-products",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "The 2027 DMC window closes Dec. 18, with Tier 1 now covering 6 million pounds",
+    "url": "https://www.fsa.usda.gov/news-events/news/09-30-2026/usda-announces-2027-dairy-margin-coverage-enrollment",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-04",
+    "headline": "A meta-analysis finds essential-oil additives move neither milk nor methane",
+    "url": "https://www.frontiersin.org/journals/animal-science/articles/10.3389/fanim.2026.1923564/full",
+    "topic": "inputs"
   }
 ]
