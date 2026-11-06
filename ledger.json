@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "Butter production jumped 10.9% in September — and the fat market is now paying for it",
+    "url": "https://release.nass.usda.gov/reports/dary1126.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "October Class III fell to $15.16 as Class IV hit $20.54 — the widest spread since May",
+    "url": "https://www.ams.usda.gov/mnreports/dymclassprices.pdf",
+    "topic": "milk-price"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "Global buyers bid up powder and cheddar while dumping butter at the November 3 auction",
+    "url": "https://ahdb.org.uk/dairy/global-dairy-trade-events",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "H5N1 turns up in an Indiana dairy herd — caught by routine milk testing, not a sick-cow call",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-dairy-herd-indiana",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "USDA reopens the milk-order exemption that has not moved since 1999 — comments close November 23",
+    "url": "https://www.federalregister.gov/documents/2026/10/23/2026-21668/exempt-plant-definition-request-for-information",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "FDA starts rewriting infant formula nutrient specs, the first tranche of 30",
+    "url": "https://www.federalregister.gov/documents/2026/11/02/2026-22273/infant-formula-nutrient-requirements",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "Canada is the only country Commerce lists as subsidizing in-quota cheese — and nobody filed comments",
+    "url": "https://www.federalregister.gov/documents/2026/10/29/2026-22103/quarterly-update-to-annual-listing-of-foreign-government-subsidies-on-articles-of-cheese-subject-to",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-11-06",
+    "headline": "Saputo's quarter shows where processor money is now made: protein, not cheese",
+    "url": "https://www.globenewswire.com/news-release/2026/11/05/3397203/0/en/saputo-reports-financial-results-for-the-second-quarter-of-fiscal-2027-ended-september-30-2026.html",
+    "topic": "processing"
   }
 ]
