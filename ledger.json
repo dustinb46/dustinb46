@@ -340,5 +340,65 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "October class prices split by $5.38 — Class IV $20.54, Class III $15.16",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "WASDE lifts 2026 milk prices but cuts the 2027 butter forecast to $1.465",
+    "url": "https://www.usda.gov/oce/commodity/wasde/wasde1126.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "The cost scissors widened again in September: inputs up 5.2%, milk down 4.4%",
+    "url": "https://release.nass.usda.gov/reports/agpr1026.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "H5N1 picks up two new dairy states in eight days — Indiana, then Oregon",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-dairy-herd-oregon",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "Objections to the FDA's salt-substitute rewrite of dairy standards close tomorrow",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-13/pdf/2026-20848.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "Butter output jumped 10.9% in September — and the spot price is under $1.29",
+    "url": "https://release.nass.usda.gov/reports/dary1126.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "Dryers are walking away from skim milk powder: output down 58.8% in a year",
+    "url": "https://release.nass.usda.gov/reports/dary1126.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "American cheese output fell 2.5% — and stocks still built",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "USDA reopens the 150,000-pound exempt-plant line for the first time since 1999",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-23/pdf/2026-21668.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-11",
+    "headline": "New Zealand processed a record 2.02 billion kgMS — and lifted its payout forecast again",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "trade"
   }
 ]
