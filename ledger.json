@@ -340,5 +340,47 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-12",
+    "headline": "A soybean engineered to grow cow casein just entered USDA's deregulation queue",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-11-12/pdf/2026-23015.pdf",
+    "topic": "biotech-casein"
+  },
+  {
+    "date": "2026-11-12",
+    "headline": "USDA proposes a SNAP change it scores at $44.6 billion less in benefits over five years",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-11-10/pdf/2026-22936.pdf",
+    "topic": "snap-demand"
+  },
+  {
+    "date": "2026-11-12",
+    "headline": "Diesel has come off 22.5 cents in two weeks - and is still $2.29 above last year",
+    "url": "https://www.eia.gov/petroleum/gasdiesel/",
+    "topic": "fuel-inputs"
+  },
+  {
+    "date": "2026-11-12",
+    "headline": "Moving fresh cows out at 7 days instead of 21 was worth 9.6% more energy-corrected milk",
+    "url": "https://academic.oup.com/jas/advance-article/doi/10.1093/jas/skag359/9029914",
+    "topic": "herd-management"
+  },
+  {
+    "date": "2026-11-12",
+    "headline": "FDA is pulling three solvents off the approved list for making annatto - the colorant in yellow cheddar",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-11-10/pdf/2026-22866.pdf",
+    "topic": "cheese-ingredients"
+  },
+  {
+    "date": "2026-11-12",
+    "headline": "The federal food-bank shopping list for 2027 is out, and whole milk and high-protein yogurt are on it",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-11-10/pdf/2026-22876.pdf",
+    "topic": "tefap-demand"
+  },
+  {
+    "date": "2026-11-12",
+    "headline": "USDA is hiring 228 people to run the sterile-fly plant that is supposed to stop screwworm",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-begins-hiring-nations-largest-facility-combat-new-world-screwworm",
+    "topic": "screwworm"
   }
 ]
