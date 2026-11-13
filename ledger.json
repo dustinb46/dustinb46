@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "USDA drops the 25% match for dairy processing grants - and moves the deadline to January 4",
+    "url": "https://www.ams.usda.gov/services/grants/dbi",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "A grazing-rule rewrite for 16 Western states would add a surcharge on leased livestock",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-11-12/pdf/2026-23033.pdf",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "Midwest plants are paying over Class for spot milk. In January they were getting it $2.51 under",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1623.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "A 60-year-old Gulf Coast fluid plant closes January 9, taking about 150 jobs",
+    "url": "https://www.acadiananewsfirst.com/2026/11/10/borden-plant-close-january/",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "A California suit asks whether a calf hutch is an \"adequate exercise area\"",
+    "url": "https://www.yahoo.com/news/us/articles/little-known-law-could-upend-133000029.html",
+    "topic": "animal-welfare"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "GAO says USDA never showed its work on the reorganization that cut its workforce a fifth",
+    "url": "https://www.gao.gov/products/gao-27-108734",
+    "topic": "oversight"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "The Supreme Court heard argument on whether Labor can fine farm employers in its own forum",
+    "url": "https://www.supremecourt.gov/search.aspx?filename=/docket/docketfiles/html/public/25-966.html",
+    "topic": "labor"
+  },
+  {
+    "date": "2026-11-13",
+    "headline": "Australia's dairy industry is trying to kill its own EU trade deal over an A$830 million gap",
+    "url": "https://www.ams.usda.gov/mnreports/dywweeklyreport.pdf",
+    "topic": "trade"
   }
 ]
