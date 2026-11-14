@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "Spot milk reached $5.00 over Class this week - the top of the range gained $2.00 in seven days",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1100.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "A farm-labor union says symptomatic dairy workers are going untested in Washington's H5N1 outbreak",
+    "url": "https://www.yahoo.com/news/us/articles/union-warns-bird-flu-cases-165158113.html",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "The whey complex has inverted: commodity dry whey is tightening while WPC 80% loads are offered under $7",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1053.pdf",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "Butter is advertised a dollar below last year while cheese ad prices run 24% higher",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1090.pdf",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "Asia is pulling US cheese hard - and Europe has no spot cheese to answer with",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1085.pdf",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "Condensed skim loosened in the West and stayed short in the East - USDA says Asian buyers backed off",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1102.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "A kefir maker posted record sales and lost 10.7 points of gross margin - to milk and packaging",
+    "url": "https://www.sec.gov/Archives/edgar/data/814586/000168316826008612/lifeway_ex9901.htm",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "The plant built for a mastitis treatment is being converted to calf-scours production",
+    "url": "https://www.sec.gov/Archives/edgar/data/811641/000143774926036588/iccc20260930_10q.htm",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-14",
+    "headline": "Thawing the straw in the cow matched conception rates in a two-year field trial",
+    "url": "https://academic.oup.com/tas/article/doi/10.1093/tas/txag179/8384061",
+    "topic": "genetics"
   }
 ]
