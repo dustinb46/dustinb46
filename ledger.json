@@ -340,5 +340,53 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "Powder lost 16.25 cents in a week while whey added 7 — the two halves of your check moved opposite ways",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1602.pdf",
+    "topic": "class-prices"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "The barrel premium is closing: barrels ended Friday 4.75 cents over blocks after blocks gained 5 cents on the week",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1603.pdf",
+    "topic": "cheese-market"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "Idaho dairies are buying hay one small load at a time — and USDA says fuel is what keeps the delivered price from falling",
+    "url": "https://www.ams.usda.gov/mnreports/ams_3056.pdf",
+    "topic": "hay-forage"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "Columbia Basin hay is sold out, and Chinese buyers have started asking for residue tests before loading",
+    "url": "https://www.ams.usda.gov/mnreports/ams_3058.pdf",
+    "topic": "hay-export"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "USDA issued five drought disaster designations on Friday — and the contiguous-county rule makes the eligible area much larger than the headlines",
+    "url": "https://www.fsa.usda.gov/news-events/news/11-13-2026/usda-designates-scott-county-minnesota-natural-disaster-area-due",
+    "topic": "fsa-disaster-loans"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "In 1,779 calves, the lung score predicted whether pneumonia resolved. The serum total protein did not.",
+    "url": "https://bovine-ojs-tamu.tdl.org/bovine/article/view/9522",
+    "topic": "calf-brd"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "A yeast postbiotic fed in whole milk moved frame and IgG but not a single kilogram of gain",
+    "url": "https://www.frontiersin.org/articles/10.3389/fvets.2026.2009350/full",
+    "topic": "calf-additives"
+  },
+  {
+    "date": "2026-11-15",
+    "headline": "At the one US auction dedicated to dairy feeders, steers traded $15 to $31 per hundredweight lower",
+    "url": "https://www.ams.usda.gov/mnreports/AMS_1898.pdf",
+    "topic": "dairy-feeder-calves"
   }
 ]
