@@ -340,5 +340,41 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-16",
+    "headline": "USDA has written the paperwork for vaccinating mammals against H5N1 — for zoos, not dairies",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-11-16/html/2026-23302.htm",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-16",
+    "headline": "Purchased hay cubes recalled over botulism risk after horse deaths in the Southwest",
+    "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/laubs-feeding-cubing-inc-voluntary-recalls-grade-mini-hay-cubes-because-potential-clostridium",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-11-16",
+    "headline": "Whey's main protein has been filed for approval in Europe as a fermentation product",
+    "url": "https://news.cision.com/21st-bio/r/21st-bio-files-eu-novel-food-application-for-blg-essential--and-calls-for-a-european-home-market-for,c4423272",
+    "topic": "technology"
+  },
+  {
+    "date": "2026-11-16",
+    "headline": "New Zealand just bought itself two more weeks of argument over the law that governs its dominant co-op",
+    "url": "https://www.mpi.govt.nz/consultations/issues-paper-for-the-202627-review-of-the-dairy-industry-restructuring-act-2001",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-16",
+    "headline": "Britain's October milk deliveries fell 4.1%, and the milk-year forecast is down 284 million litres",
+    "url": "https://ahdb.org.uk/news/gb-milk-deliveries-milk-deliveries-in-october-drop-4-year-on-year-as-producer-margins-are-eroded",
+    "topic": "supply"
+  },
+  {
+    "date": "2026-11-16",
+    "headline": "Three post-fresh calcium boluses, three different blood curves — and the same cows a year later",
+    "url": "https://www.frontiersin.org/articles/10.3389/fvets.2026.2024635/full",
+    "topic": "herd-management"
   }
 ]
