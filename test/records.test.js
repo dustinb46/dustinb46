@@ -145,6 +145,18 @@ test('a dispersal uses its own coordinates before the town centre', () => {
   assert.equal(town.summary, null);
 });
 
+test('recall names and towns printed in capitals are cleaned for display', () => {
+  const rec = r.normalizeRecall({
+    event_key: '2', event_date: '2026-10-14', firm_name: 'Family Farmstead Dairy, LLC',
+    classification: 'Class I', plant_code: '36-1', plant_name: 'FAMILY FARMSTEAD DY LLC',
+    plant_city: 'WORCESTER', plant_state: 'NY', plant_lat: 42.6, plant_lon: -74.7,
+  });
+  assert.equal(rec.title, 'Family Farmstead Dairy LLC');
+  assert.equal(rec.plant_name, 'Family Farmstead Dairy LLC');
+  assert.equal(rec.city, 'Worcester');
+  assert.equal(rec.firm, 'Family Farmstead Dairy, LLC');   // typed in mixed case: untouched
+});
+
 test('sortRecords is newest first and stable on ties', () => {
   const sorted = r.sortRecords([
     { id: 'b', date: '2026-01-01' }, { id: 'a', date: '2026-01-01' }, { id: 'c', date: '2026-05-01' },
