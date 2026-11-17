@@ -9,6 +9,7 @@ const { SITE_URL, abs } = require('./site');
 const naming = require('./naming');
 const { stateName } = require('./states');
 const { agoLabel } = require('./time');
+const records = require('./records');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -165,6 +166,7 @@ app.get('/sitemap.xml', (_req, res) => {
     const urls = [
       { loc: abs('/'), pri: '1.0' },
       { loc: abs('/timeline'), pri: '0.8' },
+      { loc: abs('/map'), pri: '0.8' },
       { loc: abs('/about'), pri: '0.5' },
       { loc: abs('/plants'), pri: '0.6' },
     ];
@@ -267,7 +269,7 @@ app.get('/api/plants/geo.json', (_req, res) => {
   const now = Date.now();
   if (!geoCache || (now - geoCacheTs) > 60 * 60 * 1000) {
     const rows = db.prepare(`
-      SELECT plant_code, name, city, state, category, lat, lon
+      SELECT plant_code, name, city, state, category, parent_company, lat, lon
       FROM plants
       WHERE lat IS NOT NULL AND lon IS NOT NULL
     `).all();
@@ -281,9 +283,12 @@ app.get('/api/plants/geo.json', (_req, res) => {
       if (!g) {
         g = { lat: r.lat, lon: r.lon, city: naming.displayCity(r.city), state: r.state,
               name: naming.displayName(r.name), category: r.category,
-              kind: 'supply', codes: [] };
+              kind: 'supply', parent: r.parent_company || null, codes: [] };
         groups.set(fk, g);
       }
+      // The /map radius count groups plants by operator; take the parent
+      // company from whichever code in the facility has one.
+      if (!g.parent && r.parent_company) g.parent = r.parent_company;
       const kind = naming.plantKind(r.name);
       g.codes.push({ plant_code: r.plant_code, name: naming.displayName(r.name),
                      category: r.category, kind });
@@ -318,6 +323,76 @@ app.get('/api/plants/geo.json', (_req, res) => {
   }
   res.setHeader('Cache-Control', 'public, max-age=3600');
   res.json(geoCache);
+});
+
+// ---------------- layered map: records, feed, page ----------------
+//
+// News, recalls and herd dispersals in one shape (see src/records.js).
+// Cached briefly per time window: the map fetches this on every load and
+// the underlying tables change a few times a day at most.
+const recordsCache = new Map();
+const RECORDS_TTL_MS = 10 * 60 * 1000;
+function recordsFor(days) {
+  const hit = recordsCache.get(days);
+  if (hit && Date.now() - hit.ts < RECORDS_TTL_MS) return hit.rows;
+  const rows = records.loadRecords(db, { days });
+  recordsCache.set(days, { ts: Date.now(), rows });
+  return rows;
+}
+
+app.get('/api/records.json', (req, res) => {
+  const days = records.parseDays(req.query.days);
+  const types = new Set(records.typesFromQuery(req.query.types));
+  const rows = recordsFor(days).filter(r => types.has(r.type));
+  res.setHeader('Cache-Control', 'public, max-age=600');
+  res.json({ window_days: days, count: rows.length, records: rows });
+});
+
+// RSS of the newest records, for feed readers and the HerdSignal brief.
+// ?types=event,recall,dispersal narrows it; default is everything.
+app.get('/feed.xml', (req, res) => {
+  const types = records.typesFromQuery(req.query.types);
+  const typeSet = new Set(types);
+  // Announced-but-future events (a closure dated next quarter) stay in
+  // the feed; they are news today.
+  const rows = recordsFor(records.DEFAULT_DAYS).filter(r => typeSet.has(r.type)).slice(0, 50);
+  const narrowed = types.length < records.TYPES.length;
+  const body = records.toRss(rows, {
+    abs,
+    title: 'Dairy Plant Atlas: what changed',
+    description: 'Plant openings, closures, expansions and ownership changes, FDA dairy recalls, and herd dispersals. Every item links to its source.',
+    selfPath: '/feed.xml' + (narrowed ? '?types=' + types.join(',') : ''),
+  });
+  res.type('application/rss+xml').set('Cache-Control', 'public, max-age=600').send(body);
+});
+
+// The layered map. One page, many views: /map?lens=capacity is a saved
+// set of layers, /map?layers=plants,events,recalls is a custom one. The
+// page renders the chosen view's title and controls server-side so a
+// shared link previews correctly; public/map.js takes it from there.
+app.get('/map', (req, res) => {
+  const view = records.resolveView(req.query);
+  const lens = records.LENSES.find(l => l.id === view.lens) || null;
+  const title = lens ? lens.label : 'Map: custom layers';
+  res.render('map', {
+    view, lens,
+    lenses: records.LENSES,
+    windows: records.WINDOWS,
+    defaultDays: records.DEFAULT_DAYS,
+    title,
+    canonical: abs('/map?' + records.viewQuery(view)),
+    metaDescription: lens
+      ? lens.blurb
+      : 'Build your own view of U.S. dairy plants: plant events, herd dispersals and FDA recalls as layers on one map.',
+    // Everything map.js needs to start, as JSON. "<" is escaped so a
+    // string can never close the script tag it is embedded in.
+    boot: JSON.stringify({
+      view,
+      lenses: records.LENSES,
+      layerType: records.LAYER_TYPE,
+      defaultDays: records.DEFAULT_DAYS,
+    }).replace(/</g, '\\u003c'),
+  });
 });
 
 app.get('/api/plants.json', (req, res) => {
@@ -727,6 +802,7 @@ const ADMIN_SCRIPTS = {
   'datcp-ingest':   'scripts/ingest-datcp.js',
   'state-gap-ingest': 'scripts/ingest-state-gap.js',
   'verify-geo':       'scripts/verify-geocodes.js',
+  'dispersals-ingest': 'scripts/ingest-dispersals.js',
 };
 
 // Upload (or replace) the homepage hero photo. Send the raw image bytes

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "prestart": "node scripts/init-db.js && node scripts/load-seeds.js",
+    "prestart": "node scripts/init-db.js && node scripts/load-seeds.js && node scripts/ingest-dispersals.js",
     "dev": "node --watch src/server.js",
     "db:init": "node scripts/init-db.js",
     "db:reset": "node scripts/init-db.js --reset",
@@ -21,7 +21,8 @@
     "usda:ingest": "node scripts/ingest-usda.js",
     "geocode": "node scripts/geocode-plants.js",
     "test": "node --test",
-    "build": "npm run db:init && npm run seed:load"
+    "build": "npm run db:init && npm run seed:load",
+    "dispersals:ingest": "node scripts/ingest-dispersals.js"
   },
   "dependencies": {
     "better-sqlite3": "^11.3.0",

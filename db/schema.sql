@@ -139,6 +139,31 @@ CREATE TABLE IF NOT EXISTS news_items (
 CREATE INDEX IF NOT EXISTS idx_news_date ON news_items(event_date);
 CREATE INDEX IF NOT EXISTS idx_news_plant ON news_items(plant_id);
 
+-- Herd dispersals: whole-herd sale listings, used as an exit signal.
+-- A dispersal is a farm event, not a plant event, so it carries its own
+-- location instead of a plant link. Loaded from data/dispersals/*.csv by
+-- scripts/ingest-dispersals.js; every row carries a source URL.
+CREATE TABLE IF NOT EXISTS dispersals (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  event_date    TEXT NOT NULL,        -- ISO date of the sale
+  headline      TEXT NOT NULL,
+  head_count    INTEGER,              -- head listed, when the listing states it
+  herd_type     TEXT,                 -- free text: Holstein, organic, Jersey...
+  city          TEXT,
+  county        TEXT,
+  state         TEXT,
+  lat           REAL,                 -- optional; else the town centre is used
+  lon           REAL,
+  auctioneer    TEXT,
+  source_url    TEXT NOT NULL,
+  source_name   TEXT,
+  added_by      TEXT,
+  -- Stable identity for upserts so re-running the loader is idempotent.
+  fingerprint   TEXT NOT NULL UNIQUE,
+  created_at    TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_dispersals_date ON dispersals(event_date);
+
 -- Lightweight ingest log so we can see what ran when.
 CREATE TABLE IF NOT EXISTS ingest_runs (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
