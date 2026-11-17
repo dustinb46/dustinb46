@@ -156,15 +156,41 @@ test/                      node --test unit tests
 
 ## Deploying to Railway
 
-1. Service branch points at this branch; build runs `db:init` + `seed:load`.
-2. Persistent volume mounted at `/data`.
-3. Variables: `PLANT_TRACK_DB=/data/plant_track.db`,
+1. The service deploys from this branch (`claude/bold-meitner-fnXod` of
+   `dustinb46/dustinb46`). A push to the branch triggers a redeploy.
+2. The build is the root `Dockerfile` (Node 20, `npm ci`, `npm start`).
+   There is no `railway.json` and nothing depends on the Nixpacks
+   builder; Railway deprecated both.
+3. Persistent volume mounted at `/data`. The SQLite database lives there
+   and is never part of the image.
+4. Variables: `PLANT_TRACK_DB=/data/plant_track.db`,
    `ADMIN_TOKEN=<long random string>`.
-4. Node pinned to 20 (`.node-version`/`.nvmrc`) — `better-sqlite3` has no
-   prebuilt binary for newer majors on Railway's image.
+5. Node pinned to 20 (`Dockerfile`, `.node-version`, `.nvmrc`).
 
 Schema init + seed load run on every container start (`prestart`), both
 idempotent, against the volume.
+
+See `RUNBOOK.md` for what to do when the site is down.
+
+## Admin pages
+
+Everything under `/admin` needs the token, either as an `X-Admin-Token`
+header or as `?token=` on the URL:
+
+- `/admin/searches?token=...` — what visitors searched for, including
+  zero-result queries (the list of brand mappings to add next)
+- `/admin/ingest?token=...` — ingest run history and row counts
+
+## How listings are shown
+
+- The database stores every name exactly as its source prints it.
+  `src/naming.js` cleans names up for display only (title case, IMS
+  shorthand like `DY`/`CRY`/`FMS` expanded). The plant page shows the
+  original as "Listed as"; search matches the original.
+- The FDA IMS list also rates raw-milk supplies. Names marked `(BTU)`,
+  `(RS)` or `(TR)` are bulk tank units and receiving/transfer stations,
+  not plants. They are labelled, left out of the plant count and the
+  default map layer, and listed separately on the browse pages.
 
 ## A note on accuracy
 

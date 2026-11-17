@@ -1,5 +1,10 @@
 # Plant Track — Handoff
 
+> Historical note (Nov 2026): this is the original June 2026 handoff. The
+> deploy setup it describes has changed: the build is now the root
+> `Dockerfile` and `railway.json` is gone. See `README.md` and
+> `RUNBOOK.md` for the current state.
+
 You are picking up an in-progress project. Read this whole doc before
 starting; most of the surprises are called out below.
 

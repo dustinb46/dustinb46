@@ -1,0 +1,12 @@
+node_modules
+.git
+.github
+db/*.db
+db/*.db-*
+data/ims/*.pdf
+data/ims/*.txt
+data/assets
+.env
+.env.*
+*.log
+test
