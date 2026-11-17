@@ -4,14 +4,8 @@
 <h1>Dairy plant news &amp; recalls</h1>
 <p class="lede">
   A running feed of FDA enforcement records for U.S. dairy plants — grouped by recall event, linked to the plant where we can identify it. Plant news from press releases and trade reporting will land here too as we wire those sources in.
-  <% if (typeof lastRecallSync !== 'undefined' && lastRecallSync) {
-       const syncedAt = new Date(lastRecallSync + 'Z');
-       const hours = Math.floor((Date.now() - syncedAt.getTime()) / 3600000);
-       const ago = hours < 1 ? 'just now'
-                 : hours < 24 ? hours + 'h ago'
-                 : Math.floor(hours / 24) + 'd ago';
-  %>
-  <br><span class="muted" style="font-size:0.85rem">Recalls last synced from openFDA <strong><%= ago %></strong> (<%= lastRecallSync %> UTC). Auto-syncs daily.</span>
+  <% if (typeof lastRecallSync !== 'undefined' && lastRecallSync) { %>
+  <br><span class="muted" style="font-size:0.85rem">Recalls last synced from openFDA <% if (typeof lastRecallSyncAgo !== 'undefined' && lastRecallSyncAgo) { %><strong><%= lastRecallSyncAgo %></strong> <% } %>(<%= String(lastRecallSync).slice(0, 10) %>). Auto-syncs daily.</span>
   <% } %>
   <% if (typeof newsMeta !== 'undefined' && newsMeta && newsMeta.n) { %>
   <br><span class="muted" style="font-size:0.85rem"><strong><%= newsMeta.n %></strong> curated news item<%= newsMeta.n === 1 ? '' : 's' %><% if (newsMeta.latest) { %>, latest <strong><%= newsMeta.latest %></strong><% } %>. News is hand-curated for now.</span>
@@ -123,7 +117,7 @@
           </header>
           <h3 class="feed-headline">
             <% if (r.plant_id) { %>
-              <a href="/plant/<%= r.plant_code %>"><%= r.headline %></a>
+              <a href="<%= plantHref(r.plant_code) %>"><%= r.headline %></a>
             <% } else { %>
               <%= r.headline %>
             <% } %>
@@ -135,7 +129,7 @@
               <%= [r.city, r.state].filter(Boolean).join(', ') %>
             <% } %>
             <% if (r.plant_id) { %>
-              <span class="sep">·</span> <a href="/plant/<%= r.plant_code %>"><%= r.plant_code %></a>
+              <span class="sep">·</span> <a href="<%= plantHref(r.plant_code) %>"><%= r.plant_code %></a>
             <% } %>
           </p>
           <% if (r.body) { %>
@@ -156,7 +150,7 @@
           </header>
           <h3 class="feed-headline">
             <% if (r.plant_id) { %>
-              <a href="/plant/<%= r.plant_code %>"><%= r.plant_name %></a>
+              <a href="<%= plantHref(r.plant_code) %>"><%= fmtName(r.plant_name) %></a>
             <% } else { %>
               <%= r.firm_name || 'Unknown firm' %>
             <% } %>

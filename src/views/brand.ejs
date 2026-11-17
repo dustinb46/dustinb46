@@ -16,9 +16,9 @@
     <tbody>
       <% for (const p of plants) { %>
         <tr>
-          <td><a href="/plant/<%= p.plant_code %>"><%= p.plant_name %></a></td>
-          <td><%= p.plant_code %></td>
-          <td><%= [p.city, p.state].filter(Boolean).join(', ') %></td>
+          <td><a href="<%= plantHref(p.plant_code) %>"><%= fmtName(p.plant_name) %></a></td>
+          <td><code><%= p.plant_code %></code></td>
+          <td><%= [fmtCity(p.city), p.state].filter(Boolean).join(', ') %></td>
           <td><%= p.region || '' %></td>
           <td><%= p.product_category || '' %></td>
           <td><span class="conf conf-<%= p.confidence %>"><%= p.confidence %></span></td>

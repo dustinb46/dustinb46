@@ -1,38 +1,80 @@
 <%- include('_header', { title, disclaimer, metaDescription, canonical }) %>
 
-<h1><%= stateParam ? 'Dairy plants in ' + stateParam : 'Browse all dairy plants' %></h1>
+<% if (stateParam) { %>
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/plants">Browse</a> <span class="sep">›</span> <span><%= fullState %></span>
+  </nav>
+<% } %>
+
+<h1><%= stateParam ? 'Dairy plants in ' + fullState : 'Browse all dairy plants' %></h1>
 <p class="lede">
-  Every plant in the atlas, grouped by state. Pick a state to see its
-  plants, codes, and locations — or
+  Every listing in the atlas, grouped by state. Pick a state to see its
+  plants, codes, and locations, or
   <a href="/search">search by code, operator, or brand</a>.
 </p>
 
 <nav class="state-grid" aria-label="States">
   <% for (const s of states) { %>
-    <a href="/plants?state=<%= s.state %>" class="<%= s.state === stateParam ? 'on' : '' %>">
+    <a href="/plants?state=<%= s.state %>" class="<%= s.state === stateParam ? 'on' : '' %>"
+       title="<%= stateName(s.state) %>">
       <%= s.state %> <span class="muted">(<%= s.n %>)</span>
     </a>
   <% } %>
 </nav>
 
 <% if (stateParam) { %>
-  <h2><%= plants.length %> plant<%= plants.length === 1 ? '' : 's' %> in <%= stateParam %></h2>
-  <% if (!plants.length) { %>
-    <p class="empty">No plants found for <%= stateParam %>.</p>
+  <% const total = plants.length + supply.length; %>
+  <% if (!total) { %>
+    <p class="empty">No listings found for <%= fullState %>.</p>
   <% } else { %>
-    <table>
-      <thead><tr><th>Code</th><th>Plant</th><th>City</th><th>Category</th></tr></thead>
-      <tbody>
-        <% for (const p of plants) { %>
-          <tr>
-            <td><a href="/plant/<%= encodeURIComponent(p.plant_code) %>"><code><%= p.plant_code %></code></a></td>
-            <td><a href="/plant/<%= encodeURIComponent(p.plant_code) %>"><%= p.name %></a></td>
-            <td><%= p.city || '' %></td>
-            <td><%= p.category || '' %></td>
-          </tr>
-        <% } %>
-      </tbody>
-    </table>
+    <h2><%= plants.length.toLocaleString() %> plant<%= plants.length === 1 ? '' : 's' %> in <%= fullState %></h2>
+    <% if (!plants.length) { %>
+      <p class="empty">No processing plants listed for <%= fullState %> yet.</p>
+    <% } else { %>
+      <table>
+        <thead><tr><th>Code</th><th>Plant</th><th>City</th><th>Category</th></tr></thead>
+        <tbody>
+          <% for (const p of plants) { %>
+            <tr>
+              <td><a href="<%= plantHref(p.plant_code) %>"><code><%= p.plant_code %></code></a></td>
+              <td><a href="<%= plantHref(p.plant_code) %>"><%= fmtName(p.name) %></a></td>
+              <td><%= fmtCity(p.city) %></td>
+              <td><%= p.category || '' %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+
+    <% if (supply.length) { %>
+      <details class="supply-list">
+        <summary>
+          <strong><%= supply.length.toLocaleString() %></strong>
+          milk supply listing<%= supply.length === 1 ? '' : 's' %>
+          <span class="muted">(bulk tank units and milk stations, not plants)</span>
+        </summary>
+        <p class="note">
+          The FDA milk shippers list also rates raw-milk supplies: bulk tank
+          units (a farm or group of farms shipping as one supply) and
+          receiving or transfer stations. They carry codes like plants do,
+          but nothing is bottled or made there, and the address is often a
+          co-op office.
+        </p>
+        <table>
+          <thead><tr><th>Code</th><th>Listing</th><th>City</th><th>Type</th></tr></thead>
+          <tbody>
+            <% for (const p of supply) { %>
+              <tr>
+                <td><a href="<%= plantHref(p.plant_code) %>"><code><%= p.plant_code %></code></a></td>
+                <td><a href="<%= plantHref(p.plant_code) %>"><%= fmtName(p.name) %></a></td>
+                <td><%= fmtCity(p.city) %></td>
+                <td><%= kindLabel(kindOf(p.name)) %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </details>
+    <% } %>
   <% } %>
 <% } %>
 

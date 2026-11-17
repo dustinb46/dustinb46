@@ -12,6 +12,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const { db } = require('./db');
+const { hoursSince } = require('./time');
 
 const CHECK_INTERVAL_HOURS = parseInt(process.env.SCHEDULER_CHECK_INTERVAL_HOURS || '6', 10);
 const STARTUP_DELAY_MS = parseInt(process.env.SCHEDULER_STARTUP_DELAY_MS || (5 * 60 * 1000), 10);
@@ -40,7 +41,11 @@ function hoursSinceLast(source) {
      ORDER BY finished_at DESC LIMIT 1`
   ).get(source);
   if (!row) return Infinity;
-  return (Date.now() - new Date(row.finished_at + 'Z').getTime()) / 3600000;
+  // finished_at may be SQLite-style or ISO-with-Z; hoursSince handles
+  // both. An unreadable timestamp counts as "never ran" so the job still
+  // fires, rather than comparing against NaN.
+  const h = hoursSince(row.finished_at);
+  return h === null ? Infinity : h;
 }
 
 function runScript(script, extraEnv = {}) {

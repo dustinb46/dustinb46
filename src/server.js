@@ -6,6 +6,9 @@ const fs = require('fs');
 const { facilityKey } = require('./facility');
 const { heroImagePath, ensureAssetDir } = require('./paths');
 const { SITE_URL, abs } = require('./site');
+const naming = require('./naming');
+const { stateName } = require('./states');
+const { agoLabel } = require('./time');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +23,46 @@ app.locals.disclaimer = (
 );
 app.locals.siteName = 'Dairy Plant Atlas';
 
+// View helpers. Names and cities are stored exactly as each source
+// prints them; these clean them up for display only (see src/naming.js).
+app.locals.fmtName = naming.displayName;
+app.locals.fmtCity = naming.displayCity;
+app.locals.kindOf = naming.plantKind;
+app.locals.kindLabel = naming.kindLabel;
+app.locals.stateName = stateName;
+// Plant codes from state license lists can contain "/" or "#"
+// ("ID-LIC-40/366/418"), so every link to a plant must be encoded.
+app.locals.plantHref = code => '/plant/' + encodeURIComponent(code);
+
 // ---------------- helpers ----------------
+
+// Everything under /admin needs the ADMIN_TOKEN, sent as an
+// X-Admin-Token header or a ?token= query parameter.
+function requireAdmin(req, res, next) {
+  const expected = process.env.ADMIN_TOKEN;
+  if (!expected) return res.status(503).json({ error: 'ADMIN_TOKEN not configured' });
+  const got = req.header('X-Admin-Token') || req.query.token;
+  if (got !== expected) return res.status(401).json({ error: 'unauthorized' });
+  next();
+}
+
+// Counts by listing kind (plant / bulk tank unit / station). The kind is
+// read from the name, so this classifies in JS rather than SQL. Cached
+// briefly because the home page asks for it on every load.
+let kindCache = null, kindCacheTs = 0;
+function kindCounts() {
+  const now = Date.now();
+  if (kindCache && now - kindCacheTs < 10 * 60 * 1000) return kindCache;
+  const c = { plant: 0, btu: 0, receiving: 0, transfer: 0, states: 0 };
+  const states = new Set();
+  for (const r of db.prepare(`SELECT name, state FROM plants`).all()) {
+    c[naming.plantKind(r.name)]++;
+    if (r.state) states.add(String(r.state).toUpperCase());
+  }
+  c.states = states.size;
+  kindCache = c; kindCacheTs = now;
+  return c;
+}
 
 function ftsQuery(raw) {
   // Defensively quote each token for FTS5 to avoid syntax errors on
@@ -152,19 +194,26 @@ app.get('/plants', (req, res) => {
     `SELECT state, COUNT(*) AS n FROM plants WHERE state IS NOT NULL AND state != ''
      GROUP BY state ORDER BY state`
   ).all();
-  let plants = [];
+  // Processing plants first; bulk tank units and milk stations go in
+  // their own list so they stop burying the plants (New York alone has
+  // dozens of co-op supply listings under one Syracuse address).
+  let plants = [], supply = [];
   if (stateParam) {
-    plants = db.prepare(
+    const rows = db.prepare(
       `SELECT plant_code, name, city, state, category FROM plants
-       WHERE UPPER(state) = ? ORDER BY name`
+       WHERE UPPER(state) = ?`
     ).all(stateParam);
+    const byName = (a, b) => naming.displayName(a.name).localeCompare(naming.displayName(b.name));
+    plants = rows.filter(r => naming.isPlant(r.name)).sort(byName);
+    supply = rows.filter(r => !naming.isPlant(r.name)).sort(byName);
   }
+  const fullState = stateParam ? stateName(stateParam) : '';
   res.render('plants_index', {
-    states, stateParam, plants,
+    states, stateParam, fullState, plants, supply,
     canonical: stateParam ? abs('/plants?state=' + stateParam) : abs('/plants'),
-    title: stateParam ? `Dairy plants in ${stateParam}` : 'Browse all dairy plants',
+    title: stateParam ? `Dairy plants in ${fullState}` : 'Browse all dairy plants',
     metaDescription: stateParam
-      ? `Directory of dairy plants in ${stateParam} — plant codes, operators, and locations.`
+      ? `Directory of dairy plants in ${fullState} — plant codes, operators, and locations.`
       : 'Browse every U.S. dairy plant in the atlas by state — plant codes, operators, brands, and recall history.',
   });
 });
@@ -172,8 +221,11 @@ app.get('/plants', (req, res) => {
 // ---------------- routes ----------------
 
 app.get('/', (req, res) => {
+  const kinds = kindCounts();
   const stats = {
-    plants:   db.prepare(`SELECT COUNT(*) AS n FROM plants`).get().n,
+    plants:   kinds.plant,
+    supply:   kinds.btu + kinds.receiving + kinds.transfer,
+    states:   kinds.states,
     brands:   db.prepare(`SELECT COUNT(*) AS n FROM brands`).get().n,
     mappings: db.prepare(`SELECT COUNT(*) AS n FROM plant_brands`).get().n,
     recalls:  db.prepare(`SELECT COUNT(*) AS n FROM recalls`).get().n,
@@ -227,11 +279,21 @@ app.get('/api/plants/geo.json', (_req, res) => {
               || `latlon|${r.lat}|${r.lon}|${r.plant_code}`;
       let g = groups.get(fk);
       if (!g) {
-        g = { lat: r.lat, lon: r.lon, city: r.city, state: r.state,
-              name: r.name, category: r.category, codes: [] };
+        g = { lat: r.lat, lon: r.lon, city: naming.displayCity(r.city), state: r.state,
+              name: naming.displayName(r.name), category: r.category,
+              kind: 'supply', codes: [] };
         groups.set(fk, g);
       }
-      g.codes.push({ plant_code: r.plant_code, name: r.name, category: r.category });
+      const kind = naming.plantKind(r.name);
+      g.codes.push({ plant_code: r.plant_code, name: naming.displayName(r.name),
+                     category: r.category, kind });
+      // A pin is a plant if any code at the site is one; a group made up
+      // only of bulk tank units / stations is drawn on the supply layer.
+      if (kind === 'plant' && g.kind !== 'plant') {
+        g.kind = 'plant';
+        g.name = naming.displayName(r.name);
+        g.category = r.category;
+      }
     }
     // Tiny lat/lon jitter when multiple distinct facilities share an
     // exact city centroid, so they don't render perfectly on top of
@@ -305,6 +367,13 @@ app.get('/search', (req, res) => {
     plants = plants.filter(p => (p.parent_company || '').toLowerCase().includes(needle));
   }
 
+  // Keep the search ranking, but list real plants ahead of bulk tank
+  // units and stations — a search for "DFA" should lead with plants.
+  plants = [
+    ...plants.filter(p => naming.isPlant(p.name)),
+    ...plants.filter(p => !naming.isPlant(p.name)),
+  ];
+
   // Log only non-empty queries so we can see what peers searched for
   // (especially zero-result queries — those tell us which mappings to
   // add next). No IP or user agent stored.
@@ -335,13 +404,16 @@ app.get('/plant/:code', (req, res) => {
     related = sameCity.filter(p => facilityKey(p.name, plant.city, plant.state) === myKey);
   }
   const brands = brandsForPlant(plant.id);
-  const loc = [plant.city, plant.state].filter(Boolean).join(', ');
+  const kind = naming.plantKind(plant.name);
+  const shownName = naming.displayName(plant.name);
+  const shownCity = naming.displayCity(plant.city);
+  const loc = [shownCity, plant.state].filter(Boolean).join(', ');
   // SEO: title/description carry the code + name + location, the way
   // people search after reading a package code.
-  const seoTitle = `Plant code ${plant.plant_code} — ${plant.name}${loc ? ', ' + loc : ''}`;
+  const seoTitle = `Plant code ${plant.plant_code} — ${shownName}${loc ? ', ' + loc : ''}`;
   const brandList = brands.map(b => b.brand_name).slice(0, 5).join(', ');
   const metaDescription =
-    `Dairy plant code ${plant.plant_code}: ${plant.name}${loc ? ' in ' + loc : ''}.` +
+    `Dairy plant code ${plant.plant_code}: ${shownName}${loc ? ' in ' + loc : ''}.` +
     (plant.category ? ` ${plant.category}.` : '') +
     (brandList ? ` Brands made here: ${brandList}.` : '') +
     ' See location, operator, and FDA recall history.';
@@ -349,11 +421,12 @@ app.get('/plant/:code', (req, res) => {
   const jsonLd = '<script type="application/ld+json">' + JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: plant.name,
+    name: shownName,
+    alternateName: shownName !== plant.name ? plant.name : undefined,
     identifier: plant.plant_code,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: plant.city || undefined,
+      addressLocality: shownCity || undefined,
       addressRegion: plant.state || undefined,
       streetAddress: plant.address || undefined,
       addressCountry: 'US',
@@ -363,6 +436,10 @@ app.get('/plant/:code', (req, res) => {
   }) + '</script>';
   res.render('plant', {
     plant,
+    kind,
+    kindNote: naming.kindNote(kind),
+    shownName,
+    shownCity,
     via,
     brands,
     recalls: recallsForPlant(plant.id),
@@ -524,8 +601,12 @@ app.get('/timeline', (req, res) => {
      ORDER BY finished_at DESC LIMIT 1`
   ).get();
   // News freshness: the most recent news item we've curated + total count.
+  // "Latest" ignores future-dated items (an announced completion date
+  // is not the most recent news).
   const newsMeta = db.prepare(
-    `SELECT COUNT(*) AS n, MAX(event_date) AS latest FROM news_items`
+    `SELECT COUNT(*) AS n,
+            MAX(CASE WHEN event_date <= date('now') THEN event_date END) AS latest
+     FROM news_items`
   ).get();
 
   res.render('timeline', {
@@ -538,6 +619,7 @@ app.get('/timeline', (req, res) => {
     newsTotal: newsItems.length,   // for the stats strip
     recent: feed,
     lastRecallSync: lastRecallSync ? lastRecallSync.finished_at : null,
+    lastRecallSyncAgo: lastRecallSync ? agoLabel(lastRecallSync.finished_at) : null,
     newsMeta,
   });
 });
@@ -586,8 +668,11 @@ app.get('/api/recalls.csv', (req, res) => {
 });
 
 // ---------------- admin: ingest run history (read-only) ----------------
+// Token-protected like the rest of /admin: the search log shows what
+// visitors typed, which is not something to publish.
+// Open as /admin/searches?token=<ADMIN_TOKEN>.
 
-app.get('/admin/searches', (_req, res) => {
+app.get('/admin/searches', requireAdmin, (_req, res) => {
   const recent = db.prepare(
     `SELECT * FROM search_log ORDER BY ts DESC LIMIT 200`
   ).all();
@@ -608,7 +693,7 @@ app.get('/admin/searches', (_req, res) => {
   res.render('admin_searches', { recent, zero, top, totals });
 });
 
-app.get('/admin/ingest', (_req, res) => {
+app.get('/admin/ingest', requireAdmin, (_req, res) => {
   const runs = db.prepare(`
     SELECT * FROM ingest_runs ORDER BY started_at DESC LIMIT 100
   `).all();
@@ -643,14 +728,6 @@ const ADMIN_SCRIPTS = {
   'state-gap-ingest': 'scripts/ingest-state-gap.js',
   'verify-geo':       'scripts/verify-geocodes.js',
 };
-
-function requireAdmin(req, res, next) {
-  const expected = process.env.ADMIN_TOKEN;
-  if (!expected) return res.status(503).json({ error: 'ADMIN_TOKEN not configured' });
-  const got = req.header('X-Admin-Token') || req.query.token;
-  if (got !== expected) return res.status(401).json({ error: 'unauthorized' });
-  next();
-}
 
 // Upload (or replace) the homepage hero photo. Send the raw image bytes
 // as the request body with an image/* content type:

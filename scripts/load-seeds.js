@@ -266,6 +266,7 @@ const ALLOWED_KINDS = new Set([
   'closure', 'opening', 'sale', 'expansion', 'acquisition',
   'leadership', 'investment', 'other',
 ]);
+const keptFingerprints = [];
 const newsTxn = db.transaction(() => {
   for (const row of newsRows) {
     newsIn++;
@@ -290,7 +291,20 @@ const newsTxn = db.transaction(() => {
       added_by: row.added_by || 'seed',
       fingerprint,
     });
+    keptFingerprints.push(fingerprint);
     newsWritten++;
+  }
+  // The CSV is the whole source of truth for news. An item's identity is
+  // its date + headline, so correcting either one in the CSV would
+  // otherwise leave the old version behind as a duplicate. Drop rows the
+  // CSV no longer contains — but never when the CSV loaded nothing, so a
+  // missing or broken file can't empty the table.
+  if (keptFingerprints.length) {
+    const marks = keptFingerprints.map(() => '?').join(',');
+    const gone = db.prepare(
+      `DELETE FROM news_items WHERE fingerprint NOT IN (${marks})`
+    ).run(...keptFingerprints).changes;
+    if (gone) console.log(`[load-seeds] news_items: removed ${gone} row(s) no longer in the CSV`);
   }
 });
 newsTxn();

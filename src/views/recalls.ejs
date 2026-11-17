@@ -33,7 +33,7 @@
           <td><%= r.firm_name || '' %><br><small class="muted"><%= [r.firm_city, r.firm_state].filter(Boolean).join(', ') %></small></td>
           <td>
             <% if (r.plant_id) { %>
-              <a href="/plant/<%= r.plant_code %>"><%= r.plant_name %></a>
+              <a href="<%= plantHref(r.plant_code) %>"><%= fmtName(r.plant_name) %></a>
               <br><small class="conf conf-<%= (r.match_confidence || 0) >= 0.7 ? 'high' : 'low' %>">
                 <%= r.match_method %> · <%= Math.round((r.match_confidence || 0) * 100) %>%
               </small>

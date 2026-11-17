@@ -30,15 +30,19 @@
 </section>
 
 <section class="stats-row">
-  <div><strong><%= stats.plants.toLocaleString() %></strong><span>plants mapped</span></div>
+  <div><strong><%= stats.plants.toLocaleString() %></strong><span>dairy plants</span></div>
+  <div><strong><%= stats.supply.toLocaleString() %></strong><span>milk supply listings</span></div>
   <div><strong><%= stats.brands.toLocaleString() %></strong><span>brands traced</span></div>
   <div><strong><%= stats.mappings.toLocaleString() %></strong><span>brand-to-plant links</span></div>
-  <div><strong>50</strong><span>states covered</span></div>
 </section>
 
 <section class="map-section">
   <h2>Every plant we know about</h2>
-  <p class="muted">Click a dot to open the plant.</p>
+  <p class="muted">
+    Plants across <%= stats.states %> states and territories. Click a pin to open one,
+    or <a href="/plants">browse by state</a>. Tick "Milk supply listings" on the map
+    to add bulk tank units and milk stations, which carry codes but are not plants.
+  </p>
   <div id="plant-map" class="plant-map" aria-label="Map of U.S. dairy plants"></div>
 </section>
 
@@ -99,13 +103,14 @@
       { attribution: 'Imagery &copy; Esri', maxZoom: 18 }
     );
     street.addTo(map);
-    L.control.layers({ 'Street': street, 'Satellite': satellite }, null,
-      { collapsed: false, position: 'topright' }).addTo(map);
 
     try {
       var res = await fetch('/api/plants/geo.json');
       var data = await res.json();
+      // Two layers: processing plants (on) and milk supply listings (off).
       var cluster = L.markerClusterGroup({ chunkedLoading: true, maxClusterRadius: 50 });
+      var supply = L.markerClusterGroup({ chunkedLoading: true, maxClusterRadius: 50 });
+      var kindNames = { btu: 'bulk tank unit', receiving: 'receiving station', transfer: 'transfer station' };
       function esc(s) { return String(s == null ? '' : s).replace(/[<>&"]/g, function (c) { return ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;' })[c]; }); }
       data.plants.forEach(function (p) {
         var m = L.marker([p.lat, p.lon]);
@@ -115,16 +120,20 @@
         var head = '<strong>' + esc(p.name) + '</strong><br><span style="color:#6b6258">' + loc + '</span>';
         var body = '<ul style="margin:0.4rem 0 0;padding:0 0 0 1rem;">' +
           codes.map(function (c) {
-            var cat = c.category ? ' <em style="color:#6b6258">· ' + esc(c.category) + '</em>' : '';
+            var tag = c.category || kindNames[c.kind] || '';
+            var cat = tag ? ' <em style="color:#6b6258">· ' + esc(tag) + '</em>' : '';
             return '<li><a href="/plant/' + encodeURIComponent(c.plant_code) + '"><code>' +
               esc(c.plant_code) + '</code></a>' + cat + '</li>';
           }).join('') +
           '</ul>';
         var label = codes.length > 1 ? ' <em style="color:#6b6258">(' + codes.length + ' codes)</em>' : '';
         m.bindPopup(head + label + body);
-        cluster.addLayer(m);
+        (p.kind === 'supply' ? supply : cluster).addLayer(m);
       });
       map.addLayer(cluster);
+      L.control.layers({ 'Street': street, 'Satellite': satellite },
+        { 'Plants': cluster, 'Milk supply listings': supply },
+        { collapsed: false, position: 'topright' }).addTo(map);
       if (data.plants.length === 0) {
         el.insertAdjacentHTML('beforeend',
           '<div class="map-empty">No plants geocoded yet. Run <code>geocode</code> on the admin endpoint.</div>');

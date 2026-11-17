@@ -1,19 +1,46 @@
 <%- include('_header', { title, disclaimer, metaDescription, canonical, jsonLd }) %>
 
-<h1><%= plant.name %></h1>
+<%
+  const hasPin = typeof plant.lat === 'number' && typeof plant.lon === 'number';
+  const mapQuery = [plant.name, plant.address, plant.city, plant.state]
+    .filter(Boolean).join(' ');
+  const mapsUrl = 'https://www.google.com/maps/search/?api=1&query='
+    + encodeURIComponent(mapQuery);
+  const isPlantKind = kind === 'plant';
+%>
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="/plants">Browse</a>
+  <% if (plant.state) { %>
+    <span class="sep">›</span>
+    <a href="/plants?state=<%= encodeURIComponent(plant.state) %>"><%= stateName(plant.state) %></a>
+  <% } %>
+  <span class="sep">›</span> <span><%= plant.plant_code %></span>
+</nav>
+
+<h1><%= shownName %></h1>
 <p class="code-line">
   <span class="badge"><%= plant.plant_code %></span>
+  <% if (!isPlantKind) { %><span class="kind-pill"><%= kindLabel(kind) %></span><% } %>
   <% if (plant.category) { %><span class="muted"><%= plant.category %></span><% } %>
   <% if (via && via !== 'ims') { %>
     <span class="muted">(matched via <%= via %> alias)</span>
   <% } %>
 </p>
 
+<% if (kindNote) { %>
+  <div class="callout kind-note"><%= kindNote %></div>
+<% } %>
+
 <dl class="meta">
-  <% if (plant.parent_company) { %><dt>Parent</dt><dd><%= plant.parent_company %></dd><% } %>
+  <% if (shownName !== plant.name) { %><dt>Listed as</dt><dd><code><%= plant.name %></code></dd><% } %>
+  <% if (plant.parent_company) { %>
+    <dt>Parent</dt>
+    <dd><a href="/search?q=<%= encodeURIComponent(plant.parent_company) %>"><%= plant.parent_company %></a></dd>
+  <% } %>
   <% if (plant.address || plant.city || plant.state) { %>
     <dt>Address</dt><dd>
-      <%= [plant.address, plant.city, plant.state].filter(Boolean).join(', ') %>
+      <%= [plant.address, shownCity, plant.state].filter(Boolean).join(', ') %>
     </dd>
   <% } %>
   <% if (plant.fmmo_pool) { %><dt>FMMO pool</dt><dd><%= plant.fmmo_pool %></dd><% } %>
@@ -22,37 +49,23 @@
   <% if (plant.last_verified) { %><dt>Last verified</dt><dd><%= plant.last_verified %></dd><% } %>
 </dl>
 
-<%
-  const mapQuery = [plant.name, plant.address, plant.city, plant.state]
-    .filter(Boolean).join(' ');
-  const mapsUrl = 'https://www.google.com/maps/search/?api=1&query='
-    + encodeURIComponent(mapQuery);
-  const locationLabel = [plant.city, plant.state].filter(Boolean).join(', ');
-  // Category-themed visual we control — no logo licensing, no map that
-  // implies precision we don't have.
-  const cat = (plant.category || '').toLowerCase();
-  const catIcon =
-      cat.includes('cheese')   ? '🧀'
-    : cat.includes('butter')   ? '🧈'
-    : cat.includes('frozen')   ? '🍦'
-    : cat.includes('dry')      ? '🥛'
-    : cat.includes('whey')     ? '💪'
-    : cat.includes('specialty')? '✨'
-    : cat.includes('packag')   ? '📦'
-    : '🥛';
-%>
-<section class="location-card cat-<%= cat.split(/[ /]/)[0] || 'milk' %>">
-  <div class="location-visual" aria-hidden="true"><%= catIcon %></div>
-  <div class="location-body">
-    <h2><%= plant.name %></h2>
-    <p class="location-meta">
-      <% if (plant.category) { %><span class="loc-cat"><%= plant.category %></span><% } %>
-      <% if (locationLabel) { %><span class="muted"><%= locationLabel %></span><% } %>
+<section class="site-map-card">
+  <% if (hasPin) { %>
+    <div id="site-map" class="site-map" data-lat="<%= plant.lat %>" data-lon="<%= plant.lon %>"
+         data-zoom="<%= plant.address ? 16 : 13 %>"
+         aria-label="Map showing the approximate location of this listing"></div>
+  <% } %>
+  <div class="site-map-foot">
+    <p class="note">
+      <% if (hasPin && plant.address) { %>
+        Pin placed from the listed street address. It can be off by a block or land on the wrong building, so check the satellite view.
+      <% } else if (hasPin) { %>
+        We only have a city for this listing, so the pin marks the town, not the building.
+      <% } else { %>
+        No map pin for this listing yet.
+      <% } %>
     </p>
-    <a class="btn-maps" href="<%= mapsUrl %>" target="_blank" rel="noopener noreferrer">
-      📍 View on Google Maps
-    </a>
-    <p class="note">Opens a Google search for this plant — satellite and Street View included.</p>
+    <a class="btn-maps" href="<%= mapsUrl %>" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
   </div>
 </section>
 
@@ -60,13 +73,14 @@
   <section class="related-site">
     <h2>Also at this site</h2>
     <p class="muted">
-      Other plant codes registered at the same operator in <%= plant.city %>, <%= plant.state %>.
+      Other codes registered to the same operator in <%= shownCity %>, <%= plant.state %>.
       Often the main plant plus a bulk tank unit, receiving line, or a separate USDA listing for the same building.
     </p>
     <ul class="related-list">
       <% for (const r of related) { %>
         <li>
-          <a href="/plant/<%= r.plant_code %>"><code><%= r.plant_code %></code> <%= r.name %></a>
+          <a href="<%= plantHref(r.plant_code) %>"><code><%= r.plant_code %></code> <%= fmtName(r.name) %></a>
+          <% if (kindOf(r.name) !== 'plant') { %><span class="kind-pill"><%= kindLabel(kindOf(r.name)) %></span><% } %>
           <% if (r.category) { %><span class="muted"> · <%= r.category %></span><% } %>
           <% if (r.source) { %><span class="conf conf-<%= r.source === 'IMS' ? 'high' : 'medium' %>"><%= r.source %></span><% } %>
         </li>
@@ -84,31 +98,33 @@
   </ul>
 <% } %>
 
-<h2>Brands made here</h2>
-<% if (!brands.length) { %>
-  <p class="empty">No brand mappings recorded for this plant.</p>
-<% } else { %>
-  <table>
-    <thead><tr><th>Brand</th><th>Category</th><th>Region</th><th>Confidence</th><th>Source</th><th>Verified</th></tr></thead>
-    <tbody>
-      <% for (const b of brands) { %>
-        <tr>
-          <td><a href="/brand/<%= b.brand_id %>"><%= b.brand_name %></a></td>
-          <td><%= b.product_category || '' %></td>
-          <td><%= b.region || '' %></td>
-          <td><span class="conf conf-<%= b.confidence %>"><%= b.confidence %></span></td>
-          <td><%= b.source %></td>
-          <td><%= b.last_verified || '' %></td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
-  <p class="note">Each mapping links to where we sourced it. Hover any badge to see how confident we are.</p>
+<% if (isPlantKind || brands.length) { %>
+  <h2>Brands made here</h2>
+  <% if (!brands.length) { %>
+    <p class="empty">No brand mappings recorded for this plant yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Brand</th><th>Category</th><th>Region</th><th>Confidence</th><th>Source</th><th>Verified</th></tr></thead>
+      <tbody>
+        <% for (const b of brands) { %>
+          <tr>
+            <td><a href="/brand/<%= b.brand_id %>"><%= b.brand_name %></a></td>
+            <td><%= b.product_category || '' %></td>
+            <td><%= b.region || '' %></td>
+            <td><span class="conf conf-<%= b.confidence %>"><%= b.confidence %></span></td>
+            <td><%= b.source %></td>
+            <td><%= b.last_verified || '' %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <p class="note">Every mapping lists the source it came from and how confident we are in it.</p>
+  <% } %>
 <% } %>
 
-<h2>Inspection &amp; recall history</h2>
+<h2>Recall history</h2>
 <% if (!recalls.length) { %>
-  <p class="empty">No public FDA enforcement records linked to this plant.</p>
+  <p class="empty">No public FDA enforcement records linked to this <%= isPlantKind ? 'plant' : 'listing' %>.</p>
 <% } else { %>
   <p class="note">FDA recall records that match this plant. <a href="/timeline">See the full recall timeline →</a></p>
   <table>
@@ -116,8 +132,8 @@
     <tbody>
       <% for (const r of recalls) { %>
         <tr>
-          <td><%= r.recall_date || r.report_date || '' %></td>
-          <td><%= r.classification || '' %></td>
+          <td class="nowrap"><%= r.recall_date || r.report_date || '' %></td>
+          <td class="nowrap"><%= r.classification || '' %></td>
           <td><%= (r.reason || '').slice(0, 200) %></td>
           <td><%= r.status || '' %></td>
           <td>
@@ -129,6 +145,36 @@
       <% } %>
     </tbody>
   </table>
+<% } %>
+
+<% if (hasPin) { %>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  (function () {
+    var el = document.getElementById('site-map');
+    if (!el || typeof L === 'undefined') return;
+    var lat = parseFloat(el.dataset.lat), lon = parseFloat(el.dataset.lon);
+    var zoom = parseInt(el.dataset.zoom, 10) || 13;
+    if (isNaN(lat) || isNaN(lon)) return;
+    var map = L.map(el, { scrollWheelZoom: false }).setView([lat, lon], zoom);
+    var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors', maxZoom: 18,
+    });
+    var satellite = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      { attribution: 'Imagery &copy; Esri', maxZoom: 18 }
+    );
+    // Lead with satellite when the pin came from a street address (you
+    // can see the building); a town-level pin reads better on the street map.
+    (zoom >= 16 ? satellite : street).addTo(map);
+    L.control.layers({ 'Satellite': satellite, 'Street': street }, null,
+      { collapsed: false, position: 'topright' }).addTo(map);
+    L.marker([lat, lon]).addTo(map);
+  })();
+</script>
 <% } %>
 
 <%- include('_footer') %>
