@@ -14,6 +14,9 @@ Live: https://dairyplant-atlas.up.railway.app
 - **Brand / company search** — type "Cabot" or "fairlife" and see which
   plants make those products, each mapping with a source and confidence.
 - **Map** — every geocoded plant on an interactive U.S. map.
+- **Layered map** (`/map`) — the same plants with plant events, herd
+  dispersals and recalls as layers you can turn on, four ready-made
+  views built from those layers, and a "what changed" list beside the map.
 - **Recall timeline** — FDA dairy enforcement records over time, matched
   to plants where possible, with CSV/JSON export.
 
@@ -104,7 +107,7 @@ curl -X POST -H "X-Admin-Token: $TOKEN" "$URL/admin/run/seeds-load"
 Available admin scripts: `ims-download`, `ims-ingest`, `ims-sanity`,
 `ims-dump` (debug; `?from=&to=` or `?grep=`), `usda-ingest`, `geocode`,
 `recalls-sync` (`?max_pages=`), `harvest-codes` (`?apply=1`),
-`resolve-plants` (`?queries=a,b,c`), `seeds-load`.
+`resolve-plants` (`?queries=a,b,c`), `seeds-load`, `dispersals-ingest`.
 
 ## Brand mappings
 
@@ -118,11 +121,58 @@ any of them. Two evidence classes are used today:
   plant's code on the recalled product (see `harvest-codes`). These are
   the only sourced path into private-label / co-pack relationships.
 
+## Layered map (`/map`)
+
+One page, many views. A view is a set of layers plus a time window, and
+it lives in the URL, so every view can be linked from anywhere (the
+HerdSignal brief, an email, a post).
+
+| Link | What it shows |
+|------|---------------|
+| `/map?lens=capacity` | Plants + plant events ("Where is capacity moving?") |
+| `/map?lens=exits` | Plants + herd dispersals ("Where are herds exiting?") |
+| `/map?lens=buyers` | Plants, plus a click-to-count ring: plants and operators within 25/50/100 miles of any spot |
+| `/map?lens=safety` | Plants + recalls matched to a plant |
+| `/map?layers=plants,events,recalls` | Any combination, picked by the reader |
+
+Add `&days=90` or `&days=0` (all time) to change the window; the default
+is one year.
+
+How it is put together:
+
+- **One record shape.** `src/records.js` turns `news_items`, `recalls`
+  and `dispersals` rows into the same thing: type, kind, date, title,
+  place, source. A layer is a filter on type. A lens is a saved set of
+  layers (the `LENSES` list in that file). The "what changed" list is the
+  same records, newest first.
+- **`GET /api/records.json?days=365&types=event,recall,dispersal`** is
+  that record set as JSON. **`GET /feed.xml`** is the newest 50 as RSS
+  (`?types=` narrows it).
+- **Adding a signal** means one normalizer and one query in
+  `src/records.js`, one entry in `LAYERS`/`LAYER_TYPE`, and a checkbox in
+  `src/views/map.ejs`. It does not mean a new page.
+- **Pins follow the same honesty rules as the rest of the site.** A
+  record linked to a plant is pinned at the plant. A record with only a
+  town is pinned at the town centre and says so. An unmatched recall is
+  listed but never pinned, because the recalling firm's city is not the
+  plant.
+
+Herd dispersals load from `data/dispersals/*.csv` (see the README in that
+folder). The file ships empty, and the page says so, until real listings
+are added.
+
+Not built yet, on purpose: a milkshed competition score. The buyers view
+counts plants and operators inside a ring, which is a fact. A score needs
+a decision about which plants buy farm milk and how to weigh capacity
+against supply, and that decision has not been made.
+
 ## Project layout
 
 ```
 db/schema.sql              Full schema (FTS5, triggers, all tables)
 src/server.js              Express app + admin endpoint
+src/records.js             News, recalls, dispersals in one shape; lenses; RSS
+src/public/map.js          Browser code for /map (no build step)
 src/views/                 EJS templates
 src/public/style.css       Visual identity
 scripts/
@@ -136,8 +186,10 @@ scripts/
   harvest-recall-codes.js  Plant codes printed in recalls (extractCodes pure/tested)
   resolve-plants.js        Batch code lookup by name
   geocode-plants.js        City-centroid geocoding for the map
+  ingest-dispersals.js     Load data/dispersals/*.csv (parseDispersalRow is pure/tested)
 data/seeds/                Brand CSVs (checked in)
 data/usda/usda-list.txt    USDA list snapshot (checked in)
+data/dispersals/           Herd dispersal CSVs (checked in; empty until fed)
 data/ims/                  Downloaded PDFs (gitignored; on volume in prod)
 test/                      node --test unit tests
 ```

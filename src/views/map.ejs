@@ -1,0 +1,137 @@
+<%- include('_header', { title, disclaimer, metaDescription, canonical }) %>
+<%
+  const isCustom = view.lens === 'custom';
+  const on = name => view.layers.includes(name);
+  const daysQs = view.days !== defaultDays ? '&days=' + view.days : '';
+  const windowLabel = d => d === 0 ? 'All time' : (d === 365 ? 'Last year' : 'Last ' + d + ' days');
+%>
+
+<section class="atlas-page">
+  <header class="atlas-head">
+    <h1>Atlas map</h1>
+    <p class="lede">
+      Pick a question, or build your own view from the layers. Every view
+      has its own address, so you can link straight to it.
+    </p>
+  </header>
+
+  <nav class="lens-bar" aria-label="Map views">
+    <span class="lens-bar-label">Pick a question</span>
+    <% for (const l of lenses) { %>
+      <a class="lens-btn<%= view.lens === l.id ? ' on' : '' %>"
+         href="/map?lens=<%= l.id %><%= daysQs %>" data-lens="<%= l.id %>"
+         <% if (view.lens === l.id) { %>aria-current="page"<% } %>><%= l.label %></a>
+    <% } %>
+    <a class="lens-btn lens-custom<%= isCustom ? ' on' : '' %>"
+       href="/map?layers=<%= view.layers.join(',') %><%= daysQs %>" data-lens="custom"
+       <% if (isCustom) { %>aria-current="page"<% } %>>Custom layers</a>
+    <label class="window-pick" for="atlas-days">
+      <span>Window</span>
+      <select id="atlas-days">
+        <% for (const d of windows) { %>
+          <option value="<%= d %>"<%= d === view.days ? ' selected' : '' %>><%= windowLabel(d) %></option>
+        <% } %>
+      </select>
+    </label>
+  </nav>
+
+  <fieldset class="layer-bar" id="atlas-layers"<%= isCustom ? '' : ' hidden' %>>
+    <legend>Layers</legend>
+    <label class="layer-opt is-locked">
+      <input type="checkbox" checked disabled />
+      <span class="pin pin-plant" aria-hidden="true"></span>
+      Plants <span class="muted">always on</span>
+    </label>
+    <label class="layer-opt">
+      <input type="checkbox" data-layer="events"<%= on('events') ? ' checked' : '' %> />
+      <span class="pin pin-event" aria-hidden="true"></span>
+      Plant events
+    </label>
+    <label class="layer-opt">
+      <input type="checkbox" data-layer="dispersals"<%= on('dispersals') ? ' checked' : '' %> />
+      <span class="pin pin-dispersal" aria-hidden="true"></span>
+      Herd dispersals
+    </label>
+    <label class="layer-opt">
+      <input type="checkbox" data-layer="recalls"<%= on('recalls') ? ' checked' : '' %> />
+      <span class="pin pin-recall" aria-hidden="true"></span>
+      Recalls
+    </label>
+  </fieldset>
+
+  <div class="atlas-layout">
+    <div class="atlas-map-col">
+      <div class="lens-card">
+        <h2 id="atlas-card-title"><%= lens ? lens.label : 'Custom view' %></h2>
+        <p id="atlas-card-blurb"><%= lens ? lens.blurb : 'Plants, plus whichever layers you turn on.' %></p>
+      </div>
+      <div id="atlas-map" class="plant-map atlas-map" aria-label="Layered map of U.S. dairy plants"></div>
+      <ul class="map-key" id="atlas-key" aria-label="Map key">
+        <li data-key="plants"><span class="pin pin-plant" aria-hidden="true"></span> Plant</li>
+        <li data-key="events"<%= on('events') ? '' : ' hidden' %>><span class="pin pin-event" aria-hidden="true"></span> Plant event</li>
+        <li data-key="dispersals"<%= on('dispersals') ? '' : ' hidden' %>><span class="pin pin-dispersal" aria-hidden="true"></span> Herd dispersal</li>
+        <li data-key="recalls"<%= on('recalls') ? '' : ' hidden' %>><span class="pin pin-recall" aria-hidden="true"></span> Recall matched to a plant</li>
+      </ul>
+      <noscript>
+        <p class="atlas-empty">
+          The map needs JavaScript. The same information is on the
+          <a href="/timeline">news and recalls feed</a> and the
+          <a href="/plants">plant directory</a>.
+        </p>
+      </noscript>
+    </div>
+
+    <aside class="atlas-panel">
+      <section id="atlas-radius"<%= lens && lens.tool === 'radius' ? '' : ' hidden' %>>
+        <h2>Plants within reach</h2>
+        <label class="radius-pick" for="atlas-radius-miles">
+          <span>Distance</span>
+          <select id="atlas-radius-miles">
+            <option value="25">25 miles</option>
+            <option value="50" selected>50 miles</option>
+            <option value="100">100 miles</option>
+          </select>
+        </label>
+        <p class="muted" id="atlas-radius-hint">Click anywhere on the map to count the plants around that spot.</p>
+        <div id="atlas-radius-result" aria-live="polite"></div>
+        <p class="atlas-fineprint">
+          Counts every plant in the atlas inside the ring, as the crow
+          flies. Not every plant buys milk direct from farms, so treat
+          this as the list to check, not the list of buyers.
+        </p>
+      </section>
+
+      <section id="atlas-feed"<%= lens && lens.tool === 'radius' ? ' hidden' : '' %>>
+        <div class="atlas-feed-head">
+          <h2>What changed in this view</h2>
+          <span class="muted" id="atlas-feed-note"></span>
+        </div>
+        <ol class="atlas-feed-list" id="atlas-feed-list" aria-live="polite"></ol>
+        <p class="atlas-empty" id="atlas-feed-empty" hidden></p>
+        <div class="atlas-actions">
+          <a class="atlas-btn" href="/timeline">Open full feed</a>
+          <a class="atlas-btn" id="atlas-rss" href="/feed.xml">RSS</a>
+        </div>
+      </section>
+
+      <section class="atlas-share">
+        <button type="button" class="atlas-btn primary" id="atlas-copy">Copy link to this view</button>
+        <p class="atlas-fineprint">The link reopens the map with the same question, layers and window.</p>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<script type="application/json" id="atlas-boot"><%- boot %></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="/map.js"></script>
+
+<%- include('_footer') %>

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "prestart": "node scripts/init-db.js && node scripts/load-seeds.js && node scripts/import-durable.js",
+    "prestart": "node scripts/init-db.js && node scripts/load-seeds.js && node scripts/import-durable.js && node scripts/ingest-dispersals.js",
     "dev": "node --watch src/server.js",
     "db:init": "node scripts/init-db.js",
     "db:reset": "node scripts/init-db.js --reset",
@@ -23,7 +23,8 @@
     "test": "node --test",
     "build": "npm run db:init && npm run seed:load",
     "durable:export": "node scripts/export-durable.js",
-    "durable:import": "node scripts/import-durable.js"
+    "durable:import": "node scripts/import-durable.js",
+    "dispersals:ingest": "node scripts/ingest-dispersals.js"
   },
   "dependencies": {
     "better-sqlite3": "^11.3.0",
