@@ -53,6 +53,9 @@ Deployments tab, three dots on the latest deployment, Redeploy.
   push, and the deploy reloads it. The CSV is the whole truth: a row
   removed from the CSV is removed from the site.
 - **Brand mappings** work the same way: `data/seeds/plant_brands.csv`.
+- **Herd dispersals** work the same way too: CSV files in
+  `data/dispersals/` feed the dispersals layer on `/map`. Columns are in
+  that folder's README. The layer is empty until listings are added.
 - **IMS plant list** is refreshed by hand, roughly quarterly, through the
   admin endpoint. Steps are in `README.md` under "Database refresh
   runbook".
