@@ -17,6 +17,7 @@
 // the database.
 
 const crypto = require('crypto');
+const { displayName, displayCity } = require('./naming');
 
 // Record types, and the map layers that show them. "plants" is the base
 // layer: always on, and not a record type. "supply" is the FDA list's bulk
@@ -128,6 +129,12 @@ function clip(text, max) {
   return s.length > max ? s.slice(0, max - 1).trimEnd() + '…' : s;
 }
 
+// Names and towns as the rest of the site shows them: source lists print
+// most of them in capitals, and src/naming.js re-cases only those, so a
+// name typed by a person comes through untouched.
+function nameOf(s) { return s ? displayName(s) : null; }
+function townOf(s) { return s ? displayCity(s) : null; }
+
 // A record is pinned at the plant when it is linked to one. Failing
 // that, at the centre of its town, and it says so.
 function place(plantLat, plantLon, cityLat, cityLon) {
@@ -151,7 +158,7 @@ function normalizeNews(row) {
     city: row.city || null,
     state: row.state || null,
     plant_code: row.plant_code || null,
-    plant_name: row.plant_name || null,
+    plant_name: nameOf(row.plant_name),
     lat: at.lat, lon: at.lon, located_by: at.located_by,
     source_url: row.source_url || null,
     source_name: row.source_name || null,
@@ -166,18 +173,20 @@ function normalizeRecall(row) {
   const at = matched
     ? place(row.plant_lat, row.plant_lon, null, null)
     : { lat: null, lon: null, located_by: null };
+  const plantName = nameOf(row.plant_name);
+  const firm = nameOf(row.firm_name);
   return {
     id: 'recall-' + row.event_key,
     type: 'recall',
     kind: row.classification || 'Recall',
     date: row.event_date,
-    title: matched ? row.plant_name : (row.firm_name || 'Unknown firm'),
+    title: matched ? plantName : (firm || 'Unknown firm'),
     summary: clip(row.reason, 280),
-    firm: row.firm_name || null,
-    city: (matched ? row.plant_city : row.firm_city) || null,
+    firm,
+    city: townOf(matched ? row.plant_city : row.firm_city),
     state: (matched ? row.plant_state : row.firm_state) || null,
     plant_code: row.plant_code || null,
-    plant_name: row.plant_name || null,
+    plant_name: plantName,
     lat: at.lat, lon: at.lon, located_by: at.located_by,
     source_url: null,
     source_name: 'openFDA',
