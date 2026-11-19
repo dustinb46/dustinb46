@@ -340,5 +340,59 @@
     "headline": "Corn holds at 57% good/excellent into the home stretch; beans slip",
     "url": "https://www.brownfieldagnews.com/news/57-of-u-s-corn-58-of-soybeans-good-to-excellent/",
     "topic": "inputs"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "Powder is now worth more than butter, and barrels are worth more than blocks",
+    "url": "https://brownfieldagnews.com/news/nonfat-dry-milk-leads-cash-dairy-gains-wednesday-at-cme/",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "Fuel and hauling relief for dairy now has a number attached: 53 cents a hundredweight",
+    "url": "https://wispolitics.com/2026/american-dairy-coalition-sends-sec-rollins-requested-fuel-relief-data",
+    "topic": "inputs"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "USDA sequencing ties the Washington H5N1 outbreak to cattle moved in from Idaho",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/update-genetic-sequencing-results-washington-dairy-herd-detection-highly",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "Indiana becomes the 21st state with H5N1 in dairy cattle — caught by bulk-tank milk testing",
+    "url": "https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-highly-pathogenic-avian-influenza-dairy-herd-indiana",
+    "topic": "animal-health"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "EPA abandons the livestock air-emissions models farms funded two decades ago",
+    "url": "https://www.dtnpf.com/agriculture/web/ag/livestock/article/2026/11/02/epa-drops-nationwide-livestock-air",
+    "topic": "policy"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "September's Dairy Margin Coverage margin lands at $8.35 — the fourth payment month of 2026",
+    "url": "https://www.agproud.com/articles/64365-september-prices-trigger-dairy-margin-coverage-payment",
+    "topic": "markets"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "Pooled milk jumped 11.7% in September while Class I volume fell — fluid is down to 26% of the pool",
+    "url": "https://www.ams.usda.gov/mnreports/ams_1054.pdf",
+    "topic": "processing"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "Cheddar jumps 8.6% at the Nov. 3 Global Dairy Trade auction while butter drops again",
+    "url": "https://ahdb.org.uk/dairy/global-dairy-trade-events",
+    "topic": "trade"
+  },
+  {
+    "date": "2026-11-05",
+    "headline": "USDA reopens the 150,000-pound exempt plant threshold — comments close Nov. 23",
+    "url": "https://www.federalregister.gov/documents/2026/10/23/2026-21668/exempt-plant-definition-request-for-information",
+    "topic": "policy"
   }
 ]
